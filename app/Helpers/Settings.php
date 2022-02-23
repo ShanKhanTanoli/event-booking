@@ -13,4 +13,11 @@ class Settings
             return $settings;
         }return false;
     }
+
+    public static function CommissionPercent()
+    {
+        if(($settings = self::Info())){
+            return $settings->commission_percentage;
+        }return 0;
+    }
 }
