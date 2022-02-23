@@ -10,7 +10,10 @@ class Type extends Component
 
     public function render()
     {
-        return view('livewire.dashboard.business.reservations.slots.type', compact($this->reservation));
+        return view('livewire.dashboard.business.reservations.slots.type')
+        ->with([
+            'reservation' => $this->reservation,
+        ]);
     }
 
     public function AddSpecificDays()

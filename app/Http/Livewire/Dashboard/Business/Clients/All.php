@@ -37,7 +37,10 @@ class All extends Component
         /*End::client Email Status*/
 
         $clients = $clients->paginate(6);
-        return view('livewire.dashboard.business.clients.all', compact('clients'));
+        return view('livewire.dashboard.business.clients.all')
+        ->with([
+            'clients' => $clients,
+        ]);
     }
 
     public function UnVerifyEmail($client)

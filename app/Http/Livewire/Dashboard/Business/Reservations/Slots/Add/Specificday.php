@@ -20,7 +20,10 @@ class Specificday extends Component
 
     public function render()
     {
-        return view('livewire.dashboard.business.reservations.slots.add.specificday', compact($this->reservation));
+        return view('livewire.dashboard.business.reservations.slots.add.specificday')
+        ->with([
+            'reservation' => $this->reservation,
+        ]);
     }
 
     public function AddSlots()

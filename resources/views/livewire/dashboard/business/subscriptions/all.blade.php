@@ -12,14 +12,12 @@
                             <div class="row mt-2">
                                 <div class="col-sm-12 col-md-2 col-lg-2">
                                     <span wire:loading>Loading...</span>
-                                    <span wire:loading class="spinner-border spinner-border-sm" role="status"
-                                        aria-hidden="true"></span>
+                                    <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <table class="table table-bordered dataTable" id="dataTable" cellspacing="0"
-                                        role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                    <table class="table table-bordered dataTable" id="dataTable" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                         <thead>
                                             <tr role="row">
                                                 <th>Invoice</th>
@@ -34,112 +32,108 @@
                                         </thead>
                                         <tbody>
                                             @if (count($subscriptions) > 0)
-                                                @foreach ($subscriptions as $subscription)
-                                                    <tr>
-                                                        <td>
-                                                            <strong>
-                                                                {{ $subscription->invoice }}
-                                                            </strong>
-                                                        </td>
-                                                        @if (!is_null($plan = Plan::find($subscription->plan_id)))
-                                                            <td class="text-center">
-                                                                <strong>
-                                                                    {!! $plan->name !!}
-                                                                </strong>
-                                                            </td>
-                                                        @else
-                                                            <td class="text-center">
-                                                                <span class="spinner-border spinner-border-sm"
-                                                                    role="status" aria-hidden="true">
-                                                                </span>
-                                                            </td>
-                                                        @endif
-                                                        @if (!is_null($plan = Plan::find($subscription->plan_id)))
-                                                            <td class="text-center">
-                                                                <strong>
-                                                                    {!! $plan->price !!}
-                                                                    {!! $plan->currency !!}
-                                                                </strong>
-                                                            </td>
-                                                        @else
-                                                            <td class="text-center">
-                                                                <span class="spinner-border spinner-border-sm"
-                                                                    role="status" aria-hidden="true">
-                                                                </span>
-                                                            </td>
-                                                        @endif
-                                                        <td class="text-center">
-                                                            @if (!is_null($plan = app('rinvex.subscriptions.plan')->find($subscription->plan_id)))
-                                                                <strong>
-                                                                    {{ $plan->reservations }}
-                                                                </strong>
-                                                            @else
-                                                                <strong>
-                                                                    0
-                                                                </strong>
-                                                            @endif
-                                                        </td>
-                                                        <td class="text-center">
-                                                            @if (Auth::user()->planSubscription($subscription->invoice)->active())
-                                                                @if (!Auth::user()->planSubscription($subscription->invoice)->canceled())
-                                                                    <span class="badge badge-primary">
-                                                                        <i class="fas fa-check"></i> Active
-                                                                    </span>
-                                                                @endif
-                                                            @endif
-                                                            @if (Auth::user()->planSubscription($subscription->invoice)->canceled())
-                                                                @if (!Auth::user()->planSubscription($subscription->invoice)->ended())
-                                                                    <span class="badge badge-danger">
-                                                                        <i class="fas fa-stop-circle"></i> Cancelled
-                                                                    </span>
-                                                                @endif
-                                                            @endif
-                                                            @if (Auth::user()->planSubscription($subscription->invoice)->ended())
-                                                                <span class="badge badge-danger">
-                                                                    <i class="fas fa-hourglass-end"></i> Ended
-                                                                </span>
-                                                            @endif
-                                                            @if (Auth::user()->planSubscription($subscription->invoice)->onTrial())
-                                                                <span class="badge badge-danger">
-                                                                    <i class="fas fa-calendar-alt"></i> On Trial
-                                                                </span>
-                                                            @endif
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <strong>
-                                                                {{ date('d M, Y', strtotime($subscription->starts_at)) }}
-                                                            </strong>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <strong>
-                                                                {{ date('d M, Y', strtotime($subscription->ends_at)) }}
-                                                            </strong>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            @if (!Auth::user()->planSubscription($subscription->invoice)->ended())
-                                                                <button
-                                                                    wire:click="End('{{ $subscription->invoice }}')"
-                                                                    style="padding:0px; border:none; background-color:transparent">
-                                                                    <span class="badge badge-primary">
-                                                                        <i class="fas fa-hourglass-end"></i> End Now
-                                                                    </span>
-                                                                </button>
-                                                            @else
-                                                                <span class="badge badge-danger">
-                                                                    <i class="fas fa-hourglass-end"></i> Ended
-                                                                </span>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
+                                            @foreach ($subscriptions as $subscription)
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        {{ $subscription->invoice }}
+                                                    </strong>
+                                                </td>
+                                                @if (!is_null($plan = Plan::find($subscription->plan_id)))
+                                                <td class="text-center">
+                                                    <strong>
+                                                        {!! $plan->name !!}
+                                                    </strong>
+                                                </td>
+                                                @else
+                                                <td class="text-center">
+                                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true">
+                                                    </span>
+                                                </td>
+                                                @endif
+                                                @if (!is_null($plan = Plan::find($subscription->plan_id)))
+                                                <td class="text-center">
+                                                    <strong>
+                                                        {!! $plan->price !!}
+                                                        {!! $plan->currency !!}
+                                                    </strong>
+                                                </td>
+                                                @else
+                                                <td class="text-center">
+                                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true">
+                                                    </span>
+                                                </td>
+                                                @endif
+                                                <td class="text-center">
+                                                    @if (!is_null($plan = app('rinvex.subscriptions.plan')->find($subscription->plan_id)))
+                                                    <strong>
+                                                        {{ $plan->reservations }}
+                                                    </strong>
+                                                    @else
+                                                    <strong>
+                                                        0
+                                                    </strong>
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    @if (Auth::user()->planSubscription($subscription->invoice)->active())
+                                                    @if (!Auth::user()->planSubscription($subscription->invoice)->canceled())
+                                                    <span class="badge badge-primary">
+                                                        <i class="fas fa-check"></i> Active
+                                                    </span>
+                                                    @endif
+                                                    @endif
+                                                    @if (Auth::user()->planSubscription($subscription->invoice)->canceled())
+                                                    @if (!Auth::user()->planSubscription($subscription->invoice)->ended())
+                                                    <span class="badge badge-danger">
+                                                        <i class="fas fa-stop-circle"></i> Cancelled
+                                                    </span>
+                                                    @endif
+                                                    @endif
+                                                    @if (Auth::user()->planSubscription($subscription->invoice)->ended())
+                                                    <span class="badge badge-danger">
+                                                        <i class="fas fa-hourglass-end"></i> Ended
+                                                    </span>
+                                                    @endif
+                                                    @if (Auth::user()->planSubscription($subscription->invoice)->onTrial())
+                                                    <span class="badge badge-danger">
+                                                        <i class="fas fa-calendar-alt"></i> On Trial
+                                                    </span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    <strong>
+                                                        {{ date('d M, Y', strtotime($subscription->starts_at)) }}
+                                                    </strong>
+                                                </td>
+                                                <td class="text-center">
+                                                    <strong>
+                                                        {{ date('d M, Y', strtotime($subscription->ends_at)) }}
+                                                    </strong>
+                                                </td>
+                                                <td class="text-center">
+                                                    @if (!Auth::user()->planSubscription($subscription->invoice)->ended())
+                                                    <button wire:click="End('{{ $subscription->invoice }}')" style="padding:0px; border:none; background-color:transparent">
+                                                        <span class="badge badge-primary">
+                                                            <i class="fas fa-hourglass-end"></i> End Now
+                                                        </span>
+                                                    </button>
+                                                    @else
+                                                    <span class="badge badge-danger">
+                                                        <i class="fas fa-hourglass-end"></i> Ended
+                                                    </span>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            @endforeach
                                             @else
-                                                <tr class="text-center">
-                                                    <td colspan="8">
-                                                        <strong>
-                                                            No Data Found
-                                                        </strong>
-                                                    </td>
-                                                </tr>
+                                            <tr class="text-center">
+                                                <td colspan="8">
+                                                    <strong>
+                                                        No Data Found
+                                                    </strong>
+                                                </td>
+                                            </tr>
                                             @endif
                                         </tbody>
                                     </table>

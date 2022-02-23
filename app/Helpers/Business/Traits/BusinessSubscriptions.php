@@ -31,7 +31,7 @@ trait BusinessSubscriptions
             }
         } else return session()->flash('error', 'Something went wrong');
     }
-
+    
     public static function CreateSubscription($user,$stripe_charge_id,$name, $plan)
     {
         if ($business = self::Is($user)) {

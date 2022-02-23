@@ -18,7 +18,11 @@ class Index extends Component
     public function render()
     {
         $slots = Business::Slots($this->reservation->id, $this->load);
-        return view('livewire.dashboard.business.reservations.slots.index', compact([$this->reservation, 'slots']));
+        return view('livewire.dashboard.business.reservations.slots.index')
+        ->with([
+            'reservation' => $this->reservation,
+            'slots' => $slots,
+        ]);
     }
 
     public function Activate($id)

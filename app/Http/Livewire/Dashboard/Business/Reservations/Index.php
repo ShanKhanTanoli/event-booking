@@ -20,19 +20,10 @@ class Index extends Component
     public function render()
     {
         $reservations =  $this->mount();
-        if ($this->status == 'all') {
-            $reservations =  $reservations->take($this->load);
-        }
-        if ($this->status == 'active') {
-            $reservations =  Business::ActiveReservations(Auth::user()->id)->take($this->load);
-        }
-        if ($this->status == 'archived') {
-            $reservations =  Business::ArchivedReservations(Auth::user()->id)->take($this->load);
-        }
-        if ($this->status == 'banned') {
-            $reservations =  Business::BannedReservations(Auth::user()->id)->take($this->load);
-        }
-        return view('livewire.dashboard.business.reservations.index', compact(['reservations', $this->reservation]));
+        return view('livewire.dashboard.business.reservations.index')
+            ->with([
+                'reservations' => $reservations,
+            ]);
     }
 
     public function Activate($id)

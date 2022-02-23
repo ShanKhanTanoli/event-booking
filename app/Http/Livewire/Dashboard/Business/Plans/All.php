@@ -15,7 +15,10 @@ class All extends Component
         if($plans = Business::Plans(Auth::user()->id)){
             $plans = $plans->take($this->load);
         }else $plans = [];
-        return view('livewire.dashboard.business.plans.all',compact('plans'));
+        return view('livewire.dashboard.business.plans.all')
+        ->with([
+            'plans' => $plans,
+        ]);
     }
 
     public function LoadMore()

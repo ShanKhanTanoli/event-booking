@@ -19,7 +19,10 @@ class Daily extends Component
 
     public function render()
     {
-        return view('livewire.dashboard.business.reservations.slots.add.daily', compact($this->reservation));
+        return view('livewire.dashboard.business.reservations.slots.add.daily')
+        ->with([
+            'reservation' => $this->reservation,
+        ]);
     }
 
     public function AddSlots()

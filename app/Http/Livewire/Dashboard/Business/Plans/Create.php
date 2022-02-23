@@ -39,13 +39,9 @@ class Create extends Component
             'currency' => 'USD',
             'reservations' => $validated['reservations'],
         ];
-        try {
-            if(Business::CanCreatePricingPlans(Auth::user()->id)){
+        if (Business::CanCreatePricingPlans(Auth::user()->id)) {
             app('rinvex.subscriptions.plan')->create($data);
             return session()->flash('success', 'Plan Created Successfully');
-            }else return session()->flash('error', 'You are not allowed to create Plans');
-        } catch (Exception $e) {
-            return session()->flash('error', 'Something went wrong');
-        }
+        } else return session()->flash('error', 'You are not allowed to create Plans');
     }
 }

@@ -17,7 +17,10 @@ class All extends Component
     public function render()
     {
         $subscriptions = Business::Subscriptions(Auth::user()->id)->latest()->paginate(6);
-        return view('livewire.dashboard.business.subscriptions.all',compact('subscriptions'));
+        return view('livewire.dashboard.business.subscriptions.all')
+        ->with([
+            'subscriptions' => $subscriptions,
+        ]);
     }
     
     public function End($invoice)

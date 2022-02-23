@@ -20,7 +20,10 @@ class Weekly extends Component
 
     public function render()
     {
-        return view('livewire.dashboard.business.reservations.slots.add.weekly', compact($this->reservation));
+        return view('livewire.dashboard.business.reservations.slots.add.weekly')
+            ->with([
+                'reservation' => $this->reservation,
+            ]);
     }
 
     public function AddSlots()

@@ -18,7 +18,7 @@ class Edit extends Component
     public function mount()
     {
         $this->state = $this->plan->only([
-            'name', 'description','reservations',
+            'name', 'description', 'reservations',
         ]);
     }
 
@@ -28,24 +28,20 @@ class Edit extends Component
     }
     public function UpdatePlan()
     {
-            $validated = Validator::make($this->state, [
-                'name' => 'required|string|max:15',
-                'description' => 'required|string|max:40',
-                'reservations' => 'required|numeric',
-            ])->validate();
-            $data = [
-                'name' => $validated['name'],
-                'slug' => Str::slug($validated['name'] . '-' . mt_rand(1, 100), '-'),
-                'description' => $validated['description'],
-                'reservations' => $validated['reservations'],
-            ];
-            try {
-                if(Business::CanUpdatePricingPlans(Auth::user()->id)){
-                return  Business::UpdatePlan(Auth::user()->id, $this->plan->id, $data,'Updated Successfully');
-                
-            }else return session()->flash('error', 'You are not allowed to update a Plan');
-            } catch (Exception $e) {
-                return session()->flash('error', 'Something went wrong');
-            }
+        $validated = Validator::make($this->state, [
+            'name' => 'required|string|max:15',
+            'description' => 'required|string|max:40',
+            'reservations' => 'required|integer',
+        ])->validate();
+        $data = [
+            'name' => $validated['name'],
+            'signup_fee' => 0,
+            'slug' => strtoupper(Str::random(10)),
+            'description' => $validated['description'],
+            'reservations' => $validated['reservations'],
+        ];
+        if (Business::CanUpdatePricingPlans(Auth::user()->id)) {
+            return  Business::UpdatePlan(Auth::user()->id, $this->plan->id, $data, 'Updated Successfully');
+        } else return session()->flash('error', 'You are not allowed to update a Plan');
     }
 }
