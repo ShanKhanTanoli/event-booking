@@ -107,7 +107,7 @@ class Viewall extends Component
     public function Edit($business)
     {
         if ($user = Admin::CheckBusiness($business)) {
-            return redirect(route('AdminEditBusiness', $user->user_name));
+            return redirect(route('AdminEditBusiness', $user->reg_no));
         } else session()->flash('error', 'Something went wrong!');
     }
 

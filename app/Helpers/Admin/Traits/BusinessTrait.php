@@ -18,9 +18,9 @@ trait BusinessTrait
     }
 
     
-    public static function CheckBusinessByUsername($user_name)
+    public static function CheckBusinessByRegNo($reg_no)
     {
-        if (!is_null($business = User::withTrashed()->where('user_name',$user_name)->first())) {
+        if (!is_null($business = User::withTrashed()->where('reg_no',$reg_no)->first())) {
             if ($business->role == 'business' && $business->role_id == 2) {
                 return $business;
             } else return false;

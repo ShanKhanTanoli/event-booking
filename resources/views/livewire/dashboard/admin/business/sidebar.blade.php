@@ -3,25 +3,25 @@
         <div class="e-navlist e-navlist--active-bg">
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link px-2" href="{{ route('AdminEditBusiness', $business->user_name) }}">
+                    <a class="nav-link px-2" href="{{ route('AdminEditBusiness', $business->reg_no) }}">
                         <i class="fas fa-user-cog mr-1"></i>
                         <span>Profile</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-2" href="{{ route('AdminEditBusinessDetails', $business->user_name) }}">
+                    <a class="nav-link px-2" href="{{ route('AdminEditBusinessDetails', $business->reg_no) }}">
                         <i class="fas fa-business-time mr-1"></i>
                         <span>Business</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-2" href="{{ route('AdminEditBusinessAbilities', $business->user_name) }}">
+                    <a class="nav-link px-2" href="{{ route('AdminEditBusinessAbilities', $business->reg_no) }}">
                         <i class="fas fa-user-shield mr-1"></i>
                         <span>Abilities</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-2" href="{{ route('AdminChangeBusinessPassword', $business->user_name) }}">
+                    <a class="nav-link px-2" href="{{ route('AdminChangeBusinessPassword', $business->reg_no) }}">
                         <i class="fas fa-shield-alt mr-1"></i>
                         <span>Password</span>
                     </a>

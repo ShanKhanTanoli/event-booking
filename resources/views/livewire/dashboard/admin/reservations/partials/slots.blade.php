@@ -72,7 +72,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12 text-center">
-                        <a href="{{ route('BusinessViewReservationSlots', $reservation->slug) }}"
+                        <a href="{{ route('AdminViewReservationSlots', $reservation->slug) }}"
                             class="btn btn-primary btn-sm">
                             View Slots
                         </a>

@@ -32,52 +32,65 @@ class AdminController extends Controller
         return view($this->path . 'business.add.index');
     }
 
-    public function BusinessClients($user_name)
+    public function BusinessClients($reg_no)
     {
-        if ($business = Admin::CheckBusinessByUsername($user_name)) {
-
-            return view($this->path . 'business.clients.index', compact('business'));
+        if ($business = Admin::CheckBusinessByRegNo($reg_no)) {
+            return view($this->path . 'business.clients.index')
+                ->with([
+                    'business' => $business,
+                ]);
         } else {
             session()->flash('error', 'Something went wrong!');
             return redirect(route('AdminBusiness'));
         }
     }
 
-    public function EditBusiness($user_name)
+    public function EditBusiness($reg_no)
     {
-        if ($business = Admin::CheckBusinessByUsername($user_name)) {
-            return view($this->path . 'business.edit.index', compact('business'));
+        if ($business = Admin::CheckBusinessByRegNo($reg_no)) {
+            return view($this->path . 'business.edit.index')
+                ->with([
+                    'business' => $business,
+                ]);
         } else {
             session()->flash('error', 'Something went wrong!');
             return redirect(route('AdminBusiness'));
         }
     }
 
-    public function EditBusinessDetails($user_name)
+    public function EditBusinessDetails($reg_no)
     {
-        if ($business = Admin::CheckBusinessByUsername($user_name)) {
-
-            return view($this->path . 'business.edit.businessdetails', compact('business'));
+        if ($business = Admin::CheckBusinessByRegNo($reg_no)) {
+            return view($this->path . 'business.edit.businessdetails')
+                ->with([
+                    'business' => $business,
+                ]);
         } else {
             session()->flash('error', 'Something went wrong!');
             return redirect(route('AdminBusiness'));
         }
     }
 
-    public function EditBusinessAbilities($user_name)
+    public function EditBusinessAbilities($reg_no)
     {
-        if ($business = Admin::CheckBusinessByUsername($user_name)) {
-            return view($this->path . 'business.edit.abilities', compact('business'));
+        if ($business = Admin::CheckBusinessByRegNo($reg_no)) {
+            return view($this->path . 'business.edit.abilities')
+                ->with([
+                    'business' => $business,
+                ]);
         } else {
             session()->flash('error', 'Something went wrong!');
             return redirect(route('AdminBusiness'));
         }
     }
 
-    public function ChangeBusinessPassword($user_name)
+    public function ChangeBusinessPassword($reg_no)
     {
-        if ($business = Admin::CheckBusinessByUsername($user_name)) {
-            return view($this->path . 'business.edit.changepassword', compact('business'));
+        if ($business = Admin::CheckBusinessByRegNo($reg_no)) {
+            return view($this->path . 'business.edit.changepassword')
+                ->with([
+                    'business' => $business,
+                ]);
         } else {
             session()->flash('error', 'Something went wrong!');
             return redirect(route('AdminBusiness'));
@@ -92,7 +105,10 @@ class AdminController extends Controller
     public function EditClient($user_name)
     {
         if ($client = Admin::CheckClientByUserName($user_name)) {
-            return view($this->path . 'clients.edit.index', compact('client'));
+            return view($this->path . 'clients.edit.index')
+                ->with([
+                    'client' => $client,
+                ]);
         }
         session()->flash('error', 'Something went wrong!');
         return redirect(route('AdminClients'));
@@ -101,7 +117,10 @@ class AdminController extends Controller
     public function ChangeClientPassword($user_name)
     {
         if ($client = Admin::CheckClientByUserName($user_name)) {
-            return view($this->path . 'clients.edit.changepassword', compact('client'));
+            return view($this->path . 'clients.edit.changepassword')
+                ->with([
+                    'client' => $client,
+                ]);
         } else {
             session()->flash('error', 'Something went wrong!');
             return redirect(route('AdminClients'));
@@ -117,7 +136,10 @@ class AdminController extends Controller
     function EditPricingPlan($price_id)
     {
         if ($plan = Admin::PlanFindByPriceId(Auth::user()->id, $price_id)) {
-            return view($this->path . 'pricingplans.edit.index', compact('plan'));
+            return view($this->path . 'pricingplans.edit.index')
+                ->with([
+                    'plan' => $plan,
+                ]);
         } else {
             session()->flash('error', 'Something went wrong!');
             return redirect(route('AdminPricingPlans'));
@@ -137,8 +159,23 @@ class AdminController extends Controller
     public function EditReservation($slug)
     {
         if ($reservation = Admin::FindReservationBySlug($slug)) {
+            return view($this->path . 'reservations.edit.index')
+                ->with([
+                    'reservation' => $reservation,
+                ]);
+        } else {
+            session()->flash('error', 'Something went wrong!');
+            return redirect(route('AdminReservations'));
+        }
+    }
 
-            return view($this->path . 'reservations.edit.index', compact('reservation'));
+    public function ViewReservationSlots($slug)
+    {
+        if ($reservation = Admin::FindReservationBySlug($slug)) {
+            return view($this->path . 'reservations.slots.index')
+                ->with([
+                    'reservation' => $reservation,
+                ]);
         } else {
             session()->flash('error', 'Something went wrong!');
             return redirect(route('AdminReservations'));

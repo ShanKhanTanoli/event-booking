@@ -8,14 +8,14 @@ Route::get('Business/{user_name}/Clients', [App\Http\Controllers\Admin\AdminCont
 Route::get('AddBusiness', [App\Http\Controllers\Admin\AdminController::class, 'AddBusiness'])
     ->name('AdminAddBusiness');
 
-Route::get('{user_name}/Edit', [App\Http\Controllers\Admin\AdminController::class, 'EditBusiness'])
+Route::get('{reg_no}/Edit', [App\Http\Controllers\Admin\AdminController::class, 'EditBusiness'])
     ->name('AdminEditBusiness');
 
-Route::get('{user_name}/BusinessDetails', [App\Http\Controllers\Admin\AdminController::class, 'EditBusinessDetails'])
+Route::get('{reg_no}/BusinessDetails', [App\Http\Controllers\Admin\AdminController::class, 'EditBusinessDetails'])
     ->name('AdminEditBusinessDetails');
 
-Route::get('{user_name}/Abilities', [App\Http\Controllers\Admin\AdminController::class, 'EditBusinessAbilities'])
+Route::get('{reg_no}/Abilities', [App\Http\Controllers\Admin\AdminController::class, 'EditBusinessAbilities'])
     ->name('AdminEditBusinessAbilities');
 
-Route::get('{user_name}/ChangePassword', [App\Http\Controllers\Admin\AdminController::class, 'ChangeBusinessPassword'])
+Route::get('{reg_no}/ChangePassword', [App\Http\Controllers\Admin\AdminController::class, 'ChangeBusinessPassword'])
     ->name('AdminChangeBusinessPassword');

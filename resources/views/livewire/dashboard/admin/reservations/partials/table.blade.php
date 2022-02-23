@@ -1,20 +1,13 @@
-@if (count($reservations) > 0)
-    @foreach ($reservations as $reservation)
-        <div class="card shadow mb-4">
-            <div class="card-header d-flex">
-                <div class="col p-0">
-                    <strong>
-                        {!! substr($reservation->name, 0, 30) !!}
-                    </strong>
-                </div>
-                <div class="col p-0" style="text-align:right;">
-                    <a href="{{ route('BusinessSelectReservationSlotsType', $reservation->slug) }}"
-                        style="padding:0px; border:none; background-color:transparent">
-                        <span class="badge badge-primary">
-                            <i class="fas fa-plus"></i> Add Slots
-                        </span>
-                    </a>
-                    @if ($reservation->status == 'banned')
+@foreach ($reservations as $reservation)
+    <div class="card shadow mb-4">
+        <div class="card-header d-flex">
+            <div class="col p-0">
+                <strong>
+                    {!! substr($reservation->name, 0, 30) !!}
+                </strong>
+            </div>
+            <div class="col p-0" style="text-align:right;">
+                @if ($reservation->status == 'banned')
                     <button wire:click="UnBan({{ $reservation->id }})" wire:loading.attr='disabled'
                         style="padding:0px; border:none; background-color:transparent">
                         <span class="badge badge-primary">
@@ -23,7 +16,7 @@
                             <i class="fas fa-check"></i> UnBan
                         </span>
                     </button>
-               @else
+                @else
                     <button wire:click="BanNow({{ $reservation->id }})" wire:loading.attr='disabled'
                         style="padding:0px; border:none; background-color:transparent">
                         <span class="badge badge-danger">
@@ -33,65 +26,55 @@
                         </span>
                     </button>
                 @endif
-                    @if ($reservation->status == 'active')
-                        <button wire:click="Archive({{ $reservation->id }})" wire:loading.attr='disabled'
-                            style="padding:0px; border:none; background-color:transparent">
-                            <span class="badge badge-danger">
-                                <span wire:loading wire:target='Archive({{ $reservation->id }})'
-                                    class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                <i class="fas fa-archive"></i> Archive
-                            </span>
-                        </button>
-                    @endif
-                    @if ($reservation->status == 'archived')
-                        <button wire:click="Activate({{ $reservation->id }})" wire:loading.attr='disabled'
-                            style="padding:0px; border:none; background-color:transparent">
-                            <span class="badge badge-primary">
-                                <span wire:loading wire:target='Activate({{ $reservation->id }})'
-                                    class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                <i class="fas fa-check"></i> Activate
-                            </span>
-                        </button>
-                    @endif
-                    <button wire:click="Edit({{ $reservation->id }})" wire:loading.attr='disabled'
-                        style="padding:0px; border:none; background-color:transparent">
-                        <span class="badge badge-primary">
-                            <span wire:loading wire:target='Edit({{ $reservation->id }})'
-                                class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            <i class="fas fa-edit"></i> Edit
-                        </span>
-                    </button>
-                    <button wire:click="RequestDelete({{ $reservation->id }})" wire:loading.attr='disabled'
+                @if ($reservation->status == 'active')
+                    <button wire:click="Archive({{ $reservation->id }})" wire:loading.attr='disabled'
                         style="padding:0px; border:none; background-color:transparent">
                         <span class="badge badge-danger">
-                            <span wire:loading wire:target='RequestDelete({{ $reservation->id }})'
+                            <span wire:loading wire:target='Archive({{ $reservation->id }})'
                                 class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            <i class="fas fa-trash-alt"></i> Delete
+                            <i class="fas fa-archive"></i> Archive
                         </span>
                     </button>
-                </div>
+                @endif
+                @if ($reservation->status == 'archived')
+                    <button wire:click="Activate({{ $reservation->id }})" wire:loading.attr='disabled'
+                        style="padding:0px; border:none; background-color:transparent">
+                        <span class="badge badge-primary">
+                            <span wire:loading wire:target='Activate({{ $reservation->id }})'
+                                class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            <i class="fas fa-check"></i> Activate
+                        </span>
+                    </button>
+                @endif
+                <button wire:click="Edit({{ $reservation->id }})" wire:loading.attr='disabled'
+                    style="padding:0px; border:none; background-color:transparent">
+                    <span class="badge badge-primary">
+                        <span wire:loading wire:target='Edit({{ $reservation->id }})'
+                            class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <i class="fas fa-edit"></i> Edit
+                    </span>
+                </button>
+                <button wire:click="RequestDelete({{ $reservation->id }})" wire:loading.attr='disabled'
+                    style="padding:0px; border:none; background-color:transparent">
+                    <span class="badge badge-danger">
+                        <span wire:loading wire:target='RequestDelete({{ $reservation->id }})'
+                            class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <i class="fas fa-trash-alt"></i> Delete
+                    </span>
+                </button>
             </div>
-            <!--Begin::Slots-->
-            @include('livewire.dashboard.admin.reservations.partials.slots')
-            <!--End::Slots-->
         </div>
-    @endforeach
-    <div class="row">
-        <div class="col-sm-12 col-md-12 mt-2 mb-2 text-center">
-            <button wire:click='LoadMore' wire:loading.attr='disabled' class="btn btn-sm btn-primary">
-                <span wire:loading wire:target='LoadMore' class="spinner-border spinner-border-sm" role="status"
-                    aria-hidden="true"></span>
-                Load More
-            </button>
-        </div>
+        <!--Begin::Slots-->
+        @include('livewire.dashboard.admin.reservations.partials.slots')
+        <!--End::Slots-->
     </div>
-@else
-    <div class="alert alert-danger  text-center" role="alert">
-        <h4 class="alert-heading">
-            <i class="fas fa-exclamation-triangle fa-5x"></i>
-        </h4>
-        <strong class="mt-2">
-            You don't have any reservations yet.
-        </strong>
+@endforeach
+<div class="row">
+    <div class="col-sm-12 col-md-12 mt-2 mb-2 text-center">
+        <button wire:click='LoadMore' wire:loading.attr='disabled' class="btn btn-sm btn-primary">
+            <span wire:loading wire:target='LoadMore' class="spinner-border spinner-border-sm" role="status"
+                aria-hidden="true"></span>
+            Load More
+        </button>
     </div>
-@endif
+</div>

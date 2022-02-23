@@ -4,7 +4,7 @@
             <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{!! $business->name !!}</h4>
             <p class="mb-0">
                 <span class="text-muted">
-                    {{ __('@' . $business->user_name) }}
+                    {{ __('@' . $business->business_user_name) }}
                 </span>
             </p>
             <div class="mt-3">
