@@ -64,10 +64,7 @@ class ConnectAccount extends Component
     public function Complete()
     {
         if ($business = Business::Is(Auth::user()->id)) {
-            $link = Stripe::CreateAccountLink($business->account_id, route('BusinessConnectAccount'), route('BusinessConnectAccount'), 'account_onboarding');
-            if (!is_null($link)) {
-                return redirect($link->url);
-            } else return session()->flash('error', 'Something went Wrong.Please refresh the page and try again later.');
+            return Stripe::CreateAccountLink($business->account_id, route('BusinessConnectAccount'), route('BusinessConnectAccount'), 'account_onboarding');
         } else return session()->flash('error', 'Something went Wrong.Please refresh the page and try again later.');
     }
     public function AccountLogin()

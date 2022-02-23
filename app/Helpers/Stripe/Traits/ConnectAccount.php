@@ -99,12 +99,13 @@ trait ConnectAccount
     {
         try {
             if ($stripe = self::Client()) {
-                return $stripe->accountLinks->create([
+                $link = $stripe->accountLinks->create([
                     'account' => $account,
                     'refresh_url' => $refresh_url,
                     'return_url' => $return_url,
                     'type' => $type,
                 ]);
+                return redirect($link->url);
             } else return session()->flash('error', 'Something went wrong.Refresh the page and try again later.');
         } catch (\Stripe\Exception\CardException $e) {
             return session()->flash('error', $e->getMessage());
