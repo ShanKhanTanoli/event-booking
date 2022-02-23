@@ -19,16 +19,12 @@
                                             role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                             <thead>
                                                 <tr role="row">
-                                                    <th>#</th>
                                                     <th>Name</th>
-                                                    <th class="text-center">From Date</th>
-                                                    <th class="text-center">To Date</th>
-                                                    <th class="text-center">From Time</th>
-                                                    <th class="text-center">To Time</th>
+                                                    <th class="text-center">Date</th>
+                                                    <th class="text-center">Time</th>
                                                     <th class="text-center">Capacity</th>
                                                     <th class="text-center">Booked</th>
                                                     <th class="text-center">Status</th>
-                                                    <th class="text-center">View</th>
                                                     <th class="text-center">Actions</th>
                                                 </tr>
                                             </thead>
@@ -38,32 +34,26 @@
                                                         <tr>
                                                             <td>
                                                                 <strong>
-                                                                    {{ $loop->iteration }}
-                                                                </strong>
-                                                            </td>
-                                                            <td>
-                                                                <strong>
-                                                                    {!! substr($slot->name, 0, 12) !!}...
-                                                                </strong>
-                                                            </td>
-                                                            <td class="text-center">
-                                                                <strong>
-                                                                    {{ date('d M y', strtotime($slot->start_date)) }}
+                                                                    {{ $slot->id }}
+                                                                    @if (strlen($slot->name) > 20)
+                                                                        {!! substr($slot->name, 0, 20) !!}...
+                                                                    @else
+                                                                        {!! substr($slot->name, 0, 20) !!}
+                                                                    @endif
                                                                 </strong>
                                                             </td>
                                                             <td class="text-center">
                                                                 <strong>
-                                                                    {{ date('d M y', strtotime($slot->end_date)) }}
+                                                                    {{ date('D d M Y', strtotime($slot->starting_date)) }}
                                                                 </strong>
                                                             </td>
                                                             <td class="text-center">
                                                                 <strong>
-                                                                    {{ date('h:i A', strtotime($slot->start_time)) }}
+                                                                    {{ date('h:i A', strtotime($slot->starting_time)) }}
                                                                 </strong>
-                                                            </td>
-                                                            <td class="text-center">
+                                                                -
                                                                 <strong>
-                                                                    {{ date('h:i A', strtotime($slot->end_time)) }}
+                                                                    {{ date('h:i A', strtotime($slot->ending_time)) }}
                                                                 </strong>
                                                             </td>
                                                             <td class="text-center">
@@ -78,49 +68,55 @@
                                                             </td>
                                                             <td class="text-center">
                                                                 <strong>
-                                                                    <span class="badge badge-danger">
-                                                                        WAITING
-                                                                    </span>
+                                                                    @if (Slot::BookingStatusOfClient($slot->id, Auth::user()->id) == 'BOOKED')
+                                                                        <span class="badge badge-primary">
+                                                                            Booked
+                                                                        </span>
+                                                                    @else
+                                                                        <span class="badge badge-danger">
+                                                                            {{ Slot::BookingStatusOfClient($slot->id, Auth::user()->id) }}
+                                                                        </span>
+                                                                    @endif
                                                                 </strong>
                                                             </td>
                                                             <td class="text-center">
-                                                                <button wire:click="View({{ $slot->id }})"
-                                                                    wire:loading.attr='disabled'
-                                                                    style="padding:0px; border:none; background-color:transparent">
-                                                                    <span class="badge badge-primary">
-                                                                        <span wire:loading
-                                                                            wire:target='View({{ $slot->id }})'
-                                                                            class="spinner-border spinner-border-sm"
-                                                                            role="status" aria-hidden="true"></span>
-                                                                        <i class="fas fa-eye"></i> View
-                                                                    </span>
-                                                                </button>
-                                                            </td>
-                                                            <td class="text-center">
-                                                                @if ($slot->status == 'active')
-                                                                    @if (Client::ReservationIsActive(Auth::user()->id, $slot->id))
+                                                                @if (Slot::CanBeBooked($slot->id))
+                                                                    @if (Booking::is_booked(Auth::user()->id, $slot->id))
                                                                         <button
-                                                                            wire:click="CancelNow({{ $slot->id }})"
+                                                                            wire:click="BookNow({{ $slot->id }})"
+                                                                            wire:loading.attr='disabled'
                                                                             style="padding:0px; border:none; background-color:transparent">
-                                                                            <span class="badge badge-danger">
-                                                                                <i class="fas fa-mouse"></i> Cancel
+                                                                            <span class="badge badge-primary">
+                                                                                <span wire:loading
+                                                                                    wire:target='BookNow({{ $slot->id }})'
+                                                                                    class="spinner-border spinner-border-sm"
+                                                                                    role="status"
+                                                                                    aria-hidden="true"></span>
+                                                                                <i class="fas fa-plus"></i> Book
                                                                             </span>
                                                                         </button>
                                                                     @else
                                                                         <button
-                                                                            wire:click="BookNow({{ $slot->id }})"
+                                                                            wire:click="CancelNow({{ $slot->id }})"
+                                                                            wire:loading.attr='disabled'
                                                                             style="padding:0px; border:none; background-color:transparent">
-                                                                            <span class="badge badge-primary">
-                                                                                <i class="fas fa-mouse"></i> Book
+                                                                            <span class="badge badge-danger">
+                                                                                <span wire:loading
+                                                                                    wire:target='CancelNow({{ $slot->id }})'
+                                                                                    class="spinner-border spinner-border-sm"
+                                                                                    role="status"
+                                                                                    aria-hidden="true"></span>
+                                                                                <i class="fas fa-minus"></i>
+                                                                                Cancel
                                                                             </span>
                                                                         </button>
                                                                     @endif
                                                                 @else
-                                                                    <button
+                                                                    <button class="btn btn-danger"
                                                                         style="padding:0px; border:none; background-color:transparent"
                                                                         disabled>
                                                                         <span class="badge badge-danger">
-                                                                            <i class="fas fa-mouse"></i> Book
+                                                                            <i class="fas fa-plus"></i> Book
                                                                         </span>
                                                                     </button>
                                                                 @endif

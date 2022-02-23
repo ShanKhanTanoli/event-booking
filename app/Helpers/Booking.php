@@ -31,7 +31,7 @@ class Booking
             $booking = ClientBooking::where('user_id', $user)
                 ->where('slot_id', $slot)->latest()->first();
             if (!is_null($booking)) {
-                if ($booking->delete()) {
+                if ($booking->forceDelete()) {
                     return session()->flash('success', "Canceled Successfully");
                 } else return session()->flash('error', "Something went wrong");
             } else return session()->flash('error', "Something went wrong");

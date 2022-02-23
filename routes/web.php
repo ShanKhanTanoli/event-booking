@@ -41,6 +41,15 @@ Route::get('Return', function () {
 
 Route::get('debug', function () {
 
+    for($user = 100; $user < 120; $user ++){
+        Booking::new($user, 121, 10);
+    }
+    //121
+    $slot = Slot::Info(121);
+
+    dd($slot);
+    dd(Slot::Bookings(121)->take($slot->capacity)->get()->where('user_id',113)->first());
+
     //jenny.rosen@example.com
 
     //You must update your Connect branding settings with 
@@ -153,14 +162,22 @@ Route::get('debug', function () {
 
     //return redirect($link->url);
 
-    //Verified Account
+
+
+    //Verified Business Account
+    $verified_business = 'acct_1KVjQIRYVF7b7SlI';
+
+    //Verified Individual Account
+    $verified_individual = 'acct_1KVjJwDGx269Aqtf';
+
+    //Restricts Soon Account
     $account = 'acct_1KVH0XRXmAQzp1r9';
 
     //Restricted Account
     $restricted = 'acct_1KVH0LRiGUGr13em';
 
-    dd(Stripe::RetrieveAccount($account));
-    dd(Stripe::CreateLoginLink($account));
+    dd(Stripe::RetrieveAccount($verified_individual));
+    dd(Stripe::CreateLoginLink($verified_individual));
 
     // $stripe = Stripe::Client();
 
