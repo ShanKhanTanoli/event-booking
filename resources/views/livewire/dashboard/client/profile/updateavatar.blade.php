@@ -3,7 +3,7 @@
         <div class="mx-auto" style="width: 140px;">
             <div id="avatar" class="d-flex justify-content-center align-items-center rounded"
                 style="height: 140px; background-color: rgb(233, 236, 239); cursor: pointer;">
-                @if (!Business::Is(Auth::user()->id))
+                @if (!Client::Is(Auth::user()->id))
                     <span style="color: rgb(166, 168, 170); font: bold 8pt Arial; text-align:center;">
                         140x140
                         <br>
@@ -13,8 +13,8 @@
                     @if ($avatar)
                         <img style="width:100%;" src="{{ asset($avatar->temporaryUrl()) }}" alt="avatar">
                     @else
-                        @if (!is_null($avatar = Business::Is(Auth::user()->id)->avatar))
-                            <img style="width:100%;" src="{{ asset('dashboard/images/business/avatars/' . $avatar) }}"
+                        @if (!is_null($avatar = Client::Is(Auth::user()->id)->avatar))
+                            <img style="width:100%;" src="{{ asset('dashboard/images/client/avatars/' . $avatar) }}"
                                 alt="Logo">
                         @else
                             <span style="color: rgb(166, 168, 170); font: bold 8pt Arial; text-align:center;">
@@ -58,7 +58,7 @@
                         </span>
                     </button>
                 @endif
-                @if (!Business::Is(Auth::user()->id))
+                @if (!Client::Is(Auth::user()->id))
                     <button wire:click="Remove()" style="border:none; padding:0px; background-color:transparent;"
                         type="button">
                         <span class="badge badge-danger">

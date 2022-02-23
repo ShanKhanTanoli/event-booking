@@ -63,6 +63,11 @@ return [
             'root'   => public_path() . '/dashboard/images/admin/avatars',
         ],
 
+        'ClientAvatars' => [
+            'driver' => 'local',
+            'root'   => public_path() . '/dashboard/images/client/avatars',
+        ],
+
         'AdminLogos' => [
             'driver' => 'local',
             'root'   => public_path() . '/dashboard/images/admin/logos',
