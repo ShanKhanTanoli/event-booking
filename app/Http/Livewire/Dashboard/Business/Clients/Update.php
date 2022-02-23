@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Dashboard\Business\Clients;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use App\Helpers\Business\Business;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +13,10 @@ class Update extends Component
 {
 
     public $client;
+
+    public $avatar;
+
+    use WithFileUploads;
 
     public $state = [];
 
@@ -72,6 +77,28 @@ class Update extends Component
                 $user->update(['email_verified_at' => now()]);
                 session()->flash('success', 'Email has been Verified Successfully!');
             } else session()->flash('error', 'You are not Allowed to perform this action!');
+        } else session()->flash('error', 'Something went wrong!');
+    }
+
+    public function Upload()
+    {
+        if ($user = Business::CheckClient(Auth::user()->id, $this->client->id)) {
+            $this->validate([
+                'avatar' => 'image|mimes:jpg,jpeg,png,bmp|max:1024',
+            ]);
+            $imageName = 'avatar' . '-' . time() . '-' . mt_rand(999, 9999999999) . '.' . $this->avatar->getClientOriginalExtension();
+            $this->avatar->storeAs('/', $imageName, ['disk' => 'ClientAvatars']);
+            $user->update(['avatar' => $imageName]);
+            session()->flash('success', 'Successfully Updated');
+        } else session()->flash('error', 'Something went wrong!');
+    }
+
+    public function Remove()
+    {
+        if ($user = Business::CheckClient(Auth::user()->id, $this->client->id)) {
+            $user->update(['avatar' => null]);
+            $this->avatar = null;
+            session()->flash('success', 'Removed Successfully');
         } else session()->flash('error', 'Something went wrong!');
     }
 }
