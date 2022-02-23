@@ -2,10 +2,11 @@
 
 namespace App\Http\Livewire\Dashboard\Admin\Reservations;
 
+use App\Models\Slot;
 use Livewire\Component;
 use App\Helpers\Admin\Admin;
-use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
 {
@@ -89,6 +90,15 @@ class Index extends Component
             if ($reservation = Admin::FindReservation($id)) {
                 return redirect(route('AdminEditReservation', $reservation->slug));
             } else return session()->flash('error', 'Something went wrong');
+        } else return session()->flash('error', 'Something went wrong');
+    }
+
+    public function DeleteSlot($slot)
+    {
+        $find = Slot::find($slot);
+        if (!is_null($find)) {
+            $find->delete();
+            return session()->flash('success', 'Deleted Successfully');
         } else return session()->flash('error', 'Something went wrong');
     }
 

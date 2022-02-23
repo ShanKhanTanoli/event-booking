@@ -53,11 +53,11 @@
                                             </strong>
                                         </td>
                                         <td class="text-center">
-                                            <button wire:click="Delete({{ $slot->id }})"
+                                            <button wire:click="DeleteSlot({{ $slot->id }})"
                                                 wire:loading.attr='disabled'
                                                 style="padding:0px; border:none; background-color:transparent">
                                                 <span class="badge badge-danger">
-                                                    <span wire:loading wire:target='Delete({{ $slot->id }})'
+                                                    <span wire:loading wire:target='DeleteSlot({{ $slot->id }})'
                                                         class="spinner-border spinner-border-sm" role="status"
                                                         aria-hidden="true"></span>
                                                     <i class="fas fa-trash-alt"></i> Delete
