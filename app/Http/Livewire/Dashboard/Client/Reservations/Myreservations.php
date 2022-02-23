@@ -20,8 +20,12 @@ class Myreservations extends Component
             ->unique()->toArray();
 
         $slots = Client::BookedSlots($ids);
-        
-        return view('livewire.dashboard.client.reservations.myreservations', compact(['reservations', 'slots']));
+
+        return view('livewire.dashboard.client.reservations.myreservations')
+            ->with([
+                'reservations' => $reservations,
+                'slots' => $slots,
+            ]);
     }
 
     public function View($id)

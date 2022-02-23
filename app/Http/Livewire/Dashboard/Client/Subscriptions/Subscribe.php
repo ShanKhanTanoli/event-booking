@@ -10,6 +10,9 @@ class Subscribe extends Component
 
     public function render()
     {
-        return view('livewire.dashboard.client.subscriptions.subscribe',compact($this->plan));
+        return view('livewire.dashboard.client.subscriptions.subscribe')
+            ->with([
+                'plan' => $this->plan,
+            ]);;
     }
 }

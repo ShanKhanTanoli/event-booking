@@ -20,22 +20,15 @@ class All extends Component
     {
         if (!is_null($plan = Plan::find($planId))) {
             if (Business::Is($plan->user_id)) {
-                $user = Auth::user()->id;
-                return Client::CreateSubscription($user, Str::random(), Str::random(), $plan->id);
+                return redirect(route('ClientSubscribe', $plan->price_id));
             } else return session()->flash('error', 'Something went wrong');
         } else return session()->flash('error', 'Something went wrong');
-
-        // if (!is_null($plan = Plan::find($planId))) {
-        //     if (Business::Is($plan->user_id)) {
-        //         return redirect(route('ClientSubscribe', $plan->price_id));
-        //     } else return session()->flash('error', 'Something went wrong');
-        // } else return session()->flash('error', 'Something went wrong');
     }
 
     public function EndSubscription()
     {
-        if($subs = Client::HasActiveSubscription(Auth::user()->id)){
+        if ($subs = Client::HasActiveSubscription(Auth::user()->id)) {
             return Client::EndSubscription(Auth::user()->id, $subs->invoice);
-        }else return session()->flash('error', 'Something went wrong');
+        } else return session()->flash('error', 'Something went wrong');
     }
 }

@@ -14,10 +14,11 @@ class Viewslots extends Component
     public function render()
     {
         $slots = Business::Slots($this->reservation->id, $this->take);
-        return view('livewire.dashboard.client.reservations.viewslots', compact([
-            $this->reservation,
-            'slots',
-        ]));
+        return view('livewire.dashboard.client.reservations.viewslots')
+        ->with([
+            'reservation' => $this->reservation,
+            'slots' => $slots,
+        ]);
     }
 
     public function LoadMore()

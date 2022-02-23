@@ -21,7 +21,11 @@ class All extends Component
     {
         $reservations = $this->mount();
         $reservations = $reservations->take($this->load);
-        return view('livewire.dashboard.client.reservations.all', compact('reservations'));
+
+        return view('livewire.dashboard.client.reservations.all')
+            ->with([
+                'reservations' => $reservations,
+            ]);
     }
 
     public function LoadMore()
