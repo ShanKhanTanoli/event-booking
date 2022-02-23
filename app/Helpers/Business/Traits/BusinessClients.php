@@ -6,26 +6,28 @@ use App\Models\User;
 
 trait BusinessClients
 {
-   
-    public static function CheckClient($business,$user)
+
+    public static function CheckClient($business, $user)
     {
         if ($self = self::Is($business)) {
-            if(!is_null($client = User::find($user))) {
-                if($self->id === $client->created_by){
+            if (!is_null($client = User::find($user))) {
+                if ($self->id == $client->created_by) {
                     return $client;
-                }return false;
-            }else return false;
+                }
+                return false;
+            } else return false;
         } else return false;
     }
 
-    public static function CheckClientByRegNo($business,$reg_no)
+    public static function CheckClientByRegNo($business, $reg_no)
     {
         if ($self = self::Is($business)) {
-            if(!is_null($client = User::where('reg_no',$reg_no)->first())) {
-                if($self->id === $client->created_by){
+            if (!is_null($client = User::where('reg_no', $reg_no)->first())) {
+                if ($self->id == $client->created_by) {
                     return $client;
-                }return false;
-            }else return false;
+                }
+                return false;
+            } else return false;
         } else return false;
     }
 
@@ -43,13 +45,13 @@ trait BusinessClients
         } else return 0;
     }
 
-    public static function ClientIsVerified($business,$client)
+    public static function ClientIsVerified($business, $client)
     {
-        if($user = self::CheckClient($business,$client)){
-            if(!is_null($user->email_verified_at)){
+        if ($user = self::CheckClient($business, $client)) {
+            if (!is_null($user->email_verified_at)) {
                 return $user;
-            }else return false;
-        }else return false;
+            } else return false;
+        } else return false;
     }
 
     public static function VerifiedClients($user)
@@ -91,5 +93,4 @@ trait BusinessClients
             } else return 0;
         } else return 0;
     }
-    
 }
