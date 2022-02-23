@@ -68,7 +68,6 @@
                                                 <th class="text-center">Email Status</th>
                                                 <th class="text-center">Visibility</th>
                                                 <th class="text-center">Status</th>
-                                                <th class="text-center">Edit</th>
                                                 <th class="text-center">Delete</th>
                                             </tr>
                                         </thead>
@@ -134,14 +133,6 @@
                                                                     <i class="fas fa-check"></i> Active
                                                                 </span>
                                                             @endif
-                                                        </td>
-                                                        <td>
-                                                            <button wire:click="EditNow({{ $client->id }})"
-                                                                style="padding:0px; border:none; background-color:transparent">
-                                                                <span class="badge badge-success">
-                                                                    <i class="fas fa-edit"></i> Edit
-                                                                </span>
-                                                            </button>
                                                         </td>
                                                         <td>
                                                             <button wire:click="DeleteNow({{ $client->id }})"

@@ -125,7 +125,7 @@
                 <!-- End::Topbar-->
 
                 <!--Begin::All Reservations-->
-                @livewire('dashboard.admin.reservations.all')
+                @livewire('dashboard.admin.reservations.index')
                 <!--Begin::All Reservations-->
             </div>
             <!-- End of Main Content -->

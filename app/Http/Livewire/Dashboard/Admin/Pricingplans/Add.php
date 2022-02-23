@@ -20,18 +20,19 @@ class Add extends Component
     }
     public function CreatePlan()
     {
+        $validated = Validator::make($this->state, [
+            'name' => 'required|string|max:30',
+            'price' => 'required|numeric',
+            'invoice_period' => 'required|numeric',
+            'invoice_interval' => 'required|string|in:day,month',
+            'description' => 'required|string|max:40',
+            'reservations' => 'required|numeric',
+        ])->validate();
+
         try {
-            $validated = Validator::make($this->state, [
-                'name' => 'required|string|max:30',
-                'price' => 'required|numeric',
-                'invoice_period' => 'required|numeric',
-                'invoice_interval' => 'required|string|in:day,month',
-                'description' => 'required|string|max:40',
-                'reservations' => 'required|numeric',
-            ])->validate();
             $data = [
                 'user_id' => Auth::user()->id,
-                'price_id' => 'price_' .strtoupper(Str::random(30)),
+                'price_id' => 'price_' . strtoupper(Str::random(30)),
                 'name' => $validated['name'],
                 'description' => $validated['description'],
                 'price' => $validated['price'],

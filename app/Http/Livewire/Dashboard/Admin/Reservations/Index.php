@@ -7,7 +7,7 @@ use App\Helpers\Admin\Admin;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
 
-class All extends Component
+class Index extends Component
 {
     use WithPagination;
 
@@ -17,28 +17,29 @@ class All extends Component
 
     public $reservation;
 
+    public $load = 3;
+
     public function render()
     {
-        $reservations =  Admin::AllReservations()->paginate(6);
+        $reservations =  Admin::AllReservations()
+            ->take($this->load)->get();
 
-        if ($this->status == 'active') {
-            $reservations =  Admin::ActiveReservations(Auth::user()->id)->paginate(6);
-        }
-        if ($this->status == 'archived') {
-            $reservations =  Admin::ArchivedReservations(Auth::user()->id)->paginate(6);
-        }
-        if ($this->status == 'banned') {
-            $reservations =  Admin::BannedReservations(Auth::user()->id)->paginate(6);
-        }
-        return view('livewire.dashboard.admin.reservations.all', compact(['reservations', $this->reservation]));
+        return view('livewire.dashboard.admin.reservations.index')
+            ->with([
+                'reservations' => $reservations,
+                'reservation' => $this->reservation,
+            ]);
+    }
+
+    public function LoadMore()
+    {
+        $this->load += 3;
     }
 
     public function Activate($id)
     {
         if (Admin::Is(Auth::user()->id)) {
-
             if ($reservation = Admin::FindReservation($id)) {
-
                 $reservation->update(['status' => 'active']);
                 return session()->flash('success', 'Activated Successfully');
             } else return session()->flash('error', 'Something went wrong');
@@ -86,7 +87,7 @@ class All extends Component
     {
         if (Admin::Is(Auth::user()->id)) {
             if ($reservation = Admin::FindReservation($id)) {
-                return redirect(route('AdminEditReservation',$reservation->slug));
+                return redirect(route('AdminEditReservation', $reservation->slug));
             } else return session()->flash('error', 'Something went wrong');
         } else return session()->flash('error', 'Something went wrong');
     }

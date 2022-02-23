@@ -13,7 +13,10 @@ class Plans extends Component
     public function render()
     {
         $plans = Admin::Plans(Auth::user()->id)->take($this->load);
-        return view('livewire.dashboard.admin.pricingplans.plans', compact('plans'));
+        return view('livewire.dashboard.admin.pricingplans.plans')
+            ->with([
+                'plans' => $plans,
+            ]);
     }
 
     public function LoadMore()

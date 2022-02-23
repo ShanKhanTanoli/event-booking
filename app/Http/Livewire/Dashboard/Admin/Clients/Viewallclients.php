@@ -63,8 +63,10 @@ class Viewallclients extends Component
         /*End::client Email Status*/
 
         $clients = $clients->paginate(6);
-
-        return view('livewire.dashboard.admin.clients.viewallclients', compact('clients'));
+        return view('livewire.dashboard.admin.clients.viewallclients')
+            ->with([
+                'clients' => $clients,
+            ]);
     }
 
     public function UnVerifyEmail($client)
@@ -104,7 +106,7 @@ class Viewallclients extends Component
     public function EditNow($client)
     {
         if ($user = Admin::CheckClient($client)) {
-            return redirect(route('AdminEditClient',$user->user_name));
+            return redirect(route('AdminEditClient', $user->user_name));
         } else session()->flash('error', 'Something went wrong!');
     }
 

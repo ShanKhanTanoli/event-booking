@@ -64,15 +64,11 @@ class Viewall extends Component
 
         $business = $business->paginate(8);
 
-        return view('livewire.dashboard.admin.business.viewall', compact('business'));
+        return view('livewire.dashboard.admin.business.viewall')
+            ->with([
+                'business' => $business,
+            ]);
     }
-
-    // public function ViewClients($business)
-    // {
-    //     if ($user = Admin::CheckBusiness($business)) {
-    //         return redirect(route('AdminBusinessClients', $user->user_name));
-    //     } else session()->flash('error', 'Something went wrong!');
-    // }
 
     public function UnVerifyEmail($business)
     {

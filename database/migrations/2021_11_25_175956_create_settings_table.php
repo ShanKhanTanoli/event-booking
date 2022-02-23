@@ -27,7 +27,7 @@ class CreateSettingsTable extends Migration
             'logo' => 'logo-white.png',
             'text_logo' => 'Subscribest',
             'use_text_logo' => 1,
-            'commission_percentage' => 1,
+            'commission_percentage' => 5,
         ]);
     }
 

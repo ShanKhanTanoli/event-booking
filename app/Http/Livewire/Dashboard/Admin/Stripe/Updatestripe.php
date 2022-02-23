@@ -26,7 +26,10 @@ class Updatestripe extends Component
     public function render()
     {
         $stripe = PaymentGateway::first();
-        return view('livewire.dashboard.admin.stripe.updatestripe', compact('stripe'));
+        return view('livewire.dashboard.admin.stripe.updatestripe')
+            ->with([
+                'stripe' => $stripe,
+            ]);
     }
 
     public function Update()
