@@ -53,7 +53,27 @@
                 <strong>Price</strong>
             </div>
             <div class="col">
-                <strong class="text-success">{{ number_format($plan->price) }} {{ strtoupper(Settings::Currency()) }}</strong>
+                <strong class="text-success">{{ $plan->price }} {{ strtoupper(Settings::Currency()) }}</strong>
+            </div>
+        </div>
+        <div class="border-top px-2 mx-2"></div>
+        <div class="p-2 d-flex pt-3">
+            <div class="col">
+                <strong>Application Fees</strong>
+            </div>
+            <div class="col">
+                <strong class="text-success">{{ Settings::CalculateFees($plan->price) }} {{ strtoupper(Settings::Currency()) }}</strong>
+            </div>
+        </div>
+        <div class="border-top px-2 mx-2"></div>
+        <div class="p-2 d-flex pt-3">
+            <div class="col">
+                <strong>Total</strong>
+            </div>
+            <div class="col">
+                <strong class="text-success">
+                    {{  $plan->price + Settings::CalculateFees($plan->price) }} {{ strtoupper(Settings::Currency()) }}
+                </strong>
             </div>
         </div>
     </div>

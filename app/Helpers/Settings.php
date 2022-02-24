@@ -27,4 +27,11 @@ class Settings
             return $settings->currency;
         }return 'usd';
     }
+
+    public static function CalculateFees($amount)
+    {
+        if(($settings = self::Info())){
+            return $settings->commission_percentage * $amount / 100;
+        }return 0;
+    }
 }

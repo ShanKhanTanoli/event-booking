@@ -23,6 +23,13 @@
                                         {{ strtoupper(Settings::Currency()) }}
                                     </strong>
                                 </div>
+                                <div class="mb-4 mt-4">
+                                    <strong>
+                                        Application Fee
+                                        {{ Settings::CalculateFees($plan->price) }}
+                                        {{ strtoupper(Settings::Currency()) }}
+                                    </strong>
+                                </div>
                                 <ul class="list-group list-group-flush small">
                                     <li style="border:none;" class="list-group-item">
                                         <strong>

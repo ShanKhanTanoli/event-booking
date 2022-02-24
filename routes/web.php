@@ -8,6 +8,7 @@ use App\Helpers\Booking;
 use App\Models\ClientBooking;
 use App\Helpers\Client\Client;
 use App\Helpers\Business\Business;
+use App\Helpers\Settings;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +42,7 @@ Route::get('Return', function () {
 
 Route::get('debug', function () {
 
+    dd(Settings::CalculateFees(100));
     for($user = 100; $user < 120; $user ++){
         Booking::new($user, 121, 10);
     }
@@ -163,6 +165,8 @@ Route::get('debug', function () {
     //return redirect($link->url);
 
 
+    //Alejandro account
+    $alejandro_account = "acct_1KWRpQPE3FBXawqb";
 
     //Verified Business Account
     $verified_business = 'acct_1KVjQIRYVF7b7SlI';

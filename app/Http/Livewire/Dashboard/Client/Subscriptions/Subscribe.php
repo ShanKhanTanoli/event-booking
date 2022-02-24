@@ -57,10 +57,14 @@ class Subscribe extends Component
                             'exp_year' => $this->card_expiry_year,
                             'cvc' => $this->card_cvc,
                         ];
-                        $amount = $this->plan->price * 100;
-                        $application_fee_amount = Settings::CommissionPercent() * $amount / 100;
+
+                        //Calculate Fee
+                        $application_fee_amount = Settings::CalculateFees($this->plan->price);
+                        //Calculate Fee
+                        $amount = $this->plan->price + $application_fee_amount;
                         $plan = $this->plan->id;
-                        return Stripe::CardChargeForClient($card, $amount,Settings::Currency(),$application_fee_amount, $account_id, $user->id, $plan);
+
+                        return Stripe::CardChargeForClient($card, $amount*100, Settings::Currency(), $application_fee_amount*100, $account_id, $user->id, $plan);
                     } else return session()->flash('error', 'contact your business owner.');
                 } else return session()->flash('error', 'contact your business owner.');
             } else return session()->flash('error', 'contact your business owner.');
