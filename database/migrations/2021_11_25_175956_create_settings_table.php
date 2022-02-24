@@ -20,6 +20,7 @@ class CreateSettingsTable extends Migration
             $table->string('text_logo')->unique()->nullable();
             $table->boolean('use_text_logo')->nullable();
             $table->integer('commission_percentage')->nullable();
+            $table->string('currency')->unique()->nullable();
             $table->timestamps();
         });
 
@@ -28,6 +29,7 @@ class CreateSettingsTable extends Migration
             'text_logo' => 'Subscribest',
             'use_text_logo' => 1,
             'commission_percentage' => 5,
+            'currency' => 'eur',
         ]);
     }
 

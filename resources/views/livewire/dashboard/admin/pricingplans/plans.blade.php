@@ -59,7 +59,7 @@
                                                         <td class="text-center">
                                                             <strong>
                                                                 {{ $plan->price }}
-                                                                {{ strtoupper($plan->currency) }}
+                                                                {{ strtoupper(Settings::Currency()) }}
                                                             </strong>
                                                         </td>
                                                         <td class="text-center">

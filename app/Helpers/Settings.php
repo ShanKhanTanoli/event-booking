@@ -20,4 +20,11 @@ class Settings
             return $settings->commission_percentage;
         }return 0;
     }
+
+    public static function Currency()
+    {
+        if(($settings = self::Info())){
+            return $settings->currency;
+        }return 'usd';
+    }
 }

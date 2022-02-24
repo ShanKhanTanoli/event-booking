@@ -15,11 +15,14 @@ class Websitesettings extends Component
     public $logo;
     public $commission_percentage;
 
+    public $currency;
+
     public function mount()
     {
         if ($stripe = Admin::Settings()) {
             $this->text_logo = $stripe->text_logo;
             $this->commission_percentage = $stripe->commission_percentage;
+            $this->currency = $stripe->currency;
         }
     }
 
@@ -34,6 +37,7 @@ class Websitesettings extends Component
             $validated = $this->validate([
                 'text_logo' => 'required|string',
                 'commission_percentage' => 'required|numeric',
+                'currency' => 'required|string|in:usd,eur,aud,cad,gbp',
             ]);
             $settings->update($validated);
             session()->flash('success', 'Successfully Updated');

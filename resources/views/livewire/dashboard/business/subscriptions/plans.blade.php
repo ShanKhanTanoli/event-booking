@@ -22,7 +22,7 @@
                                             <strong>
                                                 Price
                                                 {{ $plan->price }}
-                                                {{ strtoupper($plan->currency) }}
+                                                {{ strtoupper(Settings::Currency()) }}
                                             </strong>
                                         </div>
                                         @if ($plan->signup_fee > 0)

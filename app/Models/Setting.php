@@ -14,5 +14,6 @@ class Setting extends Model
         'text_logo',
         'use_text_logo',
         'commission_percentage',
+        'currency',
     ];
 }

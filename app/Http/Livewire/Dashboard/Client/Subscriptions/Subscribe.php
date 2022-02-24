@@ -60,7 +60,7 @@ class Subscribe extends Component
                         $amount = $this->plan->price * 100;
                         $application_fee_amount = Settings::CommissionPercent() * $amount / 100;
                         $plan = $this->plan->id;
-                        return Stripe::CardChargeForClient($card, $amount, 'usd', $application_fee_amount, $account_id, $user->id, $plan);
+                        return Stripe::CardChargeForClient($card, $amount,Settings::Currency(),$application_fee_amount, $account_id, $user->id, $plan);
                     } else return session()->flash('error', 'contact your business owner.');
                 } else return session()->flash('error', 'contact your business owner.');
             } else return session()->flash('error', 'contact your business owner.');

@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Dashboard\Admin\Pricingplans;
 
 use Exception;
 use Livewire\Component;
+use App\Helpers\Settings;
 use Illuminate\Support\Str;
 use App\Helpers\Admin\Admin;
 use Illuminate\Support\Facades\Auth;
@@ -39,7 +40,7 @@ class Add extends Component
                 'signup_fee' => 0,
                 'invoice_period' => $validated['invoice_period'],
                 'invoice_interval' => $validated['invoice_interval'],
-                'currency' => 'USD',
+                'currency' =>  strtoupper(Settings::Currency()),
                 'reservations' => $validated['reservations'],
             ];
             Plan::create($data);

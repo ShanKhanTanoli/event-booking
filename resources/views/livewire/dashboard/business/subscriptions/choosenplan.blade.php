@@ -53,7 +53,7 @@
                 <strong>Price</strong>
             </div>
             <div class="col">
-                <strong class="text-success">${{ number_format($plan->price)}}</strong>
+                <strong class="text-success">{{ number_format($plan->price)}} {{ strtoupper(Settings::Currency()) }}</strong>
             </div>
         </div>
     </div>

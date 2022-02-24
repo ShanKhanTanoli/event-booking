@@ -107,8 +107,7 @@
                                                     <div class="row">
                                                         <div class="col">
                                                             <div class="form-group">
-                                                                <label>Text Logo (It will be used as your logo If you
-                                                                    will not upload logo)</label>
+                                                                <label>Text Logo </label>
                                                                 <input wire:model.defer="text_logo"
                                                                     class="form-control @error('text_logo') is-invalid @enderror"
                                                                     id="text_logo " type="text"
@@ -123,14 +122,31 @@
                                                         </div>
                                                         <div class="col">
                                                             <div class="form-group">
-                                                                <label>Commission Percentage % (When clients will pay to their business
-                                                                    owners)</label>
+                                                                <label>Commission Percentage %</label>
                                                                 <input wire:model.defer="commission_percentage"
                                                                     class="form-control @error('commission_percentage') is-invalid @enderror"
                                                                     id="commission_percentage " type="text"
                                                                     placeholder="Commsission Percentage %"
                                                                     value="{{ old('commission_percentage') }}">
                                                                 @error('commission_percentage')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>Currency</label>
+                                                                    <select wire:model.defer="currency" class="form-control @error('currency') is-invalid @enderror">
+                                                                        <option value="">Select Currency</option>
+                                                                        <option value="usd">USD</option>
+                                                                        <option value="eur">EUR</option>
+                                                                        <option value="aud">AUD</option>
+                                                                        <option value="cad">CAD</option>
+                                                                        <option value="gbp">GBP</option>
+                                                                    </select>
+                                                                @error('currency')
                                                                     <span class="invalid-feedback" role="alert">
                                                                         <strong>{{ $message }}</strong>
                                                                     </span>

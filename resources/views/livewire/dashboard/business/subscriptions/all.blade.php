@@ -55,7 +55,7 @@
                                                 <td class="text-center">
                                                     <strong>
                                                         {!! $plan->price !!}
-                                                        {!! $plan->currency !!}
+                                                        {{ strtoupper(Settings::Currency()) }}
                                                     </strong>
                                                 </td>
                                                 @else

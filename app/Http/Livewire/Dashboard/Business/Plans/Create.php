@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Dashboard\Business\Plans;
 
 use Exception;
 use Livewire\Component;
+use App\Helpers\Settings;
 use Illuminate\Support\Str;
 use App\Helpers\Business\Business;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +37,7 @@ class Create extends Component
             'signup_fee' => 0,
             'invoice_period' => $validated['invoice_period'],
             'invoice_interval' => $validated['invoice_interval'],
-            'currency' => 'USD',
+            'currency' => strtoupper(Settings::Currency()),
             'reservations' => $validated['reservations'],
         ];
         if (Business::CanCreatePricingPlans(Auth::user()->id)) {

@@ -90,12 +90,12 @@
                                                             <div class="row">
                                                                 <div class="col">
                                                                     <div class="form-group">
-                                                                        <label>Plan Price (USD)</label>
+                                                                        <label>Plan Price ({{ strtoupper(Settings::Currency()) }})</label>
                                                                         <input wire:model.defer="state.price"
                                                                             wire:loading.attr='disabled'
                                                                             class="form-control @error('price') is-invalid @enderror"
                                                                             id="price" type="number"
-                                                                            placeholder="Plan price in USD"
+                                                                            placeholder="Plan price in  {{ strtoupper(Settings::Currency()) }}"
                                                                             value="{{ old('price') }}">
                                                                         @error('price')
                                                                             <span class="invalid-feedback" role="alert">

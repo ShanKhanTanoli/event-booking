@@ -20,7 +20,7 @@
                                     <strong>
                                         Price
                                         {{ $plan->price }}
-                                        {{ strtoupper($plan->currency) }}
+                                        {{ strtoupper(Settings::Currency()) }}
                                     </strong>
                                 </div>
                                 <ul class="list-group list-group-flush small">
