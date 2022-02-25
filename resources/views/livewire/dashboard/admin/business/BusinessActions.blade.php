@@ -3,15 +3,25 @@
         <div class="text-center text-sm-left mb-2 mb-sm-0">
             <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{!! $business->name !!}</h4>
             <p class="mb-0">
+                @if(!is_null( $business->business_user_name))
                 <span class="text-muted">
                     {{ __('@' . $business->business_user_name) }}
                 </span>
+                @else
+                <span class="text-muted">
+                    {{ __('@ Set Business Username') }}
+                </span>
+                @endif
             </p>
             <div class="mt-3">
                 @if (Admin::BusinessIsVerified($business->id))
                     <button wire:click="UnVerifyEmail({{ $business->id }})"
                         style="padding:0px; border:none; background-color:transparent">
                         <span class="badge badge-danger">
+                            <i class="fas fa-user-alt-slash"></i>
+                            <span wire:loading wire:target='UnVerifyEmail({{ $business->id }})'
+                                class="spinner-border spinner-border-sm" role="status" aria-hidden="true">
+                            </span>
                             Unverify
                         </span>
                     </button>
@@ -19,6 +29,10 @@
                     <button wire:click="VerifyEmail({{ $business->id }})"
                         style="padding:0px; border:none; background-color:transparent">
                         <span class="badge badge-primary">
+                            <i class="fas fa-user-check"></i>
+                            <span wire:loading wire:target='VerifyEmail({{ $business->id }})'
+                                class="spinner-border spinner-border-sm" role="status" aria-hidden="true">
+                            </span>
                             Verify Now
                         </span>
                     </button>
@@ -27,6 +41,10 @@
                     <button wire:click="ActivateNow({{ $business->id }})"
                         style="padding:0px; border:none; background-color:transparent">
                         <span class="badge badge-primary">
+                            <i class="fas fa-check"></i>
+                            <span wire:loading wire:target='ActivateNow({{ $business->id }})'
+                                class="spinner-border spinner-border-sm" role="status" aria-hidden="true">
+                            </span>
                             Activate
                         </span>
                     </button>
@@ -34,6 +52,10 @@
                     <button wire:click="BanNow({{ $business->id }})"
                         style="padding:0px; border:none; background-color:transparent">
                         <span class="badge badge-danger">
+                            <i class="fas fa-ban"></i>
+                            <span wire:loading wire:target='BanNow({{ $business->id }})'
+                                class="spinner-border spinner-border-sm" role="status" aria-hidden="true">
+                            </span>
                             Ban Now
                         </span>
                     </button>

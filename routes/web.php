@@ -42,6 +42,7 @@ Route::get('Return', function () {
 
 Route::get('debug', function () {
 
+    
     dd(Settings::CalculateFees(100));
     for($user = 100; $user < 120; $user ++){
         Booking::new($user, 121, 10);

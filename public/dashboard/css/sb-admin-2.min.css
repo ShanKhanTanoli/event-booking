@@ -3778,6 +3778,36 @@ input[type="submit"].btn-block {
     border-top-left-radius: 0.35rem;
     border-top-right-radius: 0.35rem;
 }
+
+.business_side_menu {
+    width: 100%;
+}
+
+.business_side_menu .nav-link:focus,
+.business_side_menu .nav-link:hover
+ {
+    background-color: #4e73df;
+    width: 100%;
+    color: #fff;
+    border-color: #eaecf4 #eaecf4 #dddfeb;
+    border-radius: 0.35rem;
+}
+
+.active_class
+ {
+    background-color: #4e73df;
+    width: 100%;
+    color: #fff !important;
+    border-color: #eaecf4 #eaecf4 #dddfeb;
+    border-radius: 0.35rem;
+}
+
+.active_class > a
+ {
+    color: #fff !important;  
+ }
+
+
 .nav-tabs .nav-link:focus,
 .nav-tabs .nav-link:hover {
     border-color: #eaecf4 #eaecf4 #dddfeb;

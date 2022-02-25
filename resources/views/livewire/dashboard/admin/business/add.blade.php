@@ -8,7 +8,7 @@
                 <div class="col mb-3">
                     <div class="card">
                         <div class="card-header">
-                            Add New Business Account
+                            Create Business Profile
                         </div>
                         <div class="card-body">
                             <div class="tab-content pt-3">
@@ -24,7 +24,7 @@
                                                             <label>Full Name</label>
                                                             <input wire:model.defer="state.name"
                                                                 class="form-control @error('name') is-invalid @enderror"
-                                                                id="name" type="text" placeholder="Business Name"
+                                                                id="name" type="text" placeholder="Business Owner Name"
                                                                 value="{{ old('name') }}">
                                                             @error('name')
                                                                 <span class="invalid-feedback" role="alert">
@@ -87,7 +87,7 @@
                                                             <textarea wire:model.defer="state.bio"
                                                                 class="form-control @error('bio') is-invalid @enderror"
                                                                 rows="5"
-                                                                placeholder="Bio">{{ old('bio') }}</textarea>
+                                                                placeholder="About">{{ old('bio') }}</textarea>
                                                             @error('bio')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
@@ -131,12 +131,12 @@
                                         </div>
                                         <div class="row">
                                             <div class="col d-flex">
-                                                <!-- Add Business Account button-->
-                                                <button wire:click="AddBusinessAccount()" class="btn btn-primary"
+                                                <!-- Save & Next button-->
+                                                <button wire:click="AddBusinessAccount()" wire:loading.attr='disabled' class="btn btn-primary"
                                                     type="button">
                                                     <span wire:loading class="spinner-border spinner-border-sm"
                                                         role="status" aria-hidden="true"></span>
-                                                    Add Business Account
+                                                    Save & Next
                                                 </button>
                                             </div>
                                         </div>

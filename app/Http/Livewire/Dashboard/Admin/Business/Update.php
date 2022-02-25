@@ -26,7 +26,6 @@ class Update extends Component
     {
         $validated = Validator::make($this->state, [
             'name' => 'required|string',
-            'user_name' => 'required|string|unique:users,user_name,' . $this->business->id,
             'bio' => 'required|string',
             'address' => 'required|string',
             'phone' => 'required|numeric|unique:users,phone,' . $this->business->id,

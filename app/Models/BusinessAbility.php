@@ -22,13 +22,11 @@ class BusinessAbility extends Model
         'can_update_client',
         'can_delete_client',
         'can_verify_client',
-        'can_add_client',
-        'can_remove_client',
+        'can_un_verify_client',
 
         'can_view_pricing_plan',
         'can_create_pricing_plan',
         'can_update_pricing_plan',
-        'can_delete_pricing_plan',
     ];
 
     public function user()

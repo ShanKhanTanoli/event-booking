@@ -14,38 +14,37 @@
                     <div class="table-responsive">
                         <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <div class="row mt-2">
-                                <div class="col-sm-12 col-md-3 col-lg-3">
-                                    <div class="dataTables_length" id="dataTable_length">
-                                        <label>Email Status
-                                            <select wire:model="email_status" name="dataTable_length"
-                                                aria-controls="dataTable"
-                                                class="custom-select custom-select-sm form-control form-control-sm">
-                                                <option value="all">All</option>
-                                                <option value="verified">Verified</option>
-                                                <option value="unverified">Unverified</option>
-                                            </select>
-                                        </label>
+                                <div class="col-sm-12 col-md-8 col-lg-8">
+                                    <div class="d-flex">
+                                        <div class="col">
+                                            <div class="dataTables_length" id="dataTable_length">
+                                                <label>Email Status
+                                                    <select wire:model="email_status" name="dataTable_length"
+                                                        aria-controls="dataTable"
+                                                        class="custom-select custom-select-sm form-control form-control-sm">
+                                                        <option value="all">All</option>
+                                                        <option value="verified">Verified</option>
+                                                        <option value="unverified">Unverified</option>
+                                                    </select>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="dataTables_length" id="dataTable_length">
+                                                <label>Visibility
+                                                    <select wire:model="visibility" name="dataTable_length"
+                                                        aria-controls="dataTable"
+                                                        class="custom-select custom-select-sm form-control form-control-sm">
+                                                        <option value="all">All</option>
+                                                        <option value="banned">Banned</option>
+                                                        <option value="active">Active</option>
+                                                    </select>
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 col-md-3 col-lg-3">
-                                    <div class="dataTables_length" id="dataTable_length">
-                                        <label>Visibility
-                                            <select wire:model="visibility" name="dataTable_length"
-                                                aria-controls="dataTable"
-                                                class="custom-select custom-select-sm form-control form-control-sm">
-                                                <option value="all">All</option>
-                                                <option value="banned">Banned</option>
-                                                <option value="active">Active</option>
-                                            </select>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-3 col-lg-3">
-                                    <span wire:loading>Loading...</span>
-                                    <span wire:loading class="spinner-border spinner-border-sm" role="status"
-                                        aria-hidden="true"></span>
-                                </div>
-                                <div class="col-sm-12 col-md-3 col-lg-3">
+                                <div class="col-sm-12 col-md-4 col-lg-4">
                                     <div id="dataTable_filter" class="dataTables_filter">
                                         <label>Search:<input wire:model.debounce.1000ms='search' type="search"
                                                 class="form-control form-control-sm" placeholder="Search here..."
@@ -65,9 +64,7 @@
                                                 <th>Email</th>
                                                 <th class="text-center">Clients</th>
                                                 <th class="text-center">Verify</th>
-                                                <th class="text-center">Email Status</th>
                                                 <th class="text-center">Actions</th>
-                                                <th class="text-center">Status</th>
                                                 <th class="text-center">Edit</th>
                                                 <th class="text-center">Delete</th>
                                             </tr>
@@ -88,6 +85,11 @@
                                                                     wire:click="UnVerifyEmail({{ $business_owner->id }})"
                                                                     style="padding:0px; border:none; background-color:transparent">
                                                                     <span class="badge badge-danger">
+                                                                        <i class="fas fa-user-alt-slash"></i>
+                                                                        <span wire:loading
+                                                                            wire:target='UnVerifyEmail({{ $business_owner->id }})'
+                                                                            class="spinner-border spinner-border-sm"
+                                                                            role="status" aria-hidden="true"></span>
                                                                         Unverify
                                                                     </span>
                                                                 </button>
@@ -96,20 +98,14 @@
                                                                     wire:click="VerifyEmail({{ $business_owner->id }})"
                                                                     style="padding:0px; border:none; background-color:transparent">
                                                                     <span class="badge badge-primary">
+                                                                        <i class="fas fa-user-check"></i>
+                                                                        <span wire:loading
+                                                                            wire:target='VerifyEmail({{ $business_owner->id }})'
+                                                                            class="spinner-border spinner-border-sm"
+                                                                            role="status" aria-hidden="true"></span>
                                                                         Verify Now
                                                                     </span>
                                                                 </button>
-                                                            @endif
-                                                        </td>
-                                                        <td class="text-center">
-                                                            @if (Admin::BusinessEmailStatus($business_owner->id))
-                                                                <span class="badge badge-primary">
-                                                                    <i class="fas fa-check"></i> Verified
-                                                                </span>
-                                                            @else
-                                                                <span class="badge badge-danger">
-                                                                    <i class="fas fa-ban"></i> Unverified
-                                                                </span>
                                                             @endif
                                                         </td>
                                                         <td class="text-center">
@@ -118,6 +114,11 @@
                                                                     wire:click="ActivateNow({{ $business_owner->id }})"
                                                                     style="padding:0px; border:none; background-color:transparent">
                                                                     <span class="badge badge-primary">
+                                                                        <i class="fas fa-check"></i>
+                                                                        <span wire:loading
+                                                                            wire:target='ActivateNow({{ $business_owner->id }})'
+                                                                            class="spinner-border spinner-border-sm"
+                                                                            role="status" aria-hidden="true"></span>
                                                                         Activate
                                                                     </span>
                                                                 </button>
@@ -125,35 +126,40 @@
                                                                 <button wire:click="BanNow({{ $business_owner->id }})"
                                                                     style="padding:0px; border:none; background-color:transparent">
                                                                     <span class="badge badge-danger">
+                                                                        <i class="fas fa-ban"></i>
+                                                                        <span wire:loading
+                                                                            wire:target='BanNow({{ $business_owner->id }})'
+                                                                            class="spinner-border spinner-border-sm"
+                                                                            role="status" aria-hidden="true"></span>
                                                                         Ban Now
                                                                     </span>
                                                                 </button>
                                                             @endif
                                                         </td>
                                                         <td class="text-center">
-                                                            @if ($business_owner->trashed())
-                                                                <span class="badge badge-danger">
-                                                                    <i class="fas fa-ban"></i> Banned
-                                                                </span>
-                                                            @else
-                                                                <span class="badge badge-primary">
-                                                                    <i class="fas fa-check"></i> Active
-                                                                </span>
-                                                            @endif
-                                                        </td>
-                                                        <td class="text-center">
                                                             <button wire:click="Edit({{ $business_owner->id }})"
                                                                 style="padding:0px; border:none; background-color:transparent">
                                                                 <span class="badge badge-success">
-                                                                    <i class="fas fa-edit"></i> Edit
+                                                                    <i class="fas fa-edit"></i>
+                                                                    <span wire:loading
+                                                                        wire:target='Edit({{ $business_owner->id }})'
+                                                                        class="spinner-border spinner-border-sm"
+                                                                        role="status" aria-hidden="true"></span>
+                                                                    Edit
                                                                 </span>
                                                             </button>
                                                         </td>
                                                         <td class="text-center">
                                                             <button wire:click="Delete({{ $business_owner->id }})"
+                                                                wire:loading.attr='disabled'
                                                                 style="padding:0px; border:none; background-color:transparent">
                                                                 <span class="badge badge-danger">
-                                                                    <i class="fas fa-trash-alt"></i> Delete
+                                                                    <i class="fas fa-trash-alt"></i>
+                                                                    <span wire:loading
+                                                                        wire:target='Delete({{ $business_owner->id }})'
+                                                                        class="spinner-border spinner-border-sm"
+                                                                        role="status" aria-hidden="true"></span>
+                                                                    Delete
                                                                 </span>
                                                             </button>
                                                         </td>

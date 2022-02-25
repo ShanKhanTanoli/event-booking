@@ -32,13 +32,11 @@ class CreateBusinessAbilitiesTable extends Migration
             $table->boolean('can_update_client')->nullable;
             $table->boolean('can_delete_client')->nullable;
             $table->boolean('can_verify_client')->nullable;
-            $table->boolean('can_add_client')->nullable;
-            $table->boolean('can_remove_client')->nullable;
+            $table->boolean('can_un_verify_client')->nullable;
 
             $table->boolean('can_view_pricing_plan')->nullable;
             $table->boolean('can_create_pricing_plan')->nullable;
             $table->boolean('can_update_pricing_plan')->nullable;
-            $table->boolean('can_delete_pricing_plan')->nullable;
 
             $table->timestamps();
         });
@@ -57,13 +55,11 @@ class CreateBusinessAbilitiesTable extends Migration
                 'can_update_client' => 1,
                 'can_delete_client' => 1,
                 'can_verify_client' => 1,
-                'can_add_client' => 1,
-                'can_remove_client' => 1,
+                'can_un_verify_client' => 1,
 
                 'can_view_pricing_plan' => 1,
                 'can_create_pricing_plan' => 1,
                 'can_update_pricing_plan' => 1,
-                'can_delete_pricing_plan' => 1,
 
             ]);
         }

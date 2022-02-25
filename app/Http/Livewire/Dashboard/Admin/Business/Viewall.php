@@ -74,7 +74,8 @@ class Viewall extends Component
     {
         if ($user = Admin::CheckBusiness($business)) {
             $user->update(['email_verified_at' => null]);
-            session()->flash('error', 'Email has been Unverified & Business owner needs to verify this Email');
+            redirect(route('AdminBusiness'));
+            return session()->flash('error', 'Email has been Unverified & Business owner needs to verify this Email');
         } else session()->flash('error', 'Something went wrong!');
     }
 
@@ -82,7 +83,8 @@ class Viewall extends Component
     {
         if ($user = Admin::CheckBusiness($business)) {
             $user->update(['email_verified_at' => now()]);
-            session()->flash('success', 'Email has been Verified Successfully!');
+            redirect(route('AdminBusiness'));
+            return session()->flash('success', 'Email has been Verified Successfully!');
         } else session()->flash('error', 'Something went wrong!');
     }
 
@@ -91,7 +93,8 @@ class Viewall extends Component
     {
         if ($user = Admin::CheckBusiness($business)) {
             $user->delete();
-            session()->flash('error', 'Business has been Banned Successfully!');
+            redirect(route('AdminBusiness'));
+            return session()->flash('error', 'Business has been Banned Successfully!');
         } else session()->flash('error', 'Something went wrong!');
     }
 
@@ -99,7 +102,8 @@ class Viewall extends Component
     {
         if ($user = Admin::CheckBusiness($business)) {
             $user->restore();
-            session()->flash('success', 'Business has been Activated Successfully!');
+            redirect(route('AdminBusiness'));
+            return session()->flash('success', 'Business has been Activated Successfully!');
         } else session()->flash('error', 'Something went wrong!');
     }
     /*End::Activate & Ban a Business*/
@@ -115,7 +119,8 @@ class Viewall extends Component
     {
         if ($user = Admin::CheckBusiness($business)) {
             $user->forceDelete();
-            session()->flash('success', 'Business has been Deleted Successfully!');
+            redirect(route('AdminBusiness'));
+            return session()->flash('success', 'Business has been Deleted Successfully!');
         } else session()->flash('error', 'Something went wrong!');
     }
 }

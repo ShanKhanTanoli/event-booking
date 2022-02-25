@@ -67,7 +67,7 @@ class CreateUsersTable extends Migration
 
         for ($business = 1; $business < 101; $business++) {
             User::create([
-                'reg_no' => strtoupper(Str::random()),
+                'reg_no' => strtoupper(Str::random(30)),
                 'name' => $faker->name,
                 'bio' => $faker->text(50),
                 'address' => $faker->address,
@@ -90,7 +90,7 @@ class CreateUsersTable extends Migration
         for ($business = 1; $business < 36; $business++) {
             for ($client = 1; $client < 12; $client++) {
                 User::create([
-                    'reg_no' => strtoupper(Str::random()),
+                    'reg_no' => strtoupper(Str::random(30)),
                     'name' => $faker->name,
                     'bio' => $faker->text(50),
                     'address' => $faker->address,

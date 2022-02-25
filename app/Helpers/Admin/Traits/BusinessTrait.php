@@ -180,22 +180,15 @@ trait BusinessTrait
                 } else return false;
             } else return false;
         }
-        public static function BusinessCanAddClients($user)
+        public static function BusinessCanUnVerifyClients($user)
         {
             if ($self = self::CheckBusiness($user)) {
                 if (!is_null($self->abilities)) {
-                    return $self->abilities->can_add_client;
+                    return $self->abilities->can_un_verify_client;
                 } else return false;
             } else return false;
         }
-        public static function BusinessCanRemoveClients($user)
-        {
-            if ($self = self::CheckBusiness($user)) {
-                if (!is_null($self->abilities)) {
-                    return $self->abilities->can_remove_client;
-                } else return false;
-            } else return false;
-        }
+
     
         public static function BusinessCanViewReservations($user)
         {
