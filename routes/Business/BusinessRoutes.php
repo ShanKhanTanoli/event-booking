@@ -2,8 +2,9 @@
 
 Route::prefix('Business')->middleware(['auth', 'business', 'verified'])->group(function () {
 
-    Route::get('Dashboard', [App\Http\Controllers\Business\BusinessController::class, 'Dashboard'])
-        ->name('BusinessDashboard');
+    /*Begin::Dashboard*/
+    include('Dashboard.php');
+    /*End::Dashboard*/
 
     /*Begin::Reservations*/
     include('Reservations.php');
@@ -18,14 +19,11 @@ Route::prefix('Business')->middleware(['auth', 'business', 'verified'])->group(f
     /*End::Pricing Plans*/
 
     /*Begin::Subscriptions*/
-    include('BusinessSubscriptions.php');
+    include('Subscriptions.php');
     /*End::Subscriptions*/
 
     Route::get('Profile', [App\Http\Controllers\Business\BusinessController::class, 'Profile'])
         ->name('BusinessProfile');
-
-    Route::get('Details', [App\Http\Controllers\Business\BusinessController::class, 'Details'])
-        ->name('BusinessDetails');
 
     Route::get('Permissions', [App\Http\Controllers\Business\BusinessController::class, 'Permissions'])
         ->name('BusinessPermissions');
@@ -38,7 +36,4 @@ Route::prefix('Business')->middleware(['auth', 'business', 'verified'])->group(f
 
     Route::get('Settings', [App\Http\Controllers\Business\BusinessController::class, 'Settings'])
         ->name('BusinessSettings');
-
-    Route::get('View/{business_user_name}/AsPublicly', [App\Http\Controllers\Business\BusinessController::class, 'ViewBusiness'])
-        ->name('ViewBusiness');
 });

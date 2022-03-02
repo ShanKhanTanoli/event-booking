@@ -36,12 +36,4 @@ trait BusinessTrait
             } else return false;
         } else return false;
     }
-    public static function findByBusinessUserName($user_name)
-    {
-        if (!is_null($business = User::where('business_user_name', $user_name)->first())) {
-            if ($business->role == 'business' && $business->role_id == 2) {
-                return $business;
-            } else return false;
-        } else return false;
-    }
 }

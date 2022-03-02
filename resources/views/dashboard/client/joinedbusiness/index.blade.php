@@ -19,7 +19,7 @@
                 <!-- End::Topbar-->
 
                 <!--Begin::Business Details-->
-                @livewire('dashboard.client.details.businessdetails')
+                @livewire('dashboard.client.businessdetails.index')
                 <!--Begin::Business Details-->
             </div>
             <!-- End of Main Content -->
@@ -27,7 +27,6 @@
             <!-- Begin::Footer-->
             @include('dashboard.client.partials.footer')
             <!-- End::Footer-->
-
         </div>
         <!-- End of Content Wrapper -->
     </div>

@@ -42,7 +42,7 @@ Route::get('Return', function () {
 
 Route::get('debug', function () {
 
-    
+    dd(User::find(2)->toArray());
     dd(Settings::CalculateFees(100));
     for($user = 100; $user < 120; $user ++){
         Booking::new($user, 121, 10);
@@ -218,10 +218,10 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 /*Begin::Custom Registration*/
-Route::get('{business}/register', [App\Http\Controllers\Auth\RegisterController::class, 'RegisterAsClient'])
+Route::get('{business_user_name}/register', [App\Http\Controllers\Auth\RegisterController::class, 'RegisterAsClient'])
     ->name('RegisterAsClient');
 
-Route::post('SaveAsClient/{business}', [App\Http\Controllers\Auth\RegisterController::class, 'SaveAsClient'])
+Route::post('SaveAsClient/{business_user_name}', [App\Http\Controllers\Auth\RegisterController::class, 'SaveAsClient'])
     ->name('SaveAsClient');
 
 Route::get('RegisterBusiness', [App\Http\Controllers\Auth\RegisterController::class, 'RegisterAsBusiness'])

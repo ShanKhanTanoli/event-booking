@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Dashboard\Business\Subscriptions;
 
-use Exception;
 use App\Helpers\Stripe;
 use Livewire\Component;
 use App\Helpers\Settings;
@@ -11,18 +10,15 @@ use Illuminate\Support\Facades\Auth;
 class Subscribe extends Component
 {
     public $plan;
-
     public $card_holder_name;
     public $card_number;
-
     public $card_expiry_month;
     public $card_expiry_year;
-
     public $card_cvc;
 
     public function render()
     {
-        return view('livewire.dashboard.business.subscriptions.subscribe')
+        return view('livewire.dashboard.business.subscriptions.subscribe.index')
             ->with([
                 'plan' => $this->plan,
             ]);
@@ -52,6 +48,6 @@ class Subscribe extends Component
             'exp_year' => $this->card_expiry_year,
             'cvc' => $this->card_cvc,
         ];
-        return Stripe::CardChargeForBusiness($card, $this->plan->price * 100,Settings::Currency(), Auth::user()->id, $this->plan->id);
+        return Stripe::CardChargeForBusiness($card, $this->plan->price * 100, Settings::Currency(), Auth::user()->id, $this->plan->id);
     }
 }

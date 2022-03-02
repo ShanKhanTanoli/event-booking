@@ -33,22 +33,6 @@
                         </div>
                         <div class="card-body">
                             <form class="form" novalidate="">
-                                <div class="row mb-3">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label>Slot Name</label>
-                                            <input wire:model.defer="state.name"
-                                                class="form-control @error('name') is-invalid @enderror" id="name"
-                                                type="text" placeholder="e.g French Class , English Class"
-                                                value="{{ old('name') }}">
-                                            @error('name')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="row mb-3 mt-3">
                                     <div class="col">
                                         <div class="form-group">

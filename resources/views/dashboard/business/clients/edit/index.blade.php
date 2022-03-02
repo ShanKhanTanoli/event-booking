@@ -19,7 +19,7 @@
                 <!-- End::Topbar-->
 
                 <!--Begin::Update Client-->
-                @livewire('dashboard.business.clients.update',['client' => $client])
+                @livewire('dashboard.business.clients.update.index',['client' => $client])
                 <!--Begin::Update Client-->
             </div>
             <!-- End of Main Content -->

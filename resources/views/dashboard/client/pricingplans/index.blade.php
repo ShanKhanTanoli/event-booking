@@ -19,7 +19,7 @@
                 <!-- End::Topbar-->
 
                 <!--Begin::Pricing Plans-->
-                @livewire('dashboard.client.pricingplans.all')
+                @livewire('dashboard.client.pricingplans.index')
                 <!--Begin::Pricing Plans-->
             </div>
             <!-- End of Main Content -->

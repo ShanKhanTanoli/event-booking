@@ -14,7 +14,7 @@ class Viewslots extends Component
     public function render()
     {
         $slots = Business::Slots($this->reservation->id, $this->take);
-        return view('livewire.dashboard.client.reservations.viewslots')
+        return view('livewire.dashboard.client.reservations.slots.index')
         ->with([
             'reservation' => $this->reservation,
             'slots' => $slots,

@@ -17,9 +17,9 @@
                 <!-- Begin::Topbar-->
                 @include('dashboard.business.partials.topbar')
                 <!-- End::Topbar-->
-
+                
                 <!--Begin::Create Client-->
-                @livewire('dashboard.business.clients.create')
+                @livewire('dashboard.business.clients.create.index')
                 <!--Begin::Create Client-->
             </div>
             <!-- End of Main Content -->

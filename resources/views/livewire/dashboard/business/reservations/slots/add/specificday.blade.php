@@ -36,20 +36,6 @@
                                 <div class="row mb-3">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Slot Name</label>
-                                            <input wire:model.defer="state.name"
-                                                class="form-control @error('name') is-invalid @enderror" id="name"
-                                                type="text" placeholder="e.g French Class , English Class"
-                                                value="{{ old('name') }}">
-                                            @error('name')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
                                             <label>Select Day</label>
                                             <select wire:model.defer="state.day"
                                                 class="form-control @error('day') is-invalid @enderror">

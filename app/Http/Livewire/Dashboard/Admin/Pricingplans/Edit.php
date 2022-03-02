@@ -16,13 +16,13 @@ class Edit extends Component
     public function mount()
     {
         $this->state = $this->plan->only([
-            'name', 'description', 'reservations',
+            'name', 'description', 'price'
         ]);
     }
 
     public function render()
     {
-        return view('livewire.dashboard.admin.pricingplans.edit');
+        return view('livewire.dashboard.admin.pricingplans.edit.index');
     }
 
     public function UpdatePlan()
@@ -30,10 +30,10 @@ class Edit extends Component
         $validated = Validator::make($this->state, [
             'name' => 'required|string|max:15',
             'description' => 'required|string|max:30',
-            'reservations' => 'required|numeric',
+            'price' => 'required|numeric|max:30',
         ])->validate();
         if ($plan = Admin::PlanFindByPriceId(Auth::user()->id, $this->plan->price_id)) {
-            Admin::UpdatePlan(Auth::user()->id, $plan->id, $validated, 'Updated Successfully');
+            return Admin::UpdatePlan(Auth::user()->id, $plan->id, $validated, 'Updated Successfully');
         } else return session()->flash('error', 'something went wrong');
     }
 }

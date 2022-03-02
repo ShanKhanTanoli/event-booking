@@ -21,7 +21,7 @@ class Myreservations extends Component
 
         $slots = Client::BookedSlots($ids);
 
-        return view('livewire.dashboard.client.reservations.myreservations')
+        return view('livewire.dashboard.client.reservations.my-reservations')
             ->with([
                 'reservations' => $reservations,
                 'slots' => $slots,

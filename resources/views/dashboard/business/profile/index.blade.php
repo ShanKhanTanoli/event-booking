@@ -19,7 +19,7 @@
                 <!-- End::Topbar-->
 
                 <!--Begin::Update Profile-->
-                @livewire('dashboard.business.profile.updateprofile')
+                @livewire('dashboard.business.profile.update')
                 <!--Begin::Update Profile-->
             </div>
             <!-- End of Main Content -->

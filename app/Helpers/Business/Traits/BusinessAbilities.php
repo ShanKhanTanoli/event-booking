@@ -50,19 +50,11 @@ trait BusinessAbilities
         } else return false;
     }
 
-    public static function CanAddClient($user)
+    public static function CanUnVerifyClient($user)
     {
         if ($self = self::Is($user)) {
             if (!is_null($self->abilities)) {
-                return $self->abilities->can_add_client;
-            } else return false;
-        } else return false;
-    }
-    public static function CanRemoveClient($user)
-    {
-        if ($self = self::Is($user)) {
-            if (!is_null($self->abilities)) {
-                return $self->abilities->can_remove_client;
+                return $self->abilities->can_un_verify_client;
             } else return false;
         } else return false;
     }
@@ -125,14 +117,6 @@ trait BusinessAbilities
         if ($self = self::Is($user)) {
             if (!is_null($self->abilities)) {
                 return $self->abilities->can_update_pricing_plan;
-            } else return false;
-        } else return false;
-    }
-    public static function CanDeletePricingPlans($user)
-    {
-        if ($self = self::Is($user)) {
-            if (!is_null($self->abilities)) {
-                return $self->abilities->can_delete_pricing_plan;
             } else return false;
         } else return false;
     }

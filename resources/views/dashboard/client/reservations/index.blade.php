@@ -21,7 +21,7 @@
                 <!-- End::Topbar-->
 
                 <!--Begin::Reservations-->
-                @livewire('dashboard.client.reservations.all')
+                @livewire('dashboard.client.reservations.index')
                 <!--Begin::Reservations-->
             </div>
             <!-- End of Main Content -->

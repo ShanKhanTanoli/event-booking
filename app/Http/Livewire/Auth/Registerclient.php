@@ -22,8 +22,8 @@ class Registerclient extends Component
     public function SaveBusiness()
     {
         $validated = Validator::make($this->state, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name' => ['required', 'string', 'max:20'],
+            'email' => ['required', 'string', 'email', 'max:30', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'password_confirmation' => ['required', 'string', 'min:8'],
         ])->validate();

@@ -19,7 +19,7 @@
                 <!-- End::Topbar-->
 
                 <!--Begin::Update Profile-->
-                @livewire('dashboard.client.profile.updateprofile')
+                @livewire('dashboard.client.profile.index')
                 <!--Begin::Update Profile-->
             </div>
             <!-- End of Main Content -->

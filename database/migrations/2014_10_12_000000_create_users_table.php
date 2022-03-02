@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->nullable();
             $table->string('reg_no')->unique()->nullable();
             $table->string('name')->nullable();
+            $table->string('user_name')->unique()->nullable();
             $table->longText('bio')->nullable();
             $table->longText('address')->nullable();
             $table->string('phone')->unique()->nullable();
@@ -32,16 +33,6 @@ class CreateUsersTable extends Migration
             $table->enum('role_id', ['1', '2', '3'])
                 ->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
-
-            /*Begin::Business Details*/
-            $table->string('business_avatar')->nullable();
-            $table->string('business_name')->nullable();
-            $table->string('business_user_name')->unique()->nullable();
-            $table->longText('business_bio')->nullable();
-            $table->longText('business_address')->nullable();
-            $table->string('business_phone')->unique()->nullable();
-            $table->string('business_email')->unique()->nullable();
-            /*End::Business Details*/
 
             $table->string('account_id')->nullable();
             $table->string('customer_id')->nullable();
@@ -55,6 +46,7 @@ class CreateUsersTable extends Migration
 
         User::create([
             'name' => 'admin',
+            'user_name' => 'Admin',
             'bio' => $faker->text(50),
             'address' => $faker->address,
             'phone' => $faker->unique()->text(50),
@@ -69,6 +61,7 @@ class CreateUsersTable extends Migration
             User::create([
                 'reg_no' => strtoupper(Str::random(30)),
                 'name' => $faker->name,
+                'user_name' => Str::random(20),
                 'bio' => $faker->text(50),
                 'address' => $faker->address,
                 'phone' => $faker->unique()->phoneNumber,
@@ -77,12 +70,6 @@ class CreateUsersTable extends Migration
                 'password' => Hash::make('password'),
                 'role' => 'business',
                 'role_id' => 2,
-                'business_name' => 'Business' . mt_rand(9999999, 9999999999),
-                'business_user_name' => Str::slug('Business' . mt_rand(9999999, 9999999999), '-'),
-                'business_bio' => $faker->text(50),
-                'business_address' => $faker->address,
-                'business_phone' => $faker->unique()->phoneNumber,
-                'business_email' => 'business' . mt_rand(9999999, 9999999999) . '@email.com',
                 'created_by' => 1,
             ]);
         }
@@ -92,6 +79,7 @@ class CreateUsersTable extends Migration
                 User::create([
                     'reg_no' => strtoupper(Str::random(30)),
                     'name' => $faker->name,
+                    'user_name' => Str::random(20),
                     'bio' => $faker->text(50),
                     'address' => $faker->address,
                     'phone' => $faker->unique()->phoneNumber,

@@ -6,7 +6,6 @@ use Exception;
 use Livewire\Component;
 use App\Helpers\Settings;
 use Illuminate\Support\Str;
-use App\Helpers\Admin\Admin;
 use Illuminate\Support\Facades\Auth;
 use Rinvex\Subscriptions\Models\Plan;
 use Illuminate\Support\Facades\Validator;
@@ -17,7 +16,7 @@ class Add extends Component
 
     public function render()
     {
-        return view('livewire.dashboard.admin.pricingplans.add');
+        return view('livewire.dashboard.admin.pricingplans.add.index');
     }
     public function CreatePlan()
     {
@@ -27,7 +26,6 @@ class Add extends Component
             'invoice_period' => 'required|numeric',
             'invoice_interval' => 'required|string|in:day,month',
             'description' => 'required|string|max:40',
-            'reservations' => 'required|numeric',
         ])->validate();
 
         try {
@@ -41,7 +39,6 @@ class Add extends Component
                 'invoice_period' => $validated['invoice_period'],
                 'invoice_interval' => $validated['invoice_interval'],
                 'currency' =>  strtoupper(Settings::Currency()),
-                'reservations' => $validated['reservations'],
             ];
             Plan::create($data);
             return session()->flash('success', 'Created Successfully');

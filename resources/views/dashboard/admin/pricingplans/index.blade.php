@@ -21,7 +21,7 @@
                 <!-- End::Topbar-->
 
                 <!--Begin::All Plans-->
-                @livewire('dashboard.admin.pricingplans.plans')
+                @livewire('dashboard.admin.pricingplans.index')
                 <!--Begin::All Plans-->
             </div>
             <!-- End of Main Content -->

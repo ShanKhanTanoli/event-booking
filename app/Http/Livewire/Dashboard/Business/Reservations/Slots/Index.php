@@ -90,7 +90,8 @@ class Index extends Component
                 if ($reservation = Business::Reservation(Auth::user()->id, $this->reservation)) {
                     if (!is_null($slot = $reservation->slots->find($id))) {
                         $slot->delete();
-                        return session()->flash('success', 'Deleted Successfully');
+                        session()->flash('success', 'Deleted Successfully');
+                        return redirect(route('BusinessViewReservationSlots', $this->reservation->slug));
                     } else return session()->flash('error', 'Something went wrong');
                 } else return session()->flash('error', 'Something went wrong');
             } else return session()->flash('error', 'Something went wrong');

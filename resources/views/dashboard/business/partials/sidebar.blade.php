@@ -101,7 +101,7 @@
         Subscriptions
     </div>
     <!-- Nav Item - Profile -->
-    <li class="nav-item @if (Request::path() == 'Business/MySubscriptions')  active @endif">
+    <li class="nav-item @if (Request::path() == 'Business/MySubscriptions') active @endif">
         <a class="nav-link" href="{{ route('BusinessSubscriptions') }}">
             <i class="fas fa-fw fa-calendar-alt"></i>
             <span>My Subscriptions</span>
@@ -112,21 +112,10 @@
         Personal Info
     </div>
     <!-- Nav Item - Profile -->
-    <li class="nav-item @if (Request::path() == 'Business/Profile')  active @endif">
+    <li class="nav-item @if (Request::path() == 'Business/Profile') active @endif">
         <a class="nav-link" href="{{ route('BusinessProfile') }}">
             <i class="fas fa-fw fa-user-cog"></i>
             <span>Profile</span>
-        </a>
-    </li>
-    <hr class="sidebar-divider">
-    <div class="sidebar-heading">
-        Business Info
-    </div>
-    <!-- Nav Item - Business/Details -->
-    <li class="nav-item @if (Request::path() == 'Business/Details' or Request::path() == 'Business/' . Auth::user()->business_user_name)  active @endif">
-        <a class="nav-link" href="{{ route('BusinessDetails') }}">
-            <i class="fas fa-fw fa-business-time"></i>
-            <span>Business Details</span>
         </a>
     </li>
     <hr class="sidebar-divider">

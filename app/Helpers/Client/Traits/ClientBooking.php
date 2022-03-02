@@ -57,17 +57,15 @@ trait ClientBooking
     public static function BookReservation($user, $slot)
     {
         if ($subscription = self::HasActiveSubscription($user)) {
-            if (!is_null($find_slot = SlotHelper::Info($slot))) {
-                if (self::BookingLimit($user)) {
-                    return Booking::new($user, $slot, $subscription->id);
-                } else return session()->flash('error', "Sorry your booking limit has been exceeded.");
+            if (!is_null(SlotHelper::Info($slot))) {
+                return Booking::new($user, $slot, $subscription->id);
             } else return session()->flash('error', "Something went wrong while booking.");
         } else return session()->flash('error', "Sorry you don't have an active subscription.");
     }
 
     public static function CancelBooking($user, $slot)
     {
-        if (!is_null($find_slot = SlotHelper::Info($slot))) {
+        if (!is_null(SlotHelper::Info($slot))) {
             return Booking::cancel($user, $slot);
         } else return session()->flash('error', "Something went wrong while booking.");
     }

@@ -12,7 +12,7 @@ class Plans extends Component
 {
     public function render()
     {
-        return view('livewire.dashboard.business.subscriptions.plans');
+        return view('livewire.dashboard.business.subscriptions.plans.index');
     }
 
     public function PayNow($planId)

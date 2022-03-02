@@ -63,7 +63,7 @@ class BusinessController extends Controller
 
     public function SubscriptionsPlans()
     {
-        return view($this->path .'subscriptions.plans.index');
+        return view($this->path . 'subscriptions.plans.index');
     }
 
 
@@ -73,10 +73,6 @@ class BusinessController extends Controller
         return view($this->path . 'profile.index');
     }
 
-    public function Details()
-    {
-        return view($this->path . 'details.index');
-    }
 
     public function Permissions()
     {

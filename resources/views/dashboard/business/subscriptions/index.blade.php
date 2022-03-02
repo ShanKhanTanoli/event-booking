@@ -21,7 +21,7 @@
                 <!-- End::Topbar-->
 
                 <!--Begin::Subscriptions-->
-                @livewire('dashboard.business.subscriptions.all')
+                @livewire('dashboard.business.subscriptions.index')
                 <!--Begin::Subscriptions-->
             </div>
             <!-- End of Main Content -->
