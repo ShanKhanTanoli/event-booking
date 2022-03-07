@@ -18,7 +18,7 @@ class Booking
                     'slot_id' => $slot,
                     'booked_at' => date('Y-m-d H:i:s'),
                 ]);
-                return session()->flash('success', "Booked Successfully");
+                return session()->flash('success', "Booking created successfully");
             } catch (Exception $e) {
                 return session()->flash('error', $e->getMessage());
             }

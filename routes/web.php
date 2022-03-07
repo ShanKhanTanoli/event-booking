@@ -2,6 +2,8 @@
 
 use App\Models\User;
 use App\Helpers\Slot;
+use App\Helpers\Booking;
+use App\Models\Reservation;
 use Illuminate\Support\Str;
 use App\Helpers\Subscription;
 use App\Helpers\Client\Client;
@@ -10,6 +12,24 @@ use Illuminate\Support\Facades\Route;
 use Rinvex\Subscriptions\Models\Plan;
 
 Route::get('debug', function () {
+
+    //Res DAYBVVW1HDCFALYA
+
+    $slots = Reservation::where('slug','QOV279IJS7ZR42W0')
+    ->first()->slots;
+
+    $clients = User::where('role_id',3)
+    ->take(12)->get();
+
+    foreach($clients as $client){
+        foreach($slots as $slot){
+        	Booking::new($client->id, $slot->id,mt_rand(1,10));
+        }	
+    }
+
+    return 'Done!';
+
+    //Booking::new($user, $slot, $subscription)
 
     // $client = User::where('reg_no','4ZXRXEYDPIRAW42GKO0J8IBGBST7NB')
     // ->first();

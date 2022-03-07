@@ -24,6 +24,7 @@
                                                         <th class="text-center">Time</th>
                                                         <th class="text-center">Capacity</th>
                                                         <th class="text-center">Booked</th>
+                                                        <th class="text-center">Bookings</th>
                                                         <th class="text-center">Delete</th>
                                                     </tr>
                                                 </thead>
@@ -53,6 +54,14 @@
                                                                 <strong>
                                                                     {{ number_format(Slot::CountBookings($slot->id)) }}
                                                                 </strong>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <a href="{{ route('BusinessViewReservationBookings',$slot->slug) }}" style="padding:0px; border:none; background-color:transparent">
+                                                                    <span class="badge badge-primary">
+                                                                        <i class="fas fa-eye"></i>
+                                                                        View
+                                                                    </span>
+                                                                </a>
                                                             </td>
                                                             <td class="text-center">
                                                                 <button wire:click="DeleteSlot({{ $slot->id }})"

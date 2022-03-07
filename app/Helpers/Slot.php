@@ -13,6 +13,12 @@ class Slot
         return ModelSlot::find($slot);
     }
 
+    public static function FindBySlug($slug)
+    {
+        return ModelSlot::where('slug',$slug)
+        ->first();
+    }
+
     public static function Count($reservation)
     {
         return ModelSlot::where('reservation_id', $reservation)

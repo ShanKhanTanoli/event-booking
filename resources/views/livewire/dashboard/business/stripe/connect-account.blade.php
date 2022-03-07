@@ -14,13 +14,14 @@
                             Complete your profile
                         </div>
                         <div class="card-body">
-                            @if (is_null($account = Stripe::RetrieveAccount(Auth::user()->account_id)))
+                            @if (!is_null($account = Business::StripeConnectAccountID(Auth::user()->id)))
+                                    {{ $account }}
                                 <!--Begin::Account Completed Form-->
-                                @include('livewire.dashboard.business.stripe.account-completed')
+                                @include('livewire.dashboard.business.stripe.partials.account-completed')
                                 <!--End::Account Completed Form-->
                             @else
                                 <!--Begin::Complete Account Form-->
-                                @include('livewire.dashboard.business.stripe.complete-account-form')
+                                @include('livewire.dashboard.business.stripe.partials.complete-account-form')
                                 <!--End::Complete Account Form-->
                             @endif
                         </div>

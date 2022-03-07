@@ -60,7 +60,7 @@ class CreateSlotsTable extends Migration
                     Slot::create([
                         'slot_id' => $slot_id,
                         'reservation_id' => $res->id,
-                        'slug' => 'schedule-' . mt_rand(1, 9999999999),
+                        'slug' => Str::random(10),
                         'starting_date' => mt_rand(2022, 2025) . '-' . mt_rand(1, 12) . '-' . mt_rand(1, 28),
                         'ending_date' => mt_rand(2022, 2025) . '-' . mt_rand(1, 12) . '-' . mt_rand(1, 28),
                         'starting_time' => mt_rand(1, 12) . ':' . mt_rand(0, 59) . ':' . mt_rand(0, 59),

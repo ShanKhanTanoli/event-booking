@@ -4,7 +4,7 @@
     <!--End::Alerts Notifications-->
     @if (Business::CanCreatePricingPlans(Auth::user()->id))
         <!--Begin::Stripe Status-->
-        @include('livewire.dashboard.business.stripe.StripeStatus')
+        @include('livewire.dashboard.business.stripe.stripe-status')
         <!--End::Stripe Status-->
         @if (Business::StripeConnectAccountID(Auth::user()->id))
             @if (!is_null($account = Stripe::RetrieveAccount(Auth::user()->account_id)))

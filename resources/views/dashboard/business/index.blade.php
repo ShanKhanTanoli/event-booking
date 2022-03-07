@@ -178,7 +178,7 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="mb-0 font-weight-bold text-gray-800">
-                                                    Create Account
+                                                    Get Paid
                                                 </div>
                                             </div>
                                             <div class="col-auto">
@@ -209,7 +209,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.container-fluid -->
             </div>
             <!-- End of Main Content -->
 

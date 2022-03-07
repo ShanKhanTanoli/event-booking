@@ -12,6 +12,9 @@ Route::get('Edit/{slug}/Reservation', [App\Http\Controllers\Business\BusinessRes
 Route::get('View/{slug}/Slots', [App\Http\Controllers\Business\BusinessReservationController::class, 'ViewReservationSlots'])
     ->name('BusinessViewReservationSlots');
 
+Route::get('View/Slot/{slug}/Bookings', [App\Http\Controllers\Business\BusinessReservationController::class, 'ViewSlotBookings'])
+    ->name('BusinessViewReservationBookings');
+
 Route::get('SelectReservation/{slug}/SlotsType', [App\Http\Controllers\Business\BusinessReservationController::class, 'SelectReservationSlotsType'])
     ->name('BusinessSelectReservationSlotsType');
 

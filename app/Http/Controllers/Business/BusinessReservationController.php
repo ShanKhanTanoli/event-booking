@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Business;
 
 
 use App\Helpers\Business\Business;
+use App\Helpers\Slot;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,7 +26,8 @@ class BusinessReservationController extends Controller
     {
         if (Business::Is(Auth::user()->id)) {
             if ($reservation = Business::ReservationBySlug(Auth::user()->id, $slug)) {
-                return view($this->path . 'reservations.edit.index', compact('reservation'));
+                return view($this->path . 'reservations.edit.index')
+                ->with(['reservation' => $reservation]);
             } else {
                 session()->flash('error', 'Reservation not found');
                 return redirect(route('BusinessReservations'));
@@ -42,7 +44,8 @@ class BusinessReservationController extends Controller
     {
         if (Business::Is(Auth::user()->id)) {
             if ($reservation = Business::ReservationBySlug(Auth::user()->id, $slug)) {
-                return view($this->path . 'reservations.slots.index', compact('reservation'));
+                return view($this->path . 'reservations.slots.index')
+                ->with(['reservation' => $reservation]);
             } else {
                 session()->flash('error', 'Reservation not found');
                 return redirect(route('BusinessReservations'));
@@ -50,11 +53,27 @@ class BusinessReservationController extends Controller
         } else return session()->flash('error', 'Something went wrong');
     }
 
+    public function ViewSlotBookings($slug)
+    {
+        if (Business::Is(Auth::user()->id)) {
+            if(!is_null($slot = Slot::FindBySlug($slug))){
+                if (Business::Reservation(Auth::user()->id, $slot->reservation_id)) {
+                    return view($this->path . 'reservations.slots.bookings.index')
+                    ->with(['slot' => $slot]);
+                } else {
+                    session()->flash('error', 'Something went wrong');
+                    return redirect(route('BusinessReservations'));
+                }
+            }else return session()->flash('error', 'Something went wrong');
+        } else return session()->flash('error', 'Something went wrong');
+    }
+
     public function SelectReservationSlotsType($slug)
     {
         if (Business::Is(Auth::user()->id)) {
             if ($reservation = Business::ReservationBySlug(Auth::user()->id, $slug)) {
-                return view($this->path . 'reservations.slots.type', compact('reservation'));
+                return view($this->path . 'reservations.slots.type')
+                ->with(['reservation' => $reservation]);
             } else {
                 session()->flash('error', 'Reservation not found');
                 return redirect(route('BusinessReservations'));
@@ -66,7 +85,8 @@ class BusinessReservationController extends Controller
     {
         if (Business::Is(Auth::user()->id)) {
             if ($reservation = Business::ReservationBySlug(Auth::user()->id, $slug)) {
-                return view($this->path . 'reservations.slots.add.specificday.index', compact('reservation'));
+                return view($this->path . 'reservations.slots.add.specificday.index')
+                ->with(['reservation' => $reservation]);
             } else {
                 session()->flash('error', 'Reservation not found');
                 return redirect(route('BusinessReservations'));
@@ -78,7 +98,8 @@ class BusinessReservationController extends Controller
     {
         if (Business::Is(Auth::user()->id)) {
             if ($reservation = Business::ReservationBySlug(Auth::user()->id, $slug)) {
-                return view($this->path . 'reservations.slots.add.weekly.index', compact('reservation'));
+                return view($this->path . 'reservations.slots.add.weekly.index')
+                ->with(['reservation' => $reservation]);
             } else {
                 session()->flash('error', 'Reservation not found');
                 return redirect(route('BusinessReservations'));
@@ -90,7 +111,8 @@ class BusinessReservationController extends Controller
     {
         if (Business::Is(Auth::user()->id)) {
             if ($reservation = Business::ReservationBySlug(Auth::user()->id, $slug)) {
-                return view($this->path . 'reservations.slots.add.daily.index', compact('reservation'));
+                return view($this->path . 'reservations.slots.add.daily.index')
+                ->with(['reservation' => $reservation]);
             } else {
                 session()->flash('error', 'Reservation not found');
                 return redirect(route('BusinessReservations'));
