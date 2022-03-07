@@ -29,3 +29,14 @@
     </div>
     <!-- End of Page Wrapper -->
 @endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#avatar').click(function(){
+                $('#avatar').css('cursor', 'pointer');
+                $('#uploadavatar').click();
+            });
+        });
+    </script>
+@endsection

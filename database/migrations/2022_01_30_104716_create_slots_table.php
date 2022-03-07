@@ -19,8 +19,6 @@ class CreateSlotsTable extends Migration
         Schema::create('slots', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name')->nullable();
-
             $table->string('slot_id')->nullable();
 
             $table->unsignedBigInteger('reservation_id')->nullable();
@@ -60,7 +58,6 @@ class CreateSlotsTable extends Migration
                 ]);
                 for ($slot = 1; $slot < mt_rand(10, 20); $slot++) {
                     Slot::create([
-                        'name' => $faker->randomElement(['Dance', 'French', 'Crossfit', 'English']),
                         'slot_id' => $slot_id,
                         'reservation_id' => $res->id,
                         'slug' => 'schedule-' . mt_rand(1, 9999999999),

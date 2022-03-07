@@ -4,14 +4,14 @@
     <!--End::Alerts Notifications-->
     <div class="row flex-lg-nowrap">
         <!--Begin::Sidebar-->
-        @include('livewire.dashboard.admin.business.sidebar')
+        @include('livewire.dashboard.admin.business.partials.sidebar')
         <!--Begin::Sidebar-->
         <div class="col">
             <div class="row">
                 <div class="col mb-3">
                     <div class="card">
                         <div class="card-header">
-                            Update Business Password
+                            Update {!! $business->name  !!} Password
                         </div>
                         <div class="card-body">
                             <form class="form" novalidate="">

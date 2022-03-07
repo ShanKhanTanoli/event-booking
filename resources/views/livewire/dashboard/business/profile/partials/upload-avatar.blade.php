@@ -36,10 +36,11 @@
                     {{ __('@' . Auth::user()->user_name) }}
                 </strong>
             </p>
-            <p class="mt-3">
+            <p class="mt-2">
                 <strong>
                     <i class="fas fa-info-circle"></i>
-                    People can register to your business by using this link.
+                    People can register to your business by using this link below.
+                    <br />
                     <span class="text-primary">
                         {{ route('RegisterAsClient', Auth::user()->user_name) }}
                     </span>

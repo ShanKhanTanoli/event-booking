@@ -4,7 +4,6 @@ namespace App\Helpers\Client\Traits;
 
 use App\Models\User;
 use App\Models\Reservation;
-use App\Models\ClientReservation;
 use App\Helpers\Client\Traits\ClientBooking;
 use App\Helpers\Client\Traits\ClientSubscriptions;
 

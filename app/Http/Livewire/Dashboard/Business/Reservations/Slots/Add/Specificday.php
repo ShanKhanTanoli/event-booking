@@ -9,6 +9,7 @@ use App\Models\Slot;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Helpers\Business\Business;
+use App\Helpers\Slot as SlotHelper;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,9 +22,9 @@ class Specificday extends Component
     public function render()
     {
         return view('livewire.dashboard.business.reservations.slots.add.specificday')
-        ->with([
-            'reservation' => $this->reservation,
-        ]);
+            ->with([
+                'reservation' => $this->reservation,
+            ]);
     }
 
     public function AddSlots()
@@ -41,7 +42,6 @@ class Specificday extends Component
                     'can_cancel_before.numeric' => 'Enter Minutes',
                 ];
                 $validated = Validator::make($this->state, [
-                    'name' => 'required|string',
                     'day' => 'required|string|in:Sun,Mon,Tue,Wed,Thu,Fri,Sat',
                     'start_date' => 'required|date',
                     'end_date' => 'required|date|after:start_date',
@@ -58,26 +58,29 @@ class Specificday extends Component
                 $interval = new DateInterval('P1D');
                 $daterange = new DatePeriod($begin, $interval, $end);
                 $slot_id = strtoupper(Str::random(10));
-                foreach ($daterange as $date) {
-                    if ($date->format("D") == $validated['day']) {
-                        Slot::create([
-                            'name' => $validated['name'],
-                            'slot_id' => $slot_id,
-                            'reservation_id' => $this->reservation->id,
-                            'slug' => strtoupper(Str::random(10)),
-                            'starting_date' => $date->format("Y-m-d"),
-                            'ending_date' => $date->format("Y-m-d"),
-                            'starting_time' => $validated['start_time'],
-                            'ending_time' => $validated['end_time'],
-                            'type' => 'specific_day',
-                            'capacity' => $validated['capacity'],
-                            'can_book_before' => $validated['can_book_before'],
-                            'can_cancel_before' => $validated['can_cancel_before'],
-                        ]);
+
+                $duration = SlotHelper::CountDuration($validated['start_date'], $validated['end_date']);
+                if ($duration < 366) {
+                    foreach ($daterange as $date) {
+                        if ($date->format("D") == $validated['day']) {
+                            Slot::create([
+                                'slot_id' => $slot_id,
+                                'reservation_id' => $this->reservation->id,
+                                'slug' => strtoupper(Str::random(10)),
+                                'starting_date' => $date->format("Y-m-d"),
+                                'ending_date' => $date->format("Y-m-d"),
+                                'starting_time' => $validated['start_time'],
+                                'ending_time' => $validated['end_time'],
+                                'type' => 'specific_day',
+                                'capacity' => $validated['capacity'],
+                                'can_book_before' => $validated['can_book_before'],
+                                'can_cancel_before' => $validated['can_cancel_before'],
+                            ]);
+                        }
                     }
-                }
-                session()->flash('success', 'Slots Added Successfully');
-                return redirect(route('BusinessReservations'));
+                    session()->flash('success', 'Slots Added Successfully');
+                    return redirect(route('BusinessReservations'));
+                } else return session()->flash('error', 'Can not add slots for more than 1 Year.');
             } else return session()->flash('error', 'You are not allowed to add slots to this Reservation');
         } else return session()->flash('error', 'Something went wrong');
     }

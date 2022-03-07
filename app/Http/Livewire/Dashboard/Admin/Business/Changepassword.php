@@ -15,6 +15,8 @@ class Changepassword extends Component
 
     public $state = [];
 
+    public $avatar;
+
     public function render()
     {
         return view('livewire.dashboard.admin.business.changepassword');
@@ -32,8 +34,10 @@ class Changepassword extends Component
                 $this->business->update(['password' => Hash::make($validated['password'])]);
                 $this->reset(['state']);
                 session()->flash('success', 'Password Updated Successfully');
+                return redirect(route('AdminChangeBusinessPassword', $this->business->reg_no));
             }catch(Exception $e){
                 session()->flash('success', $e->getMessage());
+                return redirect(route('AdminChangeBusinessPassword', $this->business->reg_no));
             }
         } else return session()->flash('error', 'Something went wrong!');
     }
@@ -44,6 +48,7 @@ class Changepassword extends Component
         if($user = Admin::CheckBusiness($business)){
             $user->update(['email_verified_at' => null]);
             session()->flash('error','Email has been Unverified & Business owner needs to verify this Email');
+            return redirect(route('AdminChangeBusinessPassword', $this->business->reg_no));
         }else session()->flash('error','Something went wrong!');
     }
 
@@ -53,6 +58,7 @@ class Changepassword extends Component
         if($user = Admin::CheckBusiness($business)){
             $user->update(['email_verified_at' => now()]);
             session()->flash('success','Email has been Verified Successfully!');
+            return redirect(route('AdminChangeBusinessPassword', $this->business->reg_no));
         }else session()->flash('error','Something went wrong!');
     }
 
@@ -62,6 +68,7 @@ class Changepassword extends Component
             if($user = Admin::CheckBusiness($business)){
                 $user->delete();
                 session()->flash('error','Business has been Banned Successfully!');
+                return redirect(route('AdminChangeBusinessPassword', $this->business->reg_no));
             }else session()->flash('error','Something went wrong!');
         }
     
@@ -70,6 +77,7 @@ class Changepassword extends Component
             if($user = Admin::CheckBusiness($business)){
                 $user->restore();
                 session()->flash('success','Business has been Activated Successfully!');
+                return redirect(route('AdminChangeBusinessPassword', $this->business->reg_no));
             }else session()->flash('error','Something went wrong!');
         }
         /*End::Activate & Ban a Business*/

@@ -65,11 +65,8 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Platform Pricing Plans
-                                                </div>
                                                 <div class="mb-0 font-weight-bold text-gray-800">
-                                                    Pay & Subscribe
+                                                    Platform Pricing Plans
                                                 </div>
                                             </div>
                                             <div class="col-auto">
@@ -126,10 +123,8 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Personal Info</div>
                                                 <div class="mb-0 font-weight-bold text-gray-800">
-                                                    Update Profile
+                                                    Profile
                                                 </div>
                                             </div>
                                             <div class="col-auto">
@@ -146,11 +141,8 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Abbilities
-                                                </div>
-                                                <div class=" mb-0 font-weight-bold text-gray-800">
-                                                    Allowed Permissions
+                                                <div class="mb-0 font-weight-bold text-gray-800">
+                                                    Permissions
                                                 </div>
                                             </div>
                                             <div class="col-auto">
@@ -167,11 +159,8 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Security
-                                                </div>
                                                 <div class=" mb-0 font-weight-bold text-gray-800">
-                                                    Change Password
+                                                    Password
                                                 </div>
                                             </div>
                                             <div class="col-auto">
@@ -188,9 +177,6 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Get Paid
-                                                </div>
                                                 <div class="mb-0 font-weight-bold text-gray-800">
                                                     Create Account
                                                 </div>
@@ -209,11 +195,8 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Settings
-                                                </div>
                                                 <div class=" mb-0 font-weight-bold text-gray-800">
-                                                    Change Logo
+                                                    Settings
                                                 </div>
                                             </div>
                                             <div class="col-auto">

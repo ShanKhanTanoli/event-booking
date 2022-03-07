@@ -7,7 +7,7 @@ use Livewire\Component;
 use App\Helpers\Admin\Admin;
 use Livewire\WithPagination;
 
-class Viewall extends Component
+class Index extends Component
 {
     use WithPagination;
 
@@ -64,7 +64,7 @@ class Viewall extends Component
 
         $business = $business->paginate(8);
 
-        return view('livewire.dashboard.admin.business.viewall')
+        return view('livewire.dashboard.admin.business.index')
             ->with([
                 'business' => $business,
             ]);

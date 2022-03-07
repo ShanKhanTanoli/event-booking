@@ -13,6 +13,12 @@ class Slot
         return ModelSlot::find($slot);
     }
 
+    public static function Count($reservation)
+    {
+        return ModelSlot::where('reservation_id', $reservation)
+            ->count();
+    }
+
     public static function IsBooked($slot)
     {
         $booked = ClientBooking::where('slot_id', $slot)
@@ -93,5 +99,11 @@ class Slot
                 } else return false;
             } else return false;
         } else return false;
+    }
+
+    public static function CountDuration($starting_date, $ending_date)
+    {
+        $datediff = strtotime($ending_date) - strtotime($starting_date);
+        return round($datediff / (60 * 60 * 24));
     }
 }

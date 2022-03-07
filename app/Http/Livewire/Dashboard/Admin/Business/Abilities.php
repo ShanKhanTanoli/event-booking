@@ -12,6 +12,8 @@ class Abilities extends Component
 
     public $state = [];
 
+    public $avatar;
+
     public function mount()
     {
         $this->state = Admin::BusinessAbilities($this->business->id)->only([
@@ -65,7 +67,7 @@ class Abilities extends Component
             if ($abilities = Admin::BusinessAbilities($user->id)) {
                 $abilities->update($validated);
                 session()->flash('success', 'Updated Successfully');
-                  return redirect(route('AdminEditBusinessDetails', $user->reg_no));
+                  return redirect(route('AdminEditBusinessAbilities', $user->reg_no));
             } else session()->flash('error', 'Something went wrong!');
         } else session()->flash('error', 'Something went wrong!');
     }
@@ -75,7 +77,7 @@ class Abilities extends Component
         if ($user = Admin::CheckBusiness($business)) {
             $user->update(['email_verified_at' => null]);
             session()->flash('error', 'Email has been Unverified & Business owner needs to verify this Email');
-              return redirect(route('AdminEditBusinessDetails', $user->reg_no));
+              return redirect(route('AdminEditBusinessAbilities', $user->reg_no));
         } else session()->flash('error', 'Something went wrong!');
     }
 
@@ -84,7 +86,7 @@ class Abilities extends Component
         if ($user = Admin::CheckBusiness($business)) {
             $user->update(['email_verified_at' => now()]);
             session()->flash('success', 'Email has been Verified Successfully!');
-            return redirect(route('AdminEditBusinessDetails', $user->reg_no));
+            return redirect(route('AdminEditBusinessAbilities', $user->reg_no));
         } else session()->flash('error', 'Something went wrong!');
     }
 
@@ -94,7 +96,7 @@ class Abilities extends Component
         if ($user = Admin::CheckBusiness($business)) {
             $user->delete();
             session()->flash('error', 'Business has been Banned Successfully!');
-              return redirect(route('AdminEditBusinessDetails', $user->reg_no));
+              return redirect(route('AdminEditBusinessAbilities', $user->reg_no));
         } else session()->flash('error', 'Something went wrong!');
     }
 
@@ -103,7 +105,7 @@ class Abilities extends Component
         if ($user = Admin::CheckBusiness($business)) {
             $user->restore();
             session()->flash('success', 'Business has been Activated Successfully!');
-            return redirect(route('AdminEditBusinessDetails', $user->reg_no));
+            return redirect(route('AdminEditBusinessAbilities', $user->reg_no));
         } else session()->flash('error', 'Something went wrong!');
     }
     /*End::Activate & Ban a Business*/

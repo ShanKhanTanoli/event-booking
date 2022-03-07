@@ -58,6 +58,19 @@ class AdminController extends Controller
         }
     }
 
+    public function ViewSubscriptions($reg_no)
+    {
+        if ($business = Admin::CheckBusinessByRegNo($reg_no)) {
+            return view($this->path . 'business.subscriptions.index')
+                ->with([
+                    'business' => $business,
+                ]);
+        } else {
+            session()->flash('error', 'Something went wrong!');
+            return redirect(route('AdminBusiness'));
+        }
+    }
+
     public function EditBusinessDetails($reg_no)
     {
         if ($business = Admin::CheckBusinessByRegNo($reg_no)) {
@@ -102,9 +115,9 @@ class AdminController extends Controller
         return view($this->path . 'clients.index');
     }
 
-    public function EditClient($user_name)
+    public function EditClient($reg_no)
     {
-        if ($client = Admin::CheckClientByUserName($user_name)) {
+        if ($client = Admin::CheckClientByRegNo($reg_no)) {
             return view($this->path . 'clients.edit.index')
                 ->with([
                     'client' => $client,
@@ -114,9 +127,21 @@ class AdminController extends Controller
         return redirect(route('AdminClients'));
     }
 
-    public function ChangeClientPassword($user_name)
+    public function ViewClientSubscriptions($reg_no)
     {
-        if ($client = Admin::CheckClientByUserName($user_name)) {
+        if ($client = Admin::CheckClientByRegNo($reg_no)) {
+            return view($this->path . 'clients.subscriptions.index')
+                ->with([
+                    'client' => $client,
+                ]);
+        }
+        session()->flash('error', 'Something went wrong!');
+        return redirect(route('AdminClients'));
+    }
+
+    public function ChangeClientPassword($reg_no)
+    {
+        if ($client = Admin::CheckClientByRegNo($reg_no)) {
             return view($this->path . 'clients.edit.changepassword')
                 ->with([
                     'client' => $client,

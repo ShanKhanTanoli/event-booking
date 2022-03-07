@@ -12,7 +12,6 @@ class Slot extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name',
         'slot_id',
         'reservation_id',
         'slug',

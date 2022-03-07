@@ -17,7 +17,6 @@
                                                 <th>Invoice</th>
                                                 <th class="text-center">Plan</th>
                                                 <th class="text-center">Price</th>
-                                                <th class="text-center">Reservations</th>
                                                 <th class="text-center">Status</th>
                                                 <th class="text-center">Starts At</th>
                                                 <th class="text-center">Ends At</th>
@@ -60,17 +59,6 @@
                                                                 </span>
                                                             </td>
                                                         @endif
-                                                        <td class="text-center">
-                                                            @if (!is_null($plan = app('rinvex.subscriptions.plan')->find($subscription->plan_id)))
-                                                                <strong>
-                                                                    {{ $plan->reservations }}
-                                                                </strong>
-                                                            @else
-                                                                <strong>
-                                                                    0
-                                                                </strong>
-                                                            @endif
-                                                        </td>
                                                         <td class="text-center">
                                                             @if (Auth::user()->planSubscription($subscription->invoice)->active())
                                                                 @if (!Auth::user()->planSubscription($subscription->invoice)->canceled())

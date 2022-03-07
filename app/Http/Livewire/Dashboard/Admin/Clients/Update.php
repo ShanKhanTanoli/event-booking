@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Dashboard\Admin\Clients;
 
 use Livewire\Component;
+use Illuminate\Support\Str;
 use App\Helpers\Admin\Admin;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Validator;
@@ -41,64 +42,32 @@ class Update extends Component
         if($user = Admin::CheckClient($this->client->id)){
             $user->update($validated);
             session()->flash('success', 'Updated Successfully');
+            return redirect(route('AdminEditClient', $this->client->reg_no));
         }else session()->flash('error','Something went wrong!');
     }
-
-    public function UnVerifyEmail($client)
-    {
-        if($user = Admin::CheckClient($client)){
-            $user->update(['email_verified_at' => null]);
-            session()->flash('error','Email has been Unverified & Client needs to verify this Email');
-        }else session()->flash('error','Something went wrong!');
-    }
-
-    public function VerifyEmail($client)
-    {
-        if($user = Admin::CheckClient($client)){
-            //dd($user);
-            $user->update(['email_verified_at' => now()]);
-            session()->flash('success','Email has been Verified Successfully!');
-        }else session()->flash('error','Something went wrong!');
-    }
-
-    /*Begin::Activate & Ban a Client*/
-    public function BanNow($client)
-    {
-        if($user = Admin::CheckClient($client)){
-            $user->delete();
-            session()->flash('error','Client has been Banned Successfully!');
-        }else session()->flash('error','Something went wrong!');
-    }
-
-    public function ActivateNow($client)
-    {
-        if($user = Admin::CheckClient($client)){
-            $user->restore();
-            session()->flash('success','Client has been Activated Successfully!');
-        }else session()->flash('error','Something went wrong!');
-    }
-    /*End::Activate & Ban a Client*/
 
     /*Begin::Upload & Remove Image*/
-    public function Upload($client)
+    public function Upload()
     {
-        if($user = Admin::CheckClient($client)){
+        if($client = Admin::CheckClient($this->client->id)){
             $this->validate([
-                'business_avatar' => 'image|mimes:jpg,jpeg,png,bmp|max:1024',
+                'avatar' => 'image|mimes:jpg,jpeg,png,bmp|max:1024',
             ]);
-            $imageName = 'avatar' . '-' . time() . '-' . mt_rand(999, 9999999999) . '.' . $this->avatar->getClientOriginalExtension();
-            $this->avatar->storeAs('/', $imageName, ['disk' => 'BusinessImages']);
+            $imageName = 'avatar' . '-' . time() . '-' .mt_rand(9999,999999999). '.' . $this->avatar->getClientOriginalExtension();
+            $this->avatar->storeAs('/', $imageName, ['disk' => 'ClientAvatars']);
             $client->update(['avatar' => $imageName]);
             session()->flash('success', 'Successfully Updated');
+            return redirect(route('AdminEditClient', $this->client->reg_no));
         } else session()->flash('error', 'Something went wrong!');
     }
 
-    public function Remove($client)
+    public function Remove()
     {
-        if($user = Admin::CheckClient($client)){
+        if($client = Admin::CheckClient($this->client->id)){
             $client->update(['avatar' => null]);
             $this->avatar = null;
             session()->flash('success', 'Removed Successfully');
+            return redirect(route('AdminEditClient', $this->client->reg_no));
         } else session()->flash('error', 'Something went wrong!');
     }
     /*End::Upload & Remove Image*/

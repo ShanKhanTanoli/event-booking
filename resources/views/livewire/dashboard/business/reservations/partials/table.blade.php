@@ -5,6 +5,7 @@
                 <div class="col p-0">
                     <strong>
                         {!! substr($reservation->name, 0, 30) !!}
+                          (Total Slots {{ Slot::Count($reservation->id)}})
                     </strong>
                 </div>
                 <div class="col p-0" style="text-align:right;">

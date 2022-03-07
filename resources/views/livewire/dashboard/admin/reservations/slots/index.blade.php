@@ -17,7 +17,6 @@
                                     aria-describedby="dataTable_info" style="width: 100%;">
                                     <thead>
                                         <tr role="row">
-                                            <th>Name</th>
                                             <th class="text-center">Date</th>
                                             <th class="text-center">Time</th>
                                             <th class="text-center">Capacity</th>
@@ -28,15 +27,6 @@
                                     <tbody>
                                         @foreach ($slots as $slot)
                                             <tr>
-                                                <td>
-                                                    <strong>
-                                                        @if (strlen($slot->name) > 25)
-                                                            {!! substr($slot->name, 0, 25) !!}...
-                                                        @else
-                                                            {!! substr($slot->name, 0, 30) !!}
-                                                        @endif
-                                                    </strong>
-                                                </td>
                                                 <td class="text-center">
                                                     <strong>
                                                         {{ date('D d M Y', strtotime($slot->starting_date)) }}

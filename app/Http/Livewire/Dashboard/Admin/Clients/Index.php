@@ -7,7 +7,7 @@ use Livewire\Component;
 use App\Helpers\Admin\Admin;
 use Livewire\WithPagination;
 
-class Viewallclients extends Component
+class Index extends Component
 {
     use WithPagination;
 
@@ -63,7 +63,7 @@ class Viewallclients extends Component
         /*End::client Email Status*/
 
         $clients = $clients->paginate(6);
-        return view('livewire.dashboard.admin.clients.viewallclients')
+        return view('livewire.dashboard.admin.clients.index')
             ->with([
                 'clients' => $clients,
             ]);
@@ -74,6 +74,7 @@ class Viewallclients extends Component
         if ($user = Admin::CheckClient($client)) {
             $user->update(['email_verified_at' => null]);
             session()->flash('error', 'Email has been Unverified & Client needs to verify this Email');
+            return redirect(route('AdminClients'));
         } else session()->flash('error', 'Something went wrong!');
     }
 
@@ -82,6 +83,7 @@ class Viewallclients extends Component
         if ($user = Admin::CheckClient($client)) {
             $user->update(['email_verified_at' => now()]);
             session()->flash('success', 'Email has been Verified Successfully!');
+            return redirect(route('AdminClients'));
         } else session()->flash('error', 'Something went wrong!');
     }
 
@@ -91,6 +93,7 @@ class Viewallclients extends Component
         if ($user = Admin::CheckClient($client)) {
             $user->delete();
             session()->flash('error', 'Client has been Banned Successfully!');
+            return redirect(route('AdminClients'));
         } else session()->flash('error', 'Something went wrong!');
     }
 
@@ -99,22 +102,18 @@ class Viewallclients extends Component
         if ($user = Admin::CheckClient($client)) {
             $user->restore();
             session()->flash('success', 'Client has been Activated Successfully!');
+            return redirect(route('AdminClients'));
         } else session()->flash('error', 'Something went wrong!');
     }
     /*End::Activate & Ban a Client*/
 
-    public function EditNow($client)
-    {
-        if ($user = Admin::CheckClient($client)) {
-            return redirect(route('AdminEditClient', $user->user_name));
-        } else session()->flash('error', 'Something went wrong!');
-    }
 
     public function DeleteNow($client)
     {
         if ($user = Admin::CheckClient($client)) {
             $user->forceDelete();
             session()->flash('success', 'Client has been Deleted Successfully!');
+            return redirect(route('AdminClients'));
         } else session()->flash('error', 'Something went wrong!');
     }
 }

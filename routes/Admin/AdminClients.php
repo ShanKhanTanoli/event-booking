@@ -3,11 +3,11 @@
 Route::get('Clients', [App\Http\Controllers\Admin\AdminController::class, 'Clients'])
 ->name('AdminClients');
 
-Route::get('Edit/{user_name}/Client', [App\Http\Controllers\Admin\AdminController::class, 'EditClient'])
+Route::get('Client/{reg_no}/Edit', [App\Http\Controllers\Admin\AdminController::class, 'EditClient'])
 ->name('AdminEditClient');
 
-Route::get('Client/{user_name}/ChangePassword', [App\Http\Controllers\Admin\AdminController::class, 'ChangeClientPassword'])
-->name('AdminChangeClientPassword');
+Route::get('Client/{reg_no}/Subscriptions', [App\Http\Controllers\Admin\AdminController::class, 'ViewClientSubscriptions'])
+->name('AdminViewClientSubscriptions');
 
-Route::get('{user_name}/Clients', [App\Http\Controllers\Admin\AdminController::class, 'EditClients'])
-->name('AdminEditClients');
+Route::get('Client/{reg_no}/ChangePassword', [App\Http\Controllers\Admin\AdminController::class, 'ChangeClientPassword'])
+->name('AdminChangeClientPassword');

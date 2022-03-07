@@ -31,9 +31,9 @@ trait ClientsTrait
         }else return false;
     }
 
-    public static function CheckClientByUserName($user_name)
+    public static function CheckClientByRegNo($reg_no)
     {
-        if (!is_null($client = User::withTrashed()->where('user_name',$user_name)->first())) {
+        if (!is_null($client = User::withTrashed()->where('reg_no',$reg_no)->first())) {
             if ($client->role == 'client' && $client->role_id == 3) {
                 return $client;
             } else return false;

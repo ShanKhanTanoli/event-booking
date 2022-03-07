@@ -23,9 +23,9 @@
                 @include('dashboard.admin.partials.topbar')
                 <!-- End::Topbar-->
 
-                <!--Begin::All Business-->
-                @livewire('dashboard.admin.business.viewall')
-                <!--Begin::All Business-->
+                <!--Begin::All Business Accounts-->
+                @livewire('dashboard.admin.business.index')
+                <!--Begin::All Business Accounts-->
             </div>
             <!-- End of Main Content -->
 

@@ -24,7 +24,7 @@
                 <!-- End::Topbar-->
 
                 <!--Begin::All Clients-->
-                @livewire('dashboard.admin.clients.viewall')
+                @livewire('dashboard.admin.clients.index')
                 <!--Begin::All Clients-->
             </div>
             <!-- End of Main Content -->

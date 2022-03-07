@@ -4,8 +4,9 @@
     <!--End::Alerts Notifications-->
 
     <!--Begin::Business Status-->
-    @include('livewire.dashboard.admin.business.BusinessStatus')
+    @include('livewire.dashboard.admin.business.partials.business-status')
     <!--Begin::Business Status-->
+    
     <div class="row justify-content-center align-align-items-center">
         <div class="col-xl-12">
             <!-- Account details card-->
@@ -74,7 +75,11 @@
                                                 @foreach ($business as $business_owner)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        <td>{!! substr($business_owner->name, 0, 8) !!}...</td>
+                                                        @if (strlen($business_owner->name) > 15)
+                                                            <td>{!! substr($business_owner->name, 0, 15) !!}...</td>
+                                                        @else
+                                                            <td>{!! $business_owner->name !!}</td>
+                                                        @endif
                                                         <td>{!! $business_owner->email !!}</td>
                                                         <td class="text-center">
                                                             {{ number_format(Admin::CountBusinessClients($business_owner->id)) }}

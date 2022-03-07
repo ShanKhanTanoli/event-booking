@@ -4,7 +4,7 @@
     <!--End::Alerts Notifications-->
 
     <!--Begin::Clients Status-->
-    @include('livewire.dashboard.admin.clients.ClientStatus')
+    @include('livewire.dashboard.admin.clients.partials.client-status')
     <!--Begin::Clients Status-->
 
     <div class="row justify-content-center align-align-items-center">
@@ -15,7 +15,7 @@
                     <div class="table-responsive">
                         <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <div class="row mt-2">
-                                <div class="col-sm-12 col-md-3 col-lg-3">
+                                <div class="col-sm-12 col-md-4 col-lg-4">
                                     <div class="dataTables_length" id="dataTable_length">
                                         <label>Email Status
                                             <select wire:model="email_status" name="dataTable_length"
@@ -28,7 +28,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 col-md-3 col-lg-3">
+                                <div class="col-sm-12 col-md-4 col-lg-4">
                                     <div class="dataTables_length" id="dataTable_length">
                                         <label>Visibility
                                             <select wire:model="visibility" name="dataTable_length"
@@ -41,12 +41,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 col-md-3 col-lg-3">
-                                    <span wire:loading>Loading...</span>
-                                    <span wire:loading class="spinner-border spinner-border-sm" role="status"
-                                        aria-hidden="true"></span>
-                                </div>
-                                <div class="col-sm-12 col-md-3 col-lg-3">
+                                <div class="col-sm-12 col-md-4 col-lg-4">
                                     <div id="dataTable_filter" class="dataTables_filter">
                                         <label>Search:<input wire:model.debounce.1000ms='search' type="search"
                                                 class="form-control form-control-sm" placeholder="Search here..."
@@ -64,10 +59,11 @@
                                                 <th>ID</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
-                                                <th class="text-center">Verify</th>
-                                                <th class="text-center">Email Status</th>
+                                                <th class="text-center">Email Verify</th>
                                                 <th class="text-center">Visibility</th>
-                                                <th class="text-center">Status</th>
+                                                <th class="text-center">Business</th>
+                                                <th class="text-center">View</th>
+                                                <th class="text-center">Edit</th>
                                                 <th class="text-center">Delete</th>
                                             </tr>
                                         </thead>
@@ -83,6 +79,11 @@
                                                                 <button wire:click="UnVerifyEmail({{ $client->id }})"
                                                                     style="padding:0px; border:none; background-color:transparent">
                                                                     <span class="badge badge-danger">
+                                                                        <span wire:loading
+                                                                            wire:target='UnVerifyEmail({{ $client->id }})'
+                                                                            class="spinner-border spinner-border-sm"
+                                                                            role="status" aria-hidden="true"></span>
+                                                                            <i class="fas fa-user-slash"></i>
                                                                         Unverify
                                                                     </span>
                                                                 </button>
@@ -90,27 +91,26 @@
                                                                 <button wire:click="VerifyEmail({{ $client->id }})"
                                                                     style="padding:0px; border:none; background-color:transparent">
                                                                     <span class="badge badge-primary">
+                                                                        <span wire:loading
+                                                                            wire:target='VerifyEmail({{ $client->id }})'
+                                                                            class="spinner-border spinner-border-sm"
+                                                                            role="status" aria-hidden="true"></span>
+                                                                            <i class="fas fa-user-check"></i>
                                                                         Verify Now
                                                                     </span>
                                                                 </button>
                                                             @endif
                                                         </td>
                                                         <td class="text-center">
-                                                            @if (Admin::ClientEmailStatus($client->id))
-                                                                <span class="badge badge-primary">
-                                                                    <i class="fas fa-check"></i> Verified
-                                                                </span>
-                                                            @else
-                                                                <span class="badge badge-danger">
-                                                                    <i class="fas fa-ban"></i> Unverified
-                                                                </span>
-                                                            @endif
-                                                        </td>
-                                                        <td>
                                                             @if ($client->trashed())
                                                                 <button wire:click="ActivateNow({{ $client->id }})"
                                                                     style="padding:0px; border:none; background-color:transparent">
                                                                     <span class="badge badge-primary">
+                                                                        <span wire:loading
+                                                                            wire:target='ActivateNow({{ $client->id }})'
+                                                                            class="spinner-border spinner-border-sm"
+                                                                            role="status" aria-hidden="true"></span>
+                                                                            <i class="fas fa-check"></i>
                                                                         Activate
                                                                     </span>
                                                                 </button>
@@ -118,26 +118,67 @@
                                                                 <button wire:click="BanNow({{ $client->id }})"
                                                                     style="padding:0px; border:none; background-color:transparent">
                                                                     <span class="badge badge-danger">
+                                                                        <span wire:loading
+                                                                            wire:target='BanNow({{ $client->id }})'
+                                                                            class="spinner-border spinner-border-sm"
+                                                                            role="status" aria-hidden="true"></span>
+                                                                        <i class="fas fa-ban"></i>
                                                                         Ban Now
                                                                     </span>
                                                                 </button>
                                                             @endif
                                                         </td>
-                                                        <td>
-                                                            @if ($client->trashed())
-                                                                <span class="badge badge-danger">
-                                                                    <i class="fas fa-ban"></i> Banned
-                                                                </span>
-                                                            @else
-                                                                <span class="badge badge-primary">
-                                                                    <i class="fas fa-check"></i> Active
-                                                                </span>
-                                                            @endif
+                                                        <td class="text-center">
+                                                            <strong>
+                                                                @if($business = Client::JoinedBusiness($client->id))
+                                                                
+                                                                @if(strlen($business->name) < 8)
+                                                                {{ $business->name }}
+                                                                @else
+                                                                {{ $business->name }}...
+                                                                @endif
+
+                                                                @else
+                                                                    No Business
+                                                                @endif
+                                                            </strong>
                                                         </td>
-                                                        <td>
+                                                        @if($business = Business::Is($client->created_by))
+                                                        <td class="text-center">
+                                                            <a href="{{ route('AdminEditBusiness',$business->reg_no) }}"
+                                                                style="padding:0px; border:none; background-color:transparent">
+                                                                <span class="badge badge-primary">
+                                                                <i class="fas fa-eye"></i>
+                                                                    View Business
+                                                                </span>
+                                                            </a>
+                                                        </td>
+                                                        @else
+                                                        <td class="text-center">
+                                                            <button style="padding:0px; border:none; background-color:transparent" disabled>
+                                                                <span class="badge badge-danger">
+                                                                        <i class="fas fa-check"></i>
+                                                                    By Admin
+                                                                </span>
+                                                            </button>
+                                                        </td>
+                                                        @endif
+                                                        <td class="text-center">
+                                                            <a href="{{ route('AdminEditClient', $client->reg_no) }}" style="padding:0px; border:none; background-color:transparent">
+                                                                <span class="badge badge-success">
+                                                                    <i class="fas fa-edit"></i>
+                                                                    Edit
+                                                                </span>
+                                                            </a>
+                                                        </td>
+                                                        <td class="text-center">
                                                             <button wire:click="DeleteNow({{ $client->id }})"
                                                                 style="padding:0px; border:none; background-color:transparent">
                                                                 <span class="badge badge-danger">
+                                                                    <span wire:loading
+                                                                            wire:target='DeleteNow({{ $client->id }})'
+                                                                            class="spinner-border spinner-border-sm"
+                                                                            role="status" aria-hidden="true"></span>
                                                                     <i class="fas fa-trash-alt"></i> Delete
                                                                 </span>
                                                             </button>

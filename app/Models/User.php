@@ -15,6 +15,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Rinvex\Subscriptions\Traits\HasPlanSubscriptions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Rinvex\Subscriptions\Models\PlanSubscription;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -85,5 +86,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function settings()
     {
         return $this->hasOne(BusinessSetting::class);
+    }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(PlanSubscription::class,'subscriber_id');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Dashboard\Business\Reservations;
 
+use App\Models\Slot;
 use Livewire\Component;
 use App\Helpers\Business\Business;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,8 @@ class Index extends Component
         if (Business::Is(Auth::user()->id)) {
             if (!Business::ReservationIsBanned(Auth::user()->id, $id)) {
                 Business::Reservation(Auth::user()->id, $id)->update(['status' => 'active']);
-                return session()->flash('success', 'Archived Successfully');
+                session()->flash('success', 'Archived Successfully');
+                return redirect(route('BusinessReservations'));
             } else return session()->flash('error', 'Something went wrong');
         } else return session()->flash('error', 'Something went wrong');
     }
@@ -41,7 +43,8 @@ class Index extends Component
         if (Business::Is(Auth::user()->id)) {
             if (!Business::ReservationIsBanned(Auth::user()->id, $id)) {
                 Business::Reservation(Auth::user()->id, $id)->update(['status' => 'archived']);
-                return session()->flash('success', 'Activated Successfully');
+                session()->flash('success', 'Archived Successfully');
+                return redirect(route('BusinessReservations'));
             } else return session()->flash('error', 'Something went wrong');
         } else return session()->flash('error', 'Something went wrong');
     }
@@ -75,7 +78,21 @@ class Index extends Component
                     Business::Reservation(Auth::user()->id, $this->reservation)
                         ->delete();
                     $this->emit('DeleteSuccess');
-                    return session()->flash('success', 'Deleted Successfully');
+                    session()->flash('success', 'Deleted Successfully');
+                    return redirect(route('BusinessReservations'));
+                } else return session()->flash('error', 'Something went wrong');
+            } else return session()->flash('error', 'Something went wrong');
+        } else return session()->flash('error', 'Something went wrong');
+    }
+
+    public function DeleteSlot($id)
+    {
+        if (Business::Is(Auth::user()->id)) {
+            if (!is_null($slot = Slot::find($id))) {
+                if (!Business::ReservationIsBanned(Auth::user()->id, $slot->reservation_id)) {
+                    $slot->delete();
+                    session()->flash('success', 'Deleted Successfully');
+                    return redirect(route('BusinessReservations'));
                 } else return session()->flash('error', 'Something went wrong');
             } else return session()->flash('error', 'Something went wrong');
         } else return session()->flash('error', 'Something went wrong');

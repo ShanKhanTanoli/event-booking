@@ -8,10 +8,10 @@
                         <span>Profile</span>
                     </a>
                 </li>
-                <li class="nav-item business_side_menu @if (Request::path() == 'Admin/'.$business->reg_no.'/BusinessDetails') active_class @endif">
-                    <a class="nav-link px-2 business_side_a" href="{{ route('AdminEditBusinessDetails', $business->reg_no) }}">
-                        <i class="fas fa-business-time mr-1"></i>
-                        <span>Business</span>
+                <li class="nav-item business_side_menu @if (Request::path() == 'Admin/'.$business->reg_no.'/Subscriptions') active_class @endif">
+                    <a class="nav-link px-2 business_side_a" href="{{ route('AdminViewBusinessSubscriptions', $business->reg_no) }}">
+                        <i class="fas fa-money-bill mr-1"></i>
+                        <span>Subscriptions</span>
                     </a>
                 </li>
                 <li class="nav-item business_side_menu @if (Request::path() == 'Admin/'.$business->reg_no.'/Abilities') active_class @endif">

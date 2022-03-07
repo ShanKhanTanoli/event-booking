@@ -135,8 +135,7 @@
                                 <div class="row mb-3 mt-3">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Book Before (Client can book before
-                                                Minutes)</label>
+                                            <label>Book Until X Minutes</label>
                                             <input wire:model.defer="state.can_book_before"
                                                 class="form-control @error('can_book_before') is-invalid @enderror"
                                                 id="can_book_before" type="number" placeholder="Enter Minutes"
@@ -150,8 +149,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>Cancel Before (Client can cancel before
-                                                Minutes)</label>
+                                            <label>Cancel Before X Minutes</label>
                                             <input wire:model.defer="state.can_cancel_before"
                                                 class="form-control @error('can_cancel_before') is-invalid @enderror"
                                                 id="can_cancel_before" type="number" placeholder="Enter Minutes"
