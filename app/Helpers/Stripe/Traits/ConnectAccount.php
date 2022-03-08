@@ -155,19 +155,19 @@ trait ConnectAccount
                 return $stripe->accounts->retrieve($account, []);
             } else return session()->flash('error', 'Something went wrong.Refresh the page and try again later.');
         } catch (\Stripe\Exception\CardException $e) {
-            return session()->flash('error', $e->getMessage());
+            return session()->flash('error', 'Something went wrong.Refresh the page and try again later.');
         } catch (\Stripe\Exception\RateLimitException $e) {
-            return session()->flash('error', $e->getMessage());
+            return session()->flash('error', 'Something went wrong.Refresh the page and try again later.');
         } catch (\Stripe\Exception\InvalidRequestException $e) {
-            return session()->flash('error', $e->getMessage());
+            return session()->flash('error', 'Something went wrong.Refresh the page and try again later.');
         } catch (\Stripe\Exception\AuthenticationException $e) {
-            return session()->flash('error', $e->getMessage());
+            return session()->flash('error', 'Something went wrong.Refresh the page and try again later.');
         } catch (\Stripe\Exception\ApiConnectionException $e) {
             return session()->flash('error', 'You are not connected to the Internet.');
         } catch (\Stripe\Exception\ApiErrorException $e) {
-            return session()->flash('error', $e->getMessage());
+            return session()->flash('error', 'Something went wrong.Refresh the page and try again later.');
         } catch (Exception $e) {
-            return session()->flash('error', $e->getMessage());
+            return session()->flash('error', 'Something went wrong.Refresh the page and try again later.');
         }
     }
 }
