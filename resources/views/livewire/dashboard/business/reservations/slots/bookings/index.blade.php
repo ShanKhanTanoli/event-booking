@@ -3,9 +3,19 @@
     @include('errors.messages')
     <!--End::Alerts Notifications-->
     @if (Business::CanViewReservations(Auth::user()->id))
+
+    @if(Slot::ReservationIsActive($slot->reservation_id))
     <!--Begin::Create Booking Modal-->
     @include('livewire.dashboard.business.reservations.slots.bookings.partials.create-booking')
     <!--Begin::Create Booking Modal-->
+    @else
+    <div class="alert alert-danger">
+        <strong>
+            This reservation is not active.
+        </strong>
+    </div>
+    @endif
+
         <div class="row justify-content-center align-align-items-center">
             <div class="col-xl-12">
                 <!--Begin::Slots-->
@@ -14,7 +24,7 @@
                         <div class="d-flex">
                             <div class="col">
                                 <strong>
-                                    Total Bookings ({{ Slot::CountBookings($slot->id) }})
+                                    Total Bookings ({{ Slot::CountBookings($slot->id) }}) - Capacity ({{ $slot->capacity }})
                                 </strong>
                             </div>
                             <div class="col text-right">
@@ -24,12 +34,20 @@
                                         View Reservations
                                     </span>
                                 </a>
+                                @if(Slot::ReservationIsActive($slot->reservation_id))
                                 <button data-toggle="modal" data-target="#create-booking"
                                     style="padding:0px; border:none; background-color:transparent">
                                     <span class="badge badge-primary">
                                         <i class="fas fa-plus"></i> Create Booking
                                     </span>
                                 </button>
+                                @else
+                                <button disabled style="padding:0px; border:none; background-color:transparent">
+                                    <span class="badge badge-danger">
+                                        <i class="fas fa-plus"></i> Create Booking
+                                    </span>
+                                </button>
+                                @endif
                             </div>
                         </div>
                     </div>
