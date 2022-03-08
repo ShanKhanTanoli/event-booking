@@ -30,6 +30,7 @@
                                             <tbody>
                                                 @if (Client::CountBookings(Auth::user()->id) > 0)
                                                     @foreach ($slots as $slot)
+                                                    @if(Slot::ReservationIsActive($slot->reservation_id))
                                                         <tr>
                                                             <td class="text-center">
                                                                 <strong>
@@ -111,6 +112,15 @@
                                                                 @endif
                                                             </td>
                                                         </tr>
+                                                        @else
+                                                        <tr class="text-center">
+                                                            <td colspan="11">
+                                                                <strong>
+                                                                    No Data Found
+                                                                </strong>
+                                                            </td>
+                                                        </tr>
+                                                        @endif
                                                     @endforeach
                                                 @else
                                                     <tr class="text-center">
