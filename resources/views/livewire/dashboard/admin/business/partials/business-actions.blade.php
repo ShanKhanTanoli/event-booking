@@ -24,19 +24,32 @@
         <div class="text-center text-sm-left mb-2 mb-sm-0">
             <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{!! $business->name !!}</h4>
             <p class="mt-3">
-                <strong>
-                    {{ __('@' . $business->user_name) }}
-                </strong>
+                @if (!is_null($business->user_name))
+                    <strong>
+                        {{ __('@' . $business->user_name) }}
+                    </strong>
+                @else
+                    <strong>
+                        {{ __('@ No Username') }}
+                    </strong>
+                @endif
             </p>
             <p class="mt-2">
-                <strong>
-                    <i class="fas fa-info-circle"></i>
-                    People can register to your business by using this link below.
-                    <br />
-                    <span class="text-primary">
-                        {{ route('RegisterAsClient', $business->user_name) }}
-                    </span>
-                </strong>
+                @if (!is_null($business->user_name))
+                    <strong>
+                        <i class="fas fa-info-circle"></i>
+                        People can register to your business by using this link below.
+                        <br />
+                        <span class="text-primary">
+                            {{ route('RegisterAsClient', $business->user_name) }}
+                        </span>
+                    </strong>
+                @else
+                    <strong>
+                        <i class="fas fa-info-circle"></i>
+                       Please set a username so your clients can register by using your username link.
+                    </strong>
+                @endif
             </p>
             <div class="mt-3">
                 <div x-data="{ isUploading: false, progress: 0 }" x-on:livewire-upload-start="isUploading = true"
