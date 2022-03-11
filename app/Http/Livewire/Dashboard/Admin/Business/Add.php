@@ -42,6 +42,7 @@ class Add extends Component
 
         $reg_no = [
             'reg_no' => strtoupper(Str::random(30)),
+            'user_name' => strtoupper(Str::random(30)),
         ];
 
         if (Admin::Is(Auth::user()->id)) {
