@@ -1,5 +1,9 @@
 <div class="row flex-lg-nowrap">
+    @if (Business::CanCreateClient($find_business->id))
     <div class="card">
+        @else
+        <div class="card" style="width: 100%;">
+        @endif
         <div class="card-body">
             <div class="col-12 col-sm-auto mb-3  justify-content-center">
                 <div class="mx-auto" style="width: 140px;">
@@ -32,7 +36,6 @@
                     </div>
                 </div>
             </div>
-            <h6 class="mt-4 mb-3 text-center">Business Details</h6>
             <table class="table user-view-table m-0">
                 <tbody>
                     <tr>
