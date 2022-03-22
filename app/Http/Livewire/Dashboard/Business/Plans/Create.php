@@ -16,7 +16,7 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.dashboard.business.plans.create');
+        return view('livewire.dashboard.business.plans.create.index');
     }
     public function CreatePlan()
     {
@@ -26,7 +26,6 @@ class Create extends Component
             'invoice_period' => 'required|numeric',
             'invoice_interval' => 'required|string|in:day,month',
             'description' => 'required|string|max:40',
-            'reservations' => 'required|numeric',
         ])->validate();
         $data = [
             'user_id' => Auth::user()->id,
@@ -38,7 +37,7 @@ class Create extends Component
             'invoice_period' => $validated['invoice_period'],
             'invoice_interval' => $validated['invoice_interval'],
             'currency' => strtoupper(Settings::Currency()),
-            'reservations' => $validated['reservations'],
+            'reservations' => 0,
         ];
         if (Business::CanCreatePricingPlans(Auth::user()->id)) {
             app('rinvex.subscriptions.plan')->create($data);

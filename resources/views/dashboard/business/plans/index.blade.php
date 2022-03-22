@@ -24,7 +24,7 @@
                 <!-- End::Topbar-->
 
                 <!--Begin::All Plans-->
-                @livewire('dashboard.business.plans.all')
+                @livewire('dashboard.business.plans.index')
                 <!--Begin::All Plans-->
             </div>
             <!-- End of Main Content -->

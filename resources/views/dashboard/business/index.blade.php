@@ -172,22 +172,79 @@
                             </a>
                         </div>
                         <div class="col-xl-4 col-sm-6 col-md-6 mb-4">
+                            @if (Business::StripeConnectAccountID(Auth::user()->id))
+                            @if (!is_null($account = Stripe::RetrieveAccount(Auth::user()->account_id)))
+                            @if (!$account->payouts_enabled)
+                            <a href="{{ route('BusinessConnectAccount') }}">
+                                <div class="card border-left-danger shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="mb-0 font-weight-bold text-gray-800">
+                                                    Complete Your Account
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-clipboard-list fa-3x text-danger"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            @else
                             <a href="{{ route('BusinessConnectAccount') }}">
                                 <div class="card border-left-primary shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="mb-0 font-weight-bold text-gray-800">
-                                                    Get Paid
+                                                    Account Ready
                                                 </div>
                                             </div>
                                             <div class="col-auto">
-                                                <i class="fas fa-university fa-3x text-primary"></i>
+                                                <i class="fas fa-money-check fa-3x text-primary"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </a>
+                            @endif
+                        @else
+                        <a href="{{ route('BusinessConnectAccount') }}">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="mb-0 font-weight-bold text-gray-800">
+                                                Create Account & Get Paid
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-university fa-3x text-primary"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        @endif
+                        @else
+                        <a href="{{ route('BusinessConnectAccount') }}">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="mb-0 font-weight-bold text-gray-800">
+                                                Create Account & Get Paid
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-university fa-3x text-primary"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        @endif
                         </div>
                         <div class="col-xl-4 col-sm-6 col-md-6 mb-4">
                             <a href="{{ route('BusinessSettings') }}">

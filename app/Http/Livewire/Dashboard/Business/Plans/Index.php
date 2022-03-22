@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Helpers\Business\Business;
 use Illuminate\Support\Facades\Auth;
 
-class All extends Component
+class Index extends Component
 {
     public $load = 5;
 
@@ -15,7 +15,7 @@ class All extends Component
         if($plans = Business::Plans(Auth::user()->id)){
             $plans = $plans->take($this->load);
         }else $plans = [];
-        return view('livewire.dashboard.business.plans.all')
+        return view('livewire.dashboard.business.plans.index')
         ->with([
             'plans' => $plans,
         ]);

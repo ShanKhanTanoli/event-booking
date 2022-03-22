@@ -24,21 +24,20 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.dashboard.business.plans.edit');
+        return view('livewire.dashboard.business.plans.edit.index');
     }
     public function UpdatePlan()
     {
         $validated = Validator::make($this->state, [
             'name' => 'required|string|max:15',
             'description' => 'required|string|max:40',
-            'reservations' => 'required|integer',
         ])->validate();
         $data = [
             'name' => $validated['name'],
             'signup_fee' => 0,
             'slug' => strtoupper(Str::random(10)),
             'description' => $validated['description'],
-            'reservations' => $validated['reservations'],
+            'reservations' => 0,
         ];
         if (Business::CanUpdatePricingPlans(Auth::user()->id)) {
             return  Business::UpdatePlan(Auth::user()->id, $this->plan->id, $data, 'Updated Successfully');

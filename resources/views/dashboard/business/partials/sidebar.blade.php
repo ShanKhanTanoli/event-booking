@@ -144,12 +144,38 @@
     <div class="sidebar-heading">
         Get Paid
     </div>
-    <!-- Nav Item - Get Paid -->
+     <!-- Nav Item - Get Paid -->
     <li class="nav-item @if (Request::path() == 'Business/ConnectAccount') active @endif">
+        @if (Business::StripeConnectAccountID(Auth::user()->id))
+        @if (!is_null($account = Stripe::RetrieveAccount(Auth::user()->account_id)))
+        
+        <!--Begin::Complete Your Account-->
+        @if (!$account->payouts_enabled)
+        <a class="nav-link" href="{{ route('BusinessConnectAccount') }}">
+            <i class="fas fa-fw fa-clipboard-list"></i>
+            <span>Complete Account</span>
+        </a>
+        @else
+        <a class="nav-link" href="{{ route('BusinessConnectAccount') }}">
+            <i class="fas fa-fw fa-money-check"></i>
+            <span>Account Ready</span>
+        </a>
+        @endif
+        <!--End::Complete Your Account-->
+
+        @else
         <a class="nav-link" href="{{ route('BusinessConnectAccount') }}">
             <i class="fas fa-fw fa-university"></i>
             <span>Create Account</span>
         </a>
+        @endif
+
+        @else
+        <a class="nav-link" href="{{ route('BusinessConnectAccount') }}">
+            <i class="fas fa-fw fa-university"></i>
+            <span>Create Account</span>
+        </a>
+        @endif
     </li>
     <hr class="sidebar-divider">
     <div class="sidebar-heading">

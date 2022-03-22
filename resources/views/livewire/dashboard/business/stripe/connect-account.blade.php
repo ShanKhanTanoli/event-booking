@@ -11,7 +11,25 @@
                 <div class="col mb-3">
                     <div class="card">
                         <div class="card-header">
-                            Complete your profile
+                            @if (Business::StripeConnectAccountID(Auth::user()->id))
+                            @if (!is_null($account = Stripe::RetrieveAccount(Auth::user()->account_id)))
+                            <!--Begin::Complete Your Account-->
+                            @if (!$account->payouts_enabled)
+                            <i class="fas fa-fw fa-clipboard-list"></i>
+                                Complete Your Account
+                            @else
+                            <i class="fas fa-fw fa-money-check"></i>
+                            Account is Ready
+                            @endif
+                            <!--End::Complete Your Account-->
+                            @else
+                                <i class="fas fa-fw fa-university"></i>
+                                Create Account
+                            @endif
+                            @else
+                            <i class="fas fa-fw fa-university"></i>
+                            Create Account
+                            @endif
                         </div>
                         <div class="card-body">
                             @if (Business::StripeConnectAccountID(Auth::user()->id))
