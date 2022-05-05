@@ -2,12 +2,11 @@
 
 use App\Models\User;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -19,78 +18,55 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('avatar')->nullable();
-            $table->string('reg_no')->unique()->nullable();
             $table->string('name')->nullable();
             $table->string('user_name')->unique()->nullable();
-            $table->longText('bio')->nullable();
-            $table->longText('address')->nullable();
-            $table->string('phone')->unique()->nullable();
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->enum('role', ['admin', 'business', 'client'])
-                ->nullable();
-            $table->enum('role_id', ['1', '2', '3'])
-                ->nullable();
-            $table->unsignedBigInteger('created_by')->nullable();
-
+            $table->string('number')->unique()->nullable();
+            $table->string('password')->nullable();
+            $table->string('role')->nullable();
+            $table->string('role_id')->nullable();
+            $table->string('slug')->unique()->nullable();
             $table->string('account_id')->nullable();
-            $table->string('customer_id')->nullable();
-
-            $table->rememberToken();
-            $table->softDeletes();
+            $table->rememberToken()->nullable();
             $table->timestamps();
         });
 
-        $faker = Faker\Factory::create();
-
         User::create([
             'name' => 'admin',
-            'user_name' => 'Admin',
-            'bio' => $faker->text(50),
-            'address' => $faker->address,
-            'phone' => $faker->unique()->text(50),
+            'user_name' => 'admin',
             'email' => 'admin@email.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('password'),
+            'number' => mt_rand(100000000000, 999999999999),
+            'password' => bcrypt('password'),
             'role' => 'admin',
-            'role_id' => 1
+            'role_id' => '1',
+            'slug' => strtoupper(Str::random(20)),
         ]);
 
-        for ($business = 1; $business < 101; $business++) {
+        for ($business = 1; $business < 3; $business++) {
             User::create([
-                'reg_no' => strtoupper(Str::random(30)),
-                'name' => $faker->name,
-                'user_name' => Str::random(20),
-                'bio' => $faker->text(50),
-                'address' => $faker->address,
-                'phone' => $faker->unique()->phoneNumber,
+                'name' => 'business' . $business,
+                'user_name' => 'business' . $business,
                 'email' => 'business' . $business . '@email.com',
-                'email_verified_at' => now(),
-                'password' => Hash::make('password'),
+                'number' => mt_rand(100000000000, 999999999999),
+                'password' => bcrypt('password'),
                 'role' => 'business',
-                'role_id' => 2,
-                'created_by' => 1,
+                'role_id' => '2',
+                'slug' => strtoupper(Str::random(20)),
             ]);
         }
 
-        for ($business = 1; $business < 36; $business++) {
-            for ($client = 1; $client < 12; $client++) {
-                User::create([
-                    'reg_no' => strtoupper(Str::random(30)),
-                    'name' => $faker->name,
-                    'user_name' => Str::random(20),
-                    'bio' => $faker->text(50),
-                    'address' => $faker->address,
-                    'phone' => $faker->unique()->phoneNumber,
-                    'email' => 'client' . $client . mt_rand(1, 9999999) . '@email.com',
-                    'email_verified_at' => now(),
-                    'password' => Hash::make('password'),
-                    'role' => 'client',
-                    'role_id' => 3,
-                    'created_by' => $business,
-                ]);
-            }
+        for ($client = 1; $client < 3; $client++) {
+            User::create([
+                'name' => 'client' . $client,
+                'user_name' => 'client' . $client,
+                'email' => 'client' . $client . '@email.com',
+                'number' => mt_rand(100000000000, 999999999999),
+                'password' => bcrypt('password'),
+                'role' => 'client',
+                'role_id' => '3',
+                'slug' => strtoupper(Str::random(20)),
+            ]);
         }
     }
 
@@ -103,4 +79,4 @@ class CreateUsersTable extends Migration
     {
         Schema::dropIfExists('users');
     }
-}
+};

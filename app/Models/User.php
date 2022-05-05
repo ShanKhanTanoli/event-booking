@@ -2,24 +2,18 @@
 
 namespace App\Models;
 
-use App\Models\Reservation;
-use Laravel\Cashier\Billable;
-use App\Models\BusinessAbility;
-use App\Models\BusinessSetting;
-use App\Models\ClientReservation;
+use App\Models\Business\BusinessDetail;
+use App\Models\Site;
+use App\Models\Setting;
 use Laravel\Sanctum\HasApiTokens;
-use Rinvex\Subscriptions\Models\Plan;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Rinvex\Subscriptions\Traits\HasPlanSubscriptions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Rinvex\Subscriptions\Models\PlanSubscription;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, Billable, HasPlanSubscriptions;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -28,20 +22,15 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'avatar',
-        'reg_no',
         'name',
         'user_name',
-        'bio',
-        'address',
-        'phone',
         'email',
-        'email_verified_at',
+        'number',
         'password',
         'role',
         'role_id',
-        'created_by',
+        'slug',
         'account_id',
-        'customer_id',
     ];
 
     /**
@@ -52,6 +41,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password',
         'remember_token',
+        'role',
+        'role_id',
     ];
 
     /**
@@ -63,33 +54,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function reservations()
-    {
-        return $this->hasMany(Reservation::class);
-    }
-
-    public function bookings()
-    {
-        return $this->hasMany(ClientReservation::class);
-    }
-
-    public function plans()
-    {
-        return $this->hasMany(Plan::class);
-    }
-
-    public function abilities()
-    {
-        return $this->hasOne(BusinessAbility::class);
-    }
-
     public function settings()
     {
-        return $this->hasOne(BusinessSetting::class);
+        return $this->hasOne(Setting::class);
     }
 
-    public function subscriptions()
+    public function details()
     {
-        return $this->hasMany(PlanSubscription::class,'subscriber_id');
+        return $this->hasOne(BusinessDetail::class);
     }
 }

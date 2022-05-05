@@ -1,34 +1,16 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <!-- Page Wrapper -->
-    <div id="wrapper" style="height:100vh;">
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-            <!-- Main Content -->
-            <div id="content">
-                <!-- Begin Page Content -->
-                <div class="container-fluid mt-5">
-                    <!--Error Text -->
-                    <div class="text-center">
-                        <div class="error mx-auto">
-                            417
-                        </div>
-                        <p class="lead text-gray-800 mb-5">
-                            Something went wrong!
-                        </p>
-                        <p class="text-gray-500 mb-4">It looks like you found a glitch in the matrix...</p>
-                        <a href="{{ url('/') }}">← Back to Home</a>
-                        @if (Auth::user())
-                            <a href="{{ User::RedirectToDashboard() }}">←Go to Dashboard</a>
-                        @endif
-                    </div>
+    <div class="page-header align-items-start min-vh-100">
+        <div class="container my-auto">
+            <div class="row">
+                <div class="col-lg-12 m-auto text-center">
+                    <h1 class="display-1 text-bolder text-dark">Error 417</h1>
+                    <h2 class="text-dark">Erm. Something went wrong</h2>
+                    <p class="lead text-dark">We suggest you to go to the homepage while we solve this issue.</p>
+                    <a href="{{ route('login') }}" class="btn btn-outline-dark mt-4">Go to Homepage</a>
                 </div>
-                <!-- /.container-fluid -->
             </div>
-            <!-- End of Main Content -->
         </div>
-        <!-- End of Content Wrapper -->
     </div>
-    <!-- End of Page Wrapper -->
 @endsection
