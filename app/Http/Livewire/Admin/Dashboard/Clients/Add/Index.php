@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class Index extends Component
 {
-    public $name, $user_name, $number, $email, $password, $password_confirmation;
+    public $name, $user_name, $number, $email, $password, $password_confirmation, $parent_business_id;
 
     public function render()
     {
@@ -20,6 +20,11 @@ class Index extends Component
 
     public function Add()
     {
+        $msg = [
+            'parent_business_id.required' => 'Select parent business',
+            'parent_business_id.numeric' => 'Select parent business',
+        ];
+
         $validated = $this->validate([
             'name' => 'required|string|min:3',
             'user_name' => 'required|string|unique:users,user_name',
@@ -27,7 +32,8 @@ class Index extends Component
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|confirmed',
             'password_confirmation' => 'required|string',
-        ]);
+            'parent_business_id' => 'required|numeric',
+        ], $msg);
         try {
             $data = [
                 'name' => $validated['name'],
@@ -35,6 +41,7 @@ class Index extends Component
                 'email' => $validated['email'],
                 'number' => $validated['number'],
                 'password' => bcrypt($validated['password']),
+                'parent_business_id' => $validated['parent_business_id'],
                 'role_id' => 3,
                 'role' => 'client',
                 'slug' => strtoupper(Str::random(20)),

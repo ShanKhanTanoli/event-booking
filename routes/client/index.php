@@ -4,11 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Client\Dashboard\Index as ClientDashboard;
 
 
-/*Begin::Cards*/
-use App\Http\Livewire\Client\Dashboard\Cards\Index as Cards;
-use App\Http\Livewire\Client\Dashboard\Cards\View\Index as ViewCard;
-use App\Http\Livewire\Client\Dashboard\Cards\Recharge\Index as RechargeCard;
-/*End::Cards*/
+/*Begin::Events*/
+use App\Http\Livewire\Client\Dashboard\Events\Index as Events;
+use App\Http\Livewire\Client\Dashboard\Events\View\Index as ViewEvent;
+use App\Http\Livewire\Client\Dashboard\Events\Book\Index as BookEvent;
+/*End::Events*/
 
 /*Begin::Settings*/
 use App\Http\Livewire\Client\Dashboard\Settings\Profile\Index as EditProfile;
@@ -25,16 +25,17 @@ Route::middleware(['auth', 'client'])->prefix('Client')->group(function () {
 
     Route::get('Dashboard', ClientDashboard::class)->name('ClientDashboard');
 
-    /*Begin::Cards*/
-    Route::get('Cards', Cards::class)
-        ->name('ClientCards');
+    /*Begin::Events*/
+    Route::get('Events', Events::class)
+        ->name('ClientEvents');
 
-    Route::get('RechargeCard/{code}', RechargeCard::class)
-        ->name('ClientRechargeCard');
+    Route::get('ViewEvent/{slug}', ViewEvent::class)
+        ->name('ClientViewEvent');
 
-    Route::get('ViewCard/{code}', ViewCard::class)
-        ->name('ClientViewCard');
-    /*End::Cards*/
+    Route::get('BookEvent/{slug}', BookEvent::class)
+        ->name('ClientBookEvent');
+
+    /*End::Events*/
 
     /*Begin::Payments*/
     Route::get('Payments', Payments::class)->name('ClientPayments');

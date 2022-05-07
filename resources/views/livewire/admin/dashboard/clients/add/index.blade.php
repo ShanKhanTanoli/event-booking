@@ -1,9 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            @include('errors.alerts')
-        </div>
-    </div>
+    @include('errors.alerts')
     <div class="row">
         <div class="col-12">
             <div class="card my-4">
@@ -68,8 +64,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="input-group input-group-outline my-3">
                                         <input type="password" wire:model.defer='password'
@@ -96,9 +90,29 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
+                                    <div class="input-group input-group-static my-3">
+                                        <label for="parent_business_id">Joined Business</label>
+                                        <select wire:model.defer='parent_business_id'
+                                            class="form-control  @error('parent_business_id') is-invalid @enderror">
+                                            <option value="">Select Business</option>
+                                            @forelse (Business::Latest()->get() as $business)
+                                                <option value="{{ $business->id }}">
+                                                    Name : {{ $business->name }}
+                                                    Email : {{ $business->email }}
+                                                </option>
+                                            @empty
+                                                <option value=""></option>
+                                            @endforelse
+                                        </select>
+                                        @error('parent_business_id')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
                                     <button type="button" class="btn btn-primary" wire:attr='disabled' wire:click='Add'>
                                         <span wire:loading class="spinner-border spinner-border-sm" role="status"
                                             aria-hidden="true">

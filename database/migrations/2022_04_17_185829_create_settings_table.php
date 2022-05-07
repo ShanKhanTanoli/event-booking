@@ -27,11 +27,11 @@ return new class extends Migration
             $table->timestamps();
         });
         Setting::create([
-            'company_name' => 'Gift Card',
+            'company_name' => 'EventBooking',
             'company_email' => 'company@email.com',
             'company_phone' => '+00000000000',
             'company_address' => 'This is the Address',
-            'comission_percentage' => 10,
+            'comission_percentage' => 5,
         ]);
     }
 

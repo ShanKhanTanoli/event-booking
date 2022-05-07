@@ -34,21 +34,22 @@ class Business
         return false;
     }
 
-    public static function all()
+    public static function Latest()
     {
         return User::where('role_id', '2')
-            ->where('role', 'business');
+            ->where('role', 'business')
+            ->latest();
     }
 
     public static function LatestPaginate($quantity)
     {
-        return self::all()->latest()
+        return self::Latest()
             ->paginate($quantity);
     }
 
     public static function count()
     {
-        return self::all()->count();
+        return self::Latest()->count();
     }
 
     /*Begin::Settings*/

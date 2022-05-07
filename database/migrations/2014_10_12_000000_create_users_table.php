@@ -23,11 +23,15 @@ return new class extends Migration
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('number')->unique()->nullable();
+            $table->mediumText('address')->nullable();
             $table->string('password')->nullable();
             $table->string('role')->nullable();
             $table->string('role_id')->nullable();
             $table->string('slug')->unique()->nullable();
             $table->string('account_id')->nullable();
+
+            $table->unsignedBigInteger('parent_business_id')->nullable();
+
             $table->rememberToken()->nullable();
             $table->timestamps();
         });
@@ -37,18 +41,20 @@ return new class extends Migration
             'user_name' => 'admin',
             'email' => 'admin@email.com',
             'number' => mt_rand(100000000000, 999999999999),
+            'address' => 'This is the address',
             'password' => bcrypt('password'),
             'role' => 'admin',
             'role_id' => '1',
             'slug' => strtoupper(Str::random(20)),
         ]);
 
-        for ($business = 1; $business < 3; $business++) {
+        for ($business = 1; $business < 6; $business++) {
             User::create([
                 'name' => 'business' . $business,
                 'user_name' => 'business' . $business,
                 'email' => 'business' . $business . '@email.com',
                 'number' => mt_rand(100000000000, 999999999999),
+                'address' => 'This is the address',
                 'password' => bcrypt('password'),
                 'role' => 'business',
                 'role_id' => '2',
@@ -56,16 +62,18 @@ return new class extends Migration
             ]);
         }
 
-        for ($client = 1; $client < 3; $client++) {
+        for ($client = 1; $client < 6; $client++) {
             User::create([
                 'name' => 'client' . $client,
                 'user_name' => 'client' . $client,
                 'email' => 'client' . $client . '@email.com',
                 'number' => mt_rand(100000000000, 999999999999),
+                'address' => 'This is the address',
                 'password' => bcrypt('password'),
                 'role' => 'client',
                 'role_id' => '3',
                 'slug' => strtoupper(Str::random(20)),
+                'parent_business_id' => mt_rand(1, 6),
             ]);
         }
     }

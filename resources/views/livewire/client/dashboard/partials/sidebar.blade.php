@@ -24,17 +24,17 @@
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    Cards
+                    Events
                 </h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white @if (Request::path() == 'Client/Cards') active bg-gradient-primary @else '' @endif"
-                    href="{{ route('ClientCards') }}">
+                <a class="nav-link text-white @if (Request::path() == 'Client/Events') active bg-gradient-primary @else '' @endif"
+                    href="{{ route('ClientEvents') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-credit-card"></i>
+                        <i class="fas fa-calendar-alt"></i>
                     </div>
                     <span class="nav-link-text ms-1">
-                        Cards
+                        Events
                     </span>
                 </a>
             </li>

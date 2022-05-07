@@ -2,23 +2,24 @@
 
 namespace App\Helpers\Payments\Traits;
 
-use FrittenKeeZ\Vouchers\Models\ClientVoucher;
-
 trait AllPayments
 {
     public static function All()
     {
-        return ClientVoucher::latest();
+        // return ClientVoucher::latest();
+        return null;
     }
 
     public static function LatestPaginate($quantity)
     {
-        return self::All()
-            ->paginate($quantity);
+        // return self::All()
+        //     ->paginate($quantity);
+        return [];
     }
 
     public static function Count()
     {
-        return self::All()->count();
+        //return self::All()->count();
+        return 0;
     }
 }

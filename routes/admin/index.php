@@ -10,13 +10,12 @@ use App\Http\Livewire\Admin\Dashboard\Business\Edit\Index as EditBusiness;
 use App\Http\Livewire\Admin\Dashboard\Business\UpdatePassword\Index as UpdateBusinessPassword;
 /*End::Business*/
 
-/*Begin::Cards*/
-use App\Http\Livewire\Admin\Dashboard\Cards\Index as ViewAllCards;
-use App\Http\Livewire\Admin\Dashboard\Cards\Check\Index as RedeemCard;
-use App\Http\Livewire\Admin\Dashboard\Cards\View\Index as ViewCard;
-use App\Http\Livewire\Admin\Dashboard\Cards\Add\Index as AddCard;
-use App\Http\Livewire\Admin\Dashboard\Cards\Edit\Index as EditCard;
-/*End::Cards*/
+/*Begin::Events*/
+use App\Http\Livewire\Admin\Dashboard\Events\Index as AllEvents;
+use App\Http\Livewire\Admin\Dashboard\Events\View\Index as ViewEvent;
+use App\Http\Livewire\Admin\Dashboard\Events\Add\Index as AddEvent;
+use App\Http\Livewire\Admin\Dashboard\Events\Edit\Index as EditEvent;
+/*End::Events*/
 
 /*Begin::Clients*/
 use App\Http\Livewire\Admin\Dashboard\Clients\Index as ViewAllClients;
@@ -41,7 +40,7 @@ use App\Http\Livewire\Admin\Dashboard\Settings\Password\Index as EditPassword;
 
 /*Begin::Auth,Admin Group*/
 
-Route::middleware(['auth', 'admin'])->prefix('mapanel')->group(function () {
+Route::middleware(['auth', 'admin'])->prefix('Admin')->group(function () {
 
     Route::get('Dashboard', AdminDashboard::class)->name('AdminDashboard');
 
@@ -53,13 +52,12 @@ Route::middleware(['auth', 'admin'])->prefix('mapanel')->group(function () {
         ->name('AdminUpdateBusinessPassword');
     /*End::Business*/
 
-    /*Begin::Cards*/
-    Route::get('Cards', ViewAllCards::class)->name('AdminCards');
-    Route::get('RedeemCard', RedeemCard::class)->name('AdminRedeemCard');
-    Route::get('ViewCard/{code}', ViewCard::class)->name('AdminViewCard');
-    Route::get('AddCard', AddCard::class)->name('AdminAddCard');
-    Route::get('EditCard/{code}', EditCard::class)->name('AdminEditCard');
-    /*End::Cards*/
+    /*Begin::Events*/
+    Route::get('Events', AllEvents::class)->name('AdminEvents');
+    Route::get('ViewEvent/{slug}', ViewEvent::class)->name('AdminViewEvent');
+    Route::get('AddEvent', AddEvent::class)->name('AdminAddEvent');
+    Route::get('EditEvent/{slug}', EditEvent::class)->name('AdminEditEvent');
+    /*End::Events*/
 
     /*Begin::Clients*/
     Route::get('Clients', ViewAllClients::class)->name('AdminClients');

@@ -49,9 +49,23 @@
     <!--Begin::Main-->
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 
-        <!--Begin::Top Bar-->
-        @include('livewire.admin.dashboard.partials.top-bar')
-        <!--End::Top Bar-->
+        @if ($user->role_id == 1 && ($user->role = 'admin'))
+            <!--Begin::Top-Bar-->
+            @include('livewire.admin.dashboard.partials.top-bar')
+            <!--Begin::Top-Bar-->
+        @endif
+
+        @if ($user->role_id == 2 && ($user->role = 'business'))
+            <!--Begin::Top-Bar-->
+            @include('livewire.business.dashboard.partials.top-bar')
+            <!--Begin::Top-Bar-->
+        @endif
+
+        @if ($user->role_id == 3 && ($user->role = 'client'))
+            <!--Begin::Top-Bar-->
+            @include('livewire.client.dashboard.partials.top-bar')
+            <!--Begin::Top-Bar-->
+        @endif
 
         <!--Begin::Section-->
         @yield('content')

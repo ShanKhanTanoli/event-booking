@@ -18,7 +18,8 @@
                         <form>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="input-group input-group-outline my-3">
+                                    <div class="input-group input-group-static my-3">
+                                        <label for="name">Name</label>
                                         <input type="text" wire:model.defer='name' value="{{ old('name') }}"
                                             class="form-control  @error('name') is-invalid @enderror"
                                             placeholder="Enter Name">
@@ -30,7 +31,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="input-group input-group-outline my-3">
+                                    <div class="input-group input-group-static my-3">
+                                        <label for="user_name">User Name</label>
                                         <input type="text" wire:model.defer='user_name' value="{{ old('user_name') }}"
                                             class="form-control  @error('user_name') is-invalid @enderror"
                                             placeholder="Enter User Name">
@@ -41,10 +43,9 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
-                                    <div class="input-group input-group-outline my-3">
+                                    <div class="input-group input-group-static my-3">
+                                        <label for="number">Number</label>
                                         <input type="text" wire:model.defer='number' value="{{ old('number') }}"
                                             class="form-control  @error('number') is-invalid @enderror"
                                             placeholder="Enter Number">
@@ -56,7 +57,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="input-group input-group-outline my-3">
+                                    <div class="input-group input-group-static my-3">
+                                        <label for="email">Email</label>
                                         <input type="text" wire:model.defer='email' value="{{ old('email') }}"
                                             class="form-control  @error('email') is-invalid @enderror"
                                             placeholder="Enter Email">
@@ -67,9 +69,29 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
+                                    <div class="input-group input-group-static my-3">
+                                        <label for="parent_business_id">Joined Business</label>
+                                        <select wire:model.defer='parent_business_id'
+                                            class="form-control  @error('parent_business_id') is-invalid @enderror">
+                                            <option value="">Select Business</option>
+                                            @forelse (Business::Latest()->get() as $business)
+                                                <option value="{{ $business->id }}">
+                                                    Name : {{ $business->name }}
+                                                    Email : {{ $business->email }}
+                                                </option>
+                                            @empty
+                                                <option value=""></option>
+                                            @endforelse
+                                        </select>
+                                        @error('parent_business_id')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
                                     <button type="button" class="btn btn-primary" wire:attr='disabled'
                                         wire:click='Update'>
                                         <span wire:loading class="spinner-border spinner-border-sm" role="status"

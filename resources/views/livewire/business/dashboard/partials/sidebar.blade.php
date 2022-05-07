@@ -24,44 +24,33 @@
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    Cards
+                    Events
                 </h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white @if (Request::path() == 'Business/Cards') active bg-gradient-primary @else '' @endif"
-                    href="{{ route('BusinessCards') }}">
+                <a class="nav-link text-white @if (Request::path() == 'Business/Events') active bg-gradient-primary @else '' @endif"
+                    href="{{ route('BusinessEvents') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-credit-card"></i>
+                        <i class="fas fa-calendar-alt"></i>
                     </div>
                     <span class="nav-link-text ms-1">
-                        Cards
-                    </span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white @if (Request::path() == 'Business/RedeemCard') active bg-gradient-primary @else '' @endif"
-                    href="{{ route('BusinessRedeemCard') }}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-credit-card"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">
-                        Redeem Card
+                        Events
                     </span>
                 </a>
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    Store
+                    Payments
                 </h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white @if (Request::path() == 'Business/Store') active bg-gradient-primary @else '' @endif"
-                    href="{{ route('BusinessStore') }}">
+                <a class="nav-link text-white @if (Request::path() == 'Business/Payments') active bg-gradient-primary @else '' @endif"
+                    href="{{ route('BusinessPayments') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-shopping-bag"></i>
+                        <i class="fas fa-credit-card"></i>
                     </div>
                     <span class="nav-link-text ms-1">
-                        Store
+                        Payments
                     </span>
                 </a>
             </li>
@@ -85,8 +74,8 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Configure</h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white @if (Request::path() == 'Business/Settings/BusinessDetails' or Request::path() == 'Business/Settings/Store' or Request::path() == 'Business/Settings/Profile' or Request::path() == 'Business/Settings/Password') active bg-gradient-primary @else '' @endif"
-                    href="{{ route('BusinessEditDetails') }}">
+                <a class="nav-link text-white @if (Request::path() == 'Business/Settings/Profile' or Request::path() == 'Business/Settings/Password') active bg-gradient-primary @else '' @endif"
+                    href="{{ route('BusinessEditProfile') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-cog"></i>
                     </div>
