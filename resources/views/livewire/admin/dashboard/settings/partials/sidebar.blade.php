@@ -20,15 +20,6 @@
                 </a>
             </li>
             <li wire:ignore.self
-                class="nav-item @if (Request::path() == 'Admin/Settings/Currency') active bg-gradient-primary @else @endif">
-                <a wire:ignore.self
-                    class="nav-link text-dark d-flex @if (Request::path() == 'Admin/Settings/Currency') active text-white @else @endif"
-                    href="{{ route('AdminCurrency') }}">
-                    <i class="fas fa-coins me-2"></i>
-                    <span class="text-sm">Currency</span>
-                </a>
-            </li>
-            <li wire:ignore.self
                 class="nav-item @if (Request::path() == 'Admin/Settings/Stripe') active bg-gradient-primary @else @endif">
                 <a wire:ignore.self
                     class="nav-link text-dark d-flex @if (Request::path() == 'Admin/Settings/Stripe') active text-white @else @endif"

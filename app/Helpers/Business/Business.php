@@ -2,7 +2,7 @@
 
 namespace App\Helpers\Business;
 
-use App\Helpers\Business\Traits\BusinessCards;
+use App\Helpers\Business\Traits\BusinessClients;
 use App\Helpers\Business\Traits\BusinessStore;
 use App\Models\User;
 use App\Helpers\Currency\Currency;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Business
 {
-    use BusinessCards, BusinessStore;
+    use BusinessClients, BusinessStore;
 
     public static function Is()
     {

@@ -86,7 +86,7 @@
                 </h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white @if (Request::path() == 'Admin/Settings/General' or Request::path() == 'Admin/Settings/Profile' or Request::path() == 'Admin/Settings/Currency' or Request::path() == 'Admin/Settings/Stripe' or Request::path() == 'Admin/Settings/Password') active bg-gradient-primary @else '' @endif"
+                <a class="nav-link text-white @if (Request::path() == 'Admin/Settings/General' or Request::path() == 'Admin/Settings/Profile' or Request::path() == 'Admin/Settings/Currency' or Request::path() == 'Admin/Settings/Language' or Request::path() == 'Admin/Settings/Stripe' or Request::path() == 'Admin/Settings/Password') active bg-gradient-primary @else '' @endif"
                     href="{{ route('AdminSettings') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-cog"></i>

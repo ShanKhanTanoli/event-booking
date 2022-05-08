@@ -79,11 +79,52 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group input-group-static my-3">
+                                                <label for="language_id">Select Language</label>
+                                                <select wire:model.defer='language_id'
+                                                    class="form-control  @error('language_id') is-invalid @enderror">
+                                                    <option value="">Select Language</option>
+                                                    @forelse (Language::all() as $language)
+                                                        <option value="{{ $language->id }}">
+                                                            {{ $language->name }}
+                                                        </option>
+                                                    @empty
+                                                        <option value="">No language found</option>
+                                                    @endforelse
+                                                </select>
+                                                @error('language_id')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group input-group-static my-3">
+                                                <label for="currency_id">Select Currency</label>
+                                                <select wire:model.defer='currency_id'
+                                                    class="form-control  @error('currency_id') is-invalid @enderror">
+                                                    <option value="">Select Currency</option>
+                                                    @forelse (Currency::all() as $currency)
+                                                        <option value="{{ $currency->id }}">
+                                                            {{ $currency->name }}
+                                                        </option>
+                                                    @empty
+                                                        <option value="">No currency found</option>
+                                                    @endforelse
+                                                </select>
+                                                @error('currency_id')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
                                         <div class="col-md-12">
                                             <div class="input-group input-group-static my-3">
                                                 <label for="company_address">Company Address</label>
                                                 <textarea wire:model.defer='company_address' class="form-control  @error('company_address') is-invalid @enderror"
-                                                    cols="30" rows="10"
                                                     placeholder="Enter Company Address">{{ old('company_address') }}</textarea>
                                                 @error('company_address')
                                                     <span class="invalid-feedback" role="alert">

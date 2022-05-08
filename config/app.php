@@ -201,6 +201,7 @@ return [
         'Stripe' => App\Helpers\Stripe\Stripe::class,
         'Business' => App\Helpers\Business\Business::class,
         'Currency' => App\Helpers\Currency\Currency::class,
+        'Language' => App\Helpers\Language\Language::class,
         'Payments' => App\Helpers\Payments\Payments::class,
 
     ])->toArray(),

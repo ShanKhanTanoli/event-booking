@@ -17,6 +17,7 @@ class Setting extends Model
         'company_phone',
         'company_address',
         'comission_percentage',
+        'language_id',
         'currency_id'
     ];
 

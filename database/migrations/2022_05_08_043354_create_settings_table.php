@@ -24,14 +24,32 @@ return new class extends Migration
             $table->mediumText('company_address')->nullable();
 
             $table->string('comission_percentage')->nullable();
+
+            //Language Foreign Key
+            $table->unsignedBigInteger('language_id')->nullable();
+            $table->foreign('language_id')->references('id')
+                ->on('languages')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            //Currency Foreign Key
+            $table->unsignedBigInteger('currency_id')->nullable();
+            $table->foreign('currency_id')->references('id')
+                ->on('currencies')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
             $table->timestamps();
         });
+
         Setting::create([
             'company_name' => 'EventBooking',
             'company_email' => 'company@email.com',
             'company_phone' => '+00000000000',
             'company_address' => 'This is the Address',
             'comission_percentage' => 5,
+            'language_id' => 2,
+            'currency_id' => 2,
         ]);
     }
 
