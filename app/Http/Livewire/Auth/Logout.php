@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\App;
 
 class Logout extends Component
 {
+    public function mount($lang = "en")
+    {
+        App::getLocale($lang);
+    }
+
     public function logout()
     {
         auth()->logout();

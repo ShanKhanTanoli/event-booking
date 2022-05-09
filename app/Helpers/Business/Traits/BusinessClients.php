@@ -24,5 +24,16 @@ trait BusinessClients
     {
         return self::Clients($business)->count();
     }
+
+    public static function FindClient($business, $client)
+    {
+        return self::Clients($business)->find($client);
+    }
+
+    public static function FindClientBySlug($business, $slug)
+    {
+        return self::Clients($business)->where('slug', $slug)->first();
+    }
+
     /*End::Clients*/
 }

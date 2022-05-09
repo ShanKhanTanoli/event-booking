@@ -3,12 +3,18 @@
 namespace App\Http\Livewire\Client\Dashboard\Settings\Password;
 
 use Exception;
+use Illuminate\Support\Facades\App;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
 {
     public $password, $password_confirmation;
+
+    public function mount($lang = "en")
+    {
+        App::setLocale($lang);
+    }
 
     public function render()
     {
@@ -27,7 +33,7 @@ class Index extends Component
             Auth::user()->update(['password' => bcrypt($validated['password'])]);
             session()->flash('success', 'Password Updated Successfully');
             $this->reset(['password', 'password_confirmation']);
-            return redirect(route('ClientEditPassword'));
+            return redirect(route('ClientEditPassword', App::getLocale()));
         } catch (Exception $e) {
             return session()->flash('error', $e->getMessage());
         }

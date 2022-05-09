@@ -8,7 +8,7 @@
                         <i class="fas fa-calendar-alt opacity-10"></i>
                     </div>
                     <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">Events</p>
+                        <p class="text-sm mb-0 text-capitalize">{{ trans('client.events') }}</p>
                         <h4 class="mb-0">
                             0
                         </h4>
@@ -30,7 +30,7 @@
                         <i class="fas fa-money-bill opacity-10"></i>
                     </div>
                     <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">Payments</p>
+                        <p class="text-sm mb-0 text-capitalize">{{ trans('client.payments') }}</p>
                         <h4 class="mb-0">
                             {{ Client::PaymentsCount(Auth::user()->id) }}
                         </h4>

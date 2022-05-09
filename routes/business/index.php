@@ -4,6 +4,13 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Livewire\Business\Dashboard\Index as BusinessDashboard;
 
+/*Begin::Clients*/
+use App\Http\Livewire\Business\Dashboard\Clients\Index as Clients;
+use App\Http\Livewire\Business\Dashboard\Clients\Add\Index as AddClient;
+use App\Http\Livewire\Business\Dashboard\Clients\Edit\Index as EditClient;
+use App\Http\Livewire\Business\Dashboard\Clients\UpdatePassword\Index as UpdateClientPassword;
+/*End::Clients*/
+
 /*Begin::Events*/
 use App\Http\Livewire\Business\Dashboard\Events\Index as Events;
 use App\Http\Livewire\Business\Dashboard\Events\View\Index as ViewEvent;
@@ -35,6 +42,20 @@ use App\Http\Livewire\Business\Dashboard\Settings\Password\Index as EditPassword
 Route::middleware(['auth', 'business'])->prefix('Business')->group(function () {
 
     Route::get('Dashboard/{lang?}', BusinessDashboard::class)->name('BusinessDashboard');
+
+    /*Begin::Clients*/
+    Route::get('Clients/{lang?}', Clients::class)
+        ->name('BusinessClients');
+
+    Route::get('AddClient/{lang?}', AddClient::class)
+        ->name('BusinessAddClient');
+
+    Route::get('EditClient/{slug}/{lang?}', EditClient::class)
+        ->name('BusinessEditClient');
+
+    Route::get('UpdateClient/{slug}/Password/{lang?}', UpdateClientPassword::class)
+        ->name('BusinessUpdateClientPassword');
+    /*End::Clients*/
 
     /*Begin::Events*/
     Route::get('Events/{lang?}', Events::class)

@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire\Client\Dashboard\Payments;
 
-use App\Helpers\Card\Card;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Helpers\Client\Client;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
@@ -14,6 +14,12 @@ class Index extends Component
 
     protected $paginationTheme = 'bootstrap';
 
+    public function mount($lang = "en")
+    {
+        App::setLocale($lang);
+    }
+    
+
     public function render()
     {
         $payments = Client::LatestPaymentsPaginate(Auth::user()->id, 10);
@@ -21,15 +27,5 @@ class Index extends Component
             ->with(['payments' => $payments])
             ->extends('layouts.dashboard')
             ->section('content');
-    }
-
-    public function ViewCard($voucher_id)
-    {
-        if ($card = Card::FindById($voucher_id)) {
-            return redirect(route('ClientViewCard', $card->code));
-        } else {
-            session()->flash('error', 'No such card found');
-            return redirect(route('ClientPayments'));
-        }
     }
 }

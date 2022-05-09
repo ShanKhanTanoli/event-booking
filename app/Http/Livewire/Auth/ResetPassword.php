@@ -21,8 +21,10 @@ class ResetPassword extends Component
         'password' => 'required|min:6|same:passwordConfirmation'
     ];
 
-    public function mount($id)
+    public function mount($lang = "en", $id)
     {
+        App::getLocale($lang);
+
         if ($existingUser = User::find($id)) {
             $this->email = $existingUser->email;
             $this->urlID = intval($existingUser->id);

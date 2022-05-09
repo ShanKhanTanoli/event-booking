@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Business\Dashboard\Settings\Password;
 
 use Exception;
+use Illuminate\Support\Facades\App;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,7 +28,7 @@ class Index extends Component
             Auth::user()->update(['password' => bcrypt($validated['password'])]);
             session()->flash('success', 'Password Updated Successfully');
             $this->reset(['password', 'password_confirmation']);
-            return redirect(route('BusinessEditPassword'));
+            return redirect(route('BusinessEditPassword',App::getLocale()));
         } catch (Exception $e) {
             return session()->flash('error', $e->getMessage());
         }

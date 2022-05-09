@@ -2,12 +2,13 @@
 
 namespace App\Http\Livewire\Auth;
 
-use App\Helpers\Redirect;
-use Livewire\Component;
 use App\Models\User;
+use Livewire\Component;
+use App\Helpers\Redirect;
 
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\App;
 use App\Notifications\ResetPassword;
+use Illuminate\Notifications\Notifiable;
 
 class ForgotPassword extends Component
 {
@@ -19,8 +20,9 @@ class ForgotPassword extends Component
         'email' => 'required|email',
     ];
 
-    public function mount()
+    public function mount($lang = "en")
     {
+        App::getLocale($lang);
         if (auth()->user()) {
             redirect(Redirect::ToDashboard());
         }

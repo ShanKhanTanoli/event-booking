@@ -18,13 +18,13 @@
                         <i class="fas fa-tachometer-alt"></i>
                     </div>
                     <span class="nav-link-text ms-1">
-                        Dashboard
+                        {{ trans('client.dashboard') }}
                     </span>
                 </a>
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    Events
+                    {{ trans('client.payments') }}
                 </h6>
             </li>
             <li class="nav-item">
@@ -34,13 +34,13 @@
                         <i class="fas fa-calendar-alt"></i>
                     </div>
                     <span class="nav-link-text ms-1">
-                        Events
+                        {{ trans('client.payments') }}
                     </span>
                 </a>
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    Payments
+                    {{ trans('client.payments') }}
                 </h6>
             </li>
             <li class="nav-item">
@@ -50,12 +50,13 @@
                         <i class="fas fa-money-bill"></i>
                     </div>
                     <span class="nav-link-text ms-1">
-                        Payments
+                        {{ trans('client.payments') }}
                     </span>
                 </a>
             </li>
             <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Configure</h6>
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
+                    {{ trans('client.settings') }}</h6>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white @if (Request::path() == 'Client/Settings/Profile/' . App::getLocale() or Request::path() == 'Client/Settings/Password/' . App::getLocale()) active bg-gradient-primary @else '' @endif"
@@ -63,7 +64,9 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-cog"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Settings</span>
+                    <span class="nav-link-text ms-1">
+                        {{ trans('client.settings') }}
+                    </span>
                 </a>
             </li>
             <hr>

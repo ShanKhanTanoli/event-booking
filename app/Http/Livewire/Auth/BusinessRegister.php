@@ -6,6 +6,7 @@ use App\Models\User;
 use Livewire\Component;
 use App\Helpers\Redirect;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 
 class BusinessRegister extends Component
@@ -22,8 +23,9 @@ class BusinessRegister extends Component
         'password_confirmation' => 'required|min:6'
     ];
 
-    public function mount()
+    public function mount($lang = "en")
     {
+        App::getLocale($lang);
         if (auth()->user()) {
             redirect(Redirect::ToDashboard());
         }

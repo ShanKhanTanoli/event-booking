@@ -4,14 +4,16 @@ namespace App\Http\Livewire\Client\Dashboard\Settings\Profile;
 
 use Exception;
 use Livewire\Component;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
 {
     public $name, $user_name, $email, $number;
 
-    public function mount()
+    public function mount($lang = "en")
     {
+        App::setLocale($lang);
         $this->name = Auth::user()->name;
         $this->user_name = Auth::user()->user_name;
         $this->email = Auth::user()->email;
@@ -35,7 +37,7 @@ class Index extends Component
         try {
             Auth::user()->update($validated);
             session()->flash('success', 'Profile Updated Successfully');
-            return redirect(route('ClientEditProfile'));
+            return redirect(route('ClientEditProfile', App::getLocale()));
         } catch (Exception $e) {
             return session()->flash('error', $e->getMessage());
         }

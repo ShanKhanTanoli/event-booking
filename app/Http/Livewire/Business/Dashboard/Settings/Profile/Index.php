@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Business\Dashboard\Settings\Profile;
 
 use Exception;
 use Livewire\Component;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
@@ -37,7 +38,7 @@ class Index extends Component
         try {
             Auth::user()->update($validated);
             session()->flash('success', 'Profile Updated Successfully');
-            return redirect(route('BusinessEditProfile'));
+            return redirect(route('BusinessEditProfile', App::getLocale()));
         } catch (Exception $e) {
             return session()->flash('error', $e->getMessage());
         }

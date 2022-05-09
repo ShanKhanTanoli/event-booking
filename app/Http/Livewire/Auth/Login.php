@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Auth;
 use App\Helpers\Redirect;
 use Livewire\Component;
 use App\Models\User;
+use Illuminate\Support\Facades\App;
 
 class Login extends Component
 {
@@ -17,11 +18,11 @@ class Login extends Component
         'password' => 'required',
     ];
 
-    public function mount() {
+    public function mount($lang = "en") {
+        App::getLocale($lang);
         if(auth()->user()){
             redirect(Redirect::ToDashboard());
         }
-        //$this->fill(['email' => 'shankhantanoli1@gmail.com', 'password' => 'secret']);
     }
 
     public function login() {
