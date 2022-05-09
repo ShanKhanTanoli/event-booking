@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\Redirect;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 
@@ -27,13 +28,13 @@ Route::get('debug', function () {
 });
 
 
-Route::get('/home', function () {
-    return redirect(route('AdminDashboard'));
+Route::get('/home/{lang?}', function () {
+    return redirect(Redirect::ToDashboard());
 })->name('home');
 
 
-Route::get('/', function () {
-    return redirect(route('login'));
+Route::get('/{lang?}', function () {
+    return redirect(Redirect::ToDashboard());
 })->name('main');
 
 /*Begin::Admin Routes*/

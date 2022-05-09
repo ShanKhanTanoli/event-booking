@@ -4,8 +4,9 @@ namespace App\Http\Livewire\Auth;
 
 use App\Models\User;
 
-use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Hash;
 
 class ResetPassword extends Component
 {
@@ -39,7 +40,7 @@ class ResetPassword extends Component
                 'password' => Hash::make($this->password)
             ]);
             session()->flash('success', 'Password changed successfully');
-            return redirect(route('login'));
+            return redirect(route('login', App::getLocale()));
         } else {
             return session()->flash('error', 'Something went wrong');
         }

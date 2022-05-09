@@ -1,7 +1,9 @@
 <div class="container-fluid my-3 py-3">
     <div class="row mb-5">
         <!--Begin::Sidebar-->
-        @include('livewire.business.dashboard.settings.partials.sidebar')
+        @include(
+            'livewire.business.dashboard.settings.partials.sidebar'
+        )
         <!--Begin::Sidebar-->
         <div class="col-lg-9 mt-lg-0">
             <!--Begin::Alerts-->
@@ -24,8 +26,7 @@
                                         <div class="col-md-6">
                                             <div class="input-group input-group-static my-3">
                                                 <label for="name">Name</label>
-                                                <input type="text" wire:model.defer='name'
-                                                    value="{{ old('name') }}"
+                                                <input type="text" wire:model.defer='name' value="{{ old('name') }}"
                                                     class="form-control  @error('name') is-invalid @enderror"
                                                     placeholder="Enter Name">
                                                 @error('name')
@@ -71,6 +72,18 @@
                                                     class="form-control  @error('number') is-invalid @enderror"
                                                     placeholder="Enter Number">
                                                 @error('number')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="input-group input-group-static my-3">
+                                                <label for="address">Address</label>
+                                                <textarea wire:model.defer='address' class="form-control  @error('address') is-invalid @enderror"
+                                                    placeholder="Enter Address">{{ old('address') }}</textarea>
+                                                @error('address')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>

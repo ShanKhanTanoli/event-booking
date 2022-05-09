@@ -3,13 +3,14 @@
 namespace App\Http\Livewire\Auth;
 
 use Livewire\Component;
+use Illuminate\Support\Facades\App;
 
 class Logout extends Component
 {
     public function logout()
     {
         auth()->logout();
-        return redirect(route('login'));
+        return redirect(route('login', App::getLocale()));
     }
 
     public function render()

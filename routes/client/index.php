@@ -23,27 +23,27 @@ use App\Http\Livewire\Client\Dashboard\Payments\Index as Payments;
 
 Route::middleware(['auth', 'client'])->prefix('Client')->group(function () {
 
-    Route::get('Dashboard', ClientDashboard::class)->name('ClientDashboard');
+    Route::get('Dashboard/{lang?}', ClientDashboard::class)->name('ClientDashboard');
 
     /*Begin::Events*/
-    Route::get('Events', Events::class)
+    Route::get('Events/{lang?}', Events::class)
         ->name('ClientEvents');
 
-    Route::get('ViewEvent/{slug}', ViewEvent::class)
+    Route::get('ViewEvent/{slug}/{lang?}', ViewEvent::class)
         ->name('ClientViewEvent');
 
-    Route::get('BookEvent/{slug}', BookEvent::class)
+    Route::get('BookEvent/{slug}/{lang?}', BookEvent::class)
         ->name('ClientBookEvent');
 
     /*End::Events*/
 
     /*Begin::Payments*/
-    Route::get('Payments', Payments::class)->name('ClientPayments');
+    Route::get('Payments/{lang?}', Payments::class)->name('ClientPayments');
     /*End::Payments*/
 
     /*Begin::Settings*/
-    Route::get('Settings/Profile', EditProfile::class)->name('ClientEditProfile');
-    Route::get('Settings/Password', EditPassword::class)->name('ClientEditPassword');
+    Route::get('Settings/Profile/{lang?}', EditProfile::class)->name('ClientEditProfile');
+    Route::get('Settings/Password/{lang?}', EditPassword::class)->name('ClientEditPassword');
     /*End::Settings*/
 });
 /*End::Auth,Client Group*/

@@ -34,6 +34,17 @@ class Business
         return false;
     }
 
+    public static function FindByUserName($user_name)
+    {
+        if ($user = User::where('user_name',$user_name)->first()) {
+            if ($user->role_id == 2 && $user->role == "business") {
+                return $user;
+            }
+            return false;
+        }
+        return false;
+    }
+
     public static function Latest()
     {
         return User::where('role_id', '2')

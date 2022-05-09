@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
 {
-    public $name, $user_name, $email, $number;
+    public $name, $user_name, $email, $number, $address;
 
     public function mount()
     {
@@ -16,6 +16,7 @@ class Index extends Component
         $this->user_name = Auth::user()->user_name;
         $this->email = Auth::user()->email;
         $this->number = Auth::user()->number;
+        $this->address = Auth::user()->address;
     }
 
     public function render()
@@ -31,6 +32,7 @@ class Index extends Component
             'user_name' => 'required|string|unique:users,user_name,' . Auth::user()->id,
             'email' => 'required|email|unique:users,email,' . Auth::user()->id,
             'number' => 'required|numeric|unique:users,number,' . Auth::user()->id,
+            'address' => 'required|string',
         ]);
         try {
             Auth::user()->update($validated);

@@ -24,11 +24,5 @@ trait BusinessClients
     {
         return self::Clients($business)->count();
     }
-
-    public static function FindCardById($business, $id)
-    {
-        return self::Clients($business)
-            ->find($id);
-    }
     /*End::Clients*/
 }

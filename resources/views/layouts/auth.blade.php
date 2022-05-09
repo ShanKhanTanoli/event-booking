@@ -35,7 +35,8 @@
                 <nav
                     class="navbar navbar-expand-lg blur border-radius-xl top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
                     <div class="container-fluid ps-2 pe-0">
-                        <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="{{ route('main') }}">
+                        <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 "
+                            href="{{ url('/', App::getLocale()) }}">
                             {{ Setting::Logo() }}
                         </a>
                         <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse"
@@ -47,27 +48,27 @@
                                 <span class="navbar-toggler-bar bar3"></span>
                             </span>
                         </button>
-                        
-                            <div class="collapse navbar-collapse" id="navigation">
-                                <ul class="navbar-nav mx-auto">
-                                    @if (Request::path() != 'login')
+
+                        <div class="collapse navbar-collapse" id="navigation">
+                            <ul class="navbar-nav mx-auto">
+                                @if (Request::path() != 'login')
                                     <li class="nav-item">
-                                        <a class="nav-link me-2" href="{{ route('login') }}">
+                                        <a class="nav-link me-2" href="{{ route('login', App::getLocale()) }}">
                                             <i class="fas fa-key opacity-6 text-dark me-1"></i>
                                             Login
                                         </a>
                                     </li>
-                                    @endif
-                                    @if (Auth::user())
+                                @endif
+                                @if (Auth::user())
                                     <li class="nav-item">
-                                        <a class="nav-link me-2" href="{{ route('login') }}">
+                                        <a class="nav-link me-2" href="{{ route('login', App::getLocale()) }}">
                                             <i class="fas fa-tachometer-alt opacity-6 text-dark me-1"></i>
                                             Dashboard
                                         </a>
                                     </li>
-                                    @endif
-                                </ul>
-                            </div>
+                                @endif
+                            </ul>
+                        </div>
                     </div>
                 </nav>
                 <!-- End Navbar -->

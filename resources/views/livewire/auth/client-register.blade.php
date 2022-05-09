@@ -1,20 +1,61 @@
-<main class="main-content  mt-0">
+<main class="main-content mt-0 ps">
     <section>
         <div class="page-header min-vh-100">
             <div class="container">
+                <!--Begin::Alerts-->
                 <div class="row">
                     <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto ">
                         @include('errors.alerts')
                     </div>
                 </div>
+                <!--End::Alerts-->
                 <div class="row">
-                    <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto ">
+                    <!--Begin::Business Details-->
+                    <div
+                        class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
                         <div class="card card-plain">
                             <div class="card-header text-center">
-                                <h4 class="font-weight-bolder">Register as Client</h4>
+                                <h4 class="font-weight-bolder text-primary">Business Details</h4>
+                            </div>
+                            <div class="card-body p-4">
+                                <ul class="list-group">
+                                    <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                        <strong class="text-dark">Full Name:</strong> &nbsp;
+                                        {!! $business->name !!}
+                                    </li>
+                                    <li class="list-group-item border-0 ps-0 text-sm">
+                                        <strong class="text-dark">User Name:</strong>
+                                        &nbsp;
+                                        {!! $business->user_name !!}
+                                    </li>
+                                    <li class="list-group-item border-0 ps-0 text-sm">
+                                        <strong class="text-dark">Mobile:</strong>
+                                        &nbsp; {!! $business->number !!}
+                                    </li>
+                                    <li class="list-group-item border-0 ps-0 text-sm">
+                                        <strong class="text-dark">Email:</strong>
+                                        &nbsp; {!! $business->email !!}
+                                    </li>
+                                    <li class="list-group-item border-0 ps-0 text-sm">
+                                        <strong class="text-dark">Address</strong>
+                                        <p class="text-sm mt-2">
+                                            {!! $business->address !!}
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End::Business Details-->
+
+                    <!--Begin::Client Register-->
+                    <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
+                        <div class="card card-plain">
+                            <div class="card-header text-center">
+                                <h4 class="font-weight-bolder text-primary">Register as Client</h4>
                             </div>
                             <div class="card-body">
-                                <form role="form">
+                                <form role="form" wire:submit.prevent='register()'>
                                     <div class="input-group input-group-outline mb-3">
                                         <input id="name" type="name" wire:model.defer="name"
                                             class="form-control @error('name') is-invalid @enderror" name="name"
@@ -58,8 +99,8 @@
                                         @enderror
                                     </div>
                                     <div class="text-center">
-                                        <button wire:click='register()' type="button"
-                                            class="btn btn-lg bg-gradient-dark btn-lg w-100 mt-4 mb-0">
+                                        <button type="submit"
+                                            class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">
                                             <span wire:loading class="spinner-border spinner-border-sm" role="status"
                                                 aria-hidden="true"></span>
                                             Register
@@ -69,13 +110,15 @@
                             </div>
                             <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                 <p class="mb-2 text-sm mx-auto">
-                                    <a href="{{ route('login') }}" class="text-dark text-gradient font-weight-bold">
+                                    <a href="{{ route('login') }}"
+                                        class="text-primary text-gradient font-weight-bold">
                                         Already have an Account ? Login here
                                     </a>
                                 </p>
                             </div>
                         </div>
                     </div>
+                    <!--End::Client Register-->
                 </div>
             </div>
         </div>

@@ -21,9 +21,12 @@ use App\Http\Livewire\Business\Dashboard\Payments\Edit\Index as EditPayment;
 use App\Http\Livewire\Business\Dashboard\StripeConnect\Index as StripeConnect;
 /*End::StripeConnect*/
 
+/*Begin::BusinessDetails*/
+use App\Http\Livewire\Business\Dashboard\BusinessDetails\Index as BusinessDetails;
+/*End::BusinessDetails*/
+
 /*Begin::Settings*/
 use App\Http\Livewire\Business\Dashboard\Settings\Profile\Index as EditProfile;
-use App\Http\Livewire\Business\Dashboard\Settings\Store\Index as EditStore;
 use App\Http\Livewire\Business\Dashboard\Settings\Password\Index as EditPassword;
 /*End::Settings*/
 
@@ -31,36 +34,40 @@ use App\Http\Livewire\Business\Dashboard\Settings\Password\Index as EditPassword
 
 Route::middleware(['auth', 'business'])->prefix('Business')->group(function () {
 
-    Route::get('Dashboard', BusinessDashboard::class)->name('BusinessDashboard');
+    Route::get('Dashboard/{lang?}', BusinessDashboard::class)->name('BusinessDashboard');
 
     /*Begin::Events*/
-    Route::get('Events', Events::class)
+    Route::get('Events/{lang?}', Events::class)
         ->name('BusinessEvents');
 
-    Route::get('ViewEvent/{slug}', ViewEvent::class)
+    Route::get('ViewEvent/{slug}/{lang?}', ViewEvent::class)
         ->name('BusinessViewEvent');
 
-    Route::get('AddEvent', AddEvent::class)
+    Route::get('AddEvent/{lang?}', AddEvent::class)
         ->name('BusinessAddEvent');
 
-    Route::get('EditEvent/{slug}', EditEvent::class)
+    Route::get('EditEvent/{slug}/{lang?}', EditEvent::class)
         ->name('BusinessEditEvent');
     /*End::Events*/
 
+    /*Begin::BusinessDetails*/
+    Route::get('BusinessDetails/{lang?}', BusinessDetails::class)->name('BusinessDetails');
+    /*End::BusinessDetails*/
+
     /*Begin::Payments*/
-    Route::get('Payments', Payments::class)->name('BusinessPayments');
-    Route::get('AddPayment', AddPayment::class)->name('BusinessAddPayment');
-    Route::get('EditPayment/{id}', EditPayment::class)->name('BusinessEditPayment');
+    Route::get('Payments/{lang?}', Payments::class)->name('BusinessPayments');
+    Route::get('AddPayment/{lang?}', AddPayment::class)->name('BusinessAddPayment');
+    Route::get('EditPayment/{id}/{lang?}', EditPayment::class)->name('BusinessEditPayment');
     /*End::Payments*/
 
     /*Begin::StripeConnect*/
-    Route::get('StripeConnect', StripeConnect::class)->name('BusinessStripeConnect');
+    Route::get('StripeConnect/{lang?}', StripeConnect::class)->name('BusinessStripeConnect');
     /*End::StripeConnect*/
 
+
     /*Begin::Settings*/
-    Route::get('Settings/Profile', EditProfile::class)->name('BusinessEditProfile');
-    Route::get('Settings/Store', EditStore::class)->name('BusinessEditStore');
-    Route::get('Settings/Password', EditPassword::class)->name('BusinessEditPassword');
+    Route::get('Settings/Profile/{lang?}', EditProfile::class)->name('BusinessEditProfile');
+    Route::get('Settings/Password/{lang?}', EditPassword::class)->name('BusinessEditPassword');
     /*End::Settings*/
 });
 /*End::Auth,Business Group*/

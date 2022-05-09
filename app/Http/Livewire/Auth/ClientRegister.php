@@ -2,14 +2,18 @@
 
 namespace App\Http\Livewire\Auth;
 
+use App\Helpers\Business\Business;
 use App\Models\User;
 use Livewire\Component;
 use App\Helpers\Redirect;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
 class ClientRegister extends Component
 {
+
+    public $business;
     public $name;
     public $email;
     public $password;
@@ -22,8 +26,19 @@ class ClientRegister extends Component
         'password_confirmation' => 'required|min:6'
     ];
 
-    public function mount()
+    public function mount($lang = "en", $user_name = null)
     {
+        //Set language
+        App::setLocale($lang);
+
+        //If user exists
+        if ($user_name) {
+            if ($business = Business::FindByUserName($user_name)) {
+                $this->business = $business;
+            } else abort(404);
+        } else abort(404);
+
+        //If user is logged in
         if (auth()->user()) {
             redirect(Redirect::ToDashboard());
         }
@@ -40,10 +55,10 @@ class ClientRegister extends Component
             'role_id' => 3,
             'password' => Hash::make($this->password),
             'slug' => Str::random(20),
+            'parent_business_id' => $this->business->id,
         ]);
 
         auth()->login($user);
-
         return redirect(Redirect::ToDashboard());
     }
 

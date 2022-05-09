@@ -2,7 +2,7 @@
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href="{{ route('ClientDashboard') }}">
+        <a class="navbar-brand m-0" href="{{ route('ClientDashboard', App::getLocale()) }}">
             <span class="ms-1 font-weight-bold text-white">
                 {{ Setting::Logo() }}
             </span>
@@ -12,8 +12,8 @@
     <div class="collapse navbar-collapse  w-auto h-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link text-white @if (Request::path() == 'Client/Dashboard') ? active bg-gradient-primary : '' @endif"
-                    href="{{ route('ClientDashboard') }}">
+                <a class="nav-link text-white @if (Request::path() == 'Client/Dashboard/' . App::getLocale()) ? active bg-gradient-primary : '' @endif"
+                    href="{{ route('ClientDashboard', App::getLocale()) }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-tachometer-alt"></i>
                     </div>
@@ -28,8 +28,8 @@
                 </h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white @if (Request::path() == 'Client/Events') active bg-gradient-primary @else '' @endif"
-                    href="{{ route('ClientEvents') }}">
+                <a class="nav-link text-white @if (Request::path() == 'Client/Events/' . App::getLocale()) active bg-gradient-primary @else '' @endif"
+                    href="{{ route('ClientEvents', App::getLocale()) }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-calendar-alt"></i>
                     </div>
@@ -44,8 +44,8 @@
                 </h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white @if (Request::path() == 'Client/Payments') active bg-gradient-primary @else '' @endif"
-                    href="{{ route('ClientPayments') }}">
+                <a class="nav-link text-white @if (Request::path() == 'Client/Payments/' . App::getLocale()) active bg-gradient-primary @else '' @endif"
+                    href="{{ route('ClientPayments', App::getLocale()) }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-money-bill"></i>
                     </div>
@@ -58,8 +58,8 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Configure</h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white @if (Request::path() == 'Client/Settings/Profile' or Request::path() == 'Client/Settings/Password') active bg-gradient-primary @else '' @endif"
-                    href="{{ route('ClientEditProfile') }}">
+                <a class="nav-link text-white @if (Request::path() == 'Client/Settings/Profile/' . App::getLocale() or Request::path() == 'Client/Settings/Password/' . App::getLocale()) active bg-gradient-primary @else '' @endif"
+                    href="{{ route('ClientEditProfile', App::getLocale()) }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-cog"></i>
                     </div>

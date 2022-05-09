@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class Redirect
@@ -10,13 +11,12 @@ class Redirect
     {
         if ($user = Auth::user()) {
             if ($user->role_id == 1 && $user->role == "admin") {
-                return route('AdminDashboard');
+                return route('AdminDashboard', App::getLocale());
             } elseif ($user->role_id == 2 && $user->role == "business") {
-                return route('BusinessDashboard');
+                return route('BusinessDashboard', App::getLocale());
             } elseif ($user->role_id == 3 && $user->role == "client") {
-                return route('ClientDashboard');
-            } else return route('login');
-        }
-        return route('login');
+                return route('ClientDashboard', App::getLocale());
+            } else return route('login', App::getLocale());
+        } else return route('login', App::getLocale());
     }
 }

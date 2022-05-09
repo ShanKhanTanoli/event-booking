@@ -1,5 +1,18 @@
 <?php
 
 return [
-    'msg' => 'This is the message in english',
+
+    /*Begin::Admin Sidebar*/
+    'admindashboard' => 'Dashboard',
+    'adminbusiness' => 'Business',
+    'adminclients' => 'Clients',
+    'adminevents' => 'Events',
+    'adminpayments' => 'Payments',
+    'adminsettings' => 'Settings',
+    /*Begin::Admin Sidebar*/
+
+    /*Begin::Global Sidebar*/
+    'logout' => 'logout',
+    /*Begin::Global Sidebar*/
+
 ];
