@@ -8,7 +8,7 @@
                         <i class="fas fa-business-time opacity-10"></i>
                     </div>
                     <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">Business</p>
+                        <p class="text-sm mb-0 text-capitalize">{{ trans('lang.adminbusiness') }}</p>
                         <h4 class="mb-0">
                             {{ Business::count() }}
                         </h4>
@@ -30,7 +30,7 @@
                         <i class="fas fa-users opacity-10"></i>
                     </div>
                     <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">Clients</p>
+                        <p class="text-sm mb-0 text-capitalize">{{ trans('lang.adminclients') }}</p>
                         <h4 class="mb-0">
                             {{ Client::count() }}
                         </h4>
@@ -52,7 +52,7 @@
                         <i class="fas fa-calendar-alt opacity-10"></i>
                     </div>
                     <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">Events</p>
+                        <p class="text-sm mb-0 text-capitalize">{{ trans('lang.adminevents') }}</p>
                         <h4 class="mb-0">
                             0
                         </h4>
@@ -74,7 +74,7 @@
                         <i class="fas fa-credit-card opacity-10"></i>
                     </div>
                     <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">Payments</p>
+                        <p class="text-sm mb-0 text-capitalize">{{ trans('lang.adminpayments') }}</p>
                         <h4 class="mb-0">
                             {{ Payments::count() }}
                         </h4>

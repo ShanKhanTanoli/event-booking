@@ -53,7 +53,8 @@ use App\Http\Livewire\Admin\Dashboard\Settings\Password\Index as EditPassword;
 
 Route::middleware(['auth', 'admin'])->prefix('Admin')->group(function () {
 
-    Route::get('Dashboard', AdminDashboard::class)->name('AdminDashboard');
+    Route::get('Dashboard/{lang}', AdminDashboard::class)
+        ->name('AdminDashboard');
 
     /*Begin::Business*/
     Route::get('Business', ViewAllBusiness::class)->name('AdminBusiness');

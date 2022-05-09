@@ -87,7 +87,8 @@
                                                     <option value="">Select Language</option>
                                                     @forelse (Language::all() as $language)
                                                         <option value="{{ $language->id }}">
-                                                            {{ $language->name }}
+                                                            {{ strtoupper($language->name) }} -
+                                                            {{ $language->description }}
                                                         </option>
                                                     @empty
                                                         <option value="">No language found</option>
@@ -108,7 +109,8 @@
                                                     <option value="">Select Currency</option>
                                                     @forelse (Currency::all() as $currency)
                                                         <option value="{{ $currency->id }}">
-                                                            {{ $currency->name }}
+                                                            {{ strtoupper($currency->name) }} -
+                                                            {{ $currency->description }}
                                                         </option>
                                                     @empty
                                                         <option value="">No currency found</option>

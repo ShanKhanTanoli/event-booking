@@ -2,7 +2,7 @@
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href="{{ route('AdminDashboard') }}">
+        <a class="navbar-brand m-0" href="{{ route('AdminDashboard', App::getLocale()) }}">
             <span class="ms-1 font-weight-bold text-white">
                 {{ Setting::Logo() }}
             </span>
@@ -12,19 +12,19 @@
     <div class="collapse navbar-collapse  w-auto h-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link text-white @if (Request::path() == 'Admin/Dashboard') ? active bg-gradient-primary : '' @endif"
-                    href="{{ route('AdminDashboard') }}">
+                <a class="nav-link text-white @if (Request::path() == 'Admin/Dashboard/lang') ? active bg-gradient-primary : '' @endif"
+                    href="{{ route('AdminDashboard', App::getLocale()) }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-tachometer-alt"></i>
                     </div>
                     <span class="nav-link-text ms-1">
-                        Dashboard
+                        {{ trans('lang.admindashboard') }}
                     </span>
                 </a>
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    Business
+                    {{ trans('lang.adminbusiness') }}
                 </h6>
             </li>
             <li class="nav-item">
@@ -33,12 +33,12 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-business-time"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Business</span>
+                    <span class="nav-link-text ms-1">{{ trans('lang.adminbusiness') }}</span>
                 </a>
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    Clients
+                    {{ trans('lang.adminclients') }}
                 </h6>
             </li>
             <li class="nav-item">
@@ -47,12 +47,12 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-users"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Clients</span>
+                    <span class="nav-link-text ms-1">{{ trans('lang.adminclients') }}</span>
                 </a>
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    Events
+                    {{ trans('lang.adminevents') }}
                 </h6>
             </li>
             <li class="nav-item">
@@ -61,12 +61,12 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-calendar-alt"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Events</span>
+                    <span class="nav-link-text ms-1">{{ trans('lang.adminevents') }}</span>
                 </a>
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    Payments
+                    {{ trans('lang.adminpayments') }}
                 </h6>
             </li>
             <li class="nav-item">
@@ -76,13 +76,13 @@
                         <i class="fas fa-money-bill"></i>
                     </div>
                     <span class="nav-link-text ms-1">
-                        Payments
+                        {{ trans('lang.adminpayments') }}
                     </span>
                 </a>
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    Configurations
+                    {{ trans('lang.adminsettings') }}
                 </h6>
             </li>
             <li class="nav-item">
@@ -91,7 +91,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-cog"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Settings</span>
+                    <span class="nav-link-text ms-1">{{ trans('lang.adminsettings') }}</span>
                 </a>
             </li>
             <hr>

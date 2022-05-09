@@ -1,47 +1,29 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use FrittenKeeZ\Vouchers\Models\Voucher;
-use FrittenKeeZ\Vouchers\Models\ClientVoucher;
+use Illuminate\Support\Facades\App;
 
 //Auth::routes();
 
+
+Route::get('lang/{lang?}', function ($lang = "en") {
+    App::setLocale($lang);
+    return trans('lang.msg');
+});
+
 Route::get('debug', function () {
 
-        //Verified Business Account
-        $verified_business = 'acct_1KVjQIRYVF7b7SlI';
+    //Verified Business Account
+    $verified_business = 'acct_1KVjQIRYVF7b7SlI';
 
-        //Verified Individual Account
-        $verified_individual = 'acct_1KVjJwDGx269Aqtf';
-    
-        //Restricts Soon Account
-        $account = 'acct_1KVH0XRXmAQzp1r9';
-    
-        //Restricted Account
-        $restricted = 'acct_1KVH0LRiGUGr13em';
+    //Verified Individual Account
+    $verified_individual = 'acct_1KVjJwDGx269Aqtf';
 
-    // $amount = 10;
-    // $percentage = 1;
+    //Restricts Soon Account
+    $account = 'acct_1KVH0XRXmAQzp1r9';
 
-    // dd($amount*$percentage/100);
-
-    $voucher = Voucher::where('code', '8610-8362-1545-2697')->first();
-    if (!$voucher->isSold() && !$voucher->isExpired()) {
-        ClientVoucher::create([
-            'stripe_id' => 'string',
-            'voucher_id' => $voucher->id,
-            'user_id' => Auth::user()->id,
-            'price' => $voucher->price,
-            'currency' => 'usd',
-            'comission_percentage' => 10,
-            'final_amount' => $voucher->price * 10 / 100,
-        ]);
-        $voucher->update([
-            'sold' => true,
-        ]);
-        return true;
-    } else return "false";
+    //Restricted Account
+    $restricted = 'acct_1KVH0LRiGUGr13em';
 });
 
 
