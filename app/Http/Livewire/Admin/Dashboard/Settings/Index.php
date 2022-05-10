@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Dashboard\Settings;
 use App\Models\Setting;
 use Livewire\Component;
 use App\Helpers\Admin\Admin;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
@@ -20,6 +21,9 @@ class Index extends Component
 
     public function mount()
     {
+        $lang = Admin::Language();
+        App::setLocale($lang);
+
         if ($settings = Admin::Settings()) {
             $this->settings = $settings;
             $this->company_name = $settings->company_name;

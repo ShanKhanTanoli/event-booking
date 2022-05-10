@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire\Admin\Dashboard\Business;
 
-use App\Helpers\Business\Business;
 use App\Models\User;
 use Livewire\Component;
+use App\Helpers\Admin\Admin;
 use Livewire\WithPagination;
+use App\Helpers\Business\Business;
+use Illuminate\Support\Facades\App;
 
 class Index extends Component
 {
@@ -15,6 +17,11 @@ class Index extends Component
 
     protected $paginationTheme = 'bootstrap';
 
+    public function mount()
+    {
+        App::setLocale(Admin::Language());
+    }
+    
     public function render()
     {
         $business = Business::LatestPaginate(10);
@@ -27,9 +34,9 @@ class Index extends Component
     public function Edit($id)
     {
         if ($business = User::find($id)) {
-            return redirect(route('AdminEditBusiness', $business->slug));
+            return redirect(route('AdminEditBusiness', ['slug' => $business->slug, 'lang' => App::getLocale()]));
         }
-        return session()->flash('error', 'Something went wrong');
+        return session()->flash('error', trans('alerts.error'));
     }
 
     public function DeleteConfirmation($id)
@@ -37,16 +44,16 @@ class Index extends Component
         if ($business = User::find($id)) {
             $this->delete = $business;
             $this->emit(['delete']);
-        } else return session()->flash('error', 'Something went wrong');
+        } else return session()->flash('error', trans('alerts.error'));
     }
 
     public function Delete($id)
     {
         if ($business = User::find($id)) {
             $business->delete();
-            session()->flash('success', 'Deleted Successfully');
-            return redirect(route('AdminBusiness'));
+            session()->flash('success', trans('alerts.delete'));
+            return redirect(route('AdminBusiness', App::getLocale()));
         }
-        return session()->flash('error', 'Something went wrong');
+        return session()->flash('error', trans('alerts.error'));
     }
 }

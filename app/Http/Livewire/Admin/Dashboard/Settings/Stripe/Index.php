@@ -4,7 +4,9 @@ namespace App\Http\Livewire\Admin\Dashboard\Settings\Stripe;
 
 use Exception;
 use Livewire\Component;
+use App\Helpers\Admin\Admin;
 use App\Models\StripeConfiguration;
+use Illuminate\Support\Facades\App;
 
 class Index extends Component
 {
@@ -12,6 +14,9 @@ class Index extends Component
 
     public function mount()
     {
+        $lang = Admin::Language();
+        App::setLocale($lang);
+
         if ($stripe = StripeConfiguration::first()) {
 
             $this->stripe = $stripe;
@@ -43,13 +48,11 @@ class Index extends Component
         ]);
 
         try {
-            
             $this->stripe->update($validated);
-            session()->flash('success', 'Updated Successfully');
-            return redirect(route('AdminStripe', $this->stripe->slug));
-
+            session()->flash('success', trans('alerts.update'));
+            return redirect(route('AdminStripe', ['slug' => $this->stripe->slug, 'lang' => App::getLocale()]));
         } catch (Exception $e) {
-            session()->flash('error', $e->getMessage());
+            session()->flash('error', trans('alerts.error'));
         }
     }
 }

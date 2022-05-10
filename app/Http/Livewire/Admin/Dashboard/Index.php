@@ -2,15 +2,16 @@
 
 namespace App\Http\Livewire\Admin\Dashboard;
 
-use Illuminate\Support\Facades\App;
 use Livewire\Component;
+use App\Helpers\Admin\Admin;
+use Illuminate\Support\Facades\App;
 
 class Index extends Component
 {
 
-    public function mount($lang = "en")
+    public function mount()
     {
-        App::setLocale($lang);
+        App::setLocale(Admin::Language());
     }
     public function render()
     {

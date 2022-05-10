@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\Admin\Admin;
 use App\Helpers\Redirect;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
@@ -14,6 +15,8 @@ Route::get('lang/{lang?}', function ($lang = "en") {
 
 Route::get('debug', function () {
 
+    dd(Admin::Language());
+    
     //Verified Business Account
     $verified_business = 'acct_1KVjQIRYVF7b7SlI';
 

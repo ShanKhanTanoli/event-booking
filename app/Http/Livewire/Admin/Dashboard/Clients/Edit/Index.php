@@ -5,15 +5,18 @@ namespace App\Http\Livewire\Admin\Dashboard\Clients\Edit;
 use Exception;
 use App\Models\User;
 use Livewire\Component;
+use App\Helpers\Admin\Admin;
+use Illuminate\Support\Facades\App;
 
 class Index extends Component
 {
     public $user;
 
-    public $name,$user_name,$email,$number,$parent_business_id;
+    public $name, $user_name, $email, $number, $parent_business_id;
 
     public function mount($slug)
     {
+        App::setLocale(Admin::Language());
         $this->user = User::where('slug', $slug)
             ->first();
         if ($this->user) {
@@ -23,8 +26,8 @@ class Index extends Component
             $this->number = $this->user->number;
             $this->parent_business_id = $this->user->parent_business_id;
         } else {
-            session()->flash('error', 'Client does not exist');
-            return redirect(route('AdminClients'));
+            session()->flash('error', trans('alerts.error'));
+            return redirect(route('AdminClients', App::getLocale()));
         }
     }
 
@@ -47,13 +50,13 @@ class Index extends Component
             'email' => 'required|email|unique:users,email,' . $this->user->id,
             'number' => 'required|numeric|unique:users,number,' . $this->user->id,
             'parent_business_id' => 'required|numeric',
-        ],$msg);
+        ], $msg);
         try {
             $this->user->update($validated);
-            session()->flash('success', 'Updated Successfully');
-            return redirect(route('AdminEditClient', $this->user->slug));
+            session()->flash('success', trans('alerts.update'));
+            return redirect(route('AdminEditClient', ['slug' => $this->user->slug, 'lang' => App::getLocale()]));
         } catch (Exception $e) {
-            return session()->flash('error', $e->getMessage());
+            return session()->flash('error', trans('alerts.error'));
         }
     }
 }

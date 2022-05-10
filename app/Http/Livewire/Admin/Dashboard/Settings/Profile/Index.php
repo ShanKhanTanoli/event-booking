@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Admin\Dashboard\Settings\Profile;
 
 use Exception;
 use Livewire\Component;
+use App\Helpers\Admin\Admin;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
@@ -12,6 +14,9 @@ class Index extends Component
 
     public function mount()
     {
+        $lang = Admin::Language();
+        App::setLocale($lang);
+        
         $this->name = Auth::user()->name;
         $this->email = Auth::user()->email;
     }
@@ -30,9 +35,9 @@ class Index extends Component
         ]);
         try{
             Auth::user()->update($validated);
-            session()->flash('success','Profile Updated Successfully');
+            session()->flash('success', trans('alerts.update'));
         }catch(Exception $e){
-            return session()->flash('error',$e->getMessage());
+            return session()->flash('error',trans('alerts.error'));
         }
     }
 }

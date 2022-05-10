@@ -6,10 +6,17 @@ use Exception;
 use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Str;
+use App\Helpers\Admin\Admin;
+use Illuminate\Support\Facades\App;
 
 class Index extends Component
 {
     public $name, $user_name, $number, $email, $password, $password_confirmation, $parent_business_id;
+
+    public function mount()
+    {
+        App::setLocale(Admin::Language());
+    }
 
     public function render()
     {
@@ -47,10 +54,10 @@ class Index extends Component
                 'slug' => strtoupper(Str::random(20)),
             ];
             User::create($data);
-            session()->flash('success', 'Added Successfully');
-            return redirect(route('AdminClients'));
+            session()->flash('success', trans('alerts.add'));
+            return redirect(route('AdminClients', App::getLocale()));
         } catch (Exception $e) {
-            return session()->flash('error', $e->getMessage());
+            return session()->flash('error', trans('alerts.error'));
         }
     }
 }

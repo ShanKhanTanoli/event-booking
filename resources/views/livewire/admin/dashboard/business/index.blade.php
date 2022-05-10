@@ -75,7 +75,7 @@
                                         Clients
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Edit
+                                        More
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Delete
@@ -154,7 +154,7 @@
                                                 <span wire:loading wire:target='Edit("{{ $user->id }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
-                                                Edit
+                                                More
                                             </button>
                                         </td>
                                         <td class="align-middle">

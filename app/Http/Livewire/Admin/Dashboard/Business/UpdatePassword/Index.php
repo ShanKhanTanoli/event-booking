@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Admin\Dashboard\Business\UpdatePassword;
 use Exception;
 use App\Models\User;
 use Livewire\Component;
+use App\Helpers\Admin\Admin;
+use Illuminate\Support\Facades\App;
 
 class Index extends Component
 {
@@ -14,11 +16,12 @@ class Index extends Component
 
     public function mount($slug)
     {
+        App::setLocale(Admin::Language());
         $this->user = User::where('slug', $slug)
             ->first();
         if (!$this->user) {
-            session()->flash('error', 'Account does not exist');
-            return redirect(route('AdminBusiness'));
+            session()->flash('error', trans('alerts.error'));
+            return redirect(route('AdminBusiness', App::getLocale()));
         }
     }
 
@@ -37,11 +40,11 @@ class Index extends Component
         ]);
         try {
             $this->user->update(['password' => bcrypt($validated['password'])]);
-            session()->flash('success', 'Updated Successfully');
+            session()->flash('success', trans('alerts.update'));
             $this->reset(['password', 'password_confirmation']);
-            return redirect(route('AdminUpdateBusinessPassword', $this->user->slug));
+            return redirect(route('AdminUpdateBusinessPassword', ['slug' => $this->user->slug, 'lang' => App::getLocale()]));
         } catch (Exception $e) {
-            return session()->flash('error', $e->getMessage());
+            return session()->flash('error', trans('alerts.error'));
         }
     }
 }

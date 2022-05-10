@@ -9,21 +9,25 @@ return [
     'events' => 'Events',
     'payments' => 'Payments',
     'settings' => 'Settings',
-    /*Fin::Admin Dashboard Sidebar*/
+    /*End::Admin Dashboard Sidebar*/
 
     /*Begin::Admin Settings Sidebar*/
+    'general' => 'General',
     'profile' => 'Profile',
+    'stripe' => 'Stripe',
     'password' => 'Password',
-    /*Fin::Admin Settings Sidebar*/
+    /*End::Admin Settings Sidebar*/
 
-    /*Begin::Admin Profile and Password*/
+    /*Begin::Admin Settings*/
+    'update-settings' => 'Update Settings',
     'update-profile' => 'Update Profile',
+    'update-stripe' => 'Update Stripe',
     'update-password' => 'Update Password',
-    /*Fin::Admin Profile and Password*/
+    /*End::Admin Settings*/
 
     /*Begin::Buttons*/
     'save-changes' => 'Save Changes',
     'view-all' => 'View All',
-    /*Fin::Buttons*/
+    /*End::Buttons*/
 
 ];

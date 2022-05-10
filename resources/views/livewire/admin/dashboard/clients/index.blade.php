@@ -20,7 +20,7 @@
             </a>
         </div>
         <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
-            <a href="{{ route('AdminAddClient') }}">
+            <a href="{{ route('AdminAddClient', App::getLocale()) }}">
                 <div class="card">
                     <div class="card-header p-3 pt-2" style="border-radius: 0;">
                         <div
@@ -72,7 +72,7 @@
                                         Joined Business
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Edit
+                                        More
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Delete
@@ -130,14 +130,14 @@
                                         <td class="align-middle">
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    @if($business = Business::Find($user->parent_business_id))
-                                                    <h6 class="mb-0 text-sm">
-                                                        {{ $business->name }}
-                                                    </h6>
+                                                    @if ($business = Business::Find($user->parent_business_id))
+                                                        <h6 class="mb-0 text-sm">
+                                                            {{ $business->name }}
+                                                        </h6>
                                                     @else
-                                                    <span class="badge bg-danger">
-                                                        NOT FOUND
-                                                    </span>
+                                                        <span class="badge bg-danger">
+                                                            NOT FOUND
+                                                        </span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -148,7 +148,7 @@
                                                 <span wire:loading wire:target='Edit("{{ $user->id }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
-                                                Edit
+                                                More
                                             </button>
                                         </td>
                                         <td class="align-middle">
