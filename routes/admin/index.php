@@ -11,8 +11,8 @@ use App\Http\Livewire\Admin\Dashboard\Business\UpdatePassword\Index as UpdateBus
 /*End::Business*/
 
 /*Begin::Business Mails*/
-use App\Http\Livewire\Admin\Dashboard\Business\Mails\Index as ViewBusinessMails;
-use App\Http\Livewire\Admin\Dashboard\Business\Mails\Send\Index as SendMailToBusiness;
+use App\Http\Livewire\Admin\Dashboard\Business\Mails\Index as BusinessMails;
+use App\Http\Livewire\Admin\Dashboard\Business\Mails\Send\Index as SendBusinessMail;
 /*End::Business Mails*/
 
 /*Begin::Clients*/
@@ -71,25 +71,12 @@ Route::middleware(['auth', 'admin'])->prefix('Admin')->group(function () {
     /*End::Business*/
 
     /*Begin::BusinessMails*/
-    Route::get('BusinessMails/{slug}/{lang?}', ViewBusinessMails::class)
+    Route::get('BusinessMails/{slug}/{lang?}', BusinessMails::class)
         ->name('AdminBusinessMails');
-    Route::get('SendMail/{slug}/{lang?}', SendMailToBusiness::class)
-        ->name('AdminSendMailToBusiness');
+
+    Route::get('SendMailToBusiness/{slug}/{lang?}', SendBusinessMail::class)
+        ->name('AdminSendBusinessMail');
     /*End::BusinessMails*/
-
-    /*Begin::Events*/
-    Route::get('Events/{lang?}', AllEvents::class)
-        ->name('AdminEvents');
-
-    Route::get('ViewEvent/{slug}/{lang?}', ViewEvent::class)
-        ->name('AdminViewEvent');
-
-    Route::get('AddEvent/{lang?}', AddEvent::class)
-        ->name('AdminAddEvent');
-
-    Route::get('EditEvent/{slug}/{lang?}', EditEvent::class)
-        ->name('AdminEditEvent');
-    /*End::Events*/
 
     /*Begin::Clients*/
     Route::get('Clients/{lang?}', ViewAllClients::class)
@@ -112,6 +99,20 @@ Route::middleware(['auth', 'admin'])->prefix('Admin')->group(function () {
     Route::get('SendMail/{slug}/{lang?}', SendMailToClient::class)
         ->name('AdminSendMailToClient');
     /*End::ClientMails*/
+
+    /*Begin::Events*/
+    Route::get('Events/{lang?}', AllEvents::class)
+        ->name('AdminEvents');
+
+    Route::get('ViewEvent/{slug}/{lang?}', ViewEvent::class)
+        ->name('AdminViewEvent');
+
+    Route::get('AddEvent/{lang?}', AddEvent::class)
+        ->name('AdminAddEvent');
+
+    Route::get('EditEvent/{slug}/{lang?}', EditEvent::class)
+        ->name('AdminEditEvent');
+    /*End::Events*/
 
     /*Begin::Payments*/
     Route::get('Payments/{lang?}', ViewAllPayments::class)
