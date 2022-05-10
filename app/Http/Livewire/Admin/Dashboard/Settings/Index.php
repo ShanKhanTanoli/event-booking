@@ -21,8 +21,7 @@ class Index extends Component
 
     public function mount()
     {
-        $lang = Admin::Language();
-        App::setLocale($lang);
+        App::setLocale(Admin::Language());
 
         if ($settings = Admin::Settings()) {
             $this->settings = $settings;
@@ -67,11 +66,14 @@ class Index extends Component
 
         if ($settings = Admin::Settings()) {
             $settings->update($validated);
-            session()->flash('success', 'Updated Successfully');
-            return redirect(route('AdminSettings'));
+            session()->flash('success', trans('alerts.update'));
+
+            App::setLocale(Admin::Language());
+            
+            return redirect(route('AdminSettings', App::getLocale()));
         } else {
             Setting::create($validated);
-            return session()->flash('success', 'Updated Successfully');
+            return session()->flash('success', trans('alerts.update'));
         }
     }
 }
