@@ -53,75 +53,95 @@ use App\Http\Livewire\Admin\Dashboard\Settings\Password\Index as EditPassword;
 
 Route::middleware(['auth', 'admin'])->prefix('Admin')->group(function () {
 
-    Route::get('Dashboard/{lang}', AdminDashboard::class)
+    Route::get('Dashboard/{lang?}', AdminDashboard::class)
         ->name('AdminDashboard');
 
     /*Begin::Business*/
-    Route::get('Business', ViewAllBusiness::class)->name('AdminBusiness');
+    Route::get('Business/{lang?}', ViewAllBusiness::class)
+        ->name('AdminBusiness');
 
-    Route::get('AddBusiness', AddBusiness::class)->name('AdminAddBusiness');
+    Route::get('AddBusiness/{lang?}', AddBusiness::class)
+        ->name('AdminAddBusiness');
 
-    Route::get('EditBusiness/{slug}', EditBusiness::class)->name('AdminEditBusiness');
+    Route::get('EditBusiness/{slug}/{lang?}', EditBusiness::class)
+        ->name('AdminEditBusiness');
 
-    Route::get('UpdateBusiness/{slug}/Password', UpdateBusinessPassword::class)
+    Route::get('UpdateBusiness/{slug}/Password/{lang?}', UpdateBusinessPassword::class)
         ->name('AdminUpdateBusinessPassword');
     /*End::Business*/
 
     /*Begin::BusinessMails*/
-    Route::get('BusinessMails/{slug}', ViewBusinessMails::class)
+    Route::get('BusinessMails/{slug}/{lang?}', ViewBusinessMails::class)
         ->name('AdminBusinessMails');
-    Route::get('SendMail/{slug}', SendMailToBusiness::class)
+    Route::get('SendMail/{slug}/{lang?}', SendMailToBusiness::class)
         ->name('AdminSendMailToBusiness');
     /*End::BusinessMails*/
 
     /*Begin::Events*/
-    Route::get('Events', AllEvents::class)->name('AdminEvents');
-    Route::get('ViewEvent/{slug}', ViewEvent::class)->name('AdminViewEvent');
-    Route::get('AddEvent', AddEvent::class)->name('AdminAddEvent');
-    Route::get('EditEvent/{slug}', EditEvent::class)->name('AdminEditEvent');
+    Route::get('Events/{lang?}', AllEvents::class)
+        ->name('AdminEvents');
+
+    Route::get('ViewEvent/{slug}/{lang?}', ViewEvent::class)
+        ->name('AdminViewEvent');
+
+    Route::get('AddEvent/{lang?}', AddEvent::class)
+        ->name('AdminAddEvent');
+
+    Route::get('EditEvent/{slug}/{lang?}', EditEvent::class)
+        ->name('AdminEditEvent');
     /*End::Events*/
 
     /*Begin::Clients*/
-    Route::get('Clients', ViewAllClients::class)->name('AdminClients');
+    Route::get('Clients/{lang?}', ViewAllClients::class)
+        ->name('AdminClients');
 
-    Route::get('AddClient', AddClient::class)->name('AdminAddClient');
+    Route::get('AddClient/{lang?}', AddClient::class)
+        ->name('AdminAddClient');
 
-    Route::get('EditClient/{slug}', EditClient::class)->name('AdminEditClient');
+    Route::get('EditClient/{slug}/{lang?}', EditClient::class)
+        ->name('AdminEditClient');
 
-    Route::get('UpdateClient/{slug}/Password', UpdateClientPassword::class)
+    Route::get('UpdateClient/{slug}/Password/{lang?}', UpdateClientPassword::class)
         ->name('AdminUpdateClientPassword');
     /*End::Clients*/
 
     /*Begin::ClientMails*/
-    Route::get('ClientMails/{slug}', ViewClientMails::class)
+    Route::get('ClientMails/{slug}/{lang?}', ViewClientMails::class)
         ->name('AdminClientMails');
 
-    Route::get('SendMail/{slug}', SendMailToClient::class)
+    Route::get('SendMail/{slug}/{lang?}', SendMailToClient::class)
         ->name('AdminSendMailToClient');
     /*End::ClientMails*/
 
     /*Begin::Payments*/
-    Route::get('Payments', ViewAllPayments::class)->name('AdminPayments');
+    Route::get('Payments/{lang?}', ViewAllPayments::class)
+        ->name('AdminPayments');
     /*End::Payments*/
 
     /*Begin::Settings*/
-    Route::get('Settings/General', Settings::class)->name('AdminSettings');
+    Route::get('Settings/General/{lang?}', Settings::class)
+        ->name('AdminSettings');
 
-    Route::get('Settings/Profile', EditProfile::class)->name('AdminEditProfile');
+    Route::get('Settings/Profile/{lang?}', EditProfile::class)
+        ->name('AdminEditProfile');
 
-    Route::get('Settings/Currency', Currency::class)->name('AdminCurrency');
+    Route::get('Settings/Currency/{lang?}', Currency::class)
+        ->name('AdminCurrency');
 
-    Route::get('Settings/EditCurrency/{slug}', EditCurrency::class)
+    Route::get('Settings/EditCurrency/{slug}/{lang?}', EditCurrency::class)
         ->name('AdminEditCurrency');
 
-    Route::get('Settings/Language', Language::class)->name('AdminLanguage');
+    Route::get('Settings/Language/{lang?}', Language::class)
+        ->name('AdminLanguage');
 
-    Route::get('Settings/Stripe', Stripe::class)->name('AdminStripe');
+    Route::get('Settings/Stripe/{lang?}', Stripe::class)
+        ->name('AdminStripe');
 
-    Route::get('Settings/EditStripe', EditStripe::class)
+    Route::get('Settings/EditStripe/{lang?}', EditStripe::class)
         ->name('AdminEditStripe');
 
-    Route::get('Settings/Password', EditPassword::class)->name('AdminEditPassword');
+    Route::get('Settings/Password/{lang?}', EditPassword::class)
+        ->name('AdminEditPassword');
     /*End::Settings*/
 });
 /*End::Auth,Admin Group*/

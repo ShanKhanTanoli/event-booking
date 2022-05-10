@@ -12,86 +12,86 @@
     <div class="collapse navbar-collapse  w-auto h-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link text-white @if (Request::path() == 'Admin/Dashboard/lang') ? active bg-gradient-primary : '' @endif"
+                <a class="nav-link text-white @if (Request::path() == 'Admin/Dashboard/' . App::getLocale()) ? active bg-gradient-primary : '' @endif"
                     href="{{ route('AdminDashboard', App::getLocale()) }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-tachometer-alt"></i>
                     </div>
                     <span class="nav-link-text ms-1">
-                        {{ trans('lang.admindashboard') }}
+                        {{ trans('admin.dashboard') }}
                     </span>
                 </a>
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    {{ trans('lang.adminbusiness') }}
+                    {{ trans('admin.business') }}
                 </h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white @if (Request::path() == 'Admin/Business') ? active bg-gradient-primary : '' @endif"
-                    href="{{ route('AdminBusiness') }}">
+                <a class="nav-link text-white @if (Request::path() == 'Admin/Business/' . App::getLocale()) ? active bg-gradient-primary : '' @endif"
+                    href="{{ route('AdminBusiness', App::getLocale()) }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-business-time"></i>
                     </div>
-                    <span class="nav-link-text ms-1">{{ trans('lang.adminbusiness') }}</span>
+                    <span class="nav-link-text ms-1">{{ trans('admin.business') }}</span>
                 </a>
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    {{ trans('lang.adminclients') }}
+                    {{ trans('admin.clients') }}
                 </h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white @if (Request::path() == 'Admin/Clients') ? active bg-gradient-primary : '' @endif"
-                    href="{{ route('AdminClients') }}">
+                <a class="nav-link text-white @if (Request::path() == 'Admin/Clients/' . App::getLocale()) ? active bg-gradient-primary : '' @endif"
+                    href="{{ route('AdminClients', App::getLocale()) }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-users"></i>
                     </div>
-                    <span class="nav-link-text ms-1">{{ trans('lang.adminclients') }}</span>
+                    <span class="nav-link-text ms-1">{{ trans('admin.clients') }}</span>
                 </a>
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    {{ trans('lang.adminevents') }}
+                    {{ trans('admin.events') }}
                 </h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white @if (Request::path() == 'Admin/Events') active bg-gradient-primary @else '' @endif"
-                    href="{{ route('AdminEvents') }}">
+                <a class="nav-link text-white @if (Request::path() == 'Admin/Events/' . App::getLocale()) active bg-gradient-primary @else '' @endif"
+                    href="{{ route('AdminEvents', App::getLocale()) }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-calendar-alt"></i>
                     </div>
-                    <span class="nav-link-text ms-1">{{ trans('lang.adminevents') }}</span>
+                    <span class="nav-link-text ms-1">{{ trans('admin.events') }}</span>
                 </a>
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    {{ trans('lang.adminpayments') }}
+                    {{ trans('admin.payments') }}
                 </h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white @if (Request::path() == 'Admin/Payments') active bg-gradient-primary @else '' @endif"
-                    href="{{ route('AdminPayments') }}">
+                <a class="nav-link text-white @if (Request::path() == 'Admin/Payments/' . App::getLocale()) active bg-gradient-primary @else '' @endif"
+                    href="{{ route('AdminPayments', App::getLocale()) }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-money-bill"></i>
                     </div>
                     <span class="nav-link-text ms-1">
-                        {{ trans('lang.adminpayments') }}
+                        {{ trans('admin.payments') }}
                     </span>
                 </a>
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    {{ trans('lang.adminsettings') }}
+                    {{ trans('admin.settings') }}
                 </h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white @if (Request::path() == 'Admin/Settings/General' or Request::path() == 'Admin/Settings/Profile' or Request::path() == 'Admin/Settings/Currency' or Request::path() == 'Admin/Settings/Language' or Request::path() == 'Admin/Settings/Stripe' or Request::path() == 'Admin/Settings/Password') active bg-gradient-primary @else '' @endif"
-                    href="{{ route('AdminSettings') }}">
+                <a class="nav-link text-white @if (Request::path() == 'Admin/Settings/General/' . App::getLocale() or Request::path() == 'Admin/Settings/Profile/' . App::getLocale() or Request::path() == 'Admin/Settings/Currency/' . App::getLocale() or Request::path() == 'Admin/Settings/Language/' . App::getLocale() or Request::path() == 'Admin/Settings/Stripe/' . App::getLocale() or Request::path() == 'Admin/Settings/Password/' . App::getLocale()) active bg-gradient-primary @else '' @endif"
+                    href="{{ route('AdminSettings', App::getLocale()) }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-cog"></i>
                     </div>
-                    <span class="nav-link-text ms-1">{{ trans('lang.adminsettings') }}</span>
+                    <span class="nav-link-text ms-1">{{ trans('admin.settings') }}</span>
                 </a>
             </li>
             <hr>

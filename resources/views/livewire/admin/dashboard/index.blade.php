@@ -8,7 +8,7 @@
                         <i class="fas fa-business-time opacity-10"></i>
                     </div>
                     <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">{{ trans('lang.adminbusiness') }}</p>
+                        <p class="text-sm mb-0 text-capitalize">{{ trans('admin.business') }}</p>
                         <h4 class="mb-0">
                             {{ Business::count() }}
                         </h4>
@@ -16,8 +16,8 @@
                 </div>
                 <hr class="dark horizontal my-0">
                 <div class="card-footer p-3 text-center">
-                    <a href="{{ route('AdminBusiness') }}" class="btn bg-gradient-dark">
-                        View All
+                    <a href="{{ route('AdminBusiness', App::getLocale()) }}" class="btn bg-gradient-dark">
+                        {{ trans('admin.view-all') }}
                     </a>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                         <i class="fas fa-users opacity-10"></i>
                     </div>
                     <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">{{ trans('lang.adminclients') }}</p>
+                        <p class="text-sm mb-0 text-capitalize">{{ trans('admin.clients') }}</p>
                         <h4 class="mb-0">
                             {{ Client::count() }}
                         </h4>
@@ -38,8 +38,8 @@
                 </div>
                 <hr class="dark horizontal my-0">
                 <div class="card-footer p-3 text-center">
-                    <a href="{{ route('AdminClients') }}" class="btn bg-gradient-dark">
-                        View All
+                    <a href="{{ route('AdminClients', App::getLocale()) }}" class="btn bg-gradient-dark">
+                        {{ trans('admin.view-all') }}
                     </a>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                         <i class="fas fa-calendar-alt opacity-10"></i>
                     </div>
                     <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">{{ trans('lang.adminevents') }}</p>
+                        <p class="text-sm mb-0 text-capitalize">{{ trans('admin.events') }}</p>
                         <h4 class="mb-0">
                             0
                         </h4>
@@ -60,8 +60,8 @@
                 </div>
                 <hr class="dark horizontal my-0">
                 <div class="card-footer p-3 text-center">
-                    <a href="{{ route('AdminEvents') }}" class="btn bg-gradient-dark">
-                        View All
+                    <a href="{{ route('AdminEvents', App::getLocale()) }}" class="btn bg-gradient-dark">
+                        {{ trans('admin.view-all') }}
                     </a>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                         <i class="fas fa-credit-card opacity-10"></i>
                     </div>
                     <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">{{ trans('lang.adminpayments') }}</p>
+                        <p class="text-sm mb-0 text-capitalize">{{ trans('admin.payments') }}</p>
                         <h4 class="mb-0">
                             {{ Payments::count() }}
                         </h4>
@@ -82,8 +82,8 @@
                 </div>
                 <hr class="dark horizontal my-0">
                 <div class="card-footer p-3 text-center">
-                    <a href="{{ route('AdminPayments') }}" class="btn bg-gradient-dark">
-                        View All
+                    <a href="{{ route('AdminPayments', App::getLocale()) }}" class="btn bg-gradient-dark">
+                        {{ trans('admin.view-all') }}
                     </a>
                 </div>
             </div>
