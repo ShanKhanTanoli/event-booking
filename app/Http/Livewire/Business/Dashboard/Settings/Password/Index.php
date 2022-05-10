@@ -11,6 +11,11 @@ class Index extends Component
 {
     public $password, $password_confirmation;
 
+    public function mount($lang = "en")
+    {
+        App::setLocale($lang);
+    }
+
     public function render()
     {
         return view('livewire.business.dashboard.settings.password.index')
@@ -26,11 +31,11 @@ class Index extends Component
         ]);
         try {
             Auth::user()->update(['password' => bcrypt($validated['password'])]);
-            session()->flash('success', 'Password Updated Successfully');
+            session()->flash('success', trans('alerts.update'));
             $this->reset(['password', 'password_confirmation']);
-            return redirect(route('BusinessEditPassword',App::getLocale()));
+            return redirect(route('BusinessEditPassword', App::getLocale()));
         } catch (Exception $e) {
-            return session()->flash('error', $e->getMessage());
+            return session()->flash('error', trans('alerts.error'));
         }
     }
 }

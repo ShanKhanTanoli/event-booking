@@ -16,6 +16,11 @@ class Index extends Component
 
     protected $paginationTheme = 'bootstrap';
 
+    public function mount($lang = "en")
+    {
+        App::setLocale($lang);
+    }
+
     public function render()
     {
         $clients = Business::ClientsLatestPaginate(Auth::user()->id, 10);
@@ -29,8 +34,7 @@ class Index extends Component
     {
         if ($client = Business::FindClient(Auth::user()->id, $id)) {
             return redirect(route('BusinessEditClient', ['slug' => $client->slug, 'lang' => App::getLocale()]));
-        }
-        return session()->flash('error', 'Something went wrong');
+        } else return session()->flash('error', trans('alerts.error'));
     }
 
     public function DeleteConfirmation($id)
@@ -38,16 +42,15 @@ class Index extends Component
         if ($business = Business::FindClient(Auth::user()->id, $id)) {
             $this->delete = $business;
             $this->emit(['delete']);
-        } else return session()->flash('error', 'Something went wrong');
+        } else return session()->flash('error', trans('alerts.error'));
     }
 
     public function Delete($id)
     {
         if ($client = Business::FindClient(Auth::user()->id, $id)) {
             $client->delete();
-            session()->flash('success', 'Deleted Successfully');
+            session()->flash('success', trans('alerts.delete'));
             return redirect(route('BusinessClients', App::getLocale()));
-        }
-        return session()->flash('error', 'Something went wrong');
+        } else return session()->flash('error', trans('alerts.error'));
     }
 }

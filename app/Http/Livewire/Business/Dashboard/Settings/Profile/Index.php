@@ -11,8 +11,9 @@ class Index extends Component
 {
     public $name, $user_name, $email, $number, $address;
 
-    public function mount()
+    public function mount($lang = "en")
     {
+        App::setLocale($lang);
         $this->name = Auth::user()->name;
         $this->user_name = Auth::user()->user_name;
         $this->email = Auth::user()->email;
@@ -37,10 +38,10 @@ class Index extends Component
         ]);
         try {
             Auth::user()->update($validated);
-            session()->flash('success', 'Profile Updated Successfully');
+            session()->flash('success', trans('alerts.update'));
             return redirect(route('BusinessEditProfile', App::getLocale()));
         } catch (Exception $e) {
-            return session()->flash('error', $e->getMessage());
+            return session()->flash('error', trans('alerts.error'));
         }
     }
 }

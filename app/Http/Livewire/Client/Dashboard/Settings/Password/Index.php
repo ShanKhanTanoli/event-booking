@@ -31,11 +31,11 @@ class Index extends Component
         ]);
         try {
             Auth::user()->update(['password' => bcrypt($validated['password'])]);
-            session()->flash('success', 'Password Updated Successfully');
+            session()->flash('success', trans('alerts.update'));
             $this->reset(['password', 'password_confirmation']);
             return redirect(route('ClientEditPassword', App::getLocale()));
         } catch (Exception $e) {
-            return session()->flash('error', $e->getMessage());
+            session()->flash('error', trans('alerts.error'));
         }
     }
 }

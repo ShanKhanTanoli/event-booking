@@ -15,8 +15,10 @@ class Index extends Component
 
     public $name, $user_name, $email, $number;
 
-    public function mount($slug)
+    public function mount($lang = "en", $slug)
     {
+        App::setLocale($lang);
+
         if ($client = Business::FindClientBySlug(Auth::user()->id, $slug)) {
             $this->user = $client;
             $this->name = $this->user->name;
@@ -24,7 +26,7 @@ class Index extends Component
             $this->email = $this->user->email;
             $this->number = $this->user->number;
         } else {
-            session()->flash('error', 'Client does not exist');
+            session()->flash('error', trans('alerts.error'));
             return redirect(route('BusinessClients', App::getLocale()));
         }
     }
@@ -46,10 +48,10 @@ class Index extends Component
         ]);
         try {
             $this->user->update($validated);
-            session()->flash('success', 'Updated Successfully');
+            session()->flash('success', trans('alerts.update'));
             return redirect(route('BusinessEditClient', ['slug' => $this->user->slug, 'lang' => App::getLocale()]));
         } catch (Exception $e) {
-            return session()->flash('error', $e->getMessage());
+            return session()->flash('error', trans('alerts.error'));
         }
     }
 }

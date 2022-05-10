@@ -8,7 +8,7 @@
                         <i class="fas fa-users opacity-10"></i>
                     </div>
                     <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">Clients</p>
+                        <p class="text-sm mb-0 text-capitalize">{{ trans('business.clients') }}</p>
                         <h4 class="mb-0">
                             {{ Business::CountClients(Auth::user()->id) }}
                         </h4>
@@ -17,7 +17,7 @@
                 <hr class="dark horizontal my-0">
                 <div class="card-footer p-3 text-center">
                     <a href="{{ route('BusinessClients', App::getLocale()) }}" class="btn bg-gradient-dark">
-                        View All
+                        {{ trans('business.view-all') }}
                     </a>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                         <i class="fas fa-calendar-alt opacity-10"></i>
                     </div>
                     <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">Events</p>
+                        <p class="text-sm mb-0 text-capitalize">{{ trans('business.events') }}</p>
                         <h4 class="mb-0">
                             0
                         </h4>
@@ -39,7 +39,7 @@
                 <hr class="dark horizontal my-0">
                 <div class="card-footer p-3 text-center">
                     <a href="{{ route('BusinessEvents', App::getLocale()) }}" class="btn bg-gradient-dark">
-                        View All
+                        {{ trans('business.view-all') }}
                     </a>
                 </div>
             </div>

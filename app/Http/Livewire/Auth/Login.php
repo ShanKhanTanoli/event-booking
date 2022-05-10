@@ -18,28 +18,29 @@ class Login extends Component
         'password' => 'required',
     ];
 
-    public function mount($lang = "en") {
-        App::getLocale($lang);
-        if(auth()->user()){
+    public function mount($lang = "en")
+    {
+        App::setLocale($lang);
+        if (auth()->user()) {
             redirect(Redirect::ToDashboard());
         }
     }
 
-    public function login() {
+    public function login()
+    {
         $credentials = $this->validate();
-        if(auth()->attempt(['email' => $this->email, 'password' => $this->password], $this->remember_me)) {
+        if (auth()->attempt(['email' => $this->email, 'password' => $this->password], $this->remember_me)) {
             $user = User::where(["email" => $this->email])->first();
             auth()->login($user, $this->remember_me);
-            return redirect()->intended(Redirect::ToDashboard());        
-        }
-        else{
-            return $this->addError('email', trans('auth.failed')); 
+            return redirect()->intended(Redirect::ToDashboard());
+        } else {
+            return $this->addError('email', trans('auth.failed'));
         }
     }
 
     public function render()
     {
         return view('livewire.auth.login')
-        ->extends('layouts.auth');
+            ->extends('layouts.auth');
     }
 }

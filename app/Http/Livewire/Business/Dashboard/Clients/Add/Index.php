@@ -13,6 +13,11 @@ class Index extends Component
 {
     public $name, $user_name, $number, $email, $password, $password_confirmation;
 
+    public function mount($lang = "en")
+    {
+        App::setLocale($lang);
+    }
+
     public function render()
     {
         return view('livewire.business.dashboard.clients.add.index')
@@ -43,10 +48,10 @@ class Index extends Component
                 'slug' => strtoupper(Str::random(20)),
             ];
             User::create($data);
-            session()->flash('success', 'Added Successfully');
+            session()->flash('success', trans('alerts.add'));
             return redirect(route('BusinessClients', App::getLocale()));
         } catch (Exception $e) {
-            return session()->flash('error', $e->getMessage());
+            return session()->flash('error', trans('alerts.error'));
         }
     }
 }

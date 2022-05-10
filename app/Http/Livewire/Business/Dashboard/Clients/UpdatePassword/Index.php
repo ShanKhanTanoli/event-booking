@@ -14,12 +14,13 @@ class Index extends Component
 
     public $password, $password_confirmation;
 
-    public function mount($slug)
+    public function mount($lang = "en", $slug)
     {
+        App::setLocale($lang);
         if ($client = Business::FindClientBySlug(Auth::user()->id, $slug)) {
             $this->user = $client;
         } else {
-            session()->flash('error', 'Account does not exist');
+            session()->flash('error', trans('alerts.error'));
             return redirect(route('BusinessClients', App::getLocale()));
         }
     }
@@ -39,11 +40,11 @@ class Index extends Component
         ]);
         try {
             $this->user->update(['password' => bcrypt($validated['password'])]);
-            session()->flash('success', 'Updated Successfully');
+            session()->flash('success', trans('alerts.update'));
             $this->reset(['password', 'password_confirmation']);
             return redirect(route('BusinessUpdateClientPassword', ['slug' => $this->user->slug, 'lang' => App::getLocale()]));
         } catch (Exception $e) {
-            return session()->flash('error', $e->getMessage());
+            return session()->flash('error', trans('alerts.error'));
         }
     }
 }

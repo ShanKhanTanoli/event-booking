@@ -7,7 +7,7 @@
                     class="nav-link text-dark d-flex @if (Request::path() == 'Client/Settings/Profile/' . App::getLocale()) active text-white @else @endif"
                     href="{{ route('ClientEditProfile', App::getLocale()) }}">
                     <i class="fas fa-user-edit me-2"></i>
-                    <span class="text-sm">Profile</span>
+                    <span class="text-sm">{{ trans('client.profile') }}</span>
                 </a>
             </li>
             <li wire:ignore.self
@@ -16,7 +16,7 @@
                     class="nav-link text-dark d-flex @if (Request::path() == 'Client/Settings/Password/' . App::getLocale()) active text-white @else @endif"
                     href="{{ route('ClientEditPassword', App::getLocale()) }}">
                     <i class="fas fa-lock me-2"></i>
-                    <span class="text-sm">Password</span>
+                    <span class="text-sm">{{ trans('client.password') }}</span>
                 </a>
             </li>
         </ul>

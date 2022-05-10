@@ -18,13 +18,13 @@
                         <i class="fas fa-tachometer-alt"></i>
                     </div>
                     <span class="nav-link-text ms-1">
-                        Dashboard
+                        {{ trans('business.dashboard') }}
                     </span>
                 </a>
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    Clients
+                    {{ trans('business.clients') }}
                 </h6>
             </li>
             <li class="nav-item">
@@ -34,13 +34,13 @@
                         <i class="fas fa-users"></i>
                     </div>
                     <span class="nav-link-text ms-1">
-                        Clients
+                        {{ trans('business.clients') }}
                     </span>
                 </a>
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    Events
+                    {{ trans('business.events') }}
                 </h6>
             </li>
             <li class="nav-item">
@@ -50,13 +50,13 @@
                         <i class="fas fa-calendar-alt"></i>
                     </div>
                     <span class="nav-link-text ms-1">
-                        Events
+                        {{ trans('business.events') }}
                     </span>
                 </a>
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    Business Details
+                    {{ trans('business.business-details') }}
                 </h6>
             </li>
             <li class="nav-item">
@@ -66,13 +66,13 @@
                         <i class="fas fa-business-time"></i>
                     </div>
                     <span class="nav-link-text ms-1">
-                        Business Details
+                        {{ trans('business.business-details') }}
                     </span>
                 </a>
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    Payments
+                    {{ trans('business.payments') }}
                 </h6>
             </li>
             <li class="nav-item">
@@ -82,13 +82,13 @@
                         <i class="fas fa-credit-card"></i>
                     </div>
                     <span class="nav-link-text ms-1">
-                        Payments
+                        {{ trans('business.payments') }}
                     </span>
                 </a>
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    Connect Account
+                    {{ trans('business.stripe-connect') }}
                 </h6>
             </li>
             <li class="nav-item">
@@ -98,12 +98,13 @@
                         <i class="fab fa-stripe"></i>
                     </div>
                     <span class="nav-link-text ms-1">
-                        Stripe Connect
+                        {{ trans('business.stripe-connect') }}
                     </span>
                 </a>
             </li>
             <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Configure</h6>
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
+                    {{ trans('business.settings') }}</h6>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white @if (Request::path() == 'Business/Settings/Profile/' . App::getLocale() or Request::path() == 'Business/Settings/Password/' . App::getLocale()) active bg-gradient-primary @else '' @endif"
@@ -111,7 +112,7 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-cog"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Settings</span>
+                    <span class="nav-link-text ms-1">{{ trans('business.settings') }}</span>
                 </a>
             </li>
             <hr>

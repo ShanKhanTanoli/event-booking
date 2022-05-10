@@ -33,7 +33,8 @@ Route::get('/home/{lang?}', function () {
 })->name('home');
 
 
-Route::get('/{lang?}', function () {
+Route::get('/{lang?}', function ($lang = "en") {
+    App::setLocale($lang);
     return redirect(Redirect::ToDashboard());
 })->name('main');
 

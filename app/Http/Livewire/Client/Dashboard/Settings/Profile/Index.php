@@ -36,10 +36,10 @@ class Index extends Component
         ]);
         try {
             Auth::user()->update($validated);
-            session()->flash('success', 'Profile Updated Successfully');
+            session()->flash('success', trans('alerts.update'));
             return redirect(route('ClientEditProfile', App::getLocale()));
         } catch (Exception $e) {
-            return session()->flash('error', $e->getMessage());
+            return session()->flash('error', trans('alerts.error'));
         }
     }
 }

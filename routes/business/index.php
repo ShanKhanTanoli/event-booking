@@ -85,10 +85,10 @@ Route::middleware(['auth', 'business'])->prefix('Business')->group(function () {
     Route::get('StripeConnect/{lang?}', StripeConnect::class)->name('BusinessStripeConnect');
     /*End::StripeConnect*/
 
-
     /*Begin::Settings*/
     Route::get('Settings/Profile/{lang?}', EditProfile::class)->name('BusinessEditProfile');
     Route::get('Settings/Password/{lang?}', EditPassword::class)->name('BusinessEditPassword');
     /*End::Settings*/
+    
 });
 /*End::Auth,Business Group*/

@@ -25,7 +25,7 @@ class BusinessRegister extends Component
 
     public function mount($lang = "en")
     {
-        App::getLocale($lang);
+        App::setLocale($lang);
         if (auth()->user()) {
             redirect(Redirect::ToDashboard());
         }
