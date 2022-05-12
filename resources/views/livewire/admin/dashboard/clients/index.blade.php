@@ -48,7 +48,7 @@
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                         <h6 class="text-white text-capitalize ps-3">
-                            Client Accounts
+                            {{ trans('admin.client-accounts') }}
                         </h6>
                     </div>
                 </div>
@@ -61,25 +61,25 @@
                                         #
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('admin.client-name') }}
+                                        {{ trans('admin.client-table-name') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('admin.client-user-name') }}
+                                        {{ trans('admin.client-table-user-name') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('admin.client-email') }}
+                                        {{ trans('admin.client-table-email') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('admin.client-number') }}
+                                        {{ trans('admin.client-table-number') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('admin.client-joined-business') }}
+                                        {{ trans('admin.client-table-joined-business') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('admin.client-more') }}
+                                        {{ trans('admin.client-table-more') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('admin.client-delete') }}
+                                        {{ trans('admin.client-table-delete') }}
                                     </th>
                                 </tr>
                             </thead>
@@ -152,7 +152,7 @@
                                                 <span wire:loading wire:target='Edit("{{ $user->id }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
-                                                More
+                                                    {{ trans('admin.client-table-more') }}
                                             </button>
                                         </td>
                                         <td class="align-middle">
@@ -162,7 +162,7 @@
                                                     wire:target='DeleteConfirmation("{{ $user->id }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
-                                                Delete
+                                                    {{ trans('admin.client-table-delete') }}
                                             </button>
                                         </td>
                                     </tr>

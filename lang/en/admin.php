@@ -7,6 +7,7 @@ return [
     'business' => 'Business',
     'clients' => 'Clients',
     'events' => 'Events',
+    'plans' => 'Plans',
     'payments' => 'Payments',
     'settings' => 'Settings',
     /*End::Admin Dashboard Sidebar*/
@@ -40,17 +41,6 @@ return [
     'mails' => 'Mails',
     'password' => 'Password',
 
-    /*Begin::Table*/
-    'table-name' => 'Name',
-    'table-user-name' => 'User Name',
-    'table-email' => 'Email',
-    'table-number' => 'Number',
-    'table-events' => 'Events',
-    'table-clients' => 'Clients',
-    'table-more' => 'More',
-    'table-delete' => 'Delete',
-    /*End::Table*/
-
     /*Begin::Mails*/
     'sent-mails' => 'Sent Mails',
     'table-mail-subject' => 'Subject',
@@ -67,6 +57,18 @@ return [
     /*End::Common*/
 
     /*Begin::Only Business*/
+
+    /*Begin::Business Table*/
+    'business-table-name' => 'Name',
+    'business-table-user-name' => 'User Name',
+    'business-table-email' => 'Email',
+    'business-table-number' => 'Number',
+    'business-table-events' => 'Events',
+    'business-table-clients' => 'Clients',
+    'business-table-more' => 'More',
+    'business-table-delete' => 'Delete',
+    /*End::Business Table*/
+
     'business-accounts' => 'Business Accounts',
     'add-business' => 'Add Business',
     'update-business' => 'Update Business',
@@ -79,13 +81,54 @@ return [
     'update-business-password' => 'Update Password',
     'update-business-new-password' => 'New Password',
     'update-business-confirm-password' => 'Confirm Password',
+
+    /*Begin::Admin Business Sidebar*/
+    'business-profile' => 'Profile',
+    'business-clients' => 'Clients',
+    'business-send-mail' => 'Send Mail',
+    'business-mails' => 'Mails',
+    'business-password' => 'Password',
+    /*End::Admin Business Sidebar*/
+
     /*End::Only Business*/
 
+    /****************************************/
+
     /*Begin::Only Client*/
+
+    /*Begin::Client Table*/
+    'client-table-name' => 'Name',
+    'client-table-user-name' => 'User Name',
+    'client-table-email' => 'Email',
+    'client-table-number' => 'Number',
+    'client-table-events' => 'Events',
+    'client-table-joined-business' => 'Joined Business',
+    'client-table-more' => 'More',
+    'client-table-delete' => 'Delete',
+    /*End::Client Table*/
+
+    'client' => 'Client',
     'client-accounts' => 'Client Accounts',
     'add-client' => 'Add Client',
     'update-client' => 'Update Client',
+
+    'update-client-name' => 'Name',
+    'update-client-user-name' => 'User Name',
+    'update-client-number' => 'Number',
+    'update-client-email' => 'Email',
+    'update-client-parent-business' => 'Business Account',
+
     'update-client-password' => 'Update Password',
+    'update-client-new-password' => 'New Password',
+    'update-client-confirm-password' => 'Confirm Password',
+
+    /*Begin::Admin Client Sidebar*/
+    'client-profile' => 'Profile',
+    'client-send-mail' => 'Send Mail',
+    'client-mails' => 'Mails',
+    'client-password' => 'Password',
+    /*End::Admin Client Sidebar*/
+
     /*End::Only Client*/
 
     /*End::Business & Clients*/

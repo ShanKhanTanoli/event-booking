@@ -8,6 +8,7 @@ return [
     'adminclients' => 'Clients',
     'adminevents' => 'Events',
     'adminpayments' => 'Payments',
+    'adminpayments' => 'Payments',
     'adminsettings' => 'Settings',
     /*Begin::Admin Sidebar*/
 

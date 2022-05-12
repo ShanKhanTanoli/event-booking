@@ -59,28 +59,28 @@
                                         #
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('admin.table-name') }}
+                                        {{ trans('admin.business-table-name') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('admin.table-user-name') }}
+                                        {{ trans('admin.business-table-user-name') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('admin.table-email') }}
+                                        {{ trans('admin.business-table-email') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('admin.table-number') }}
+                                        {{ trans('admin.business-table-number') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('admin.table-events') }}
+                                        {{ trans('admin.business-table-events') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('admin.table-clients') }}
+                                        {{ trans('admin.business-table-clients') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('admin.table-more') }}
+                                        {{ trans('admin.business-table-more') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('admin.table-delete') }}
+                                        {{ trans('admin.business-table-delete') }}
                                     </th>
                                 </tr>
                             </thead>
@@ -156,7 +156,7 @@
                                                 <span wire:loading wire:target='Edit("{{ $user->id }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
-                                                {{ trans('admin.table-more') }}
+                                                {{ trans('admin.business-table-more') }}
                                             </button>
                                         </td>
                                         <td class="align-middle">
@@ -166,7 +166,7 @@
                                                     wire:target='DeleteConfirmation("{{ $user->id }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
-                                                {{ trans('admin.table-delete') }}
+                                                {{ trans('admin.business-table-delete') }}
                                             </button>
                                         </td>
                                     </tr>

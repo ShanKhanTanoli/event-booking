@@ -7,6 +7,7 @@ return [
     'business' => 'Negocio',
     'clients' => 'Clientes',
     'events' => 'Eventos',
+    'plans' => 'Planes',
     'payments' => 'Pagos',
     'settings' => 'Ajustes',
     /*End::Admin Dashboard Sidebar*/
