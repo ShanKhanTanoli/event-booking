@@ -21,15 +21,14 @@ class ResetPassword extends Component
         'password' => 'required|min:6|same:passwordConfirmation'
     ];
 
-    public function mount($lang = "en", $id)
+    public function mount($id, $lang = "en")
     {
-        App::getLocale($lang);
-
+        App::setLocale($lang);
         if ($existingUser = User::find($id)) {
             $this->email = $existingUser->email;
             $this->urlID = intval($existingUser->id);
         } else {
-            return session()->flash('error', 'Something went wrong');
+            return session()->flash('error', trans('alerts.error'));
         }
     }
 
@@ -41,10 +40,10 @@ class ResetPassword extends Component
             $existingUser->update([
                 'password' => Hash::make($this->password)
             ]);
-            session()->flash('success', 'Password changed successfully');
+            session()->flash('success', trans('alerts.change-password'));
             return redirect(route('login', App::getLocale()));
         } else {
-            return session()->flash('error', 'Something went wrong');
+            return session()->flash('error', trans('alerts.error'));
         }
     }
 

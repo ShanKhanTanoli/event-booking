@@ -9,7 +9,10 @@ return [
     'update' => 'Actualizado con éxito',
     'delete' => 'Borrado exitosamente',
     'error' => 'Algo salió mal',
-    'mail-sent' => 'Enviado correctamente',
+    'mail-sent' => 'El correo ha sido enviado con éxito',
+    'no-email' => 'El correo electrónico no existe',
+    'password-email-sent' => 'Se ha enviado un correo electrónico de restablecimiento de contraseña',
+    'change-password' => 'La contraseña ha sido cambiada con éxito',
     /*Fin::Notificaciones*/
 
 ];

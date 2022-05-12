@@ -22,7 +22,7 @@ class ForgotPassword extends Component
 
     public function mount($lang = "en")
     {
-        App::getLocale($lang);
+        App::setLocale($lang);
         if (auth()->user()) {
             redirect(Redirect::ToDashboard());
         }
@@ -39,9 +39,9 @@ class ForgotPassword extends Component
         $user = User::where('email', $this->email)->first();
         if ($user) {
             $this->notify(new ResetPassword($user->id));
-            return session()->flash('success', 'A password reset link has been sent to ' . $this->email);
+            return session()->flash('success', trans('alerts.password-email-sent'));
         } else {
-            return session()->flash('error', 'Email not found');
+            return session()->flash('error', trans('alerts.no-email'));
         }
     }
 

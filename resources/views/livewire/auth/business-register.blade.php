@@ -11,14 +11,17 @@
                     <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto ">
                         <div class="card card-plain">
                             <div class="card-header text-center">
-                                <h4 class="font-weight-bolder text-primary">Register as Business</h4>
+                                <h4 class="font-weight-bolder text-primary">
+                                    {{ trans('business-register.heading') }}
+                                </h4>
                             </div>
                             <div class="card-body">
                                 <form role="form" wire:submit.prevent='register()'>
                                     <div class="input-group input-group-outline mb-3">
                                         <input id="name" type="name" wire:model.defer="name"
                                             class="form-control @error('name') is-invalid @enderror" name="name"
-                                            value="{{ old('name') }}" autocomplete="name" placeholder="Enter Name">
+                                            value="{{ old('name') }}" autocomplete="name"
+                                            placeholder="{{ trans('business-register.name') }}">
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -28,7 +31,8 @@
                                     <div class="input-group input-group-outline mb-3">
                                         <input id="email" type="email" wire:model.defer="email"
                                             class="form-control @error('email') is-invalid @enderror" name="email"
-                                            value="{{ old('email') }}" autocomplete="email" placeholder="Enter Email">
+                                            value="{{ old('email') }}" autocomplete="email"
+                                            placeholder="{{ trans('business-register.email') }}">
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -38,7 +42,8 @@
                                     <div class="input-group input-group-outline mb-3">
                                         <input id="password" type="password" wire:model.defer="password"
                                             class="form-control @error('password') is-invalid @enderror" name="password"
-                                            autocomplete="password" placeholder="Enter Password">
+                                            autocomplete="password"
+                                            placeholder="{{ trans('business-register.password') }}">
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -50,7 +55,7 @@
                                             wire:model.defer="password_confirmation"
                                             class="form-control @error('password_confirmation') is-invalid @enderror"
                                             name="password_confirmation" autocomplete="password_confirmation"
-                                            placeholder="Confirm Password">
+                                            placeholder="{{ trans('business-register.confirm-password') }}">
                                         @error('password_confirmation')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -62,7 +67,7 @@
                                             class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">
                                             <span wire:loading class="spinner-border spinner-border-sm" role="status"
                                                 aria-hidden="true"></span>
-                                            Register
+                                            {{ trans('business-register.register-btn') }}
                                         </button>
                                     </div>
                                 </form>
@@ -71,7 +76,7 @@
                                 <p class="mb-2 text-sm mx-auto">
                                     <a href="{{ route('login', App::getLocale()) }}"
                                         class="text-primary text-gradient font-weight-bold">
-                                        Already have an Account ? Login here
+                                        {{ trans('business-register.have-account') }}
                                     </a>
                                 </p>
                             </div>

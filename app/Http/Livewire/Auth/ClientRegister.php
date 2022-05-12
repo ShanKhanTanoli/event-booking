@@ -29,7 +29,7 @@ class ClientRegister extends Component
     public function mount($lang = "en", $user_name = null)
     {
         //Set language
-        App::setLocale($lang);
+        App::setlocale($lang);
 
         //If user exists
         if ($user_name) {

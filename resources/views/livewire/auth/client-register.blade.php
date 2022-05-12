@@ -15,16 +15,21 @@
                         class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
                         <div class="card card-plain">
                             <div class="card-header text-center">
-                                <h4 class="font-weight-bolder text-primary">Business Details</h4>
+                                <h4 class="font-weight-bolder text-primary">
+                                    {{ trans('client-register.business-heading') }}
+                                </h4>
                             </div>
                             <div class="card-body p-4">
                                 <ul class="list-group">
                                     <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                                        <strong class="text-dark">Full Name:</strong> &nbsp;
+                                        <strong
+                                            class="text-dark">{{ trans('client-register.business-name') }}:</strong>
+                                        &nbsp;
                                         {!! $business->name !!}
                                     </li>
                                     <li class="list-group-item border-0 ps-0 text-sm">
-                                        <strong class="text-dark">User Name:</strong>
+                                        <strong
+                                            class="text-dark">{{ trans('client-register.business-user-name') }}:</strong>
                                         &nbsp;
                                         {!! $business->user_name !!}
                                     </li>
@@ -33,11 +38,13 @@
                                         &nbsp; {!! $business->number !!}
                                     </li>
                                     <li class="list-group-item border-0 ps-0 text-sm">
-                                        <strong class="text-dark">Email:</strong>
+                                        <strong
+                                            class="text-dark">{{ trans('client-register.business-email') }}:</strong>
                                         &nbsp; {!! $business->email !!}
                                     </li>
                                     <li class="list-group-item border-0 ps-0 text-sm">
-                                        <strong class="text-dark">Address</strong>
+                                        <strong
+                                            class="text-dark">{{ trans('client-register.business-address') }}</strong>
                                         <p class="text-sm mt-2">
                                             {!! $business->address !!}
                                         </p>
@@ -52,14 +59,16 @@
                     <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
                         <div class="card card-plain">
                             <div class="card-header text-center">
-                                <h4 class="font-weight-bolder text-primary">Register as Client</h4>
+                                <h4 class="font-weight-bolder text-primary">
+                                    {{ trans('client-register.register-heading') }}
+                                </h4>
                             </div>
                             <div class="card-body">
                                 <form role="form" wire:submit.prevent='register()'>
                                     <div class="input-group input-group-outline mb-3">
                                         <input id="name" type="name" wire:model.defer="name"
                                             class="form-control @error('name') is-invalid @enderror" name="name"
-                                            value="{{ old('name') }}" autocomplete="name" placeholder="Enter Name">
+                                            value="{{ old('name') }}" autocomplete="name" placeholder="{{ trans('client-register.client-name') }}">
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -69,7 +78,7 @@
                                     <div class="input-group input-group-outline mb-3">
                                         <input id="email" type="email" wire:model.defer="email"
                                             class="form-control @error('email') is-invalid @enderror" name="email"
-                                            value="{{ old('email') }}" autocomplete="email" placeholder="Enter Email">
+                                            value="{{ old('email') }}" autocomplete="email" placeholder="{{ trans('client-register.client-email') }}">
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -79,7 +88,7 @@
                                     <div class="input-group input-group-outline mb-3">
                                         <input id="password" type="password" wire:model.defer="password"
                                             class="form-control @error('password') is-invalid @enderror" name="password"
-                                            autocomplete="password" placeholder="Enter Password">
+                                            autocomplete="password" placeholder="{{ trans('client-register.client-password') }}">
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -91,7 +100,7 @@
                                             wire:model.defer="password_confirmation"
                                             class="form-control @error('password_confirmation') is-invalid @enderror"
                                             name="password_confirmation" autocomplete="password_confirmation"
-                                            placeholder="Confirm Password">
+                                            placeholder="{{ trans('client-register.client-confirm-password') }}">
                                         @error('password_confirmation')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -103,7 +112,7 @@
                                             class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">
                                             <span wire:loading class="spinner-border spinner-border-sm" role="status"
                                                 aria-hidden="true"></span>
-                                            Register
+                                                {{ trans('client-register.register-btn') }}
                                         </button>
                                     </div>
                                 </form>
@@ -112,7 +121,7 @@
                                 <p class="mb-2 text-sm mx-auto">
                                     <a href="{{ route('login') }}"
                                         class="text-primary text-gradient font-weight-bold">
-                                        Already have an Account ? Login here
+                                        {{ trans('client-register.have-account') }}
                                     </a>
                                 </p>
                             </div>
