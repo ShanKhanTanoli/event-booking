@@ -1,16 +1,12 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            @include('errors.alerts')
-        </div>
-    </div>
+    @include('errors.alerts')
     <div class="row">
         <div class="col-12">
             <div class="card my-4">
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                         <h6 class="text-white text-capitalize ps-3">
-                            Add Business Account
+                            {{ trans('admin.add-business') }}
                         </h6>
                     </div>
                 </div>
@@ -103,7 +99,7 @@
                                         <span wire:loading class="spinner-border spinner-border-sm" role="status"
                                             aria-hidden="true">
                                         </span>
-                                        Save Changes
+                                        {{ trans('admin.save-changes') }}
                                     </button>
                                 </div>
                             </div>

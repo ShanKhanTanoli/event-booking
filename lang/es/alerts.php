@@ -9,6 +9,7 @@ return [
     'update' => 'Actualizado con éxito',
     'delete' => 'Borrado exitosamente',
     'error' => 'Algo salió mal',
+    'mail-sent' => 'Enviado correctamente',
     /*Fin::Notificaciones*/
 
 ];

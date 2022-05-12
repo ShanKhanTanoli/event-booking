@@ -6,6 +6,7 @@ use App\Http\Livewire\Admin\Dashboard\Index as AdminDashboard;
 /*Begin::Business*/
 use App\Http\Livewire\Admin\Dashboard\Business\Index as ViewAllBusiness;
 use App\Http\Livewire\Admin\Dashboard\Business\Add\Index as AddBusiness;
+use App\Http\Livewire\Admin\Dashboard\Business\Clients\Index as BusinessClients;
 use App\Http\Livewire\Admin\Dashboard\Business\Edit\Index as EditBusiness;
 use App\Http\Livewire\Admin\Dashboard\Business\UpdatePassword\Index as UpdateBusinessPassword;
 /*End::Business*/
@@ -22,10 +23,10 @@ use App\Http\Livewire\Admin\Dashboard\Clients\Edit\Index as EditClient;
 use App\Http\Livewire\Admin\Dashboard\Clients\UpdatePassword\Index as UpdateClientPassword;
 /*End::Clients*/
 
-/*Begin::Clients Mails*/
-use App\Http\Livewire\Admin\Dashboard\Clients\Mails\Index as ViewClientMails;
-use App\Http\Livewire\Admin\Dashboard\Clients\Mails\Send\Index as SendMailToClient;
-/*End::Clients Mails*/
+/*Begin::Client Mails*/
+use App\Http\Livewire\Admin\Dashboard\Clients\Mails\Index as ClientMails;
+use App\Http\Livewire\Admin\Dashboard\Clients\Mails\Send\Index as SendClientMail;
+/*End::Client Mails*/
 
 /*Begin::Events*/
 use App\Http\Livewire\Admin\Dashboard\Events\Index as AllEvents;
@@ -63,6 +64,9 @@ Route::middleware(['auth', 'admin'])->prefix('Admin')->group(function () {
     Route::get('AddBusiness/{lang?}', AddBusiness::class)
         ->name('AdminAddBusiness');
 
+    Route::get('BusinessClients/{slug}/{lang?}', BusinessClients::class)
+        ->name('AdminBusinessClients');
+
     Route::get('EditBusiness/{slug}/{lang?}', EditBusiness::class)
         ->name('AdminEditBusiness');
 
@@ -93,11 +97,11 @@ Route::middleware(['auth', 'admin'])->prefix('Admin')->group(function () {
     /*End::Clients*/
 
     /*Begin::ClientMails*/
-    Route::get('ClientMails/{slug}/{lang?}', ViewClientMails::class)
+    Route::get('ClientMails/{slug}/{lang?}', ClientMails::class)
         ->name('AdminClientMails');
 
-    Route::get('SendMail/{slug}/{lang?}', SendMailToClient::class)
-        ->name('AdminSendMailToClient');
+    Route::get('SendMailToClient/{slug}/{lang?}', SendClientMail::class)
+        ->name('AdminSendClientMail');
     /*End::ClientMails*/
 
     /*Begin::Events*/

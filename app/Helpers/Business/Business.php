@@ -3,6 +3,7 @@
 namespace App\Helpers\Business;
 
 use App\Helpers\Business\Traits\BusinessClients;
+use App\Helpers\Business\Traits\BusinessMails;
 use App\Helpers\Business\Traits\BusinessStore;
 use App\Models\User;
 use App\Helpers\Currency\Currency;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Business
 {
-    use BusinessClients, BusinessStore;
+    use BusinessClients, BusinessStore, BusinessMails;
 
     public static function Is()
     {
@@ -34,9 +35,18 @@ class Business
         return false;
     }
 
+    public static function FindBySlug($slug)
+    {
+        if ($user = User::where('slug', $slug)->first()) {
+            if ($user->role_id == 2 && $user->role == "business") {
+                return $user;
+            } else return false;
+        } else return false;
+    }
+
     public static function FindByUserName($user_name)
     {
-        if ($user = User::where('user_name',$user_name)->first()) {
+        if ($user = User::where('user_name', $user_name)->first()) {
             if ($user->role_id == 2 && $user->role == "business") {
                 return $user;
             }

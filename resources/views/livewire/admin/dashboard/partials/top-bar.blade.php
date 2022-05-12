@@ -15,7 +15,7 @@
                     </a>
                 </li>
                 <li class="nav-item px-3 d-flex align-items-center">
-                    <a href="{{ route('AdminSettings') }}" class="nav-link text-body p-0">
+                    <a href="{{ route('AdminSettings', App::getLocale()) }}" class="nav-link text-body p-0">
                         <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer" aria-hidden="true"></i>
                     </a>
                 </li>

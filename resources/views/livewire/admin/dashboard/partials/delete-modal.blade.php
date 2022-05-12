@@ -7,7 +7,7 @@
                     <i class="fas fa-exclamation-triangle fa-4x text-danger">
                     </i>
                     <h4 class="mt-3">
-                        Are you sure you want to delete?
+                        {{ trans('admin.modal-sure') }}
                     </h4>
                 </div>
             </div>
@@ -16,10 +16,11 @@
                     wire:click='Delete("{{ $delete->id }}")'>
                     <span wire:loading wire:target='Delete("{{ $delete->id }}")'
                         class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    DELETE
+                    {{ trans('admin.modal-delete') }}
                 </button>
-                <button type="button" class="btn btn-lg btn-block bg-gradient-dark"
-                    data-bs-dismiss="modal">CANCEL</button>
+                <button type="button" class="btn btn-lg btn-block bg-gradient-dark" data-bs-dismiss="modal">
+                    {{ trans('admin.modal-cancel') }}
+                </button>
             </div>
         </div>
     </div>

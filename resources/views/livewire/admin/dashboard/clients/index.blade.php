@@ -10,7 +10,9 @@
                             <i class="fas fa-users opacity-10"></i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Clients</p>
+                            <p class="text-sm mb-0 text-capitalize">
+                                {{ trans('admin.clients') }}
+                            </p>
                             <h4 class="mb-0">
                                 {{ Client::count() }}
                             </h4>
@@ -28,9 +30,11 @@
                             <i class="fas fa-plus opacity-10"></i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Add New</p>
+                            <p class="text-sm mb-0 text-capitalize">
+                                {{ trans('admin.add-new') }}
+                            </p>
                             <h4 class="mb-0">
-                                Client
+                                {{ trans('admin.client') }}
                             </h4>
                         </div>
                     </div>
@@ -57,25 +61,25 @@
                                         #
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Name
+                                        {{ trans('admin.client-name') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        User Name
+                                        {{ trans('admin.client-user-name') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Email
+                                        {{ trans('admin.client-email') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Number
+                                        {{ trans('admin.client-number') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Joined Business
+                                        {{ trans('admin.client-joined-business') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        More
+                                        {{ trans('admin.client-more') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Delete
+                                        {{ trans('admin.client-delete') }}
                                     </th>
                                 </tr>
                             </thead>
