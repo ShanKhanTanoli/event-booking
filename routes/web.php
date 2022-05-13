@@ -14,8 +14,6 @@ Route::get('lang/{lang?}', function ($lang = "en") {
 });
 
 Route::get('debug', function () {
-
-    dd(Admin::Language());
     
     //Verified Business Account
     $verified_business = 'acct_1KVjQIRYVF7b7SlI';

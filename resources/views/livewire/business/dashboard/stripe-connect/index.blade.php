@@ -19,28 +19,41 @@
                             <!--Begin::If Business has Valid Connect Account-->
                             @if ($retrieve = Stripe::RetrieveAccount($account))
 
-                                <div class="alert alert-info text-white">
-                                    <i class="fas fa-info-circle"></i>
-                                    <strong>You have Connect Account</strong>
-                                </div>
+                                <!--Begin::If Account is ready to use-->
+                                @if ($retrieve->payouts_enabled && $retrieve->charges_enabled && $retrieve->details_submitted)
+                                    <div class="alert alert-info text-white">
+                                        <i class="fas fa-info-circle"></i>
+                                        <strong>You Connect Account is ready to use</strong>
+                                    </div>
+                                @endif
+                                <!--End::If Account is ready to use-->
 
-                                <!--Begin::If Payouts are Enabled-->
+                                <!--Begin::If Payouts are not Enabled-->
                                 @if (!$retrieve->payouts_enabled)
                                     <div class="alert alert-danger text-white">
                                         <i class="fas fa-info-circle"></i>
-                                        <strong>Complete your Account</strong>
+                                        <strong>Payouts are not enabled</strong>
                                     </div>
                                 @endif
-                                <!--End::If Payouts are Enabled-->
+                                <!--End::If Payouts are not Enabled-->
 
-                                <!--Begin::If Payouts are Enabled-->
-                                @if (!$retrieve->payouts_enabled && !$retrieve->charges_enabled && !$retrieve->details_submitted)
+                                <!--Begin::If Charges are not Enabled-->
+                                @if (!$retrieve->charges_enabled)
                                     <div class="alert alert-danger text-white">
                                         <i class="fas fa-info-circle"></i>
-                                        <strong>Please complete your Account</strong>
+                                        <strong>Charges are not enabled</strong>
                                     </div>
                                 @endif
-                                <!--End::If Payouts are Enabled-->
+                                <!--End::If Charges are not Enabled-->
+
+                                <!--Begin::If Deatils are not Enabled-->
+                                @if (!$retrieve->details_submitted)
+                                    <div class="alert alert-danger text-white">
+                                        <i class="fas fa-info-circle"></i>
+                                        <strong>Details are not enabled</strong>
+                                    </div>
+                                @endif
+                                <!--End::If Deatils are not Enabled-->
 
 
                                 <!--Begin::If Business has a Valid Connect Account-->
@@ -50,28 +63,27 @@
 
                                             <!--Begin::If Payouts are not Enabled-->
                                             @if (!$retrieve->payouts_enabled && !$retrieve->charges_enabled && !$retrieve->details_submitted)
-                                            <button type="button" class="btn btn-info" wire:attr='disabled'
-                                                wire:click='Complete'>
-                                                <span wire:loading wire:target='Complete'
-                                                    class="spinner-border spinner-border-sm" role="status"
-                                                    aria-hidden="true"></span>
-                                                Complete Your Account
-                                            </button>
+                                                <button type="button" class="btn btn-info" wire:attr='disabled'
+                                                    wire:click='Complete'>
+                                                    <span wire:loading wire:target='Complete'
+                                                        class="spinner-border spinner-border-sm" role="status"
+                                                        aria-hidden="true"></span>
+                                                    Complete Your Account
+                                                </button>
                                             @else
-                                            <button type="button" class="btn btn-info" wire:attr='disabled'
-                                                wire:click='AccountLogin'>
-                                                <span wire:loading wire:target='AccountLogin'
-                                                    class="spinner-border spinner-border-sm" role="status"
-                                                    aria-hidden="true"></span>
-                                                Account Login
-                                            </button>
+                                                <button type="button" class="btn btn-info" wire:attr='disabled'
+                                                    wire:click='AccountLogin'>
+                                                    <span wire:loading wire:target='AccountLogin'
+                                                        class="spinner-border spinner-border-sm" role="status"
+                                                        aria-hidden="true"></span>
+                                                    Account Login
+                                                </button>
                                             @endif
                                             <!--End::If Payouts are not Enabled-->
                                         </div>
                                     </div>
                                 </form>
                                 <!--End::If Business has a Valid Connect Account-->
-
                             @else
                                 <!--Begin::If Business has Not a Valid Connect Account-->
                                 <!--Begin::Create Account-->

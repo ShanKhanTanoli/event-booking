@@ -18,6 +18,12 @@ use App\Http\Livewire\Business\Dashboard\Events\Add\Index as AddEvent;
 use App\Http\Livewire\Business\Dashboard\Events\Edit\Index as EditEvent;
 /*End::Events*/
 
+/*Begin::Plans*/
+use App\Http\Livewire\Business\Dashboard\Plans\Index as AllPlans;
+use App\Http\Livewire\Business\Dashboard\Plans\Add\Index as AddPlan;
+use App\Http\Livewire\Business\Dashboard\Plans\Edit\Index as EditPlan;
+/*End::Plans*/
+
 /*Begin::Payments*/
 use App\Http\Livewire\Business\Dashboard\Payments\Index as Payments;
 use App\Http\Livewire\Business\Dashboard\Payments\Add\Index as AddPayment;
@@ -75,6 +81,17 @@ Route::middleware(['auth', 'business'])->prefix('Business')->group(function () {
     Route::get('BusinessDetails/{lang?}', BusinessDetails::class)->name('BusinessDetails');
     /*End::BusinessDetails*/
 
+    /*Begin::Plans*/
+    Route::get('Plans/{lang?}', AllPlans::class)
+        ->name('BusinessPlans');
+
+    Route::get('AddPlan/{lang?}', AddPlan::class)
+        ->name('BusinessAddPlan');
+
+    Route::get('EditPlan/{slug}/{lang?}', EditPlan::class)
+        ->name('BusinessEditPlan');
+    /*End::Plans*/
+
     /*Begin::Payments*/
     Route::get('Payments/{lang?}', Payments::class)->name('BusinessPayments');
     Route::get('AddPayment/{lang?}', AddPayment::class)->name('BusinessAddPayment');
@@ -89,6 +106,5 @@ Route::middleware(['auth', 'business'])->prefix('Business')->group(function () {
     Route::get('Settings/Profile/{lang?}', EditProfile::class)->name('BusinessEditProfile');
     Route::get('Settings/Password/{lang?}', EditPassword::class)->name('BusinessEditPassword');
     /*End::Settings*/
-    
 });
 /*End::Auth,Business Group*/

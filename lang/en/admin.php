@@ -157,10 +157,6 @@ return [
     'plan-table-edit' => 'Edit',
     'plan-table-archive' => 'Archive',
     'plan-table-activate' => 'Activate',
-
-    'mail-subject' => 'Subject',
-    'mail-message' => 'Message',
-    'send-now' => 'Send Now',
     /*End::Plans Table*/
 
     /*Begin::Admin Plans*/
