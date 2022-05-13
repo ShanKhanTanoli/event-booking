@@ -140,4 +140,29 @@ return [
     'modal-cancel' => 'Cancel',
     /*End::Delete Modal Window*/
 
+
+    /***************************************************/
+
+    /*Begin::Admin Plans*/
+
+    /*Begin::Plans Table*/
+    'plan-table-name' => 'Plan Name',
+    'plan-table-plan-id' => 'Plan ID',
+    'plan-table-status' => 'Plan Status',
+    'plan-table-price' => 'Price',
+    'plan-table-duration' => 'Duration',
+    'plan-table-product-id' => 'Product Id',
+    'plan-table-actions' => 'Actions',
+    //Buttons
+    'plan-table-edit' => 'Edit',
+    'plan-table-archive' => 'Archive',
+    'plan-table-activate' => 'Activate',
+
+    'mail-subject' => 'Subject',
+    'mail-message' => 'Message',
+    'send-now' => 'Send Now',
+    /*End::Plans Table*/
+
+    /*Begin::Admin Plans*/
+
 ];

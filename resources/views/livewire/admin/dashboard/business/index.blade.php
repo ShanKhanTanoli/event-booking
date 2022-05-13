@@ -20,7 +20,7 @@
             </a>
         </div>
         <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
-            <a href="{{ route('AdminAddBusiness') }}">
+            <a href="{{ route('AdminAddBusiness',App::getLocale()) }}">
                 <div class="card">
                     <div class="card-header p-3 pt-2" style="border-radius: 0;">
                         <div

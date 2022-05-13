@@ -2,6 +2,7 @@
 
 namespace App\Helpers\Admin;
 
+use App\Helpers\Admin\Traits\AdminPlans;
 use App\Helpers\Currency\Currency;
 use App\Helpers\Language\Language;
 use App\Models\Setting;
@@ -9,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 class Admin
 {
+    use AdminPlans;
+    
     public static function Is()
     {
         if ($user = Auth::user()) {

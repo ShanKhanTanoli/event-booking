@@ -8,6 +8,8 @@ return [
     'add' => 'Agregado exitosamente',
     'update' => 'Actualizado con éxito',
     'delete' => 'Borrado exitosamente',
+    'archive' => 'Archivado correctamente',
+    'activate' => 'Activado con éxito',
     'error' => 'Algo salió mal',
     'mail-sent' => 'El correo ha sido enviado con éxito',
     'no-email' => 'El correo electrónico no existe',

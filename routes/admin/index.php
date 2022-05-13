@@ -36,7 +36,9 @@ use App\Http\Livewire\Admin\Dashboard\Events\Edit\Index as EditEvent;
 /*End::Events*/
 
 /*Begin::Plans*/
-use App\Http\Livewire\Admin\Dashboard\Plans\Index as ViewAllPlans;
+use App\Http\Livewire\Admin\Dashboard\Plans\Index as AllPlans;
+use App\Http\Livewire\Admin\Dashboard\Plans\Add\Index as AddPlan;
+use App\Http\Livewire\Admin\Dashboard\Plans\Edit\Index as EditPlan;
 /*End::Plans*/
 
 /*Begin::Payments*/
@@ -123,8 +125,14 @@ Route::middleware(['auth', 'admin'])->prefix('Admin')->group(function () {
     /*End::Events*/
 
     /*Begin::Plans*/
-    Route::get('Plans/{lang?}', ViewAllPlans::class)
+    Route::get('Plans/{lang?}', AllPlans::class)
         ->name('AdminPlans');
+
+    Route::get('AddPlan/{lang?}', AddPlan::class)
+        ->name('AdminAddPlan');
+
+    Route::get('EditPlan/{slug}/{lang?}', EditPlan::class)
+        ->name('AdminEditPlan');
     /*End::Plans*/
 
     /*Begin::Payments*/

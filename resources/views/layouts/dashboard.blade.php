@@ -53,7 +53,7 @@
 
             @if ($user->role_id == 1 && ($user->role = 'admin'))
                 <!--Begin::Top-Bar-->
-                @include('livewire.admin.dashboard.partials.top-bar')
+                @livewire('admin.dashboard.partials.top-bar')
                 <!--Begin::Top-Bar-->
             @endif
 
