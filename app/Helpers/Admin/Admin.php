@@ -6,15 +6,28 @@ use App\Helpers\Admin\Traits\AdminPlans;
 use App\Helpers\Currency\Currency;
 use App\Helpers\Language\Language;
 use App\Models\Setting;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class Admin
 {
     use AdminPlans;
-    
+
     public static function Is()
     {
         if ($user = Auth::user()) {
+            if ($user->role_id == 1 && $user->role == "admin") {
+                return $user;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    //Admin ID
+    public static function ID()
+    {
+        if ($user = User::where('role_id', 1)->where('role', 'admin')->first()) {
             if ($user->role_id == 1 && $user->role == "admin") {
                 return $user;
             }

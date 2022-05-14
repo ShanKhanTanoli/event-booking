@@ -9,6 +9,7 @@ use FrittenKeeZ\Vouchers\Models\VoucherRecharge;
 
 trait StripeCard
 {
+
     public static function CreateCardToken($holder_name, $number, $exp_month, $exp_year, $cvc)
     {
         try {
@@ -86,7 +87,7 @@ trait StripeCard
         }
     }
 
-    public static function ChargeClientCard($card, $amount, $currency, $application_fee_amount, $comission_percentage, $stripe_account,$voucher_id)
+    public static function ChargeClientCard($card, $amount, $currency, $application_fee_amount, $comission_percentage, $stripe_account, $voucher_id)
     {
         try {
             if ($stripe = self::Client()) {
@@ -107,10 +108,40 @@ trait StripeCard
                     'price' => $amount,
                     'currency' => $currency,
                     'comission_percentage' => $comission_percentage,
-                    'final_amount' => $amount-$application_fee_amount,
+                    'final_amount' => $amount - $application_fee_amount,
                 ]);
 
                 return true;
+            } else return session()->flash('error', 'Something went wrong.Refresh the page and try again later.');
+        } catch (\Stripe\Exception\CardException $e) {
+            return $e->getMessage();
+        } catch (\Stripe\Exception\RateLimitException $e) {
+            return $e->getMessage();
+        } catch (\Stripe\Exception\InvalidRequestException $e) {
+            return $e->getMessage();
+        } catch (\Stripe\Exception\AuthenticationException $e) {
+            return $e->getMessage();
+        } catch (\Stripe\Exception\ApiConnectionException $e) {
+            return session()->flash('error', 'You are not connected to the Internet.');
+        } catch (\Stripe\Exception\ApiErrorException $e) {
+            return $e->getMessage();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    //Subscribe with Stripe Cashier
+
+    public static function CashierSubscribe($customer, $card, $plan)
+    {
+        try {
+            if ($stripe = self::Client()) {
+
+                $pm = $stripe->tokens->create([
+                    'card' => $card,
+                ]);
+
+                dd($pm);
 
             } else return session()->flash('error', 'Something went wrong.Refresh the page and try again later.');
         } catch (\Stripe\Exception\CardException $e) {

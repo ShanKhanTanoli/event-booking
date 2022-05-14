@@ -77,9 +77,6 @@
                                         {{ trans('admin.plan-table-product-id') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('admin.plan-table-edit') }}
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         {{ trans('admin.plan-table-actions') }}
                                     </th>
                                 </tr>
@@ -157,15 +154,6 @@
                                                     </h6>
                                                 </div>
                                             </div>
-                                        </td>
-                                        <td class="align-middle">
-                                            <button class="btn btn-sm btn-success"
-                                                wire:click='Edit("{{ $plan->id }}")'>
-                                                <span wire:loading wire:target='Edit("{{ $plan->id }}")'
-                                                    class="spinner-border spinner-border-sm" role="status"
-                                                    aria-hidden="true"></span>
-                                                {{ trans('admin.plan-table-edit') }}
-                                            </button>
                                         </td>
                                         @if ($plan->active)
                                             <td class="align-middle">

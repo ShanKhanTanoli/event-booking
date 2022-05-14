@@ -12,77 +12,72 @@
                 </div>
                 <div class="card-body px-0 pb-2">
                     <div class="container">
-                        <form wire:submit.prevent='Update'>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="input-group input-group-static my-3">
-                                        <label for="name">{{ trans('business.plan-name') }}</label>
-                                        <input type="text" wire:model.defer='name' value="{{ old('name') }}"
-                                            class="form-control  @error('name') is-invalid @enderror"
-                                            placeholder="{{ trans('business.plan-name') }}">
-                                        @error('name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+
+
+                        <!--Begin::If Business has Connect Account-->
+                        @if ($account = Auth::user()->account_id)
+
+                            <!--Begin::If Business has Valid Connect Account-->
+                            @if ($retrieve = Stripe::RetrieveAccount($account))
+
+                                <!--Begin::If Payouts are not Enabled-->
+                                @if (!$retrieve->payouts_enabled)
+                                    <div class="alert alert-danger text-white">
+                                        <i class="fas fa-info-circle"></i>
+                                        <strong>Payouts are not enabled</strong>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-group input-group-static my-3">
-                                        <label for="amount">{{ trans('business.plan-amount') }}
-                                            ({{ strtoupper(Admin::Currency()) }})</label>
-                                        <input type="text" wire:model.defer='amount' value="{{ old('amount') }}"
-                                            class="form-control  @error('amount') is-invalid @enderror"
-                                            placeholder="{{ trans('business.plan-amount') }} ({{ strtoupper(Admin::Currency()) }})">
-                                        @error('amount')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                @endif
+                                <!--End::If Payouts are not Enabled-->
+
+                                <!--Begin::If Charges are not Enabled-->
+                                @if (!$retrieve->charges_enabled)
+                                    <div class="alert alert-danger text-white">
+                                        <i class="fas fa-info-circle"></i>
+                                        <strong>Charges are not enabled</strong>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-group input-group-static my-3">
-                                        <label for="interval-count">{{ trans('business.plan-interval-count') }}</label>
-                                        <input type="text" wire:model.defer='interval_count'
-                                            value="{{ old('interval_count') }}"
-                                            class="form-control  @error('interval_count') is-invalid @enderror"
-                                            placeholder="{{ trans('business.plan-interval-count') }}">
-                                        @error('interval_count')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                @endif
+                                <!--End::If Charges are not Enabled-->
+
+                                <!--Begin::If Deatils are not Enabled-->
+                                @if (!$retrieve->details_submitted)
+                                    <div class="alert alert-danger text-white">
+                                        <i class="fas fa-info-circle"></i>
+                                        <strong>Details are not enabled</strong>
                                     </div>
+                                @endif
+                                <!--End::If Deatils are not Enabled-->
+
+                                <!--Begin::If Business has a Valid Connect Account-->
+
+                                <!--Begin::If Payouts are Enabled-->
+                                @if ($retrieve->payouts_enabled && $retrieve->charges_enabled && $retrieve->details_submitted)
+                                    <!--Begin::Update Plan-->
+                                    @include(
+                                        'livewire.business.dashboard.plans.partials.update-plan-form'
+                                    )
+                                    <!--Begin::Update Plan-->
+                                @endif
+                                <!--End::If Payouts are Enabled-->
+
+                                <!--End::If Business has a Valid Connect Account-->
+                            @else
+                                <!--Begin::If Business has not a Valid Connect Account-->
+                                <div class="alert alert-info text-white">
+                                    <i class="fas fa-info-circle"></i>
+                                    <strong>Please create a Stripe Connect Account</strong>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="input-group input-group-static my-3">
-                                        <label for="billing-period">{{ trans('business.plan-billing-period') }}</label>
-                                        <select type="text" wire:model.defer='interval'
-                                            class="form-control  @error('interval') is-invalid @enderror">
-                                            <option value="">{{ trans('business.plan-billing-period') }}</option>
-                                            <option value="day">Day</option>
-                                            <option value="week">Week</option>
-                                            <option value="month">Month</option>
-                                            <option value="year">Year</option>
-                                        </select>
-                                        @error('interval')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary" wire:attr='disabled'>
-                                        <span wire:loading class="spinner-border spinner-border-sm" role="status"
-                                            aria-hidden="true">
-                                        </span>
-                                        {{ trans('business.save-changes') }}
-                                    </button>
-                                </div>
+                                <!--End::If Business has not a Valid Connect Account-->
+                            @endif
+                            <!--End::If Business has Valid Connect Account-->
+                        @else
+                            <!--Begin::No Account-->
+                            <div class="alert alert-info text-white">
+                                <i class="fas fa-info-circle"></i>
+                                <strong>Please create a Stripe Connect Account</strong>
                             </div>
-                        </form>
+                            <!--Begin::No Account-->
+                        @endif
+                        <!--Begin::If Business has Connect Account-->
                     </div>
                 </div>
             </div>

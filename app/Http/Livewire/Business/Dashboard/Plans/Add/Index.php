@@ -39,37 +39,40 @@ class Index extends Component
 
         try {
             $secrey_key = Stripe::SecretKey();
+            //If secret Key is Available
             if ($secrey_key) {
                 //Set Api Key
                 \Stripe\Stripe::setApiKey($secrey_key);
-                //Create Plan
-                $plan = Plan::create([
-                    'amount' => ($validated['amount'] * 100),
-                    'currency' => Admin::Currency(),
-                    'interval_count' => $validated['interval_count'],
-                    'interval' => $validated['interval'],
-                    'product' => [
+                //If Stripe Connect Account ID is Available
+                if ($account_id = Auth::user()->account_id) {
+                    //Create Plan
+                    $plan = Plan::create([
+                        'amount' => ($validated['amount'] * 100),
+                        'currency' => Admin::Currency(),
+                        'interval_count' => $validated['interval_count'],
+                        'interval' => $validated['interval'],
+                        'product' => [
+                            'name' => $validated['name'],
+                        ],
+                    ], ['stripe_account' => $account_id]);
+                    //Save Plan to Database
+                    PlanModel::create([
                         'name' => $validated['name'],
-                    ],
-                ]);
-                //Save Plan to Database
-                PlanModel::create([
-                    'name' => $validated['name'],
-                    'user_id' => Auth::user()->id,
-                    'plan_id' => $plan->id,
-                    'active' => $plan->active,
-                    'amount' => $plan->amount / 100,
-                    'amount_decimal' => $plan->amount_decimal / 100,
-                    'currency' => $plan->currency,
-                    'interval' => $plan->interval,
-                    'interval_count' => $plan->interval_count,
-                    'product_id' => $plan->product,
-                    'slug' => strtoupper(Str::random(10)),
-                ]);
-                session()->flash('success', trans('alerts.add'));
-                return redirect(route('BusinessPlans', App::getLocale()));
+                        'user_id' => Auth::user()->id,
+                        'plan_id' => $plan->id,
+                        'active' => $plan->active,
+                        'amount' => $plan->amount / 100,
+                        'amount_decimal' => $plan->amount_decimal / 100,
+                        'currency' => $plan->currency,
+                        'interval' => $plan->interval,
+                        'interval_count' => $plan->interval_count,
+                        'product_id' => $plan->product,
+                        'slug' => strtoupper(Str::random(10)),
+                    ]);
+                    session()->flash('success', trans('alerts.add'));
+                    return redirect(route('BusinessPlans', App::getLocale()));
+                }
             }
-            //If Secret Key Not Found
             session()->flash('error', trans('alerts.error'));
             return redirect(route('BusinessAddPlan', App::getLocale()));
         } catch (Exception $e) {

@@ -2,7 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 
+/*Begin::Dashboard*/
 use App\Http\Livewire\Business\Dashboard\Index as BusinessDashboard;
+/*End::Dashboard*/
+
+/*Begin::Platform Plans*/
+use App\Http\Livewire\Business\Dashboard\PlatformPlans\Index as PlatformPlans;
+/*End::Platform Plans*/
+
+/*Begin::Subscribe*/
+use App\Http\Livewire\Business\Dashboard\Subscribe\Index as Subscribe;
+/*End::Subscribe*/
 
 /*Begin::Clients*/
 use App\Http\Livewire\Business\Dashboard\Clients\Index as Clients;
@@ -47,7 +57,19 @@ use App\Http\Livewire\Business\Dashboard\Settings\Password\Index as EditPassword
 
 Route::middleware(['auth', 'business'])->prefix('Business')->group(function () {
 
+    /*Begin::Dashboard*/
     Route::get('Dashboard/{lang?}', BusinessDashboard::class)->name('BusinessDashboard');
+    /*End::Dashboard*/
+
+    /*Begin::PlatformPlans*/
+    Route::get('PlatformPlans/{lang?}', PlatformPlans::class)
+        ->name('BusinessPlatformPlans');
+    /*End::PlatformPlans*/
+
+    /*Begin::Subscribe*/
+    Route::get('Subscribe/{slug}/{lang?}', Subscribe::class)
+        ->name('BusinessSubscribe');
+    /*End::Subscribe*/
 
     /*Begin::Clients*/
     Route::get('Clients/{lang?}', Clients::class)

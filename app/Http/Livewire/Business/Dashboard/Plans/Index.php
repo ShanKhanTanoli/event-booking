@@ -35,6 +35,7 @@ class Index extends Component
 
     public function Edit($id)
     {
+        return false;
         if ($plan = Business::FindPlan(Auth::user()->id, $id)) {
             return redirect(route('BusinessEditPlan', ['slug' => $plan->slug, 'lang' => App::getLocale()]));
         }
@@ -56,15 +57,22 @@ class Index extends Component
             if ($secrey_key) {
                 //Set Api Key
                 \Stripe\Stripe::setApiKey($secrey_key);
-                //Create Plan
-                Plan::update($plan->plan_id, [
-                    'active' => false,
-                ]);
-                $plan->update([
-                    'active' => 0,
-                ]);
-                session()->flash('success', trans('alerts.archive'));
-                return redirect(route('BusinessPlans', App::getLocale()));
+                //Deactivate a Plan
+                //If Stripe Connect Account ID is Available
+                if ($account_id = Auth::user()->account_id) {
+                    Plan::update(
+                        $plan->plan_id,
+                        [
+                            'active' => false,
+                        ],
+                        ['stripe_account' => $account_id]
+                    );
+                    $plan->update([
+                        'active' => 0,
+                    ]);
+                    session()->flash('success', trans('alerts.archive'));
+                    return redirect(route('BusinessPlans', App::getLocale()));
+                }
             } //If Secret Key Not Found
             session()->flash('error', trans('alerts.error'));
             return redirect(route('AdminAddPlan', App::getLocale()));
@@ -79,16 +87,22 @@ class Index extends Component
             if ($secrey_key) {
                 //Set Api Key
                 \Stripe\Stripe::setApiKey($secrey_key);
-                //Create Plan
-                Plan::update($plan->plan_id, [
-                    'active' => true,
-                ]);
-                $plan->update([
-                    'active' => 1,
-                ]);
-                session()->flash('success', trans('alerts.archive'));
-                return redirect(route('AdminPlans', App::getLocale()));
-            } //If Secret Key Not Found
+                //If Stripe Connect Account ID is Available
+                if ($account_id = Auth::user()->account_id) {
+                    Plan::update(
+                        $plan->plan_id,
+                        [
+                            'active' => true,
+                        ],
+                        ['stripe_account' => $account_id]
+                    );
+                    $plan->update([
+                        'active' => 1,
+                    ]);
+                    session()->flash('success', trans('alerts.archive'));
+                    return redirect(route('BusinessPlans', App::getLocale()));
+                }
+            }
             session()->flash('error', trans('alerts.error'));
             return redirect(route('AdminAddPlan', App::getLocale()));
         }

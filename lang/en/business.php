@@ -4,6 +4,7 @@ return [
 
     /*Begin::Business Dashboard Sidebar*/
     'dashboard' => 'Dashboard',
+    'platform-plans' => 'Platform Plans',
     'clients' => 'Clients',
     'events' => 'Events',
     'business-details' => 'Business Details',
@@ -30,7 +31,7 @@ return [
 
     /*Begin::Plans*/
 
-    'add-new' => 'Add New', 
+    'add-new' => 'Add New',
     'plan' => 'Plan',
 
     /*Begin::Plans Table*/
@@ -56,6 +57,22 @@ return [
     /*End::Add Plan*/
 
     /*End::Plans*/
+
+
+    /*Begin::Business Subscribe*/
+    'subscribe' => 'Subscribe',
+    'subscribe-payment-details' => 'Payment Details',
+
+    /*Begin::Payment Form*/
+    'subscribe-card-holder-name' => 'Card Holder Name',
+    'subscribe-card-number' => 'Card Number',
+    'subscribe-card-expiry' => 'Card Expiry',
+    'subscribe-card-cvc' => 'Card CVC',
+    'subscribe-pay-now-btn' => 'Pay Now',
+    /*Begin::Payment Form*/
+
+    'subscribe-plan-details' => 'Plan Details',
+    /*End::Business Subscribe*/
 
 
 ];
