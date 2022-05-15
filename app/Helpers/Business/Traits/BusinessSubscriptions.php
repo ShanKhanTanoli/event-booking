@@ -24,10 +24,10 @@ trait BusinessSubscriptions
         return self::Subscriptions($business)->count();
     }
 
-    public static function FinSubscription($business, $subscription)
+    public static function FindSubscription($business, $subscription)
     {
         return self::Subscriptions($business)
-            ->where('stripe_price', $subscription)
+            ->where('name', $subscription)
             ->first();
     }
     /*End::Subscriptions*/

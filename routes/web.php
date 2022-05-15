@@ -1,9 +1,11 @@
 <?php
 
-use App\Helpers\Admin\Admin;
 use App\Helpers\Redirect;
-use Illuminate\Support\Facades\Route;
+use App\Helpers\Admin\Admin;
+use App\Helpers\Stripe\Stripe;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 //Auth::routes();
 
@@ -15,6 +17,41 @@ Route::get('lang/{lang?}', function ($lang = "en") {
 
 Route::get('debug', function () {
     
+    $stripe = Stripe::Client();
+    
+    // $product = $stripe->products->create([
+    //     'name' => 'Gold Special',
+    //     'description' => 'This is the Product',
+    //   ]);
+
+    // $price = $stripe->prices->create([
+    //     'unit_amount' => 2000,
+    //     'currency' => 'usd',
+    //     'recurring' => ['interval' => 'month','interval_count' => 1],
+    //     'product' => 'prod_Lgz1t8mvOha4tP',
+    //   ]);
+
+    $user = Auth::user();
+
+    $product = "prod_Lgz1t8mvOha4tP";
+    $price = "price_1Kzb6UDz8ngwza7q2oXBVuSY";
+
+    //$paymentMethods = $user->paymentMethods();
+    
+    $pm = "pm_1KzbLwDz8ngwza7qQyC9clXX";
+
+    dd($user->subscription($price)->resume());
+
+    dd($user->subscription($price)->onGracePeriod());
+
+    //Create Subscription
+    // $sub = $user->newSubscription(
+    //     $price,
+    //     $price
+    // )->create($pm);
+
+    // dd($sub);
+
     //Verified Business Account
     $verified_business = 'acct_1KVjQIRYVF7b7SlI';
 

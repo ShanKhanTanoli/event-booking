@@ -25,39 +25,52 @@ class Index extends Component
     }
 
 
-    public function Cancel($stripe_price)
+    public function Cancel($name)
     {
         $user = Auth::user();
 
-        if ($subscription = Business::FinSubscription($user, $stripe_price)) {
+        if ($subscription = Business::FindSubscription($user, $name)) {
 
-            dd($user->subscription('plan_LgI7p6DEHq0b4N')->onGracePeriod());
 
-            if ($user->subscription($subscription->name)->onGracePeriod()) {
+            if (!$user->subscription($subscription->name)->ended()) {
 
-                $user->subscription($subscription->stripe_price)->cancel();
+                $user->subscription($subscription->name)->cancel();
                 session()->flash('success', trans('alerts.canceled'));
                 return redirect(route('BusinessSubscriptions', App::getLocale()));
 
             } else return session()->flash('error', trans('alerts.error'));
-
-
         } else return session()->flash('error', trans('alerts.error'));
     }
 
-    public function CancelNow($stripe_price)
+    public function Resume($name)
     {
         $user = Auth::user();
 
-        // if ($user->subscription($subscription)->onGracePeriod()) {
+        if ($subscription = Business::FindSubscription($user, $name)) {
 
-        //     $user->subscription($subscription)->cancelNow();
+            if (!$user->subscription($subscription->name)->ended()) {
 
-        // }
+                $user->subscription($subscription->name)->resume();
+                session()->flash('success', trans('alerts.resume'));
+                return redirect(route('BusinessSubscriptions', App::getLocale()));
+
+            } else return session()->flash('error', trans('alerts.error'));
+        } else return session()->flash('error', trans('alerts.error'));
     }
 
-    public function Resume($stripe_price)
+    public function End($name)
     {
-        // $user->subscription($subscription)->resume();
+        $user = Auth::user();
+
+        if ($subscription = Business::FindSubscription($user, $name)) {
+            
+            if (!$user->subscription($subscription->name)->ended()) {
+
+                $user->subscription($subscription->name)->cancelNow();
+                session()->flash('success', trans('alerts.canceled'));
+                return redirect(route('BusinessSubscriptions', App::getLocale()));
+
+            } else return session()->flash('error', trans('alerts.error'));
+        } else return session()->flash('error', trans('alerts.error'));
     }
 }

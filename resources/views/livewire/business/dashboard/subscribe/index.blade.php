@@ -2,6 +2,7 @@
     @include('errors.alerts')
     <div class="row mt-3 d-flex">
         <div class="col-8">
+            
             @if(Auth::user()->subscribed($plan->plan_id))
             <!--Begin::Already Subscribed-->
             @include('livewire.business.dashboard.subscribe.partials.already-subscribed')
@@ -17,6 +18,7 @@
             @include('livewire.business.dashboard.subscribe.partials.payment-details')
             <!--End::Payment Details-->
             @endif
+
         </div>
         <div class="col-4">
             <!--Begin::Plan Info-->

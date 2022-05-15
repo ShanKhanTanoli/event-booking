@@ -17,6 +17,8 @@ class Index extends Component
 
     public function render()
     {
+        dd("Under Development");
+
         $events = Business::EventsLatestPaginate(Auth::user()->id, 10);
         return view('livewire.business.dashboard.events.index')
             ->with(['events' => $events])

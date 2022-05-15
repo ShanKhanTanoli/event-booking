@@ -154,26 +154,63 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="align-middle">
-                                            <button class="btn btn-sm btn-success"
-                                                wire:click='Cancel("{{ $subscription->stripe_price }}")'>
-                                                <span wire:loading
-                                                    wire:target='Cancel("{{ $subscription->stripe_price }}")'
-                                                    class="spinner-border spinner-border-sm" role="status"
-                                                    aria-hidden="true"></span>
-                                                {{ trans('business.subscription-table-btn-cancel') }}
-                                            </button>
-                                        </td>
-                                        <td class="align-middle">
-                                            <button class="btn btn-sm btn-danger"
-                                                wire:click='End("{{ $subscription->stripe_price }}")'>
-                                                <span wire:loading
-                                                    wire:target='End("{{ $subscription->stripe_price }}")'
-                                                    class="spinner-border spinner-border-sm" role="status"
-                                                    aria-hidden="true"></span>
-                                                {{ trans('business.subscription-table-btn-end') }}
-                                            </button>
-                                        </td>
+
+                                        <!--Begin::If not ended-->
+                                        @if (!Auth::user()->subscription($subscription->name)->ended())
+                                            <!--Begin::If canceled-->
+                                            @if (Auth::user()->subscription($subscription->name)->canceled())
+                                                <td class="align-middle">
+                                                    <button class="btn btn-sm btn-info"
+                                                        wire:click='Resume("{{ $subscription->name }}")'>
+                                                        <span wire:loading
+                                                            wire:target='Resume("{{ $subscription->name }}")'
+                                                            class="spinner-border spinner-border-sm" role="status"
+                                                            aria-hidden="true"></span>
+                                                        {{ trans('business.subscription-table-btn-resume') }}
+                                                    </button>
+                                                </td>
+                                            @else
+                                                <td class="align-middle">
+                                                    <button class="btn btn-sm btn-danger"
+                                                        wire:click='Cancel("{{ $subscription->name }}")'>
+                                                        <span wire:loading
+                                                            wire:target='Cancel("{{ $subscription->name }}")'
+                                                            class="spinner-border spinner-border-sm" role="status"
+                                                            aria-hidden="true"></span>
+                                                        {{ trans('business.subscription-table-btn-cancel') }}
+                                                    </button>
+                                                </td>
+                                            @endif
+                                            <!--End::If canceled-->
+
+                                            <!--If ended-->
+                                        @else
+                                            <td class="align-middle">
+                                                <button class="btn btn-sm btn-danger disabled">
+                                                    {{ trans('business.subscription-table-btn-cancel') }}
+                                                    /
+                                                    {{ trans('business.subscription-table-btn-resume') }}
+                                                </button>
+                                            </td>
+                                        @endif
+                                        <!--Begin::If not ended-->
+                                        @if (Auth::user()->subscription($subscription->name)->ended())
+                                            <td class="align-middle">
+                                                <button class="btn btn-sm btn-danger disabled">
+                                                    {{ trans('business.subscription-table-btn-end') }}
+                                                </button>
+                                            </td>
+                                        @else
+                                            <td class="align-middle">
+                                                <button class="btn btn-sm btn-danger"
+                                                    wire:click='End("{{ $subscription->name }}")'>
+                                                    <span wire:loading wire:target='End("{{ $subscription->name }}")'
+                                                        class="spinner-border spinner-border-sm" role="status"
+                                                        aria-hidden="true"></span>
+                                                    {{ trans('business.subscription-table-btn-end') }}
+                                                </button>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

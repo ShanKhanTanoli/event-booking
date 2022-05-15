@@ -3,6 +3,7 @@
 namespace App\Helpers\Stripe\Traits;
 
 use Exception;
+use Illuminate\Support\Str;
 
 trait StripeCard
 {
@@ -133,7 +134,7 @@ trait StripeCard
                 $user->updateDefaultPaymentMethodFromStripe();
                 //Create Subscription
                 $user->newSubscription(
-                    $plan->plan_id,
+                    strtoupper(Str::random(10)),
                     $plan->plan_id
                 )->create($pm);
                 return session()->flash('success', trans('alerts.subscribed'));
