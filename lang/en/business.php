@@ -9,7 +9,7 @@ return [
     'events' => 'Events',
     'business-details' => 'Business Details',
     'plans' => 'Plans',
-    'payments' => 'Payments',
+    'subscriptions' => 'Subscriptions',
     'stripe-connect' => 'Stripe Connect',
     'settings' => 'Settings',
     /*End::Business Dashboard Sidebar*/
@@ -61,6 +61,9 @@ return [
 
     /*Begin::Business Subscribe*/
     'subscribe' => 'Subscribe',
+    'subscribed' => 'Subscribed',
+    'subscribe-already-subscribed' => 'Already subscribed',
+    'subscribe-active-subscription' => 'Already have an Active Subscription',
     'subscribe-payment-details' => 'Payment Details',
 
     /*Begin::Payment Form*/
@@ -73,6 +76,24 @@ return [
 
     'subscribe-plan-details' => 'Plan Details',
     /*End::Business Subscribe*/
+
+
+    /*Begin::Subscription Table*/
+    'subscription-table-plan' => 'Plan',
+    'subscription-table-duration' => 'Duration',
+    'subscription-table-price' => 'Price',
+    'subscription-table-date' => 'Date',
+    'subscription-table-status' => 'Status',
+    'subscription-table-actions' => 'Cancel/Resume',
+    'subscription-table-end' => 'End',
+
+    //Buttons
+    'subscription-table-btn-cancel' => 'Cancel',
+    'subscription-table-btn-resume' => 'Resume',
+    'subscription-table-btn-end' => 'End',
+    /*End::Subscription Table*/
+
+
 
 
 ];

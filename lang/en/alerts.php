@@ -11,6 +11,7 @@ return [
     'archive' => 'Archived Successfully',
     'activate' => 'Activated Successfully',
     'error' => 'Something went wrong',
+    'subscribed' => 'Subscribed Successfully',
     'mail-sent' => 'Mail has been sent successfully',
     'no-email' => 'Email does not exist',
     'password-email-sent' => 'Password reset email has been sent',

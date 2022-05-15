@@ -43,19 +43,13 @@ class Index extends Component
     public function PayNow()
     {
         $user = Auth::user();
-
-        //Create or get customer
-        $stripeCustomer = $user->createOrGetStripeCustomer();
-
         $card = $this->validate([
             'card_holder_name' => 'required|string',
             'card_number' => 'required|numeric',
             'card_expiry' => 'required|date',
             'card_cvc' => 'required|string',
         ]);
-
-        return Stripe::CashierSubscribe($customer,$card,$this->plan);
-
+        return Stripe::CashierSubscribe($user, $card, $this->plan);
     }
 
     public function FreePlan()

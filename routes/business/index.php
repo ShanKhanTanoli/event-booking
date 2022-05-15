@@ -34,11 +34,9 @@ use App\Http\Livewire\Business\Dashboard\Plans\Add\Index as AddPlan;
 use App\Http\Livewire\Business\Dashboard\Plans\Edit\Index as EditPlan;
 /*End::Plans*/
 
-/*Begin::Payments*/
-use App\Http\Livewire\Business\Dashboard\Payments\Index as Payments;
-use App\Http\Livewire\Business\Dashboard\Payments\Add\Index as AddPayment;
-use App\Http\Livewire\Business\Dashboard\Payments\Edit\Index as EditPayment;
-/*End::Payments*/
+/*Begin::Subscriptions*/
+use App\Http\Livewire\Business\Dashboard\Subscriptions\Index as Subscriptions;
+/*End::Subscriptions*/
 
 /*Begin::StripeConnect*/
 use App\Http\Livewire\Business\Dashboard\StripeConnect\Index as StripeConnect;
@@ -114,11 +112,9 @@ Route::middleware(['auth', 'business'])->prefix('Business')->group(function () {
         ->name('BusinessEditPlan');
     /*End::Plans*/
 
-    /*Begin::Payments*/
-    Route::get('Payments/{lang?}', Payments::class)->name('BusinessPayments');
-    Route::get('AddPayment/{lang?}', AddPayment::class)->name('BusinessAddPayment');
-    Route::get('EditPayment/{id}/{lang?}', EditPayment::class)->name('BusinessEditPayment');
-    /*End::Payments*/
+    /*Begin::Subscriptions*/
+    Route::get('Subscriptions/{lang?}', Subscriptions::class)->name('BusinessSubscriptions');
+    /*End::Subscriptions*/
 
     /*Begin::StripeConnect*/
     Route::get('StripeConnect/{lang?}', StripeConnect::class)->name('BusinessStripeConnect');

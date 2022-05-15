@@ -3,9 +3,6 @@
 namespace App\Helpers\Stripe\Traits;
 
 use Exception;
-use Illuminate\Support\Facades\Auth;
-use FrittenKeeZ\Vouchers\Models\ClientVoucher;
-use FrittenKeeZ\Vouchers\Models\VoucherRecharge;
 
 trait StripeCard
 {
@@ -24,21 +21,21 @@ trait StripeCard
                     ],
                 ]);
                 return $token;
-            } else return session()->flash('error', 'Something went wrong.Refresh the page and try again later.');
+            } else return session()->flash('error', trans('alerts.error'));
         } catch (\Stripe\Exception\CardException $e) {
             return session()->flash('error', $e->getMessage());
         } catch (\Stripe\Exception\RateLimitException $e) {
-            return session()->flash('error', 'Something went wrong.Refresh the page and try again later.');
+            return session()->flash('error', trans('alerts.error'));
         } catch (\Stripe\Exception\InvalidRequestException $e) {
-            return session()->flash('error', 'Something went wrong.Refresh the page and try again later.');
+            return session()->flash('error', trans('alerts.error'));
         } catch (\Stripe\Exception\AuthenticationException $e) {
-            return session()->flash('error', 'Something went wrong.Refresh the page and try again later.');
+            return session()->flash('error', trans('alerts.error'));
         } catch (\Stripe\Exception\ApiConnectionException $e) {
-            return session()->flash('error', 'You are not connected to the Internet.');
+            return session()->flash('error', trans('alerts.error'));
         } catch (\Stripe\Exception\ApiErrorException $e) {
-            return session()->flash('error', 'Something went wrong.Refresh the page and try again later.');
+            return session()->flash('error', trans('alerts.error'));
         } catch (Exception $e) {
-            return $e->getMessage();
+            return session()->flash('error', trans('alerts.error'));
         }
     }
 
@@ -57,19 +54,13 @@ trait StripeCard
                     'source' => $token->id,
                 ]);
 
-                VoucherRecharge::create([
-                    'stripe_id' => $charge->id,
-                    'voucher_id' => $voucher->id,
-                    'user_id' => $user_id,
-                    'amount' => $charge->amount,
-                ]);
 
                 $voucher->update([
                     'balance' => $voucher->balance + $charge->amount,
                 ]);
 
                 return session()->flash('success', 'Successfully recharged');
-            } else return session()->flash('error', 'Something went wrong.Refresh the page and try again later.');
+            } else return session()->flash('error', trans('alerts.error'));
         } catch (\Stripe\Exception\CardException $e) {
             return session()->flash('error', $e->getMessage());
         } catch (\Stripe\Exception\RateLimitException $e) {
@@ -79,7 +70,7 @@ trait StripeCard
         } catch (\Stripe\Exception\AuthenticationException $e) {
             return session()->flash('error', $e->getMessage());
         } catch (\Stripe\Exception\ApiConnectionException $e) {
-            return session()->flash('error', 'You are not connected to the Internet.');
+            return session()->flash('error', trans('alerts.error'));
         } catch (\Stripe\Exception\ApiErrorException $e) {
             return session()->flash('error', $e->getMessage());
         } catch (Exception $e) {
@@ -101,63 +92,66 @@ trait StripeCard
                     'application_fee_amount' => $application_fee_amount * 100,
                 ], ['stripe_account' => $stripe_account]);
 
-                ClientVoucher::create([
-                    'stripe_id' => $charge->id,
-                    'voucher_id' => $voucher_id,
-                    'user_id' => Auth::user()->id,
-                    'price' => $amount,
-                    'currency' => $currency,
-                    'comission_percentage' => $comission_percentage,
-                    'final_amount' => $amount - $application_fee_amount,
-                ]);
-
                 return true;
-            } else return session()->flash('error', 'Something went wrong.Refresh the page and try again later.');
+            } else return session()->flash('error', trans('alerts.error'));
         } catch (\Stripe\Exception\CardException $e) {
-            return $e->getMessage();
+            return session()->flash('error', trans('alerts.error'));
         } catch (\Stripe\Exception\RateLimitException $e) {
-            return $e->getMessage();
+            return session()->flash('error', trans('alerts.error'));
         } catch (\Stripe\Exception\InvalidRequestException $e) {
-            return $e->getMessage();
+            return session()->flash('error', trans('alerts.error'));
         } catch (\Stripe\Exception\AuthenticationException $e) {
-            return $e->getMessage();
+            return session()->flash('error', trans('alerts.error'));
         } catch (\Stripe\Exception\ApiConnectionException $e) {
-            return session()->flash('error', 'You are not connected to the Internet.');
+            return session()->flash('error', trans('alerts.error'));
         } catch (\Stripe\Exception\ApiErrorException $e) {
-            return $e->getMessage();
+            return session()->flash('error', trans('alerts.error'));
         } catch (Exception $e) {
-            return $e->getMessage();
+            return session()->flash('error', trans('alerts.error'));
         }
     }
 
     //Subscribe with Stripe Cashier
-
-    public static function CashierSubscribe($customer, $card, $plan)
+    public static function CashierSubscribe($user, $card, $plan)
     {
         try {
             if ($stripe = self::Client()) {
-
-                $pm = $stripe->tokens->create([
-                    'card' => $card,
+                $pm = $stripe->paymentMethods->create([
+                    'type' => 'card',
+                    'card' => [
+                        'number' => $card['card_number'],
+                        'exp_month' => date('m', strtotime($card['card_expiry'])),
+                        'exp_year' => date('Y', strtotime($card['card_expiry'])),
+                        'cvc' => $card['card_cvc'],
+                    ],
                 ]);
-
-                dd($pm);
-
-            } else return session()->flash('error', 'Something went wrong.Refresh the page and try again later.');
+                //Create or get customer
+                $user->createOrGetStripeCustomer();
+                //Update Payment Method
+                $user->updateDefaultPaymentMethod($pm);
+                //Sync with Stripe
+                $user->updateDefaultPaymentMethodFromStripe();
+                //Create Subscription
+                $user->newSubscription(
+                    $plan->plan_id,
+                    $plan->plan_id
+                )->create($pm);
+                return session()->flash('success', trans('alerts.subscribed'));
+            } else return session()->flash('error', trans('alerts.error'));
         } catch (\Stripe\Exception\CardException $e) {
-            return $e->getMessage();
+            return session()->flash('error', trans('alerts.error'));
         } catch (\Stripe\Exception\RateLimitException $e) {
-            return $e->getMessage();
+            return session()->flash('error', trans('alerts.error'));
         } catch (\Stripe\Exception\InvalidRequestException $e) {
-            return $e->getMessage();
+            return session()->flash('error', trans('alerts.error'));
         } catch (\Stripe\Exception\AuthenticationException $e) {
-            return $e->getMessage();
+            return session()->flash('error', trans('alerts.error'));
         } catch (\Stripe\Exception\ApiConnectionException $e) {
-            return session()->flash('error', 'You are not connected to the Internet.');
+            return session()->flash('error', trans('alerts.error'));
         } catch (\Stripe\Exception\ApiErrorException $e) {
-            return $e->getMessage();
+            return session()->flash('error', trans('alerts.error'));
         } catch (Exception $e) {
-            return $e->getMessage();
+            return session()->flash('error', trans('alerts.error'));
         }
     }
 }

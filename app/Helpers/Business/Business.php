@@ -2,17 +2,17 @@
 
 namespace App\Helpers\Business;
 
-use App\Helpers\Business\Traits\BusinessClients;
-use App\Helpers\Business\Traits\BusinessMails;
-use App\Helpers\Business\Traits\BusinessPlans;
-use App\Helpers\Business\Traits\BusinessStore;
 use App\Models\User;
 use App\Helpers\Currency\Currency;
 use Illuminate\Support\Facades\Auth;
+use App\Helpers\Business\Traits\BusinessMails;
+use App\Helpers\Business\Traits\BusinessPlans;
+use App\Helpers\Business\Traits\BusinessClients;
+use App\Helpers\Business\Traits\BusinessSubscriptions;
 
 class Business
 {
-    use BusinessClients, BusinessStore, BusinessMails, BusinessPlans;
+    use BusinessClients, BusinessMails, BusinessPlans,BusinessSubscriptions;
 
     public static function Is()
     {

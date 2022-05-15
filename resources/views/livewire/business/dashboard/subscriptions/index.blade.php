@@ -10,9 +10,9 @@
                             <i class="fas fa-credit-card opacity-10"></i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Cards</p>
+                            <p class="text-sm mb-0 text-capitalize">{{ trans('business.subscriptions') }}</p>
                             <h4 class="mb-0">
-                                {{ Business::CountCards(Auth::user()->id) }}
+                                {{ Business::CountSubscriptions(Auth::user()) }}
                             </h4>
                         </div>
                     </div>
@@ -20,17 +20,21 @@
             </a>
         </div>
         <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
-            <a href="{{ route('BusinessAddCard') }}">
+            <a href="{{ route('BusinessPlatformPlans', App::getLocale()) }}">
                 <div class="card">
                     <div class="card-header p-3 pt-2" style="border-radius: 0;">
                         <div
                             class="icon icon-lg icon-shape bg-gradient-primary shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                            <i class="fas fa-plus opacity-10"></i>
+                            <i class="fas fa-box-open opacity-10"></i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Add New</p>
+                            <p class="text-sm mb-0 text-capitalize">{{ trans('business.platform-plans') }}</p>
                             <h4 class="mb-0">
-                                Card
+                                @if ($admin = Admin::ID())
+                                    {{ Admin::CountPlans($admin->id) }}
+                                @else
+                                    {{ trans('business.view-all') }}
+                                @endif
                             </h4>
                         </div>
                     </div>
@@ -44,7 +48,7 @@
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                         <h6 class="text-white text-capitalize ps-3">
-                            Cards
+                            {{ trans('business.subscriptions') }}
                         </h6>
                     </div>
                 </div>
@@ -57,33 +61,30 @@
                                         #
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Price
+                                        {{ trans('business.subscription-table-plan') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Balance
+                                        {{ trans('business.subscription-table-duration') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Expires At
+                                        {{ trans('business.subscription-table-price') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Created At
+                                        {{ trans('business.subscription-table-date') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Sold
+                                        {{ trans('business.subscription-table-status') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        View
+                                        {{ trans('business.subscription-table-actions') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Edit
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Delete
+                                        {{ trans('business.subscription-table-end') }}
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($cards as $card)
+                                @foreach ($subscriptions as $subscription)
                                     <tr>
                                         <td>
                                             <div class="d-flex px-2 py-1">
@@ -98,8 +99,11 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        {{ $card->price }}
-                                                        {{ strtoupper(Business::Currency(Auth::user()->id)) }}
+                                                        @if ($admin = Admin::ID())
+                                                            @if ($plan = Admin::FindPlanByPlanId($admin->id, $subscription->stripe_price))
+                                                                {{ $plan->name }}
+                                                            @endif
+                                                        @endif
                                                     </h6>
                                                 </div>
                                             </div>
@@ -108,8 +112,12 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        {{ $card->balance }}
-                                                        {{ strtoupper(Business::Currency(Auth::user()->id)) }}
+                                                        @if ($admin = Admin::ID())
+                                                            @if ($plan = Admin::FindPlanByPlanId($admin->id, $subscription->stripe_price))
+                                                                {{ $plan->interval_count }}
+                                                                {{ Str::ucfirst($plan->interval) }}
+                                                            @endif
+                                                        @endif
                                                     </h6>
                                                 </div>
                                             </div>
@@ -118,7 +126,12 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        {{ date('d M Y', strtotime($card->expires_at)) }}
+                                                        @if ($admin = Admin::ID())
+                                                            @if ($plan = Admin::FindPlanByPlanId($admin->id, $subscription->stripe_price))
+                                                                {{ $plan->amount }}
+                                                                {{ strtoupper($plan->currency) }}
+                                                            @endif
+                                                        @endif
                                                     </h6>
                                                 </div>
                                             </div>
@@ -127,7 +140,7 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        {{ date('d M Y', strtotime($card->created_at)) }}
+                                                        {{ date('d M Y', strtotime($subscription->created_at)) }}
                                                     </h6>
                                                 </div>
                                             </div>
@@ -135,37 +148,30 @@
                                         <td class="align-middle">
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">
-                                                        {{ Card::CountSold($card->unique_id) }}
-                                                    </h6>
+                                                    <span class="badge bg-info">
+                                                        {{ strtoupper($subscription->stripe_status) }}
+                                                    </span>
                                                 </div>
                                             </div>
-                                        </td>
-                                        <td class="align-middle">
-                                            <button class="btn btn-sm btn-info"
-                                                wire:click='View("{{ $card->unique_id }}")'>
-                                                <span wire:loading wire:target='View("{{ $card->unique_id }}")'
-                                                    class="spinner-border spinner-border-sm" role="status"
-                                                    aria-hidden="true"></span>
-                                                View
-                                            </button>
                                         </td>
                                         <td class="align-middle">
                                             <button class="btn btn-sm btn-success"
-                                                wire:click='Edit("{{ $card->unique_id }}")'>
-                                                <span wire:loading wire:target='Edit("{{ $card->unique_id }}")'
+                                                wire:click='Cancel("{{ $subscription->stripe_price }}")'>
+                                                <span wire:loading
+                                                    wire:target='Cancel("{{ $subscription->stripe_price }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
-                                                Edit
+                                                {{ trans('business.subscription-table-btn-cancel') }}
                                             </button>
                                         </td>
                                         <td class="align-middle">
                                             <button class="btn btn-sm btn-danger"
-                                                wire:click='Delete("{{ $card->unique_id }}")'>
-                                                <span wire:loading wire:target='Delete("{{ $card->unique_id }}")'
+                                                wire:click='End("{{ $subscription->stripe_price }}")'>
+                                                <span wire:loading
+                                                    wire:target='End("{{ $subscription->stripe_price }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
-                                                Delete
+                                                {{ trans('business.subscription-table-btn-end') }}
                                             </button>
                                         </td>
                                     </tr>
@@ -175,7 +181,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    {{ $cards->render() }}
+                    {{ $subscriptions->render() }}
                 </div>
             </div>
         </div>
