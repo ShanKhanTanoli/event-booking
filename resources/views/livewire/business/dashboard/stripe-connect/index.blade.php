@@ -6,7 +6,7 @@
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                         <h6 class="text-white text-capitalize ps-3">
-                            Stripe Connect Account
+                            {{ trans('business.stripe-connect') }}
                         </h6>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                                 @if ($retrieve->payouts_enabled && $retrieve->charges_enabled && $retrieve->details_submitted)
                                     <div class="alert alert-info text-white">
                                         <i class="fas fa-info-circle"></i>
-                                        <strong>You Connect Account is ready to use</strong>
+                                        <strong>{{ trans('business.connect-ready') }}</strong>
                                     </div>
                                 @endif
                                 <!--End::If Account is ready to use-->
@@ -32,7 +32,7 @@
                                 @if (!$retrieve->payouts_enabled)
                                     <div class="alert alert-danger text-white">
                                         <i class="fas fa-info-circle"></i>
-                                        <strong>Payouts are not enabled</strong>
+                                        <strong>{{ trans('business.payouts-disabled') }}</strong>
                                     </div>
                                 @endif
                                 <!--End::If Payouts are not Enabled-->
@@ -41,19 +41,19 @@
                                 @if (!$retrieve->charges_enabled)
                                     <div class="alert alert-danger text-white">
                                         <i class="fas fa-info-circle"></i>
-                                        <strong>Charges are not enabled</strong>
+                                        <strong>{{ trans('business.charges-disabled') }}</strong>
                                     </div>
                                 @endif
                                 <!--End::If Charges are not Enabled-->
 
-                                <!--Begin::If Deatils are not Enabled-->
+                                <!--Begin::If Deatils are not submitted-->
                                 @if (!$retrieve->details_submitted)
                                     <div class="alert alert-danger text-white">
                                         <i class="fas fa-info-circle"></i>
-                                        <strong>Details are not enabled</strong>
+                                        <strong>{{ trans('business.details-notsubmitted') }}</strong>
                                     </div>
                                 @endif
-                                <!--End::If Deatils are not Enabled-->
+                                <!--End::If Deatils are not submitted-->
 
 
                                 <!--Begin::If Business has a Valid Connect Account-->
@@ -68,7 +68,7 @@
                                                     <span wire:loading wire:target='Complete'
                                                         class="spinner-border spinner-border-sm" role="status"
                                                         aria-hidden="true"></span>
-                                                    Complete Your Account
+                                                        {{ trans('business.complete-account') }}
                                                 </button>
                                             @else
                                                 <button type="button" class="btn btn-info" wire:attr='disabled'
@@ -76,7 +76,7 @@
                                                     <span wire:loading wire:target='AccountLogin'
                                                         class="spinner-border spinner-border-sm" role="status"
                                                         aria-hidden="true"></span>
-                                                    Account Login
+                                                        {{ trans('business.account-login') }}
                                                 </button>
                                             @endif
                                             <!--End::If Payouts are not Enabled-->

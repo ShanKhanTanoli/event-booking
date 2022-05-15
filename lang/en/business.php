@@ -14,23 +14,51 @@ return [
     'settings' => 'Settings',
     /*End::Business Dashboard Sidebar*/
 
-    /*Begin::Business Settings Sidebar*/
-    'profile' => 'Profile',
-    'password' => 'Password',
-    /*End::Business Settings Sidebar*/
 
-    /*Begin::Business Profile and Password*/
-    'update-profile' => 'Update Profile',
-    'update-password' => 'Update Password',
-    /*End::Business Profile and Password*/
+    /*Begin::Business Clients*/
+    'add-client' => 'Add Client',
 
-    /*Begin::Buttons*/
-    'save-changes' => 'Save Changes',
-    'view-all' => 'View All',
-    /*End::Buttons*/
+    'update-client-profile' => 'Update Profile',
+    'update-client-password' => 'Update Password',
+
+    'client' => 'Client',
+
+    'client-name' => 'Name',
+    'client-username' => 'User Name',
+    'client-number' => 'Number',
+    'client-email' => 'Email',
+    'client-new-password' => 'Password',
+    'client-confirm-password' => 'Confirm Password',
+
+    /*Begin::Business Edit Clients Sidebar*/
+    'client-profile' => 'Profile',
+    'client-password' => 'Password',
+    /*End::Business Edit Clients Sidebar*/
+
+
+    /*Begin::Business Clients Table*/
+    'client-table-name' => 'Name',
+    'client-table-username' => 'User Name',
+    'client-table-email' => 'Email',
+    'client-table-number' => 'Number',
+    'client-table-more' => 'More',
+    'client-table-delete' => 'Delete',
+    /*End::Business Clients Table*/
+
+    /*End::Business Clients*/
+
+
+    /*Begin::Business Details*/
+    'register-link' => 'Clients will register while using this link',
+    'details' => 'Business Details',
+    'name' => 'Name',
+    'username' => 'User Name',
+    'email' => 'Email',
+    'address' => 'Address',
+    /*End::Business Details*/
+
 
     /*Begin::Plans*/
-
     'add-new' => 'Add New',
     'plan' => 'Plan',
 
@@ -56,7 +84,10 @@ return [
     'plan-billing-period' => 'Plan Billing Period',
     /*End::Add Plan*/
 
+    'platform-plan-not-found' => 'Plans will be available soon',
+
     /*End::Plans*/
+
 
 
     /*Begin::Business Subscribe*/
@@ -95,5 +126,45 @@ return [
 
 
 
+    /*Begin::Stripe Connect*/
+    'connect-ready' => 'You Connect Account is ready to use',
+    'payouts-disabled' => 'Payouts are disabled',
+    'charges-disabled' => 'Charges are disabled',
+    'details-notsubmitted' => 'Details are not submitted',
+    'complete-account' => 'Complete Your Account',
+    'account-login' => 'Account Login',
+
+    /*Begin::Create Account*/
+    'account-business-type' => 'Account Type',
+    'business.account-individual' => 'Individual',
+    'business.account-company' => 'Company',
+    'business.account-country' => 'Country',
+    'business.account-email' => 'Email',
+    'business.account-company-name' => 'Company Name',
+    'account-business-fname' => 'First Name',
+    'account-business-lname' => 'Last Name',
+    'account-business-phone' => 'Phone',
+    'account-dob' => 'Date of birth',
+    'craete-account-btn' => 'Create Account',
+    /*End::Create Account*/
+
+    /*End::Stripe Connect*/
+
+
+    /*Begin::Business Profile and Password*/
+    'update-profile' => 'Update Profile',
+    'update-password' => 'Update Password',
+
+    /*Begin::Business Settings Sidebar*/
+    'profile' => 'Profile',
+    'password' => 'Password',
+    /*End::Business Settings Sidebar*/
+
+    /*End::Business Profile and Password*/
+
+    /*Begin::Buttons*/
+    'save-changes' => 'Save Changes',
+    'view-all' => 'View All',
+    /*End::Buttons*/
 
 ];

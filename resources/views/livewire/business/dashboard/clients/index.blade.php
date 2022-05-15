@@ -2,7 +2,7 @@
     @include('errors.alerts')
     <div class="row mb-4">
         <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
-            <a href="{{ route('BusinessClients', App::getLocale()) }}">
+            <a href="#">
                 <div class="card">
                     <div class="card-header p-3 pt-2" style="border-radius: 0;">
                         <div
@@ -10,9 +10,11 @@
                             <i class="fas fa-users opacity-10"></i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Clients</p>
+                            <p class="text-sm mb-0 text-capitalize">
+                                {{ trans('business.clients') }}
+                            </p>
                             <h4 class="mb-0">
-                                {{ Business::CountClients(Auth::user()->id) }}
+                                {{ Client::count() }}
                             </h4>
                         </div>
                     </div>
@@ -28,9 +30,11 @@
                             <i class="fas fa-plus opacity-10"></i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Add New</p>
+                            <p class="text-sm mb-0 text-capitalize">
+                                {{ trans('business.add-new') }}
+                            </p>
                             <h4 class="mb-0">
-                                Client
+                                {{ trans('business.client') }}
                             </h4>
                         </div>
                     </div>
@@ -44,7 +48,7 @@
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                         <h6 class="text-white text-capitalize ps-3">
-                            Clients
+                            {{ trans('business.client-accounts') }}
                         </h6>
                     </div>
                 </div>
@@ -57,22 +61,22 @@
                                         #
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Name
+                                        {{ trans('business.client-table-name') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        User Name
+                                        {{ trans('business.client-table-username') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Email
+                                        {{ trans('business.client-table-email') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Number
+                                        {{ trans('business.client-table-number') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Edit
+                                        {{ trans('business.client-table-more') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Delete
+                                        {{ trans('business.client-table-delete') }}
                                     </th>
                                 </tr>
                             </thead>
@@ -130,7 +134,7 @@
                                                 <span wire:loading wire:target='Edit("{{ $user->id }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
-                                                Edit
+                                                {{ trans('business.client-table-more') }}
                                             </button>
                                         </td>
                                         <td class="align-middle">
@@ -140,7 +144,7 @@
                                                     wire:target='DeleteConfirmation("{{ $user->id }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
-                                                Delete
+                                                {{ trans('business.client-table-delete') }}
                                             </button>
                                         </td>
                                     </tr>
@@ -157,7 +161,7 @@
     </div>
     @if ($delete)
         <!--Begin::DeleteModel-->
-        @include('livewire.admin.dashboard.partials.delete-modal')
+        @include('livewire.business.dashboard.partials.delete-modal')
         <!--End::DeleteModel-->
     @endif
     <!--Begin::Script-->

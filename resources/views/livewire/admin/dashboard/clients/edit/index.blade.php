@@ -25,10 +25,10 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="input-group input-group-static my-3">
-                                                <label for="name">{{ trans('admin.update-business-name') }}</label>
+                                                <label for="name">{{ trans('admin.client-name') }}</label>
                                                 <input type="text" wire:model.defer='name' value="{{ old('name') }}"
                                                     class="form-control  @error('name') is-invalid @enderror"
-                                                    placeholder="{{ trans('admin.update-business-name') }}">
+                                                    placeholder="{{ trans('admin.client-name') }}">
                                                 @error('name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -38,12 +38,11 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="input-group input-group-static my-3">
-                                                <label
-                                                    for="user_name">{{ trans('admin.update-business-user_name') }}</label>
+                                                <label for="user_name">{{ trans('admin.client-username') }}</label>
                                                 <input type="text" wire:model.defer='user_name'
                                                     value="{{ old('user_name') }}"
                                                     class="form-control  @error('user_name') is-invalid @enderror"
-                                                    placeholder="{{ trans('admin.update-business-user_name') }}">
+                                                    placeholder="{{ trans('admin.client-username') }}">
                                                 @error('user_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -55,12 +54,11 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="input-group input-group-static my-3">
-                                                <label
-                                                    for="number">{{ trans('admin.update-business-number') }}</label>
+                                                <label for="number">{{ trans('admin.client-number') }}</label>
                                                 <input type="text" wire:model.defer='number'
                                                     value="{{ old('number') }}"
                                                     class="form-control  @error('number') is-invalid @enderror"
-                                                    placeholder="{{ trans('admin.update-business-number') }}">
+                                                    placeholder="{{ trans('admin.client-number') }}">
                                                 @error('number')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -70,11 +68,11 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="input-group input-group-static my-3">
-                                                <label for="email">{{ trans('admin.update-business-email') }}</label>
+                                                <label for="email">{{ trans('admin.client-email') }}</label>
                                                 <input type="text" wire:model.defer='email'
                                                     value="{{ old('email') }}"
                                                     class="form-control  @error('email') is-invalid @enderror"
-                                                    placeholder="{{ trans('admin.update-business-email') }}">
+                                                    placeholder="{{ trans('admin.client-email') }}">
                                                 @error('email')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -92,8 +90,10 @@
                                                         {{ trans('admin.update-client-parent-business') }}</option>
                                                     @forelse (Business::Latest()->get() as $business)
                                                         <option value="{{ $business->id }}">
-                                                            Name : {{ $business->name }}
-                                                            Email : {{ $business->email }}
+                                                            {{ trans('admin.client-name') }} :
+                                                            {{ $business->name }}
+                                                            {{ trans('admin.client-email') }} :
+                                                            {{ $business->email }}
                                                         </option>
                                                     @empty
                                                         <option value=""></option>

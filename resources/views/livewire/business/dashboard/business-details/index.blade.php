@@ -5,7 +5,7 @@
         <!--Begin::Display Business Link-->
         <div class="col-12">
             <div class="alert alert-info text-white">
-                <i class="fas fa-info-circle"></i> Clients will register while using this link.
+                <i class="fas fa-info-circle"></i> {{ trans('business.register-link') }}
                 <strong class="text-white">
                     {{ route('ClientRegister', ['user_name' => Auth::user()->user_name, 'lang' => App::getLocale()]) }}
                 </strong>
@@ -19,31 +19,31 @@
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                         <h6 class="text-white text-capitalize ps-3">
-                            Business Details
+                            {{ trans('business.details') }}
                         </h6>
                     </div>
                 </div>
                 <div class="card-body p-4">
                     <ul class="list-group">
                         <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                            <strong class="text-dark">Full Name:</strong> &nbsp;
+                            <strong class="text-dark">{{ trans('business.name') }}:</strong> &nbsp;
                             {!! Auth::user()->name !!}
                         </li>
                         <li class="list-group-item border-0 ps-0 text-sm">
-                            <strong class="text-dark">User Name:</strong>
+                            <strong class="text-dark">{{ trans('business.username') }}:</strong>
                             &nbsp;
                             {!! Auth::user()->user_name !!}
                         </li>
                         <li class="list-group-item border-0 ps-0 text-sm">
-                            <strong class="text-dark">Mobile:</strong>
+                            <strong class="text-dark">{{ trans('business.mobile') }}:</strong>
                             &nbsp; {!! Auth::user()->number !!}
                         </li>
                         <li class="list-group-item border-0 ps-0 text-sm">
-                            <strong class="text-dark">Email:</strong>
+                            <strong class="text-dark">{{ trans('business.email') }}:</strong>
                             &nbsp; {!! Auth::user()->email !!}
                         </li>
                         <li class="list-group-item border-0 ps-0 text-sm">
-                            <strong class="text-dark">Address:</strong>
+                            <strong class="text-dark">{{ trans('business.address') }}:</strong>
                             <p class="text-sm mt-2">
                                 {!! Auth::user()->address !!}
                             </p>

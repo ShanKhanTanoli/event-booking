@@ -52,7 +52,7 @@
             @endforeach
             <!--End::Platform Plans-->
         @else
-            <div class="col-lg-12 mb-lg-0 mb-4">
+            <div class="col-lg-12 mb-lg-0 mt-4">
                 <div class="alert alert-danger text-white">
                     <strong>
                         {{ trans('business.platform-plan-not-found') }}

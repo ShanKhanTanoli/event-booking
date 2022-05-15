@@ -1,13 +1,13 @@
-<form>
+<form wire:submit='Create'>
     <div class="row">
         <div class="col-md-6">
             <div class="input-group input-group-static my-3">
-                <label>Business Type</label>
+                <label>{{ trans('business.account-type') }}</label>
                 <select name="business_type" wire:model="business_type"
                     class="form-control @error('business_type') is-invalid @enderror">
-                    <option value="">Select Business Type</option>
-                    <option value="individual">Individual</option>
-                    <option value="company">Company</option>
+                    <option value="">{{ trans('business.account-type') }}</option>
+                    <option value="individual">{{ trans('business.account-individual') }}</option>
+                    <option value="company">{{ trans('business.account-company') }}</option>
                 </select>
                 @error('business_type')
                     <span class="invalid-feedback" role="alert">
@@ -18,10 +18,10 @@
         </div>
         <div class="col-md-6">
             <div class="input-group input-group-static my-3">
-                <label>Country</label>
+                <label>{{ trans('business.account-country') }}</label>
                 <select name="country" wire:model.defer="country"
                     class="form-control @error('country') is-invalid @enderror" id="country">
-                    <option value="">Select Country</option>
+                    <option value="">{{ trans('business.account-country') }}</< /option>
                     <option value="AU">Australia</option>
                     <option value="AT">Austria</option>
                     <option value="BE">Belgium</option>
@@ -75,9 +75,9 @@
         @if ($business_type == 'company')
             <div class="col-md-6">
                 <div class="input-group input-group-static my-3">
-                    <label>Email</label>
+                    <label>{{ trans('business.account-email') }}</label>
                     <input wire:model.defer="email" class="form-control @error('email') is-invalid @enderror" id="email"
-                        type="email" placeholder="Enter Email" />
+                        type="email" placeholder="{{ trans('business.account-email') }}" />
                     @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -87,10 +87,10 @@
             </div>
             <div class="col-md-6">
                 <div class="input-group input-group-static my-3">
-                    <label>Company Name</label>
+                    <label>{{ trans('business.account-company-name') }}</label>
                     <input wire:model.defer="company_name"
                         class="form-control @error('company_name') is-invalid @enderror" id="company_name"
-                        type="company_name" placeholder="Company Name" />
+                        type="company_name" placeholder="{{ trans('business.account-company-name') }}" />
                     @error('company_name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -102,9 +102,10 @@
         @if ($business_type == 'individual')
             <div class="col-md-6">
                 <div class="input-group input-group-static my-3">
-                    <label>First Name</label>
+                    <label>{{ trans('business.account-business-fname') }}</label>
                     <input wire:model.defer="first_name" class="form-control @error('first_name') is-invalid @enderror"
-                        id="first_name" type="first_name" placeholder="First Name" />
+                        id="first_name" type="first_name"
+                        placeholder="{{ trans('business.account-business-fname') }}" />
                     @error('first_name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -114,9 +115,10 @@
             </div>
             <div class="col-md-6">
                 <div class="input-group input-group-static my-3">
-                    <label>Last Name</label>
+                    <label>{{ trans('business.account-business-lname') }}</label>
                     <input wire:model.defer="last_name" class="form-control @error('last_name') is-invalid @enderror"
-                        id="last_name" type="last_name" placeholder="Last Name" />
+                        id="last_name" type="last_name"
+                        placeholder="{{ trans('business.account-business-lname') }}" />
                     @error('last_name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -126,9 +128,9 @@
             </div>
             <div class="col-md-12">
                 <div class="input-group input-group-static my-3">
-                    <label>Email</label>
+                    <label>{{ trans('business.account-email') }}</label>
                     <input wire:model.defer="email" class="form-control @error('email') is-invalid @enderror" id="email"
-                        type="email" placeholder="Enter Email" />
+                        type="email" placeholder="{{ trans('business.account-email') }}" />
                     @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -139,9 +141,9 @@
         @endif
         <div class="col-md-6">
             <div class="input-group input-group-static my-3">
-                <label>Phone</label>
+                <label>{{ trans('business.account-phone') }}</label>
                 <input wire:model.defer="phone" class="form-control @error('phone') is-invalid @enderror" id="phone"
-                    type="phone" placeholder="Enter Phone Number" />
+                    type="phone" placeholder="{{ trans('business.account-phone') }}" />
                 @error('phone')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -151,9 +153,9 @@
         </div>
         <div class="col-md-6">
             <div class="input-group input-group-static my-3">
-                <label>Date of Birth</label>
+                <label>{{ trans('business.account-dob') }}"</label>
                 <input wire:model.defer="dob" class="form-control @error('dob') is-invalid @enderror" type="date"
-                    placeholder="Enter Day of Birth" />
+                    placeholder="{{ trans('business.account-dob') }}" />
                 @error('dob')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -162,10 +164,10 @@
             </div>
         </div>
         <div class="col-md-12">
-            <button type="button" class="btn btn-primary" wire:attr='disabled' wire:click='Create'>
+            <button type="submit" class="btn btn-primary" wire:attr='disabled'>
                 <span wire:loading wire:target='Create' class="spinner-border spinner-border-sm" role="status"
                     aria-hidden="true"></span>
-                Create Account
+                {{ trans('business.craete-account-btn') }}
             </button>
         </div>
     </div>
