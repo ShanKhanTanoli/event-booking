@@ -24,6 +24,22 @@
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
+                    {{ trans('client.business-plans') }}
+                </h6>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white @if (Request::path() == 'ClientBusinessPlans/' . App::getLocale()) active bg-gradient-primary @else '' @endif"
+                    href="{{ route('ClientBusinessPlans', App::getLocale()) }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">
+                        {{ trans('client.business-plans') }}
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item mt-3">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
                     {{ trans('client.events') }}
                 </h6>
             </li>
@@ -40,17 +56,17 @@
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    {{ trans('client.payments') }}
+                    {{ trans('client.subscriptions') }}
                 </h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white @if (Request::path() == 'Client/Payments/' . App::getLocale()) active bg-gradient-primary @else '' @endif"
-                    href="{{ route('ClientPayments', App::getLocale()) }}">
+                <a class="nav-link text-white @if (Request::path() == 'Client/Subscriptions/' . App::getLocale()) active bg-gradient-primary @else '' @endif"
+                    href="{{ route('ClientSubscriptions', App::getLocale()) }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-money-bill"></i>
+                        <i class="fas fa-credit-card"></i>
                     </div>
                     <span class="nav-link-text ms-1">
-                        {{ trans('client.payments') }}
+                        {{ trans('client.subscriptions') }}
                     </span>
                 </a>
             </li>

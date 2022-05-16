@@ -58,7 +58,7 @@ Route::middleware(['auth', 'business'])->prefix('Business')->group(function () {
     /*Begin::Dashboard*/
     Route::get('Dashboard/{lang?}', BusinessDashboard::class)->name('BusinessDashboard');
     /*End::Dashboard*/
-
+    
     /*Begin::PlatformPlans*/
     Route::get('PlatformPlans/{lang?}', PlatformPlans::class)
         ->name('BusinessPlatformPlans');
