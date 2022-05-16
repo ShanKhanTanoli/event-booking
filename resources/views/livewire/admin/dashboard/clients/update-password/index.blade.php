@@ -26,11 +26,11 @@
                                         <div class="col-md-6">
                                             <div class="input-group input-group-static my-3">
                                                 <label
-                                                    for="password">{{ trans('admin.update-business-new-password') }}</label>
+                                                    for="password">{{ trans('admin.client-password') }}</label>
                                                 <input type="password" wire:model.defer='password'
                                                     value="{{ old('password') }}"
                                                     class="form-control  @error('password') is-invalid @enderror"
-                                                    placeholder="{{ trans('admin.update-business-new-password') }}">
+                                                    placeholder="{{ trans('admin.client-password') }}">
                                                 @error('password')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -41,11 +41,11 @@
                                         <div class="col-md-6">
                                             <div class="input-group input-group-static my-3">
                                                 <label
-                                                    for="password_confirmation">{{ trans('admin.update-business-confirm-password') }}</label>
+                                                    for="password_confirmation">{{ trans('admin.client-confirm-password') }}</label>
                                                 <input type="password" wire:model.defer='password_confirmation'
                                                     value="{{ old('password_confirmation') }}"
                                                     class="form-control  @error('password_confirmation') is-invalid @enderror"
-                                                    placeholder="{{ trans('admin.update-business-confirm-password') }}">
+                                                    placeholder="{{ trans('admin.client-confirm-password') }}">
                                                 @error('password_confirmation')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

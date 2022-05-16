@@ -167,7 +167,7 @@ return [
     'company-name' => 'Company Name',
     'company-email' => 'Company Email',
     'company-phone' => 'Company Phone',
-    'company-commission-percentage' => 'Commission Percentage',
+    'commission-percentage' => 'Commission Percentage',
     'select-language' => 'Select Language',
     'select-currency' => 'Select Currency',
     'company-address' => 'Company Address',
