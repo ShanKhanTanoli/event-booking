@@ -12,20 +12,6 @@ return [
     'settings' => 'Settings',
     /*End::Admin Dashboard Sidebar*/
 
-    /*Begin::Admin Settings Sidebar*/
-    'general' => 'General',
-    'profile' => 'Profile',
-    'stripe' => 'Stripe',
-    'password' => 'Password',
-    /*End::Admin Settings Sidebar*/
-
-    /*Begin::Admin Settings*/
-    'update-settings' => 'Update Settings',
-    'update-profile' => 'Update Profile',
-    'update-stripe' => 'Update Stripe',
-    'update-password' => 'Update Password',
-    /*End::Admin Settings*/
-
     /*Begin::Buttons*/
     'save-changes' => 'Save Changes',
     'view-all' => 'View All',
@@ -82,7 +68,7 @@ return [
     /*Begin::Admin Business Sidebar*/
     'business-profile' => 'Profile',
     'update-business-profile' => 'Update Business Profile',
-    
+
     'business-clients' => 'Clients',
 
     'business-send-mail' => 'Send Mail',
@@ -164,5 +150,50 @@ return [
     /*End::Plans Table*/
 
     /*Begin::Admin Plans*/
+
+    /***************************************************/
+
+    /*Begin::Admin Settings*/
+
+    /*Begin::Admin Settings Sidebar*/
+    'general' => 'General',
+    'profile' => 'Profile',
+    'stripe' => 'Stripe',
+    'password' => 'Password',
+    /*End::Admin Settings Sidebar*/
+
+    /*Begin::General*/
+    'update-settings' => 'Update Settings',
+    'company-name' => 'Company Name',
+    'company-email' => 'Company Email',
+    'company-phone' => 'Company Phone',
+    'company-commission-percentage' => 'Commission Percentage',
+    'select-language' => 'Select Language',
+    'select-currency' => 'Select Currency',
+    'company-address' => 'Company Address',
+    /*End::General*/
+
+    /*Begin::Profile*/
+    'update-profile' => 'Update Profile',
+    'profile-name' => 'Profile Name',
+    'profile-email' => 'Profile Email',
+    /*End::Profile*/
+
+    /*Begin::Stripe*/
+    'update-stripe' => 'Update Stripe',
+    'stripe-pkey' => 'Public Key',
+    'stripe-skey' => 'Secret Key',
+    'stripe-mode' => 'Select Mode',
+    'stripe-test-mode' => 'Test Mode',
+    'stripe-live-mode' => 'Live Mode',
+    /*End::Stripe*/
+
+    /*Begin::Password*/
+    'update-password' => 'Update Password',
+    'new-password' => 'New Password',
+    'confirm-new-password' => 'Confirm New Password',
+    /*End::Password*/
+
+    /*Begin::Admin Settings*/
 
 ];
