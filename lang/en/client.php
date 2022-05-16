@@ -4,8 +4,9 @@ return [
 
     /*Begin::Client Sidebar*/
     'dashboard' => 'Dashboard',
+    'business-plans' => 'Business Plans',
     'events' => 'Events',
-    'payments' => 'Payments',
+    'subscriptions' => 'Subscriptions',
     'settings' => 'Settings',
     /*End::Client Sidebar*/
 
@@ -23,4 +24,12 @@ return [
     'save-changes' => 'Save Changes',
     /*End::Buttons*/
 
+
+    /*Begin::Subscribe*/
+    'subscribe' => 'Subscribe',
+    /*End::Subscribe*/
+
+    /*Begin::Business Plans not found*/
+    'business-plan-not-found' => 'Plans will be available soon',
+    /*End::Business Plans not found*/
 ];

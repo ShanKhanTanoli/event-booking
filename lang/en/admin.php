@@ -71,23 +71,25 @@ return [
 
     'business-accounts' => 'Business Accounts',
     'add-business' => 'Add Business',
-    'update-business' => 'Update Business',
 
-    'update-business-name' => 'Name',
-    'update-business-user_name' => 'User Name',
-    'update-business-number' => 'Number',
-    'update-business-email' => 'Email',
-
-    'update-business-password' => 'Update Password',
-    'update-business-new-password' => 'New Password',
-    'update-business-confirm-password' => 'Confirm Password',
+    'business-name' => 'Name',
+    'business-username' => 'User Name',
+    'business-number' => 'Number',
+    'business-email' => 'Email',
+    'business-password' => 'Password',
+    'business-confirm-password' => 'Confirm Password',
 
     /*Begin::Admin Business Sidebar*/
     'business-profile' => 'Profile',
+    'update-business-profile' => 'Update Business Profile',
+    
     'business-clients' => 'Clients',
+
     'business-send-mail' => 'Send Mail',
     'business-mails' => 'Mails',
+
     'business-password' => 'Password',
+    'update-business-password' => 'Update Business Password',
     /*End::Admin Business Sidebar*/
 
     /*End::Only Business*/
@@ -110,23 +112,25 @@ return [
     'client' => 'Client',
     'client-accounts' => 'Client Accounts',
     'add-client' => 'Add Client',
-    'update-client' => 'Update Client',
 
-    'update-client-name' => 'Name',
-    'update-client-user-name' => 'User Name',
-    'update-client-number' => 'Number',
-    'update-client-email' => 'Email',
-    'update-client-parent-business' => 'Business Account',
+    'client-name' => 'Name',
+    'client-user-name' => 'User Name',
+    'client-number' => 'Number',
+    'client-email' => 'Email',
+    'client-joined-business' => 'Business Account',
 
-    'update-client-password' => 'Update Password',
-    'update-client-new-password' => 'New Password',
-    'update-client-confirm-password' => 'Confirm Password',
+    'client-password' => 'Password',
+    'client-confirm-password' => 'Confirm Password',
 
     /*Begin::Admin Client Sidebar*/
     'client-profile' => 'Profile',
+    'update-client-profile' => 'Update Client Profile',
+
     'client-send-mail' => 'Send Mail',
     'client-mails' => 'Mails',
+
     'client-password' => 'Password',
+    'update-client-password' => 'Update Client Password',
     /*End::Admin Client Sidebar*/
 
     /*End::Only Client*/

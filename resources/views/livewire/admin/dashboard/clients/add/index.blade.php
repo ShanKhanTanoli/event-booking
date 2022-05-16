@@ -105,8 +105,9 @@
                                             <option value="">{{ trans('admin.client-joined-business') }}</option>
                                             @forelse (Business::Latest()->get() as $business)
                                                 <option value="{{ $business->id }}">
-                                                    {{ trans('admin.client-name') }} : {{ $business->name }}
-                                                    {{ trans('admin.client-email') }} : {{ $business->email }}
+                                                    {{ $business->name }}
+                                                    -
+                                                    {{ $business->email }}
                                                 </option>
                                             @empty
                                                 <option value=""></option>

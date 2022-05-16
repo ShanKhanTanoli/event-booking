@@ -5,12 +5,12 @@ namespace App\Helpers\Client;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\Client\Traits\ClientMails;
-use App\Helpers\Client\Traits\ClientPayments;
 use App\Helpers\Client\Traits\ClientSettings;
+use App\Helpers\Client\Traits\ClientSubscriptions;
 
 class Client
 {
-    use ClientPayments, ClientMails, ClientSettings;
+    use ClientSubscriptions, ClientMails, ClientSettings;
 
     public static function Is()
     {

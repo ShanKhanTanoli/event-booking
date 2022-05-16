@@ -20,6 +20,21 @@ trait BusinessPlans
             ->paginate($quantity);
     }
 
+    public static function ActivePlansLatestPaginate($business, $quantity)
+    {
+        return self::Plans($business)
+            ->where('active', 1)
+            ->latest()
+            ->paginate($quantity);
+    }
+
+    public static function ActivePlansLastPaginate($business, $quantity)
+    {
+        return self::Plans($business)
+            ->where('active', 1)
+            ->paginate($quantity);
+    }
+
     public static function CountPlans($business)
     {
         return self::Plans($business)->count();
@@ -38,6 +53,14 @@ trait BusinessPlans
     public static function FindPlanBySlug($business, $slug)
     {
         return self::Plans($business)->where('slug', $slug)->first();
+    }
+
+    public static function FindActivePlanBySlug($business, $slug)
+    {
+        return self::Plans($business)
+            ->where('slug', $slug)
+            ->where('active', 1)
+            ->first();
     }
 
     /*End::Plans*/

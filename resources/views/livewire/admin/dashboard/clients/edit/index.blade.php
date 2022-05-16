@@ -15,7 +15,7 @@
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                                 <h6 class="text-white text-capitalize ps-3">
-                                    {{ trans('admin.update-client') }}
+                                    {{ trans('admin.update-client-profile') }}
                                 </h6>
                             </div>
                         </div>
@@ -83,16 +83,15 @@
                                         <div class="col-md-12">
                                             <div class="input-group input-group-static my-3">
                                                 <label
-                                                    for="parent_business_id">{{ trans('admin.update-client-parent-business') }}</label>
+                                                    for="parent_business_id">{{ trans('admin.client-joined-business') }}</label>
                                                 <select wire:model.defer='parent_business_id'
                                                     class="form-control  @error('parent_business_id') is-invalid @enderror">
                                                     <option value="">
-                                                        {{ trans('admin.update-client-parent-business') }}</option>
+                                                        {{ trans('admin.client-joined-business') }}</option>
                                                     @forelse (Business::Latest()->get() as $business)
                                                         <option value="{{ $business->id }}">
-                                                            {{ trans('admin.client-name') }} :
                                                             {{ $business->name }}
-                                                            {{ trans('admin.client-email') }} :
+                                                            -
                                                             {{ $business->email }}
                                                         </option>
                                                     @empty

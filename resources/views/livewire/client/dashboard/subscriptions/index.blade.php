@@ -10,9 +10,9 @@
                             <i class="fas fa-credit-card opacity-10"></i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">{{ trans('business.subscriptions') }}</p>
+                            <p class="text-sm mb-0 text-capitalize">{{ trans('client.subscriptions') }}</p>
                             <h4 class="mb-0">
-                                {{ Business::CountSubscriptions(Auth::user()) }}
+                                {{ Client::CountSubscriptions(Auth::user()) }}
                             </h4>
                         </div>
                     </div>
@@ -20,7 +20,7 @@
             </a>
         </div>
         <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
-            <a href="{{ route('BusinessPlatformPlans', App::getLocale()) }}">
+            <a href="{{ route('ClientBusinessPlans', App::getLocale()) }}">
                 <div class="card">
                     <div class="card-header p-3 pt-2" style="border-radius: 0;">
                         <div
@@ -28,10 +28,10 @@
                             <i class="fas fa-box-open opacity-10"></i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">{{ trans('business.platform-plans') }}</p>
+                            <p class="text-sm mb-0 text-capitalize">{{ trans('client.business-plans') }}</p>
                             <h4 class="mb-0">
-                                @if ($admin = Admin::ID())
-                                    {{ Admin::CountPlans($admin->id) }}
+                                @if ($business = Auth::user()->parent_business_id)
+                                    {{ Business::CountPlans($business) }}
                                 @else
                                     {{ trans('business.view-all') }}
                                 @endif
@@ -48,7 +48,7 @@
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                         <h6 class="text-white text-capitalize ps-3">
-                            {{ trans('business.subscriptions') }}
+                            {{ trans('client.subscriptions') }}
                         </h6>
                     </div>
                 </div>
@@ -61,25 +61,25 @@
                                         #
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('business.subscription-table-plan') }}
+                                        {{ trans('client.subscription-table-plan') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('business.subscription-table-duration') }}
+                                        {{ trans('client.subscription-table-duration') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('business.subscription-table-price') }}
+                                        {{ trans('client.subscription-table-price') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('business.subscription-table-date') }}
+                                        {{ trans('client.subscription-table-date') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('business.subscription-table-status') }}
+                                        {{ trans('client.subscription-table-status') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('business.subscription-table-actions') }}
+                                        {{ trans('client.subscription-table-actions') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('business.subscription-table-end') }}
+                                        {{ trans('client.subscription-table-end') }}
                                     </th>
                                 </tr>
                             </thead>
@@ -99,8 +99,8 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        @if ($admin = Admin::ID())
-                                                            @if ($plan = Admin::FindPlanByPlanId($admin->id, $subscription->stripe_price))
+                                                        @if ($business = Auth::user()->parent_business_id)
+                                                            @if ($plan = Business::FindPlanByPlanId($business->id, $subscription->stripe_price))
                                                                 {{ $plan->name }}
                                                             @endif
                                                         @endif
@@ -112,8 +112,8 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        @if ($admin = Admin::ID())
-                                                            @if ($plan = Admin::FindPlanByPlanId($admin->id, $subscription->stripe_price))
+                                                        @if ($business = Auth::user()->parent_business_id)
+                                                            @if ($plan = Business::FindPlanByPlanId($business->id, $subscription->stripe_price))
                                                                 {{ $plan->interval_count }}
                                                                 {{ Str::ucfirst($plan->interval) }}
                                                             @endif
@@ -126,8 +126,8 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        @if ($admin = Admin::ID())
-                                                            @if ($plan = Admin::FindPlanByPlanId($admin->id, $subscription->stripe_price))
+                                                        @if ($business = Auth::user()->parent_business_id)
+                                                            @if ($plan = Business::FindPlanByPlanId($business->id, $subscription->stripe_price))
                                                                 {{ $plan->amount }}
                                                                 {{ strtoupper($plan->currency) }}
                                                             @endif
@@ -166,7 +166,7 @@
                                                             wire:target='Resume("{{ $subscription->name }}")'
                                                             class="spinner-border spinner-border-sm" role="status"
                                                             aria-hidden="true"></span>
-                                                        {{ trans('business.subscription-table-btn-resume') }}
+                                                        {{ trans('client.subscription-table-btn-resume') }}
                                                     </button>
                                                 </td>
                                             @else
@@ -177,7 +177,7 @@
                                                             wire:target='Cancel("{{ $subscription->name }}")'
                                                             class="spinner-border spinner-border-sm" role="status"
                                                             aria-hidden="true"></span>
-                                                        {{ trans('business.subscription-table-btn-cancel') }}
+                                                        {{ trans('client.subscription-table-btn-cancel') }}
                                                     </button>
                                                 </td>
                                             @endif
@@ -187,9 +187,9 @@
                                         @else
                                             <td class="align-middle">
                                                 <button class="btn btn-sm btn-danger disabled">
-                                                    {{ trans('business.subscription-table-btn-cancel') }}
+                                                    {{ trans('client.subscription-table-btn-cancel') }}
                                                     /
-                                                    {{ trans('business.subscription-table-btn-resume') }}
+                                                    {{ trans('client.subscription-table-btn-resume') }}
                                                 </button>
                                             </td>
                                         @endif
@@ -197,7 +197,7 @@
                                         @if (Auth::user()->subscription($subscription->name)->ended())
                                             <td class="align-middle">
                                                 <button class="btn btn-sm btn-danger disabled">
-                                                    {{ trans('business.subscription-table-btn-end') }}
+                                                    {{ trans('client.subscription-table-btn-end') }}
                                                 </button>
                                             </td>
                                         @else
@@ -207,7 +207,7 @@
                                                     <span wire:loading wire:target='End("{{ $subscription->name }}")'
                                                         class="spinner-border spinner-border-sm" role="status"
                                                         aria-hidden="true"></span>
-                                                    {{ trans('business.subscription-table-btn-end') }}
+                                                    {{ trans('client.subscription-table-btn-end') }}
                                                 </button>
                                             </td>
                                         @endif

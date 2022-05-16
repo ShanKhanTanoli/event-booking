@@ -28,7 +28,7 @@
                 </h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white @if (Request::path() == 'ClientBusinessPlans/' . App::getLocale()) active bg-gradient-primary @else '' @endif"
+                <a class="nav-link text-white @if (Request::path() == 'Client/BusinessPlans/' . App::getLocale()) active bg-gradient-primary @else '' @endif"
                     href="{{ route('ClientBusinessPlans', App::getLocale()) }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-box-open"></i>

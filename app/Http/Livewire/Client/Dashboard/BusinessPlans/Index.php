@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Client\Dashboard\PlatformPlans;
+namespace App\Http\Livewire\Client\Dashboard\BusinessPlans;
 
 use App\Models\User;
 use Livewire\Component;
@@ -18,7 +18,7 @@ class Index extends Component
     public function render()
     {
         $plans = Business::ActivePlansLastPaginate(Auth::user()->parent_business_id, 10);
-        return view('livewire.client.dashboard.platform-plans.index')
+        return view('livewire.client.dashboard.business-plans.index')
             ->with(['plans' => $plans])
             ->extends('layouts.dashboard')
             ->section('content');

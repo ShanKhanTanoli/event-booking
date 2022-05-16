@@ -15,7 +15,7 @@
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                                 <h6 class="text-white text-capitalize ps-3">
-                                    {{ trans('admin.update-business') }}
+                                    {{ trans('admin.update-business-profile') }}
                                 </h6>
                             </div>
                         </div>
@@ -25,10 +25,10 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="input-group input-group-static my-3">
-                                                <label for="name">{{ trans('admin.update-business-name') }}</label>
+                                                <label for="name">{{ trans('admin.business-name') }}</label>
                                                 <input type="text" wire:model.defer='name' value="{{ old('name') }}"
                                                     class="form-control  @error('name') is-invalid @enderror"
-                                                    placeholder="{{ trans('admin.update-business-name') }}">
+                                                    placeholder="{{ trans('admin.business-name') }}">
                                                 @error('name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -39,11 +39,11 @@
                                         <div class="col-md-6">
                                             <div class="input-group input-group-static my-3">
                                                 <label
-                                                    for="user_name">{{ trans('admin.update-business-user_name') }}</label>
+                                                    for="user_name">{{ trans('admin.business-user_name') }}</label>
                                                 <input type="text" wire:model.defer='user_name'
                                                     value="{{ old('user_name') }}"
                                                     class="form-control  @error('user_name') is-invalid @enderror"
-                                                    placeholder="{{ trans('admin.update-business-user_name') }}">
+                                                    placeholder="{{ trans('admin.business-user_name') }}">
                                                 @error('user_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -56,11 +56,11 @@
                                         <div class="col-md-6">
                                             <div class="input-group input-group-static my-3">
                                                 <label
-                                                    for="number">{{ trans('admin.update-business-number') }}</label>
+                                                    for="number">{{ trans('admin.business-number') }}</label>
                                                 <input type="text" wire:model.defer='number'
                                                     value="{{ old('number') }}"
                                                     class="form-control  @error('number') is-invalid @enderror"
-                                                    placeholder="{{ trans('admin.update-business-number') }}">
+                                                    placeholder="{{ trans('admin.business-number') }}">
                                                 @error('number')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -70,11 +70,11 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="input-group input-group-static my-3">
-                                                <label for="email">{{ trans('admin.update-business-email') }}</label>
+                                                <label for="email">{{ trans('admin.business-email') }}</label>
                                                 <input type="text" wire:model.defer='email'
                                                     value="{{ old('email') }}"
                                                     class="form-control  @error('email') is-invalid @enderror"
-                                                    placeholder="{{ trans('admin.update-business-email') }}">
+                                                    placeholder="{{ trans('admin.business-email') }}">
                                                 @error('email')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
