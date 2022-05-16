@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ClientSetting extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id','language_id',
+    ];
 }

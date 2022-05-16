@@ -3,6 +3,7 @@
 use App\Helpers\Redirect;
 use App\Helpers\Admin\Admin;
 use App\Helpers\Stripe\Stripe;
+use App\Helpers\Business\Business;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -16,7 +17,11 @@ Route::get('lang/{lang?}', function ($lang = "en") {
 });
 
 Route::get('debug', function () {
-    
+   
+    $user = Auth::user();
+
+    dd(Business::Language($user->id));
+
     $stripe = Stripe::Client();
     
     // $product = $stripe->products->create([
@@ -31,7 +36,6 @@ Route::get('debug', function () {
     //     'product' => 'prod_Lgz1t8mvOha4tP',
     //   ]);
 
-    $user = Auth::user();
 
     $product = "prod_Lgz1t8mvOha4tP";
     $price = "price_1Kzb6UDz8ngwza7q2oXBVuSY";

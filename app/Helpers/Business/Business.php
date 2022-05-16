@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\Auth;
 use App\Helpers\Business\Traits\BusinessMails;
 use App\Helpers\Business\Traits\BusinessPlans;
 use App\Helpers\Business\Traits\BusinessClients;
+use App\Helpers\Business\Traits\BusinessSettings;
 use App\Helpers\Business\Traits\BusinessSubscriptions;
 
 class Business
 {
-    use BusinessClients, BusinessMails, BusinessPlans,BusinessSubscriptions;
+    use BusinessClients, BusinessMails, BusinessPlans, BusinessSubscriptions, BusinessSettings;
 
     public static function Is()
     {
@@ -74,25 +75,4 @@ class Business
         return self::Latest()->count();
     }
 
-    /*Begin::Settings*/
-    public static function Settings($user)
-    {
-        return User::find($user)->settings;
-    }
-    /*End::Settings*/
-
-    /*Begin::Business Details*/
-    public static function Details($user)
-    {
-        return User::find($user)->details;
-    }
-    public static function Currency($user)
-    {
-        if ($details = User::find($user)->details) {
-            if ($currency = Currency::Find($details->currency_id)) {
-                return $currency->name;
-            } else return "usd";
-        } else return "usd";
-    }
-    /*End::Business Details*/
 }

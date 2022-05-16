@@ -24,7 +24,7 @@
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-                    {{ trans('client.payments') }}
+                    {{ trans('client.events') }}
                 </h6>
             </li>
             <li class="nav-item">
@@ -34,7 +34,7 @@
                         <i class="fas fa-calendar-alt"></i>
                     </div>
                     <span class="nav-link-text ms-1">
-                        {{ trans('client.payments') }}
+                        {{ trans('client.events') }}
                     </span>
                 </a>
             </li>

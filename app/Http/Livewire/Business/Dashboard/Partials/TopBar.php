@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Dashboard\Partials;
+namespace App\Http\Livewire\Business\Dashboard\Partials;
 
 use Livewire\Component;
-use App\Helpers\Admin\Admin;
+use App\Helpers\Business\Business;
 use App\Helpers\Currency\Currency;
 use App\Helpers\Language\Language;
+use App\Models\BusinessSetting;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 class TopBar extends Component
@@ -16,21 +18,28 @@ class TopBar extends Component
     public function mount()
     {
         $this->currentUrl = url()->current();
-
         $this->currentRoute = Route::currentRouteName();
     }
 
     public function render()
     {
-        return view('livewire.admin.dashboard.partials.top-bar');
+        return view('livewire.business.dashboard.partials.top-bar');
     }
 
     public function ChangeLanguage($slug)
     {
         if ($language = Language::FindBySlug($slug)) {
 
-            if ($settings = Admin::Settings()) {
+            //If Settings are available
+            if ($settings = Business::Settings(Auth::user()->id)) {
+
                 $settings->update([
+                    'language_id' => $language->id,
+                ]);
+            } else {
+
+                BusinessSetting::create([
+                    'user_id' => Auth::user()->id,
                     'language_id' => $language->id,
                 ]);
             }
@@ -60,11 +69,21 @@ class TopBar extends Component
         }
     }
 
+
     public function ChangeCurrency($slug)
     {
         if ($currency = Currency::FindBySlug($slug)) {
-            if ($settings = Admin::Settings()) {
+
+            //If Settings are available
+            if ($settings = Business::Settings(Auth::user()->id)) {
+
                 $settings->update([
+                    'currency_id' => $currency->id,
+                ]);
+            } else {
+
+                BusinessSetting::create([
+                    'user_id' => Auth::user()->id,
                     'currency_id' => $currency->id,
                 ]);
             }

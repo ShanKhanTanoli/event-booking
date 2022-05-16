@@ -2,14 +2,15 @@
 
 namespace App\Helpers\Client;
 
-use App\Helpers\Client\Traits\ClientMails;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Helpers\Client\Traits\ClientMails;
 use App\Helpers\Client\Traits\ClientPayments;
+use App\Helpers\Client\Traits\ClientSettings;
 
 class Client
 {
-    use ClientPayments, ClientMails;
+    use ClientPayments, ClientMails, ClientSettings;
 
     public static function Is()
     {

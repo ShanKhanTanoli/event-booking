@@ -61,14 +61,14 @@
 
             @if ($user->role_id == 2 && ($user->role = 'business'))
                 <!--Begin::Top-Bar-->
-                @include('livewire.business.dashboard.partials.top-bar')
+                @livewire('business.dashboard.partials.top-bar')
                 <!--Begin::Top-Bar-->
             @endif
 
             @if ($user->role_id == 3 && ($user->role = 'client'))
-                <!--Begin::Top-Bar-->
-                @include('livewire.client.dashboard.partials.top-bar')
-                <!--Begin::Top-Bar-->
+                   <!--Begin::Top-Bar-->
+                   @livewire('client.dashboard.partials.top-bar')
+                   <!--Begin::Top-Bar-->
             @endif
 
         @endif
