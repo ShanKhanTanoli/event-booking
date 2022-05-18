@@ -12,13 +12,13 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-lg btn-block bg-gradient-danger"
+                <button type="button" class="btn btn-sm btn-block bg-gradient-danger"
                     wire:click='Delete("{{ $delete->id }}")'>
                     <span wire:loading wire:target='Delete("{{ $delete->id }}")'
                         class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     {{ trans('admin.modal-delete') }}
                 </button>
-                <button type="button" class="btn btn-lg btn-block bg-gradient-dark" data-bs-dismiss="modal">
+                <button type="button" class="btn btn-sm btn-block bg-gradient-dark" data-bs-dismiss="modal">
                     {{ trans('admin.modal-cancel') }}
                 </button>
             </div>

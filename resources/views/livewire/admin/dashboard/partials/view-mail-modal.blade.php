@@ -11,7 +11,7 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-lg btn-block bg-gradient-dark" data-bs-dismiss="modal">
+                <button type="button" class="btn btn-sm btn-block bg-gradient-dark" data-bs-dismiss="modal">
                     {{ trans('admin.modal-cancel') }}
                 </button>
             </div>

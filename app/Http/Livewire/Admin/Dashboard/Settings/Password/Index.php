@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Dashboard\Settings\Password;
 use Exception;
 use Livewire\Component;
 use App\Helpers\Admin\Admin;
+use App\Notifications\Alerts;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,7 +33,13 @@ class Index extends Component
         ]);
         try {
             Auth::user()->update(['password' => bcrypt($validated['password'])]);
+            //Send Notification
+            $data = [
+                'message' => 'notifications.password-update',
+            ];
+            Auth::user()->notify(new Alerts($data));
             session()->flash('success', trans('alerts.update'));
+            return redirect(route('AdminEditPassword', App::getLocale()));
             $this->reset(['password', 'password_confirmation']);
         } catch (Exception $e) {
             return session()->flash('error', trans('alerts.error'));

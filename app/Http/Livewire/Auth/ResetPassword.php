@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Auth;
 use App\Models\User;
 
 use Livewire\Component;
+use App\Notifications\Alerts;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 
@@ -40,6 +41,11 @@ class ResetPassword extends Component
             $existingUser->update([
                 'password' => Hash::make($this->password)
             ]);
+            //Send Notification
+            $data = [
+                'message' => 'notifications.password-update',
+            ];
+            $existingUser->notify(new Alerts($data));
             session()->flash('success', trans('alerts.change-password'));
             return redirect(route('login', App::getLocale()));
         } else {

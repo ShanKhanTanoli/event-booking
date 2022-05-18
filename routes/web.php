@@ -4,6 +4,7 @@ use App\Helpers\Redirect;
 use App\Helpers\Admin\Admin;
 use App\Helpers\Stripe\Stripe;
 use App\Helpers\Business\Business;
+use App\Notifications\Alerts;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -17,13 +18,23 @@ Route::get('lang/{lang?}', function ($lang = "en") {
 });
 
 Route::get('debug', function () {
-   
+
+    $data = [
+        'message' => 'notifications.account-login',
+    ];
+
     $user = Auth::user();
 
-    dd(Business::Language($user->id));
+    $notification = $user->notify(new Alerts($data));
+
+    dd($notification);
+
+    $notifications = $user->notifications()->first();
+
+    dd($notifications->data['user']);
 
     $stripe = Stripe::Client();
-    
+
     // $product = $stripe->products->create([
     //     'name' => 'Gold Special',
     //     'description' => 'This is the Product',
@@ -41,7 +52,7 @@ Route::get('debug', function () {
     $price = "price_1Kzb6UDz8ngwza7q2oXBVuSY";
 
     //$paymentMethods = $user->paymentMethods();
-    
+
     $pm = "pm_1KzbLwDz8ngwza7qQyC9clXX";
 
     dd($user->subscription($price)->resume());

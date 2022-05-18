@@ -6,6 +6,7 @@ use App\Models\User;
 use Livewire\Component;
 use App\Helpers\Redirect;
 
+use App\Notifications\Alerts;
 use Illuminate\Support\Facades\App;
 use App\Notifications\ResetPassword;
 use Illuminate\Notifications\Notifiable;
@@ -39,6 +40,11 @@ class ForgotPassword extends Component
         $user = User::where('email', $this->email)->first();
         if ($user) {
             $this->notify(new ResetPassword($user->id));
+            //Send Notification
+            $data = [
+                'message' => 'notifications.reset-password',
+            ];
+            $user->notify(new Alerts($data));
             return session()->flash('success', trans('alerts.password-email-sent'));
         } else {
             return session()->flash('error', trans('alerts.no-email'));

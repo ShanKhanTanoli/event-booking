@@ -6,6 +6,7 @@ use App\Models\User;
 use Livewire\Component;
 use App\Helpers\Redirect;
 use Illuminate\Support\Str;
+use App\Notifications\Alerts;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 
@@ -43,9 +44,12 @@ class BusinessRegister extends Component
             'password' => Hash::make($this->password),
             'slug' => Str::random(20),
         ]);
-
         auth()->login($user);
-
+        //Send Notification
+        $data = [
+            'message' => 'notifications.account-signup',
+        ];
+        $user->notify(new Alerts($data));
         return redirect(Redirect::ToDashboard());
     }
 

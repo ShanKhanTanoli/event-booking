@@ -193,6 +193,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
 
+        'Helper' => App\Helpers\Helper::class,
         'User' => App\Models\User::class,
         'Setting' => App\Models\Setting::class,
         'Card' => App\Helpers\Card\Card::class,

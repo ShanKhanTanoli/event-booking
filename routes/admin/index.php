@@ -1,7 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+/*Begin::Dashboard*/
 use App\Http\Livewire\Admin\Dashboard\Index as AdminDashboard;
+/*End::Dashboard*/
+
+/*Begin::Notifications*/
+use App\Http\Livewire\Admin\Dashboard\Notifications\Index as AdminNotifications;
+/*End::Notifications*/
 
 /*Begin::Business*/
 use App\Http\Livewire\Admin\Dashboard\Business\Index as ViewAllBusiness;
@@ -60,8 +67,15 @@ use App\Http\Livewire\Admin\Dashboard\Settings\Password\Index as EditPassword;
 
 Route::middleware(['auth', 'admin'])->prefix('Admin')->group(function () {
 
+    /*Begin::Dashboard*/
     Route::get('Dashboard/{lang?}', AdminDashboard::class)
         ->name('AdminDashboard');
+    /*End::Dashboard*/
+
+    /*Begin::Notifications*/
+    Route::get('Notifications/{lang?}', AdminNotifications::class)
+        ->name('AdminNotifications');
+    /*End::Notifications*/
 
     /*Begin::Business*/
     Route::get('Business/{lang?}', ViewAllBusiness::class)

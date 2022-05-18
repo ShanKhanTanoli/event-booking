@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire\Auth;
 
-use App\Helpers\Redirect;
-use Livewire\Component;
 use App\Models\User;
+use Livewire\Component;
+use App\Helpers\Redirect;
+use App\Notifications\Alerts;
 use Illuminate\Support\Facades\App;
 
 class Login extends Component
@@ -32,6 +33,11 @@ class Login extends Component
         if (auth()->attempt(['email' => $this->email, 'password' => $this->password], $this->remember_me)) {
             $user = User::where(["email" => $this->email])->first();
             auth()->login($user, $this->remember_me);
+            //Send Notification
+            $data = [
+                'message' => 'notifications.account-login',
+            ];
+            $user->notify(new Alerts($data));
             return redirect()->intended(Redirect::ToDashboard());
         } else {
             return $this->addError('email', trans('auth.failed'));

@@ -2,12 +2,13 @@
 
 namespace App\Http\Livewire\Auth;
 
-use App\Helpers\Business\Business;
 use App\Models\User;
 use Livewire\Component;
 use App\Helpers\Redirect;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
+use App\Notifications\Alerts;
+use App\Helpers\Business\Business;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 
 class ClientRegister extends Component
@@ -59,6 +60,13 @@ class ClientRegister extends Component
         ]);
 
         auth()->login($user);
+
+        //Send Notification
+        $data = [
+            'message' => 'notifications.account-signup',
+        ];
+        $user->notify(new Alerts($data));
+
         return redirect(Redirect::ToDashboard());
     }
 

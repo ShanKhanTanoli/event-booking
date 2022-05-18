@@ -95,46 +95,56 @@
                     <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-bell cursor-pointer" aria-hidden="true"></i>
+                        @if (Auth::user()->notifications()->unread()->count() > 0)
+                            <sup>
+                                <i style="font-size: 6px; color:#e91e63;" class="fas fa-circle"></i>
+                            </sup>
+                        @endif
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                        <li class="mb-2">
-                            <a class="dropdown-item border-radius-md" href="javascript:;">
-                                <div class="d-flex py-1">
-                                    <div class="my-auto">
-                                        <img src="{{ asset('dashboard/img/team-2.jpg') }}"
-                                            class="avatar avatar-sm  me-3 ">
+                        @forelse (Auth::user()->notifications()->take(3)->get() as $notifications)
+                            <li class="mb-2">
+                                <a class="dropdown-item border-radius-md" href="javascript:;">
+                                    <div class="d-flex py-1">
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="text-sm font-weight-normal mb-1">
+                                                @if (Str::length(trans($notifications->data['message']) > 15))
+                                                    {!! Str::substr(trans($notifications->data['message']), 0, 15) !!}...
+                                                @else
+                                                    {!! trans($notifications->data['message']) !!}
+                                                @endif
+                                            </h6>
+                                            <p class="text-xs text-secondary mb-0">
+                                                <i class="fa fa-clock me-1" aria-hidden="true"></i>
+                                                {!! Helper::TimeAgo($notifications->created_at) !!}
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="text-sm font-weight-normal mb-1">
-                                            <span class="font-weight-bold">New message</span> from Laur
-                                        </h6>
-                                        <p class="text-xs text-secondary mb-0">
-                                            <i class="fa fa-clock me-1" aria-hidden="true"></i>
-                                            13 minutes ago
-                                        </p>
+                                </a>
+                            </li>
+                        @empty
+                            <li class="mb-2">
+                                <a class="dropdown-item border-radius-md" href="javascript:;">
+                                    <div class="d-flex py-1">
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="text-sm font-weight-normal mb-1">
+                                                No notifications found
+                                            </h6>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="mb-2">
-                            <a class="dropdown-item border-radius-md" href="javascript:;">
-                                <div class="d-flex py-1">
-                                    <div class="my-auto">
-                                        <img src="{{ asset('dashboard/img/small-logos/logo-spotify.svg') }}"
-                                            class="avatar avatar-sm bg-gradient-dark  me-3 ">
-                                    </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="text-sm font-weight-normal mb-1">
-                                            <span class="font-weight-bold">New album</span> by Travis Scott
-                                        </h6>
-                                        <p class="text-xs text-secondary mb-0">
-                                            <i class="fa fa-clock me-1" aria-hidden="true"></i>
-                                            1 day
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
+                                </a>
+                            </li>
+                        @endforelse
+                        @if (Auth::user()->notifications()->count() > 3)
+                            <li class="mb-2">
+                                <a class="dropdown-item border-radius-md text-center text-dark"
+                                    href="{{ route('AdminNotifications', App::getLocale()) }}">
+                                    <strong>
+                                        {{ trans('Admin.view-all') }}
+                                    </strong>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </li>
                 <!--End::Notifications-->

@@ -2,12 +2,13 @@
 
 namespace App\Helpers\Admin;
 
-use App\Helpers\Admin\Traits\AdminPlans;
+use DateTime;
+use App\Models\User;
+use App\Models\Setting;
 use App\Helpers\Currency\Currency;
 use App\Helpers\Language\Language;
-use App\Models\Setting;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Helpers\Admin\Traits\AdminPlans;
 
 class Admin
 {
@@ -72,4 +73,5 @@ class Admin
         return Setting::first();
     }
     /*End::Settings*/
+
 }
