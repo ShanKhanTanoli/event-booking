@@ -12,6 +12,7 @@ return [
     'activate' => 'Activado con éxito',
     'error' => 'Algo salió mal',
     'subscribed' => 'Suscrito con éxito',
+    'plans-not-found' => 'No se encontró ningún plan',
     'mail-sent' => 'El correo ha sido enviado con éxito',
     'no-email' => 'El correo electrónico no existe',
     'password-email-sent' => 'Se ha enviado un correo electrónico de restablecimiento de contraseña',

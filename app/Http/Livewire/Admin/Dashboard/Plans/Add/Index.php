@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
 {
-    public $name, $amount, $interval_count, $interval;
+    public $validated, $name, $amount, $description, $interval_count, $interval, $plan_type;
+
 
     public function mount()
     {
@@ -30,48 +31,58 @@ class Index extends Component
 
     public function Add()
     {
-        $validated = $this->validate([
-            'name' => 'required|string',
-            'amount' => 'required|numeric',
-            'interval_count' => 'required|numeric',
-            'interval' => 'required|string|in:day,week,month,year',
-        ]);
+
+        //One Time
+        if ($this->plan_type == "onetime") {
+            $validated = $this->validate([
+                'name' => 'required|string',
+                'amount' => 'required|numeric',
+                'description' => 'required|string',
+            ]);
+
+            $this->validated = $validated;
+        }
+
+        //Recurring
+        if ($this->plan_type == "recurring") {
+            $validated = $this->validate([
+                'name' => 'required|string',
+                'amount' => 'required|numeric',
+                'description' => 'required|string',
+                'interval_count' => 'required|numeric',
+                'interval' => 'required|string|in:day,week,month,year',
+            ]);
+            $this->validated = $validated;
+        }
 
         try {
-            $secrey_key = Stripe::SecretKey();
-            if ($secrey_key) {
-                //Set Api Key
-                \Stripe\Stripe::setApiKey($secrey_key);
-                //Create Plan
-                $plan = Plan::create([
-                    'amount' => ($validated['amount'] * 100),
-                    'currency' => Admin::Currency(),
-                    'interval_count' => $validated['interval_count'],
-                    'interval' => $validated['interval'],
-                    'product' => [
-                        'name' => $validated['name'],
-                    ],
-                ]);
-                //Save Plan to Database
-                PlanModel::create([
-                    'name' => $validated['name'],
-                    'user_id' => Auth::user()->id,
-                    'plan_id' => $plan->id,
-                    'active' => $plan->active,
-                    'amount' => $plan->amount / 100,
-                    'amount_decimal' => $plan->amount_decimal / 100,
-                    'currency' => $plan->currency,
-                    'interval' => $plan->interval,
-                    'interval_count' => $plan->interval_count,
-                    'product_id' => $plan->product,
-                    'slug' => strtoupper(Str::random(10)),
-                ]);
-                session()->flash('success', trans('alerts.add'));
-                return redirect(route('AdminPlans', App::getLocale()));
+            //If plan type is selected
+            if ($this->plan_type) {
+                //Create Product with onetime pricing 
+                if ($this->plan_type == "onetime") {
+                    $name = $validated['name'];
+                    $description = $validated['description'];
+                    $amount = $validated['amount'];
+                    Admin::AddOneTimeProductWithPrice($name, $description, $amount);
+                    session()->flash('success', trans('alerts.add'));
+                    return redirect(route('AdminPlans', App::getLocale()));
+                }
+                //Create Product with recurring pricing 
+                if ($this->plan_type == "recurring") {
+                    $name = $validated['name'];
+                    $description = $validated['description'];
+                    $amount = $validated['amount'];
+                    $interval_count = $validated['interval_count'];
+                    $interval = $validated['interval'];
+                    Admin::AddRecurringProductWithPrice($name, $description, $amount, $interval_count, $interval);
+                    session()->flash('success', trans('alerts.add'));
+                    return redirect(route('AdminPlans', App::getLocale()));
+                }
+            } else {
+                //If plan type is not selected
+                session()->flash('error', trans('alerts.select-plan-type'));
+                return redirect(route('AdminAddPlan', App::getLocale()));
             }
-            //If Secret Key Not Found
-            session()->flash('error', trans('alerts.error'));
-            return redirect(route('AdminAddPlan', App::getLocale()));
         } catch (Exception $e) {
             session()->flash('error', $e->getMessage());
             return redirect(route('AdminAddPlan', App::getLocale()));

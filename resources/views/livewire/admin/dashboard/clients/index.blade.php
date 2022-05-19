@@ -2,7 +2,7 @@
     @include('errors.alerts')
     <div class="row mb-4">
         <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
-            <a href="#">
+            <a href="{{ route('AdminClients', App::getLocale()) }}">
                 <div class="card">
                     <div class="card-header p-3 pt-2" style="border-radius: 0;">
                         <div
@@ -152,7 +152,7 @@
                                                 <span wire:loading wire:target='Edit("{{ $user->id }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
-                                                    {{ trans('admin.client-table-more') }}
+                                                {{ trans('admin.client-table-more') }}
                                             </button>
                                         </td>
                                         <td class="align-middle">
@@ -162,7 +162,7 @@
                                                     wire:target='DeleteConfirmation("{{ $user->id }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
-                                                    {{ trans('admin.client-table-delete') }}
+                                                {{ trans('admin.client-table-delete') }}
                                             </button>
                                         </td>
                                     </tr>

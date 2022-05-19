@@ -145,7 +145,7 @@ Route::middleware(['auth', 'admin'])->prefix('Admin')->group(function () {
     Route::get('AddPlan/{lang?}', AddPlan::class)
         ->name('AdminAddPlan');
 
-    Route::get('EditPlan/{slug}/{lang?}', EditPlan::class)
+    Route::get('EditPlan/{product}/{lang?}', EditPlan::class)
         ->name('AdminEditPlan');
     /*End::Plans*/
 

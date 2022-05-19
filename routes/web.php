@@ -19,21 +19,11 @@ Route::get('lang/{lang?}', function ($lang = "en") {
 
 Route::get('debug', function () {
 
-    $data = [
-        'message' => 'notifications.account-login',
-    ];
-
     $user = Auth::user();
 
-    $notification = $user->notify(new Alerts($data));
-
-    dd($notification);
-
-    $notifications = $user->notifications()->first();
-
-    dd($notifications->data['user']);
-
     $stripe = Stripe::Client();
+
+    dd(Admin::CountPlans($user->id));
 
     // $product = $stripe->products->create([
     //     'name' => 'Gold Special',

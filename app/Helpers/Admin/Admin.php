@@ -2,17 +2,17 @@
 
 namespace App\Helpers\Admin;
 
-use DateTime;
 use App\Models\User;
 use App\Models\Setting;
 use App\Helpers\Currency\Currency;
 use App\Helpers\Language\Language;
 use Illuminate\Support\Facades\Auth;
-use App\Helpers\Admin\Traits\AdminPlans;
+use App\Helpers\Admin\Traits\AdminStripePrices;
+use App\Helpers\Admin\Traits\AdminStripeProducts;
 
 class Admin
 {
-    use AdminPlans;
+    use AdminStripePrices, AdminStripeProducts;
 
     public static function Is()
     {
@@ -73,5 +73,4 @@ class Admin
         return Setting::first();
     }
     /*End::Settings*/
-
 }

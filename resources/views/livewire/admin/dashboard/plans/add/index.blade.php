@@ -41,32 +41,14 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="input-group input-group-static my-3">
-                                        <label for="interval-count">{{ trans('admin.plan-interval-count') }}</label>
-                                        <input type="text" wire:model.defer='interval_count'
-                                            value="{{ old('interval_count') }}"
-                                            class="form-control  @error('interval_count') is-invalid @enderror"
-                                            placeholder="{{ trans('admin.plan-interval-count') }}">
-                                        @error('interval_count')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-group input-group-static my-3">
-                                        <label for="billing-period">{{ trans('admin.plan-billing-period') }}</label>
-                                        <select type="text" wire:model.defer='interval'
-                                            class="form-control  @error('interval') is-invalid @enderror">
-                                            <option value="">{{ trans('admin.plan-billing-period') }}</option>
-                                            <option value="day">Day</option>
-                                            <option value="week">Week</option>
-                                            <option value="month">Month</option>
-                                            <option value="year">Year</option>
-                                        </select>
-                                        @error('interval')
+                                        <label for="description">{{ trans('admin.plan-description') }}</label>
+                                        <textarea wire:model.defer='description' class="form-control  @error('description') is-invalid @enderror"
+                                            placeholder="{{ trans('admin.plan-description') }}">
+                                            {{ old('description') }}
+                                        </textarea>
+                                        @error('description')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -74,8 +56,65 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
+                                    <div class="input-group input-group-static my-3">
+                                        <label for="plan_type">{{ trans('admin.plan-type') }}</label>
+                                        <select type="text" wire:model='plan_type'
+                                            class="form-control  @error('plan_type') is-invalid @enderror">
+                                            <option value="">{{ trans('admin.plan-type') }}</option>
+                                            <option value="onetime">{{ trans('admin.plan-one-time') }}</option>
+                                            <option value="recurring">{{ trans('admin.plan-recurring') }}</option>
+                                        </select>
+                                        @error('plan_type')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12 text-center">
+                                    <span wire:loading wire:target='plan_type' class="spinner-border spinner-border-sm" role="status"
+                                            aria-hidden="true">
+                                    </span>
+                                </div>
+                                @if ($plan_type == 'recurring')
+                                    <div class="col-md-6">
+                                        <div class="input-group input-group-static my-3">
+                                            <label
+                                                for="interval-count">{{ trans('admin.plan-interval-count') }}</label>
+                                            <input type="text" wire:model.defer='interval_count'
+                                                value="{{ old('interval_count') }}"
+                                                class="form-control  @error('interval_count') is-invalid @enderror"
+                                                placeholder="{{ trans('admin.plan-interval-count') }}">
+                                            @error('interval_count')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group input-group-static my-3">
+                                            <label
+                                                for="billing-period">{{ trans('admin.plan-billing-period') }}</label>
+                                            <select type="text" wire:model.defer='interval'
+                                                class="form-control  @error('interval') is-invalid @enderror">
+                                                <option value="">{{ trans('admin.plan-billing-period') }}</option>
+                                                <option value="day">Day</option>
+                                                <option value="week">Week</option>
+                                                <option value="month">Month</option>
+                                                <option value="year">Year</option>
+                                            </select>
+                                            @error('interval')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                @endif
+                                <div class="col-md-12">
                                     <button type="submit" class="btn btn-primary" wire:attr='disabled'>
-                                        <span wire:loading class="spinner-border spinner-border-sm" role="status"
+                                        <span wire:loading wire:target='Add' class="spinner-border spinner-border-sm" role="status"
                                             aria-hidden="true">
                                         </span>
                                         {{ trans('admin.save-changes') }}

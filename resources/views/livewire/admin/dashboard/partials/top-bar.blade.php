@@ -102,7 +102,7 @@
                         @endif
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                        @forelse (Auth::user()->notifications()->take(3)->get() as $notifications)
+                        @forelse (Auth::user()->notifications()->unread()->take(3)->get() as $notifications)
                             <li class="mb-2">
                                 <a class="dropdown-item border-radius-md" href="javascript:;">
                                     <div class="d-flex py-1">
@@ -116,7 +116,7 @@
                                             </h6>
                                             <p class="text-xs text-secondary mb-0">
                                                 <i class="fa fa-clock me-1" aria-hidden="true"></i>
-                                                {!! Helper::TimeAgo($notifications->created_at) !!}
+                                                {{ date('d M Y', strtotime($notifications->created_at)) }}
                                             </p>
                                         </div>
                                     </div>
@@ -128,7 +128,7 @@
                                     <div class="d-flex py-1">
                                         <div class="d-flex flex-column justify-content-center">
                                             <h6 class="text-sm font-weight-normal mb-1">
-                                                No notifications found
+                                                {{ trans('admin.no-unread') }}
                                             </h6>
                                         </div>
                                     </div>
