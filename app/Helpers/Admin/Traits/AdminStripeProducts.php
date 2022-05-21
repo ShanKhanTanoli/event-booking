@@ -22,6 +22,19 @@ trait AdminStripeProducts
         }
     }
 
+    public static function ActiveProducts($load)
+    {
+        try {
+            $skey = StripeConfiguration::first()->secret_key;
+            $stripe = new \Stripe\StripeClient(
+                $skey
+            );
+            return $stripe->products->all(['active' => true, 'limit' => $load]);
+        } catch (Exception $e) {
+            return session()->flash('error', trans('alerts.plans-not-found'));
+        }
+    }
+
     public static function CountProducts()
     {
         try {
@@ -31,6 +44,21 @@ trait AdminStripeProducts
             );
             return $stripe->products
                 ->all()->count();
+        } catch (Exception $e) {
+            return session()->flash('error', trans('alerts.error'));
+        }
+    }
+
+
+    public static function CountActiveProducts()
+    {
+        try {
+            $skey = StripeConfiguration::first()->secret_key;
+            $stripe = new \Stripe\StripeClient(
+                $skey
+            );
+            return $stripe->products
+                ->all(['active' => true])->count();
         } catch (Exception $e) {
             return session()->flash('error', trans('alerts.error'));
         }

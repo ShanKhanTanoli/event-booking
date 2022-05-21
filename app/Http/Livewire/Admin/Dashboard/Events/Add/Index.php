@@ -4,10 +4,12 @@ namespace App\Http\Livewire\Admin\Dashboard\Events\Add;
 
 use Exception;
 use Livewire\Component;
+use Illuminate\Support\Facades\App;
 
 class Index extends Component
 {
-    public $price, $balance, $expires_at, $quantity, $user_id;
+    public $name, $subscription_id, $user_id;
+
     public function render()
     {
         return view('livewire.admin.dashboard.events.add.index')
@@ -16,31 +18,19 @@ class Index extends Component
 
     public function Add()
     {
-        $msg = [
-            'user_id.required' => 'Enter Price',
-            'user_id.numeric' => 'Enter Price',
-            'price.required' => 'Enter Price',
-            'price.numeric' => 'Enter Price',
-            'balance.required' => 'Enter Balance Amount',
-            'balance.numeric' => 'Enter Balance Amount',
-            'expires_at.required' => 'Enter Date',
-            'expires_at.date' => 'Enter Date',
-            'quantity.required' => 'Enter Quantity',
-            'quantity.numeric' => 'Enter Quantity',
-        ];
         $validated = $this->validate([
+            'name' => 'required|string',
+            'subscription_id' => 'required|numeric',
             'user_id' => 'required|numeric',
-            'price' => 'required|numeric',
-            'balance' => 'required|numeric',
-            'expires_at' => 'required|date',
-            'quantity' => 'required|numeric',
-        ], $msg);
+        ]);
+
+        dd($validated);
 
         try {
-            session()->flash('success', 'Added Successfully');
-            return redirect(route('AdminEvents'));
+            session()->flash('success', trans('alerts.add'));
+            return redirect(route('AdminEvents', App::getLocale()));
         } catch (Exception $e) {
-            return session()->flash('error', $e->getMessage());
+            return session()->flash('error', trans('alerts.error'));
         }
     }
 }

@@ -95,10 +95,6 @@ include('business/index.php');
 include('client/index.php');
 /*End::Client Routes*/
 
-/*Begin::Public Routes*/
-include('public/index.php');
-/*End::Public Routes*/
-
 /*Begin::Auth Routes*/
 include('auth/index.php');
 /*End::Auth Routes*/

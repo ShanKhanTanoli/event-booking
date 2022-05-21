@@ -1,8 +1,8 @@
 <div class="container-fluid">
     @include('errors.alerts')
     <div class="row mb-4">
-        <div class="col-xl-3 col-sm-12 mb-xl-0 mb-4">
-            <a href="{{ route('AdminEvents') }}">
+        <div class="col-xl-6 col-sm-12 mb-xl-0 mb-4">
+            <a href="{{ route('AdminEvents', App::getLocale()) }}">
                 <div class="card">
                     <div class="card-header p-3 pt-2" style="border-radius: 0;">
                         <div
@@ -11,7 +11,8 @@
                         </div>
                         <div class="text-end pt-1">
                             <p class="text-sm mb-0 text-capitalize">
-                                Total</p>
+                                {{ trans('admin.events') }}
+                            </p>
                             <h4 class="mb-0">
                                 {{ Event::count() }}
                             </h4>
@@ -20,46 +21,8 @@
                 </div>
             </a>
         </div>
-        <div class="col-xl-3 col-sm-12 mb-xl-0 mb-4">
-            <a href="#">
-                <div class="card">
-                    <div class="card-header p-3 pt-2" style="border-radius: 0;">
-                        <div
-                            class="icon icon-lg icon-shape bg-gradient-primary shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                            <i class="fas fa-credit-card opacity-10"></i>
-                        </div>
-                        <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">
-                                UnSold</p>
-                            <h4 class="mb-0">
-                                {{ Card::CountUnSold() }}
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-xl-3 col-sm-12 mb-xl-0 mb-4">
-            <a href="#">
-                <div class="card">
-                    <div class="card-header p-3 pt-2" style="border-radius: 0;">
-                        <div
-                            class="icon icon-lg icon-shape bg-gradient-primary shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                            <i class="fas fa-credit-card opacity-10"></i>
-                        </div>
-                        <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">
-                                Sold</p>
-                            <h4 class="mb-0">
-                                {{ Card::CountSold() }}
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-xl-3 col-sm-12 mb-xl-0 mb-4">
-            <a href="{{ route('AdminAddCard') }}">
+        <div class="col-xl-6 col-sm-12 mb-xl-0 mb-4">
+            <a href="{{ route('AdminAddEvent', App::getLocale()) }}">
                 <div class="card">
                     <div class="card-header p-3 pt-2" style="border-radius: 0;">
                         <div
@@ -67,9 +30,11 @@
                             <i class="fas fa-plus opacity-10"></i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Add New</p>
+                            <p class="text-sm mb-0 text-capitalize">
+                                {{ trans('admin.add-new') }}
+                            </p>
                             <h4 class="mb-0">
-                                Card
+                                {{ trans('admin.event') }}
                             </h4>
                         </div>
                     </div>
@@ -93,16 +58,16 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Code
+                                        #
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Price
+                                        Name
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Added By
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Balance
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Expires At
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Created At
@@ -125,13 +90,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($cards as $card)
+                                @foreach ($events as $event)
                                     <tr>
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        {{ $card->code }}
+                                                        {{ $loop->iteration }}
                                                     </h6>
                                                 </div>
                                             </div>
@@ -140,8 +105,7 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        {{ $card->price }}
-                                                        {{ strtoupper(Business::Currency($card->user_id)) }}
+                                                        {{ $event->code }}
                                                     </h6>
                                                 </div>
                                             </div>
@@ -150,8 +114,8 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        {{ $card->balance }}
-                                                        {{ strtoupper(Business::Currency($card->user_id)) }}
+                                                        {{ $event->price }}
+                                                        {{ strtoupper(Business::Currency($event->user_id)) }}
                                                     </h6>
                                                 </div>
                                             </div>
@@ -160,7 +124,8 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        {{ date('d M Y', strtotime($card->expires_at)) }}
+                                                        {{ $event->balance }}
+                                                        {{ strtoupper(Business::Currency($event->user_id)) }}
                                                     </h6>
                                                 </div>
                                             </div>
@@ -169,7 +134,16 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        {{ date('d M Y', strtotime($card->created_at)) }}
+                                                        {{ date('d M Y', strtotime($event->expires_at)) }}
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">
+                                                        {{ date('d M Y', strtotime($event->created_at)) }}
                                                     </h6>
                                                 </div>
                                             </div>
@@ -178,7 +152,7 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        @if ($card->isExpired())
+                                                        @if ($event->isExpired())
                                                             <span class="badge bg-gradient-danger">
                                                                 Expired
                                                             </span>
@@ -195,15 +169,15 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        {{ Str::substr(Card::FindOwner($card->code)->name, 0, 12) }}
+                                                        {{ Str::substr(Card::FindOwner($event->code)->name, 0, 12) }}
                                                     </h6>
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="align-middle">
                                             <button class="btn btn-sm btn-info"
-                                                wire:click='View("{{ $card->code }}")'>
-                                                <span wire:loading wire:target='View("{{ $card->code }}")'
+                                                wire:click='View("{{ $event->code }}")'>
+                                                <span wire:loading wire:target='View("{{ $event->code }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
                                                 View
@@ -211,8 +185,8 @@
                                         </td>
                                         <td class="align-middle">
                                             <button class="btn btn-sm btn-success"
-                                                wire:click='Edit("{{ $card->code }}")'>
-                                                <span wire:loading wire:target='Edit("{{ $card->code }}")'
+                                                wire:click='Edit("{{ $event->code }}")'>
+                                                <span wire:loading wire:target='Edit("{{ $event->code }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
                                                 Edit
@@ -220,9 +194,9 @@
                                         </td>
                                         <td class="align-middle">
                                             <button class="btn btn-sm btn-danger"
-                                                wire:click='DeleteConfirmation("{{ $card->code }}")'>
+                                                wire:click='DeleteConfirmation("{{ $event->code }}")'>
                                                 <span wire:loading
-                                                    wire:target='DeleteConfirmation("{{ $card->code }}")'
+                                                    wire:target='DeleteConfirmation("{{ $event->code }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
                                                 Delete
@@ -235,7 +209,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    {{ $cards->render() }}
+                    {{ $events->render() }}
                 </div>
             </div>
         </div>

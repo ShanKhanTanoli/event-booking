@@ -13,9 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('plans', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->id();
+
             $table->string('name')->nullable();
+
+            //Subscription Foreign Key
+            $table->unsignedBigInteger('subscription_id')->nullable();
+            $table->foreign('subscription_id')->references('id')
+                ->on('subscriptions')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
             //User Foreign Key
             $table->unsignedBigInteger('user_id')->nullable();
@@ -24,17 +32,9 @@ return new class extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->string('plan_id')->nullable();
-            $table->tinyInteger('active')->nullable();
-            $table->string('amount')->nullable();
-            $table->string('amount_decimal')->nullable();
-            $table->string('currency')->nullable();
-            $table->string('interval')->nullable();
-            $table->string('interval_count')->nullable();
-            $table->string('product_id')->nullable();
-
+            $table->string('created_by')->nullable();
             $table->string('slug')->unique()->nullable();
-
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -46,6 +46,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('plans');
+        Schema::dropIfExists('events');
     }
 };

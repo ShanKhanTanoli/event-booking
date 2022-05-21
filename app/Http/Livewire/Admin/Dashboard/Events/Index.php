@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Dashboard\Events;
 
 use Livewire\Component;
+use App\Helpers\Event\Event;
 use Livewire\WithPagination;
 
 class Index extends Component

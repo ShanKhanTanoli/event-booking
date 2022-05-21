@@ -6,13 +6,13 @@
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                         <h6 class="text-white text-capitalize ps-3">
-                            Add Card
+                            {{ trans('admin.add-event') }}
                         </h6>
                     </div>
                 </div>
                 <div class="card-body px-0 pb-2">
                     <div class="container">
-                        <form>
+                        <form wire:submit.prevent='Add'>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="input-group input-group-static my-3">
@@ -36,20 +36,6 @@
                                             class="form-control  @error('balance') is-invalid @enderror"
                                             placeholder="Enter Balance Amount ({{ strtoupper(Business::Currency(Auth::user()->id)) }})">
                                         @error('balance')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-group input-group-static my-3">
-                                        <label for="expires_at">Expiry Date</label>
-                                        <input type="date" wire:model.defer='expires_at'
-                                            value="{{ old('expires_at') }}"
-                                            class="form-control  @error('expires_at') is-invalid @enderror"
-                                            placeholder="Enter Expiry Date">
-                                        @error('expires_at')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -96,7 +82,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <button type="button" class="btn btn-primary" wire:attr='disabled' wire:click='Add'>
+                                    <button type="submit" class="btn btn-primary" wire:attr='disabled'>
                                         <span wire:loading class="spinner-border spinner-border-sm" role="status"
                                             aria-hidden="true"></span>
                                         Save Changes
