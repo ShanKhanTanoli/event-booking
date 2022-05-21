@@ -3,17 +3,22 @@
 namespace App\Helpers\Business;
 
 use App\Models\User;
-use App\Helpers\Currency\Currency;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\Business\Traits\BusinessMails;
-use App\Helpers\Business\Traits\BusinessPlans;
 use App\Helpers\Business\Traits\BusinessClients;
 use App\Helpers\Business\Traits\BusinessSettings;
+use App\Helpers\Business\Traits\BusinessStripePrices;
+use App\Helpers\Business\Traits\BusinessStripeProducts;
 use App\Helpers\Business\Traits\BusinessSubscriptions;
 
 class Business
 {
-    use BusinessClients, BusinessMails, BusinessPlans, BusinessSubscriptions, BusinessSettings;
+    use BusinessClients,
+        BusinessMails,
+        BusinessStripeProducts,
+        BusinessStripePrices,
+        BusinessSubscriptions,
+        BusinessSettings;
 
     public static function Is()
     {
@@ -74,5 +79,4 @@ class Business
     {
         return self::Latest()->count();
     }
-
 }

@@ -67,16 +67,13 @@
                                         Added By
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Balance
+                                        Owner
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Subscription
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Created At
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Status
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Owner
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         View
@@ -105,7 +102,7 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        {{ $event->code }}
+                                                        {{ Str::substr($event->name, 0, 15) }}...
                                                     </h6>
                                                 </div>
                                             </div>
@@ -114,8 +111,7 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        {{ $event->price }}
-                                                        {{ strtoupper(Business::Currency($event->user_id)) }}
+                                                        {{ Str::substr($event->created_by, 0, 15) }}...
                                                     </h6>
                                                 </div>
                                             </div>
@@ -124,17 +120,20 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        {{ $event->balance }}
-                                                        {{ strtoupper(Business::Currency($event->user_id)) }}
+                                                        @if ($business = Business::Find($event->user_id))
+                                                            {{ Str::substr($business->name, 0, 15) }}...
+                                                        @else
+                                                            NOT FOUND
+                                                        @endif
                                                     </h6>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>
+                                        <td class="align-middle">
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        {{ date('d M Y', strtotime($event->expires_at)) }}
+                                                        abc
                                                     </h6>
                                                 </div>
                                             </div>
@@ -149,35 +148,9 @@
                                             </div>
                                         </td>
                                         <td class="align-middle">
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">
-                                                        @if ($event->isExpired())
-                                                            <span class="badge bg-gradient-danger">
-                                                                Expired
-                                                            </span>
-                                                        @else
-                                                            <span class="badge bg-gradient-success">
-                                                                Active
-                                                            </span>
-                                                        @endif
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">
-                                                        {{ Str::substr(Card::FindOwner($event->code)->name, 0, 12) }}
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle">
                                             <button class="btn btn-sm btn-info"
-                                                wire:click='View("{{ $event->code }}")'>
-                                                <span wire:loading wire:target='View("{{ $event->code }}")'
+                                                wire:click='View("{{ $event->id }}")'>
+                                                <span wire:loading wire:target='View("{{ $event->id }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
                                                 View
@@ -185,8 +158,8 @@
                                         </td>
                                         <td class="align-middle">
                                             <button class="btn btn-sm btn-success"
-                                                wire:click='Edit("{{ $event->code }}")'>
-                                                <span wire:loading wire:target='Edit("{{ $event->code }}")'
+                                                wire:click='Edit("{{ $event->id }}")'>
+                                                <span wire:loading wire:target='Edit("{{ $event->id }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
                                                 Edit
@@ -194,9 +167,9 @@
                                         </td>
                                         <td class="align-middle">
                                             <button class="btn btn-sm btn-danger"
-                                                wire:click='DeleteConfirmation("{{ $event->code }}")'>
+                                                wire:click='DeleteConfirmation("{{ $event->id }}")'>
                                                 <span wire:loading
-                                                    wire:target='DeleteConfirmation("{{ $event->code }}")'
+                                                    wire:target='DeleteConfirmation("{{ $event->id }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
                                                 Delete

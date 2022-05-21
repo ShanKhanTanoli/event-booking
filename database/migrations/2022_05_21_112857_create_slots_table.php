@@ -50,16 +50,19 @@ return new class extends Migration
         $faker = \Faker\Factory::create();
         for ($business = 1; $business < 6; $business++) {
             for ($event = 1; $event < mt_rand(10, 20); $event++) {
-                $slot_id = strtoupper(Str::random());
+
+                //Create Events
                 $res = Event::create([
                     'name' => $faker->randomElement(['French Accademy', 'Cool Gym', 'English Accademy']),
                     'slug' => strtoupper(Str::random()),
                     'user_id' => $business,
                     'created_by' => 'Admin',
                 ]);
+
+                //Create Slots
                 for ($slot = 1; $slot < mt_rand(10, 20); $slot++) {
                     Slot::create([
-                        'slot_id' => $slot_id,
+                        'slot_id' => $res->slug,
                         'event_id' => $res->id,
                         'slug' => Str::random(10),
                         'starting_date' => mt_rand(2022, 2025) . '-' . mt_rand(1, 12) . '-' . mt_rand(1, 28),
@@ -72,6 +75,7 @@ return new class extends Migration
                         'can_cancel_before' => 10,
                     ]);
                 }
+
             }
         }
     }

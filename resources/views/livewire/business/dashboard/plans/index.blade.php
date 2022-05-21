@@ -2,7 +2,7 @@
     @include('errors.alerts')
     <div class="row mb-4">
         <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
-            <a href="#">
+            <a href="{{ route('BusinessPlans', App::getLocale()) }}">
                 <div class="card">
                     <div class="card-header p-3 pt-2" style="border-radius: 0;">
                         <div
@@ -12,7 +12,11 @@
                         <div class="text-end pt-1">
                             <p class="text-sm mb-0 text-capitalize">{{ trans('business.plans') }}</p>
                             <h4 class="mb-0">
-                                {{ Business::CountPlans(Auth::user()->id) }}
+                                @if ($prices)
+                                    {{ Business::CountProducts() }}
+                                @else
+                                    0
+                                @endif
                             </h4>
                         </div>
                     </div>
@@ -62,147 +66,164 @@
                                         {{ trans('business.plan-table-name') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('business.plan-table-plan-id') }}
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         {{ trans('business.plan-table-status') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         {{ trans('business.plan-table-price') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('business.plan-table-duration') }}
+                                        {{ trans('business.plan-table-type') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ trans('business.plan-table-product-id') }}
+                                        {{ trans('business.plan-table-duration') }}
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         {{ trans('business.plan-table-actions') }}
                                     </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        {{ trans('business.plan-table-edit') }}
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($plans as $plan)
-                                    <tr>
-                                        <td class="align-middle">
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">
-                                                        {{ $loop->iteration }}
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">
-                                                        {{ $plan->name }}
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">
-                                                        {{ $plan->plan_id }}
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    @if ($plan->active)
-                                                        <span class="badge bg-primary">
-                                                            Active
-                                                        </span>
-                                                    @else
-                                                        <span class="badge bg-danger">
-                                                            Archived
-                                                        </span>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">
-                                                        {{ $plan->amount }}
-                                                        {{ strtoupper($plan->currency) }}
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">
-                                                        {{ strtoupper($plan->interval_count) }}
-                                                        {{ ucfirst($plan->interval) }}
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">
-                                                        {{ $plan->product_id }}
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        @if ($plan->active)
+                                @if ($prices)
+                                    @foreach ($prices as $price)
+                                        <tr>
                                             <td class="align-middle">
-                                                <button class="btn btn-sm btn-danger"
-                                                    wire:click='DeleteConfirmation("{{ $plan->id }}")'>
-                                                    <span wire:loading
-                                                        wire:target='DeleteConfirmation("{{ $plan->id }}")'
-                                                        class="spinner-border spinner-border-sm" role="status"
-                                                        aria-hidden="true"></span>
-                                                    {{ trans('business.plan-table-archive') }}
-                                                </button>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">
+                                                            {{ $loop->iteration }}
+                                                        </h6>
+                                                    </div>
+                                                </div>
                                             </td>
-                                        @else
                                             <td class="align-middle">
-                                                <button class="btn btn-sm btn-info"
-                                                    wire:click='ActivatePlan("{{ $plan->id }}")'>
-                                                    <span wire:loading
-                                                        wire:target='ActivatePlan("{{ $plan->id }}")'
-                                                        class="spinner-border spinner-border-sm" role="status"
-                                                        aria-hidden="true"></span>
-                                                    {{ trans('business.plan-table-activate') }}
-                                                </button>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">
+                                                            @if ($product = Business::FindProduct($price->product))
+                                                                {{ $product->name }}
+                                                            @else
+                                                                {{ __('NOT FOUND') }}
+                                                            @endif
+                                                        </h6>
+                                                    </div>
+                                                </div>
                                             </td>
-                                        @endif
-                                    </tr>
-                                @endforeach
+                                            <td class="align-middle">
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        @if ($product = Business::FindProduct($price->product)->active)
+                                                            <span class="badge bg-primary">
+                                                                Active
+                                                            </span>
+                                                        @else
+                                                            <span class="badge bg-danger">
+                                                                Archived
+                                                            </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">
+                                                            {{ $price->unit_amount / 100 }}
+                                                            {{ strtoupper($price->currency) }}
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        @if ($price->type == 'recurring')
+                                                            <span class="badge bg-info">
+                                                                {{ trans('business.plan-recurring') }}
+                                                            </span>
+                                                        @else
+                                                            <span class="badge bg-info">
+                                                                {{ trans('business.plan-one-time') }}
+                                                            </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        @if ($price->type == 'recurring')
+                                                            <h6 class="mb-0 text-sm">
+                                                                {{ strtoupper($price->recurring->interval_count) }}
+                                                                {{ ucfirst($price->recurring->interval) }}
+                                                            </h6>
+                                                        @else
+                                                            <span class="badge bg-info">
+                                                                {{ trans('business.plan-one-time') }}
+                                                            </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            @if ($product = Business::FindProduct($price->product)->active)
+                                                <td class="align-middle">
+                                                    <form wire:submit.prevent='Archive("{{ $price->id }}")'>
+                                                        <button class="btn btn-sm btn-danger">
+                                                            <span wire:loading
+                                                                wire:target='Archive("{{ $price->id }}")'
+                                                                class="spinner-border spinner-border-sm" role="status"
+                                                                aria-hidden="true"></span>
+                                                            {{ trans('business.plan-table-archive') }}
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            @else
+                                                <td class="align-middle">
+                                                    <form wire:submit.prevent='Activate("{{ $price->id }}")'>
+                                                        <button type="submit" class="btn btn-sm btn-info">
+                                                            <span wire:loading
+                                                                wire:target='Activate("{{ $price->id }}")'
+                                                                class="spinner-border spinner-border-sm" role="status"
+                                                                aria-hidden="true"></span>
+                                                            {{ trans('business.plan-table-activate') }}
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            @endif
+                                            <td class="align-middle">
+                                                <form wire:submit.prevent='Edit("{{ $price->id }}")'>
+                                                    <button type="submit" class="btn btn-sm btn-info">
+                                                        <span wire:loading wire:target='Edit("{{ $price->id }}")'
+                                                            class="spinner-border spinner-border-sm" role="status"
+                                                            aria-hidden="true"></span>
+                                                        {{ trans('business.plan-table-edit') }}
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
-                        {{ $plans->render() }}
                     </div>
+                </div>
+                <div class="card-footer text-center">
+                    @if ($prices)
+                        @if ($prices->count() < Business::CountProducts())
+                            <form wire:submit.prevent="LoadMore">
+                                <button type="submit" class="btn btn-sm bg-gradient-primary" wire:attr='disabled'>
+                                    <span wire:loading wire:target='LoadMore' class="spinner-border spinner-border-sm"
+                                        role="status" aria-hidden="true">
+                                    </span>
+                                    Load More
+                                </button>
+                            </form>
+                        @endif
+                    @endif
                 </div>
             </div>
         </div>
     </div>
-    @if ($delete)
-        <!--Begin::DeleteModel-->
-        @include(
-            'livewire.business.dashboard.partials.delete-modal'
-        )
-        <!--End::DeleteModel-->
-    @endif
-
-    <!--Begin::Script-->
-    @section('scripts')
-        <script>
-            Livewire.on('delete', function() {
-                $('#delete-notification').modal('show');
-            })
-        </script>
-    @endsection
-    <!--End::Script-->
 </div>

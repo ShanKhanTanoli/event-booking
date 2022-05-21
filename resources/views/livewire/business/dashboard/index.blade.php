@@ -54,7 +54,7 @@
                     <div class="text-end pt-1">
                         <p class="text-sm mb-0 text-capitalize">{{ trans('business.plans') }}</p>
                         <h4 class="mb-0">
-                            {{ Business::CountPlans(Auth::user()->id) }}
+                            {{ Business::CountProducts() }}
                         </h4>
                     </div>
                 </div>
