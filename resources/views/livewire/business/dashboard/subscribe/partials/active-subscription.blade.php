@@ -2,7 +2,7 @@
     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
             <h6 class="text-white text-capitalize ps-3">
-                {{ trans('business.subscribe-active-subscription') }}
+                Active Subscription
             </h6>
         </div>
     </div>
@@ -13,7 +13,7 @@
             </div>
             <div class="text-success text-center">
                 <strong>
-                    {{ trans('business.subscribe-active-subscription') }}
+                    You are Subscribed.
                 </strong>
             </div>
         </div>

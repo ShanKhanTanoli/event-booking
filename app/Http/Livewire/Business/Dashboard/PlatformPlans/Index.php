@@ -4,34 +4,43 @@ namespace App\Http\Livewire\Business\Dashboard\PlatformPlans;
 
 use Livewire\Component;
 use App\Helpers\Admin\Admin;
-use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
 {
-    public function mount($lang = "en")
-    {
-        App::setLocale($lang);
-    }
-
     public function render()
     {
-        $plans = Admin::ActivePlansLastPaginate(Admin::ID()->id, 10);
+        $prices = Admin::ActivePrices(10);
         return view('livewire.business.dashboard.platform-plans.index')
-            ->with(['plans' => $plans])
+            ->with(['prices' => $prices])
             ->extends('layouts.dashboard')
             ->section('content');
     }
 
-    public function Subscribe($slug)
+    public function Subscribe($price)
     {
-        if ($admin = Admin::ID()) {
-            if ($plan = Admin::FindActivePlanBySlug($admin->id, $slug)) {
-                return redirect(route('BusinessSubscribe', ['slug' => $plan->slug, 'lang' => App::getLocale()]));
-            } else {
-                return session()->flash('error', trans('alerts.error'));
-            }
+        return redirect(route('BusinessSubscribe', ['price' => $price]));
+    }
+
+    public function Free($price)
+    {
+        //User
+        $user = Auth::user();
+        //Find price
+        if ($find = Admin::FindPrice($price)) {
+            //Create or get customer
+            $user->createOrGetStripeCustomer();
+            //Create Subscription
+            $user->newSubscription(
+                $find->product,
+                $find->id
+            )->create();
+            //Success
+            session()->flash('success', 'You are successfully subscribed');
+            return redirect(route('BusinessPlatformPlans'));
         } else {
-            return session()->flash('error', trans('alerts.error'));
+            session()->flash('error', 'Something went wrong');
+            return redirect(route('BusinessPlatformPlans'));
         }
     }
 }

@@ -44,7 +44,7 @@ trait BusinessStripeProducts
                 $skey
             );
             return $stripe->products
-                ->all([], ['stripe_account' => Auth::user()->account_id])->count();
+                ->all(['stripe_account' => Auth::user()->account_id])->count();
         } catch (Exception $e) {
             return session()->flash('error', trans('alerts.error'));
         }

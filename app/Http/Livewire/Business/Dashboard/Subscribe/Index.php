@@ -5,37 +5,28 @@ namespace App\Http\Livewire\Business\Dashboard\Subscribe;
 use Livewire\Component;
 use App\Helpers\Admin\Admin;
 use App\Helpers\Stripe\Stripe;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
 {
-    public $plan, $card_holder_name, $card_number, $card_expiry, $card_cvc;
-    public function mount($slug, $lang = "en")
+    public $price, $product, $card_holder_name, $card_number, $card_expiry, $card_cvc;
+
+    public function mount($price)
     {
-        App::setLocale($lang);
-        //If Admin is Available
-        if ($admin = Admin::ID()) {
-            //If Plan found
-            if ($plan = Admin::FindActivePlanBySlug($admin->id, $slug)) {
-                $this->plan = $plan;
-            } else {
-                //If Plan not found
-                session()->flash('error', trans('alerts.error'));
-                return redirect(route('BusinessPlatformPlans', ['lang' => App::getLocale()]));
-            }
+        //If Price found
+        if ($find = Admin::FindPrice($price)) {
+            $this->price = $find->id;
+            $this->product = $find->product;
         } else {
-            //If Admin is not Available
-            return session()->flash('error', trans('alerts.error'));
+            //If Platform plans not found
+            session()->flash('error', 'Something went wrong');
+            return redirect(route('BusinessPlatformPlans'));
         }
     }
 
     public function render()
     {
-        $intent = Auth::user()->createSetupIntent();
-        return view('livewire.business.dashboard.subscribe.index')
-            ->with(['intent' => $intent])
+        return view('livewire.user.dashboard.subscribe.index')
             ->extends('layouts.dashboard')
             ->section('content');
     }
@@ -49,10 +40,26 @@ class Index extends Component
             'card_expiry' => 'required|date',
             'card_cvc' => 'required|string',
         ]);
-        return Stripe::CashierSubscribe($user, $card, $this->plan);
-    }
 
-    public function FreePlan()
-    {
+        //If Price found
+        if ($find = Admin::FindPrice($this->price)) {
+            //If Price is recurring
+            if ($find->type == "recurring") {
+                return Stripe::CashierSubscribe($user, $card, $this->product, $this->price);
+            }
+            //If Price is one_time
+            if ($find->type == "one_time") {
+                session()->flash('error', 'Something went wrong');
+                return redirect(route('BusinessPlatformPlans'));
+                //return Stripe::CashierSingleCharge($user, $card, $this->product, $find->unit_amount);
+            }
+            //If Something else
+            session()->flash('error', 'Something went wrong');
+            return redirect(route('BusinessPlatformPlans'));
+        } else {
+            //If Platform plans not found
+            session()->flash('error', 'Something went wrong');
+            return redirect(route('BusinessPlatformPlans'));
+        }
     }
 }
