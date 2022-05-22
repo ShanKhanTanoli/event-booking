@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Business\Dashboard\PlatformPlans;
 
 use Livewire\Component;
 use App\Helpers\Admin\Admin;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
@@ -19,7 +20,7 @@ class Index extends Component
 
     public function Subscribe($price)
     {
-        return redirect(route('BusinessSubscribe', ['price' => $price]));
+        return redirect(route('BusinessSubscribe', ['price' => $price, 'lang' => App::getLocale()]));
     }
 
     public function Free($price)
@@ -37,10 +38,10 @@ class Index extends Component
             )->create();
             //Success
             session()->flash('success', 'You are successfully subscribed');
-            return redirect(route('BusinessPlatformPlans'));
+            return redirect(route('BusinessPlatformPlans', ['lang' => App::getLocale()]));
         } else {
             session()->flash('error', 'Something went wrong');
-            return redirect(route('BusinessPlatformPlans'));
+            return redirect(route('BusinessPlatformPlans', ['lang' => App::getLocale()]));
         }
     }
 }

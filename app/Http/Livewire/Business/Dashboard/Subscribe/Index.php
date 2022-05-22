@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Business\Dashboard\Subscribe;
 use Livewire\Component;
 use App\Helpers\Admin\Admin;
 use App\Helpers\Stripe\Stripe;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
@@ -20,13 +21,13 @@ class Index extends Component
         } else {
             //If Platform plans not found
             session()->flash('error', 'Something went wrong');
-            return redirect(route('BusinessPlatformPlans'));
+            return redirect(route('BusinessPlatformPlans', ['lang' => App::getLocale()]));
         }
     }
 
     public function render()
     {
-        return view('livewire.user.dashboard.subscribe.index')
+        return view('livewire.business.dashboard.subscribe.index')
             ->extends('layouts.dashboard')
             ->section('content');
     }
@@ -50,16 +51,16 @@ class Index extends Component
             //If Price is one_time
             if ($find->type == "one_time") {
                 session()->flash('error', 'Something went wrong');
-                return redirect(route('BusinessPlatformPlans'));
+                return redirect(route('BusinessPlatformPlans', ['lang' => App::getLocale()]));
                 //return Stripe::CashierSingleCharge($user, $card, $this->product, $find->unit_amount);
             }
             //If Something else
             session()->flash('error', 'Something went wrong');
-            return redirect(route('BusinessPlatformPlans'));
+            return redirect(route('BusinessPlatformPlans', ['lang' => App::getLocale()]));
         } else {
             //If Platform plans not found
             session()->flash('error', 'Something went wrong');
-            return redirect(route('BusinessPlatformPlans'));
+            return redirect(route('BusinessPlatformPlans', ['lang' => App::getLocale()]));
         }
     }
 }

@@ -2,7 +2,7 @@
     @include('errors.alerts')
     <div class="row mb-4">
         <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
-            <a href="{{ route('UserSubscriptions') }}">
+            <a href="{{ route('BusinessSubscriptions', App::getLocale()) }}">
                 <div class="card">
                     <div class="card-header p-3 pt-2" style="border-radius: 0;">
                         <div
@@ -11,10 +11,10 @@
                         </div>
                         <div class="text-end pt-1">
                             <p class="text-sm mb-0 text-capitalize">
-                                Subscriptions
+                                {{ trans('business.subscriptions') }}
                             </p>
                             <h4 class="mb-0">
-                                {{ User::CountSubscriptions(Auth::user()) }}
+                                {{ Business::CountSubscriptions(Auth::user()) }}
                             </h4>
                         </div>
                     </div>
@@ -22,7 +22,7 @@
             </a>
         </div>
         <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
-            <a href="{{ route('UserPlatformPlans') }}">
+            <a href="{{ route('BusinessPlatformPlans', App::getLocale()) }}">
                 <div class="card">
                     <div class="card-header p-3 pt-2" style="border-radius: 0;">
                         <div
@@ -31,7 +31,7 @@
                         </div>
                         <div class="text-end pt-1">
                             <p class="text-sm mb-0 text-capitalize">
-                                Platform Plans
+                                {{ trans('business.platform-plans') }}
                             </p>
                             <h4 class="mb-0">
                                 {{ Admin::CountActiveProducts() }}
@@ -48,7 +48,7 @@
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                         <h6 class="text-white text-capitalize ps-3">
-                            Subscriptions
+                            {{ trans('business.subscriptions') }}
                         </h6>
                     </div>
                 </div>
@@ -181,8 +181,7 @@
                                             </div>
                                         </td>
                                         <!--Begin::If not ended-->
-                                        @if ($subscription->stripe_status == "active")
-
+                                        @if ($subscription->stripe_status == 'active')
                                             <!--Begin::If canceled-->
                                             @if (Auth::user()->subscription($subscription->name)->canceled())
                                                 <td class="align-middle">
@@ -222,7 +221,7 @@
 
 
                                         <!--Begin::If not ended-->
-                                        @if ($subscription->stripe_status == "canceled")
+                                        @if ($subscription->stripe_status == 'canceled')
                                             <td class="align-middle">
                                                 <button class="btn btn-sm btn-danger disabled">
                                                     End

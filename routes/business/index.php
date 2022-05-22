@@ -65,7 +65,7 @@ Route::middleware(['auth', 'business'])->prefix('Business')->group(function () {
     /*End::PlatformPlans*/
 
     /*Begin::Subscribe*/
-    Route::get('Subscribe/{slug}/{lang?}', Subscribe::class)
+    Route::get('Subscribe/{price}/{lang?}', Subscribe::class)
         ->name('BusinessSubscribe');
     /*End::Subscribe*/
 

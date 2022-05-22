@@ -2,7 +2,7 @@
     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
             <h6 class="text-white text-capitalize ps-3">
-                Plan Details
+                {{ trans('business.subscribe-plan-details') }}
             </h6>
         </div>
     </div>
@@ -12,7 +12,7 @@
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
                         <h6 class="my-0">
-                            Plan
+                            {{ trans('business.plan') }}
                         </h6>
                     </div>
                     <span class="text-muted">
@@ -27,7 +27,7 @@
                     <li class="list-group-item d-flex justify-content-between lh-sm">
                         <div>
                             <h6 class="my-0">
-                                Period
+                                {{ trans('business.subscribe-plan-period') }}
                             </h6>
                         </div>
                         <span class="text-muted">
@@ -40,7 +40,7 @@
                     <li class="list-group-item d-flex justify-content-between lh-sm">
                         <div>
                             <h6 class="my-0">
-                                Create
+                                {{ trans('business.subscribe-create') }}
                             </h6>
                         </div>
                         <span class="text-muted">
@@ -56,7 +56,7 @@
                     <li class="list-group-item d-flex justify-content-between lh-sm">
                         <div>
                             <h6 class="my-0">
-                                Create
+                                {{ trans('business.subscribe-create') }}
                             </h6>
                         </div>
                         <span class="text-muted">
@@ -71,7 +71,7 @@
                 <li class="list-group-item d-flex justify-content-between">
                     <div>
                         <h6 class="my-0">
-                            Sub Total
+                            {{ trans('business.subscribe-sub-total') }}
                         </h6>
                     </div>
                     <strong>{{ $plan->unit_amount / 100 }} {{ strtoupper($plan->currency) }}</strong>
