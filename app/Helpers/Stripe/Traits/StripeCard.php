@@ -113,8 +113,9 @@ trait StripeCard
     }
 
     //Subscribe with Stripe Cashier
-    public static function CashierSubscribe($user, $card, $plan)
+    public static function CashierSubscribe($user, $card, $product, $price)
     {
+        dd($price);
         try {
             if ($stripe = self::Client()) {
                 $pm = $stripe->paymentMethods->create([
@@ -134,25 +135,25 @@ trait StripeCard
                 $user->updateDefaultPaymentMethodFromStripe();
                 //Create Subscription
                 $user->newSubscription(
-                    strtoupper(Str::random(10)),
-                    $plan->plan_id
+                    $product,
+                    $price,
                 )->create($pm);
-                return session()->flash('success', trans('alerts.subscribed'));
+                return true;
             } else return session()->flash('error', trans('alerts.error'));
         } catch (\Stripe\Exception\CardException $e) {
-            return session()->flash('error', trans('alerts.error'));
+            return session()->flash('error', $e->getMessage());
         } catch (\Stripe\Exception\RateLimitException $e) {
-            return session()->flash('error', trans('alerts.error'));
+            return session()->flash('error', $e->getMessage());
         } catch (\Stripe\Exception\InvalidRequestException $e) {
-            return session()->flash('error', trans('alerts.error'));
+            return session()->flash('error', $e->getMessage());
         } catch (\Stripe\Exception\AuthenticationException $e) {
-            return session()->flash('error', trans('alerts.error'));
+            return session()->flash('error', $e->getMessage());
         } catch (\Stripe\Exception\ApiConnectionException $e) {
-            return session()->flash('error', trans('alerts.error'));
+            return session()->flash('error', $e->getMessage());
         } catch (\Stripe\Exception\ApiErrorException $e) {
-            return session()->flash('error', trans('alerts.error'));
+            return session()->flash('error', $e->getMessage());
         } catch (Exception $e) {
-            return session()->flash('error', trans('alerts.error'));
+            return session()->flash('error', $e->getMessage());
         }
     }
 }

@@ -20,7 +20,7 @@ class Index extends Component
             $this->product = $find->product;
         } else {
             //If Platform plans not found
-            session()->flash('error', 'Something went wrong');
+            session()->flash('error', trans('alerts.error'));
             return redirect(route('BusinessPlatformPlans', ['lang' => App::getLocale()]));
         }
     }
@@ -41,25 +41,26 @@ class Index extends Component
             'card_expiry' => 'required|date',
             'card_cvc' => 'required|string',
         ]);
-
         //If Price found
         if ($find = Admin::FindPrice($this->price)) {
             //If Price is recurring
             if ($find->type == "recurring") {
-                return Stripe::CashierSubscribe($user, $card, $this->product, $this->price);
+                Stripe::CashierSubscribe($user, $card, $this->product, $this->price);
+                session()->flash('success', trans('alerts.subscribe'));
+                return redirect(route('BusinessSubscriptions', ['lang' => App::getLocale()]));
             }
             //If Price is one_time
             if ($find->type == "one_time") {
-                session()->flash('error', 'Something went wrong');
+                session()->flash('error', trans('alerts.error'));
                 return redirect(route('BusinessPlatformPlans', ['lang' => App::getLocale()]));
                 //return Stripe::CashierSingleCharge($user, $card, $this->product, $find->unit_amount);
             }
             //If Something else
-            session()->flash('error', 'Something went wrong');
+            session()->flash('error', trans('alerts.error'));
             return redirect(route('BusinessPlatformPlans', ['lang' => App::getLocale()]));
         } else {
             //If Platform plans not found
-            session()->flash('error', 'Something went wrong');
+            session()->flash('error', trans('alerts.error'));
             return redirect(route('BusinessPlatformPlans', ['lang' => App::getLocale()]));
         }
     }

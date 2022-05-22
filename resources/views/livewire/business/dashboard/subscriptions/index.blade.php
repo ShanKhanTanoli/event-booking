@@ -187,7 +187,7 @@
                                                 <td class="align-middle">
                                                     <form wire:submit.prevent='Resume("{{ $subscription->name }}")'>
                                                         <button type="submit" class="btn btn-sm btn-info">
-                                                            <span wire:loading
+                                                            <span wire:ignore.self wire:loading
                                                                 wire:target='Resume("{{ $subscription->name }}")'
                                                                 class="spinner-border spinner-border-sm" role="status"
                                                                 aria-hidden="true"></span>
@@ -199,7 +199,7 @@
                                                 <td class="align-middle">
                                                     <form wire:submit.prevent='Cancel("{{ $subscription->name }}")'>
                                                         <button type="submit" class="btn btn-sm btn-danger">
-                                                            <span wire:loading
+                                                            <span wire:ignore.self wire:loading
                                                                 wire:target='Cancel("{{ $subscription->name }}")'
                                                                 class="spinner-border spinner-border-sm" role="status"
                                                                 aria-hidden="true"></span>
@@ -231,7 +231,7 @@
                                             <td class="align-middle">
                                                 <form wire:submit.prevent='End("{{ $subscription->name }}")'>
                                                     <button type="submit" class="btn btn-sm btn-danger">
-                                                        <span wire:loading
+                                                        <span wire:ignore.self wire:loading
                                                             wire:target='End("{{ $subscription->name }}")'
                                                             class="spinner-border spinner-border-sm" role="status"
                                                             aria-hidden="true"></span>
