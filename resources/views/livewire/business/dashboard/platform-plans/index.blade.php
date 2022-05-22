@@ -44,9 +44,9 @@
                                             <span class="ps-3 text-dark">
                                                 <i class="fas fa-check"></i>
                                                 @if ($find = $product->metadata->customers)
-                                                    {!! $find !!} Customers
+                                                    {!! $find !!} Events
                                                 @else
-                                                    Unlimited Customers
+                                                    Unlimited Events
                                                 @endif
                                             </span>
                                         </div>
@@ -57,9 +57,9 @@
                                             <span class="ps-3 text-dark">
                                                 <i class="fas fa-check"></i>
                                                 @if ($find = $product->metadata->deadlines)
-                                                    {!! $find !!} Deadlines
+                                                    {!! $find !!} Slots
                                                 @else
-                                                    Unlimited Deadlines
+                                                    Unlimited Slots
                                                 @endif
                                             </span>
                                         </div>
@@ -116,7 +116,7 @@
         @else
             <div class="alert alert-danger text-white text-center">
                 <strong>
-                    Plans will be available soon.
+                    {{ trans('business.admin-plans-unavailable') }}
                 </strong>
             </div>
         @endif

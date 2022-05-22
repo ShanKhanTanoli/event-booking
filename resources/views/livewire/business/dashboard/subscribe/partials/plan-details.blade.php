@@ -45,9 +45,9 @@
                         </div>
                         <span class="text-muted">
                             @if ($find = $product->metadata->customers)
-                                {!! $find !!} Customers
+                                {!! $find !!} Events
                             @else
-                                Unlimited Customers
+                                Unlimited Events
                             @endif
                         </span>
                     </li>
@@ -61,9 +61,9 @@
                         </div>
                         <span class="text-muted">
                             @if ($find = $product->metadata->deadlines)
-                                {!! $find !!} Deadlines
+                                {!! $find !!} Slots
                             @else
-                                Unlimited Deadlines
+                                Unlimited Slots
                             @endif
                         </span>
                     </li>

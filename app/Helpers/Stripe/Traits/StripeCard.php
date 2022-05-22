@@ -115,7 +115,6 @@ trait StripeCard
     //Subscribe with Stripe Cashier
     public static function CashierSubscribe($user, $card, $product, $price)
     {
-        dd($price);
         try {
             if ($stripe = self::Client()) {
                 $pm = $stripe->paymentMethods->create([
