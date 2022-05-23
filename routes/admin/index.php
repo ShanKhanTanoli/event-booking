@@ -11,7 +11,7 @@ use App\Http\Livewire\Admin\Dashboard\Notifications\Index as AdminNotifications;
 /*End::Notifications*/
 
 /*Begin::Business*/
-use App\Http\Livewire\Admin\Dashboard\Business\Index as ViewAllBusiness;
+use App\Http\Livewire\Admin\Dashboard\Business\Index as Business;
 use App\Http\Livewire\Admin\Dashboard\Business\Add\Index as AddBusiness;
 use App\Http\Livewire\Admin\Dashboard\Business\Clients\Index as BusinessClients;
 use App\Http\Livewire\Admin\Dashboard\Business\Edit\Index as EditBusiness;
@@ -24,7 +24,7 @@ use App\Http\Livewire\Admin\Dashboard\Business\Mails\Send\Index as SendBusinessM
 /*End::Business Mails*/
 
 /*Begin::Clients*/
-use App\Http\Livewire\Admin\Dashboard\Clients\Index as ViewAllClients;
+use App\Http\Livewire\Admin\Dashboard\Clients\Index as Clients;
 use App\Http\Livewire\Admin\Dashboard\Clients\Add\Index as AddClient;
 use App\Http\Livewire\Admin\Dashboard\Clients\Edit\Index as EditClient;
 use App\Http\Livewire\Admin\Dashboard\Clients\UpdatePassword\Index as UpdateClientPassword;
@@ -36,14 +36,15 @@ use App\Http\Livewire\Admin\Dashboard\Clients\Mails\Send\Index as SendClientMail
 /*End::Client Mails*/
 
 /*Begin::Events*/
-use App\Http\Livewire\Admin\Dashboard\Events\Index as AllEvents;
+use App\Http\Livewire\Admin\Dashboard\Events\Index as Events;
 use App\Http\Livewire\Admin\Dashboard\Events\View\Index as ViewEvent;
 use App\Http\Livewire\Admin\Dashboard\Events\Add\Index as AddEvent;
 use App\Http\Livewire\Admin\Dashboard\Events\Edit\Index as EditEvent;
 /*End::Events*/
 
+
 /*Begin::Plans*/
-use App\Http\Livewire\Admin\Dashboard\Plans\Index as AllPlans;
+use App\Http\Livewire\Admin\Dashboard\Plans\Index as Plans;
 use App\Http\Livewire\Admin\Dashboard\Plans\Add\Index as AddPlan;
 use App\Http\Livewire\Admin\Dashboard\Plans\Edit\Index as EditPlan;
 /*End::Plans*/
@@ -53,7 +54,7 @@ use App\Http\Livewire\Admin\Dashboard\Subscriptions\Index as Subscriptions;
 /*End::Subscriptions*/
 
 /*Begin::Payments*/
-use App\Http\Livewire\Admin\Dashboard\Payments\Index as ViewAllPayments;
+use App\Http\Livewire\Admin\Dashboard\Payments\Index as Payments;
 /*End::Payments*/
 
 /*Begin::Settings*/
@@ -82,7 +83,7 @@ Route::middleware(['auth', 'admin'])->prefix('Admin')->group(function () {
     /*End::Notifications*/
 
     /*Begin::Business*/
-    Route::get('Business/{lang?}', ViewAllBusiness::class)
+    Route::get('Business/{lang?}', Business::class)
         ->name('AdminBusiness');
 
     Route::get('AddBusiness/{lang?}', AddBusiness::class)
@@ -107,7 +108,7 @@ Route::middleware(['auth', 'admin'])->prefix('Admin')->group(function () {
     /*End::BusinessMails*/
 
     /*Begin::Clients*/
-    Route::get('Clients/{lang?}', ViewAllClients::class)
+    Route::get('Clients/{lang?}', Clients::class)
         ->name('AdminClients');
 
     Route::get('AddClient/{lang?}', AddClient::class)
@@ -129,7 +130,7 @@ Route::middleware(['auth', 'admin'])->prefix('Admin')->group(function () {
     /*End::ClientMails*/
 
     /*Begin::Events*/
-    Route::get('Events/{lang?}', AllEvents::class)
+    Route::get('Events/{lang?}', Events::class)
         ->name('AdminEvents');
 
     Route::get('ViewEvent/{slug}/{lang?}', ViewEvent::class)
@@ -140,10 +141,14 @@ Route::middleware(['auth', 'admin'])->prefix('Admin')->group(function () {
 
     Route::get('EditEvent/{slug}/{lang?}', EditEvent::class)
         ->name('AdminEditEvent');
+
+    Route::get('Event/{slug}/Slots/{lang?}', ViewEvent::class)
+        ->name('AdminEventSlots');
     /*End::Events*/
 
+
     /*Begin::Plans*/
-    Route::get('Plans/{lang?}', AllPlans::class)
+    Route::get('Plans/{lang?}', Plans::class)
         ->name('AdminPlans');
 
     Route::get('AddPlan/{lang?}', AddPlan::class)
@@ -158,7 +163,7 @@ Route::middleware(['auth', 'admin'])->prefix('Admin')->group(function () {
     /*End::Subscriptions*/
 
     /*Begin::Payments*/
-    Route::get('Payments/{lang?}', ViewAllPayments::class)
+    Route::get('Payments/{lang?}', Payments::class)
         ->name('AdminPayments');
     /*End::Payments*/
 

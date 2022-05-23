@@ -48,7 +48,7 @@
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                         <h6 class="text-white text-capitalize ps-3">
-                            Cards
+                            {{ trans('admin.events') }}
                         </h6>
                     </div>
                 </div>
@@ -70,13 +70,16 @@
                                         Owner
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Subscription
+                                        Slots
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Created At
+                                        Date
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         View
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Add Slots
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Edit
@@ -133,7 +136,7 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        abc
+                                                        {{ Event::CountSlots($event->id) }}
                                                     </h6>
                                                 </div>
                                             </div>
@@ -154,6 +157,15 @@
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
                                                 View
+                                            </button>
+                                        </td>
+                                        <td class="align-middle">
+                                            <button class="btn btn-sm btn-success"
+                                                wire:click='AddSlots("{{ $event->id }}")'>
+                                                <span wire:loading wire:target='AddSlots("{{ $event->id }}")'
+                                                    class="spinner-border spinner-border-sm" role="status"
+                                                    aria-hidden="true"></span>
+                                                Add Slots
                                             </button>
                                         </td>
                                         <td class="align-middle">

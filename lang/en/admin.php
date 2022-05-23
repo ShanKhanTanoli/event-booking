@@ -26,4 +26,8 @@ return array_merge(
     /*Begin::Buttons*/
     include('admin/buttons.php'),
     /*End::Buttons*/
+
+    /*Begin::Modal*/
+    include('admin/modal.php'),
+    /*End::Modal*/
 );

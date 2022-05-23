@@ -2,10 +2,12 @@
 
 namespace App\Helpers\Event;
 
+use App\Helpers\Event\Traits\Slots;
 use App\Models\Event as EventModel;
 
 class Event
 {
+    use Slots;
 
     public static function all()
     {
