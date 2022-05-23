@@ -48,6 +48,10 @@ use App\Http\Livewire\Admin\Dashboard\Plans\Add\Index as AddPlan;
 use App\Http\Livewire\Admin\Dashboard\Plans\Edit\Index as EditPlan;
 /*End::Plans*/
 
+/*Begin::Subscriptions*/
+use App\Http\Livewire\Admin\Dashboard\Subscriptions\Index as Subscriptions;
+/*End::Subscriptions*/
+
 /*Begin::Payments*/
 use App\Http\Livewire\Admin\Dashboard\Payments\Index as ViewAllPayments;
 /*End::Payments*/
@@ -148,6 +152,10 @@ Route::middleware(['auth', 'admin'])->prefix('Admin')->group(function () {
     Route::get('EditPlan/{product}/{lang?}', EditPlan::class)
         ->name('AdminEditPlan');
     /*End::Plans*/
+
+    /*Begin::Subscriptions*/
+    Route::get('Subscriptions/{lang?}', Subscriptions::class)->name('AdminSubscriptions');
+    /*End::Subscriptions*/
 
     /*Begin::Payments*/
     Route::get('Payments/{lang?}', ViewAllPayments::class)
