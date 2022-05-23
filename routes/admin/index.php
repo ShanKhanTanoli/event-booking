@@ -42,6 +42,11 @@ use App\Http\Livewire\Admin\Dashboard\Events\Add\Index as AddEvent;
 use App\Http\Livewire\Admin\Dashboard\Events\Edit\Index as EditEvent;
 /*End::Events*/
 
+/*Begin::Event Slots*/
+use App\Http\Livewire\Admin\Dashboard\Events\Slots\Index as Slots;
+use App\Http\Livewire\Admin\Dashboard\Events\Slots\View\Index as ViewSlot;
+use App\Http\Livewire\Admin\Dashboard\Events\Slots\Add\Index as AddSlot;
+/*End::Event Slots*/
 
 /*Begin::Plans*/
 use App\Http\Livewire\Admin\Dashboard\Plans\Index as Plans;
@@ -145,6 +150,17 @@ Route::middleware(['auth', 'admin'])->prefix('Admin')->group(function () {
     Route::get('Event/{slug}/Slots/{lang?}', ViewEvent::class)
         ->name('AdminEventSlots');
     /*End::Events*/
+
+    /*Begin::Event Slots*/
+    Route::get('Event/{slug}/Slots/{lang?}', Slots::class)
+        ->name('AdminSlots');
+
+    Route::get('ViewSlot/{slug}/{lang?}', ViewSlot::class)
+        ->name('AdminViewSlot');
+
+    Route::get('Event/{slug}/AddSlot/{lang?}', AddSlot::class)
+        ->name('AdminAddSlot');
+    /*End::Event Slots*/
 
 
     /*Begin::Plans*/
