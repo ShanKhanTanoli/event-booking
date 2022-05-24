@@ -105,7 +105,7 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        {{ Str::substr($event->name, 0, 15) }}...
+                                                        {{ Str::substr($event->name, 0, 12) }}...
                                                     </h6>
                                                 </div>
                                             </div>
@@ -114,7 +114,7 @@
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
-                                                        {{ Str::substr($event->created_by, 0, 15) }}...
+                                                        {{ Str::substr($event->created_by, 0, 12) }}...
                                                     </h6>
                                                 </div>
                                             </div>
@@ -124,7 +124,7 @@
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">
                                                         @if ($business = Business::Find($event->user_id))
-                                                            {{ Str::substr($business->name, 0, 15) }}...
+                                                            {{ Str::substr($business->name, 0, 12) }}...
                                                         @else
                                                             NOT FOUND
                                                         @endif
@@ -152,8 +152,8 @@
                                         </td>
                                         <td class="align-middle">
                                             <button class="btn btn-sm btn-info"
-                                                wire:click='View("{{ $event->id }}")'>
-                                                <span wire:loading wire:target='View("{{ $event->id }}")'
+                                                wire:click='View("{{ $event->slug }}")'>
+                                                <span wire:loading wire:target='View("{{ $event->slug }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
                                                 View
@@ -161,8 +161,8 @@
                                         </td>
                                         <td class="align-middle">
                                             <button class="btn btn-sm btn-success"
-                                                wire:click='AddSlots("{{ $event->id }}")'>
-                                                <span wire:loading wire:target='AddSlots("{{ $event->id }}")'
+                                                wire:click='AddSlots("{{ $event->slug }}")'>
+                                                <span wire:loading wire:target='AddSlots("{{ $event->slug }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
                                                 Add Slots
@@ -170,8 +170,8 @@
                                         </td>
                                         <td class="align-middle">
                                             <button class="btn btn-sm btn-success"
-                                                wire:click='Edit("{{ $event->id }}")'>
-                                                <span wire:loading wire:target='Edit("{{ $event->id }}")'
+                                                wire:click='Edit("{{ $event->slug }}")'>
+                                                <span wire:loading wire:target='Edit("{{ $event->slug }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
                                                 Edit
@@ -179,9 +179,9 @@
                                         </td>
                                         <td class="align-middle">
                                             <button class="btn btn-sm btn-danger"
-                                                wire:click='DeleteConfirmation("{{ $event->id }}")'>
+                                                wire:click='DeleteConfirmation("{{ $event->slug }}")'>
                                                 <span wire:loading
-                                                    wire:target='DeleteConfirmation("{{ $event->id }}")'
+                                                    wire:target='DeleteConfirmation("{{ $event->slug }}")'
                                                     class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
                                                 Delete

@@ -4,18 +4,22 @@ namespace App\Http\Livewire\Admin\Dashboard\Events\Edit;
 
 use Exception;
 use Livewire\Component;
+use App\Helpers\Event\Event;
+use Illuminate\Support\Facades\App;
 
 class Index extends Component
 {
-    public $event;
+    public $event, $name, $user_id;
 
     public function mount($slug)
     {
-        if ($event = Event::Find($slug)) {
+        if ($event = Event::FindBySlug($slug)) {
             $this->event = $event;
+            $this->name = $event->name;
+            $this->user_id = $event->user_id;
         } else {
-            session()->flash('error', 'No such event found');
-            return redirect(route('AdminEvents'));
+            session()->flash('error', trans('alerts.error'));
+            return redirect(route('AdminEvents', App::getLocale()));
         }
     }
 
@@ -27,34 +31,22 @@ class Index extends Component
 
     public function Update()
     {
-        //Begin::If Card Exists
-        if (Card::Find($this->card->slug)) {
-            $msg = [
-                'user_id.required' => 'Enter Price',
-                'user_id.numeric' => 'Enter Price',
-                'price.required' => 'Enter Price',
-                'price.numeric' => 'Enter Price',
-                'balance.required' => 'Enter Balance Amount',
-                'balance.numeric' => 'Enter Balance Amount',
-                'expires_at.required' => 'Enter Date',
-                'expires_at.date' => 'Enter Date',
-            ];
+        //Begin::If Event Exists
+        if (Event::FindBySlug($this->event->slug)) {
             $validated = $this->validate([
+                'name' => 'required|string',
                 'user_id' => 'required|numeric',
-                'price' => 'required|numeric',
-                'balance' => 'required|numeric',
-                'expires_at' => 'required|date',
-            ], $msg);
+            ]);
             try {
                 $this->event->update($validated);
-                session()->flash('success', 'Updated Successfully');
-                return redirect(route('AdminEditEvent', $this->event->slug));
+                session()->flash('success', trans('alerts.update'));
+                return redirect(route('AdminEditEvent', ['slug' => $this->event->slug, 'lang' => App::getLocale()]));
             } catch (Exception $e) {
                 return session()->flash('error', $e->getMessage());
             }
         } else {
-            session()->flash('error', 'No such event found');
-            return redirect(route('AdminEvents'));
+            session()->flash('error', trans('alerts.error'));
+            return redirect(route('AdminEvents', App::getLocale()));
         }
     }
 }

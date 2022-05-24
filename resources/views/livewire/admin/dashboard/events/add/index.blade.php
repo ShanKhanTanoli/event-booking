@@ -2,7 +2,7 @@
     @include('errors.alerts')
     <div class="row mt-3">
         <div class="col-12">
-            <div class="card my-4">
+            <div class="card">
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                         <h6 class="text-white text-capitalize ps-3">
@@ -16,12 +16,11 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="input-group input-group-static my-3">
-                                        <label for="price">Price
-                                            ({{ strtoupper(Business::Currency(Auth::user()->id)) }})</label>
-                                        <input type="text" wire:model.defer='price' value="{{ old('price') }}"
-                                            class="form-control  @error('price') is-invalid @enderror"
-                                            placeholder="Enter Price ({{ strtoupper(Business::Currency(Auth::user()->id)) }})">
-                                        @error('price')
+                                        <label for="name">{{ trans('admin.event-name') }}</label>
+                                        <input type="text" wire:model.defer='name' value="{{ old('name') }}"
+                                            class="form-control  @error('name') is-invalid @enderror"
+                                            placeholder="{{ trans('admin.event-name') }}">
+                                        @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -30,32 +29,18 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-group input-group-static my-3">
-                                        <label for="balance">Balance Amount
-                                            ({{ strtoupper(Business::Currency(Auth::user()->id)) }})</label>
-                                        <input type="text" wire:model.defer='balance' value="{{ old('balance') }}"
-                                            class="form-control  @error('balance') is-invalid @enderror"
-                                            placeholder="Enter Balance Amount ({{ strtoupper(Business::Currency(Auth::user()->id)) }})">
-                                        @error('balance')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-group input-group-static my-3">
-                                        <label for="user_id">Card Owner</label>
+                                        <label for="user_id">{{ trans('admin.select-business') }}</label>
                                         <select wire:model.defer='user_id'
                                             class="form-control  @error('user_id') is-invalid @enderror">
-                                            <option value="">Select Owner</option>
-                                            @forelse(Business::All()->get() as $business)
+                                            <option value="">{{ trans('admin.select-business') }}
+                                            </option>
+                                            @foreach (Business::Latest()->get() as $business)
                                                 <option value="{{ $business->id }}">
-                                                    Name : {{ $business->name }}
-                                                    Email : {{ $business->email }}
+                                                    {!! $business->name !!}
+                                                    -
+                                                    {!! $business->email !!}
                                                 </option>
-                                            @empty
-                                                <option value="">Please Add Business</option>
-                                            @endforelse
+                                            @endforeach
                                         </select>
                                         @error('user_id')
                                             <span class="invalid-feedback" role="alert">
@@ -65,27 +50,11 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="input-group input-group-static my-3">
-                                        <label for="quantity">Quantity (1-30)</label>
-                                        <select wire:model.defer='quantity'
-                                            class="form-control  @error('quantity') is-invalid @enderror">
-                                            <option value="">Select Quantity</option>
-                                            @for ($i = 1; $i < 31; $i++)
-                                                <option value="{{ $i }}">{{ $i }} Cards</option>
-                                            @endfor
-                                        </select>
-                                        @error('quantity')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
                                     <button type="submit" class="btn btn-primary" wire:attr='disabled'>
                                         <span wire:loading class="spinner-border spinner-border-sm" role="status"
-                                            aria-hidden="true"></span>
-                                        Save Changes
+                                            aria-hidden="true">
+                                        </span>
+                                        {{ trans('admin.save-changes') }}
                                     </button>
                                 </div>
                             </div>

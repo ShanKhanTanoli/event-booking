@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Dashboard\Events;
 use Livewire\Component;
 use App\Helpers\Event\Event;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\App;
 
 class Index extends Component
 {
@@ -25,31 +26,37 @@ class Index extends Component
 
     public function View($slug)
     {
-        return redirect(route('AdminViewEvent', $slug));
+        return redirect(route('AdminViewEvent', ['slug' => $slug, 'lang' => App::getLocale()]));
+    }
+
+
+    public function AddSlots($slug)
+    {
+        return redirect(route('AdminSlotTypes', ['slug' => $slug, 'lang' => App::getLocale()]));
     }
 
 
     public function Edit($slug)
     {
-        if ($event = Event::Find($slug)) {
-            return redirect(route('AdminEditEvent', $event->slug));
-        } else return session()->flash('error', 'No such event found');
+        if ($event = Event::FindBySlug($slug)) {
+            return redirect(route('AdminEditEvent', ['slug' => $event->slug, 'lang' => App::getLocale()]));
+        } else return session()->flash('error', trans('alerts.error'));
     }
 
     public function DeleteConfirmation($slug)
     {
-        if ($event = Event::Find($slug)) {
+        if ($event = Event::FindBySlug($slug)) {
             $this->delete = $event;
             $this->emit(['delete']);
-        } else return session()->flash('error', 'No such event found');
+        } else return session()->flash('error', trans('alerts.error'));
     }
 
     public function Delete($id)
     {
         if ($event = Event::FindById($id)) {
             $event->delete();
-            session()->flash('success', 'Deleted Successfully');
-            return redirect(route('AdminEvents'));
-        } else return session()->flash('error', 'No such event found');
+            session()->flash('success', trans('alerts.delete'));
+            return redirect(route('AdminEvents', ['lang' => App::getLocale()]));
+        } else return session()->flash('error', trans('alerts.error'));
     }
 }

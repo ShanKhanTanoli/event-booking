@@ -3,7 +3,9 @@
 namespace App\Http\Livewire\Admin\Dashboard\Events\Add;
 
 use Exception;
+use App\Models\Event;
 use Livewire\Component;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\App;
 
 class Index extends Component
@@ -20,17 +22,20 @@ class Index extends Component
     {
         $validated = $this->validate([
             'name' => 'required|string',
-            'subscription_id' => 'required|numeric',
             'user_id' => 'required|numeric',
         ]);
-
-        dd($validated);
-
+        $data = [
+            'name' => $validated['name'],
+            'user_id' => $validated['user_id'],
+            'created_by' => 'Admin',
+            'slug' => strtoupper(Str::random(10)),
+        ];
         try {
+            Event::create($data);
             session()->flash('success', trans('alerts.add'));
-            return redirect(route('AdminEvents', App::getLocale()));
+            return redirect(route('AdminEvents', ['lang' => App::getLocale()]));
         } catch (Exception $e) {
-            return session()->flash('error', trans('alerts.error'));
+            return session()->flash('error', $e->getMessage());
         }
     }
 }

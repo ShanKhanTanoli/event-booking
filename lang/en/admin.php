@@ -11,6 +11,10 @@ return array_merge(
     include('admin/business-clients.php'),
     /*End::Business Clients*/
 
+    /*Begin::Events*/
+    include('admin/events.php'),
+    /*End::Events*/
+
     /*Begin::Plans*/
     include('admin/plans.php'),
     /*End::Plans*/

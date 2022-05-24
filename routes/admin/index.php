@@ -44,8 +44,13 @@ use App\Http\Livewire\Admin\Dashboard\Events\Edit\Index as EditEvent;
 
 /*Begin::Event Slots*/
 use App\Http\Livewire\Admin\Dashboard\Events\Slots\Index as Slots;
-use App\Http\Livewire\Admin\Dashboard\Events\Slots\View\Index as ViewSlot;
 use App\Http\Livewire\Admin\Dashboard\Events\Slots\Add\Index as AddSlot;
+use App\Http\Livewire\Admin\Dashboard\Events\Slots\View\Index as ViewSlot;
+use App\Http\Livewire\Admin\Dashboard\Events\Slots\Types\Index as SlotTypes;
+
+use App\Http\Livewire\Admin\Dashboard\Events\Slots\Add\Daily\Index as AddDaily;
+use App\Http\Livewire\Admin\Dashboard\Events\Slots\Add\Weekly\Index as AddWeekly;
+use App\Http\Livewire\Admin\Dashboard\Events\Slots\Add\SpecificDays\Index as AddSpecificDays;
 /*End::Event Slots*/
 
 /*Begin::Plans*/
@@ -155,11 +160,25 @@ Route::middleware(['auth', 'admin'])->prefix('Admin')->group(function () {
     Route::get('Event/{slug}/Slots/{lang?}', Slots::class)
         ->name('AdminSlots');
 
+    Route::get('Event/{slug}/SlotTypes/{lang?}', SlotTypes::class)
+        ->name('AdminSlotTypes');
+
     Route::get('ViewSlot/{slug}/{lang?}', ViewSlot::class)
         ->name('AdminViewSlot');
 
     Route::get('Event/{slug}/AddSlot/{lang?}', AddSlot::class)
         ->name('AdminAddSlot');
+
+
+    Route::get('Event/{slug}/AddDaily/{lang?}', AddDaily::class)
+        ->name('AdminAddDaily');
+
+    Route::get('Event/{slug}/AddWeekly/{lang?}', AddWeekly::class)
+        ->name('AdminAddWeekly');
+
+    Route::get('Event/{slug}/AddSpecificDays/{lang?}', AddSpecificDays::class)
+        ->name('AdminAddSpecificDays');
+
     /*End::Event Slots*/
 
 

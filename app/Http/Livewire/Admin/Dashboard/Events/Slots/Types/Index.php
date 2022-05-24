@@ -1,18 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Dashboard\Events\View;
+namespace App\Http\Livewire\Admin\Dashboard\Events\Slots\Types;
 
 use Livewire\Component;
 use App\Helpers\Event\Event;
-use Livewire\WithPagination;
 use Illuminate\Support\Facades\App;
 
 class Index extends Component
 {
-    use WithPagination;
-
-    protected $paginationTheme = 'bootstrap';
-
     public $slug, $event;
 
     public function mount($slug)
@@ -27,7 +22,22 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.admin.dashboard.events.view.index')
+        return view('livewire.admin.dashboard.events.slots.types.index')
             ->extends('layouts.dashboard');
+    }
+
+    public function SpecificDays()
+    {
+        dd('Specific');
+    }
+
+    public function Daily()
+    {
+        dd('daily');
+    }
+
+    public function Weekly()
+    {
+        dd('weekly');
     }
 }
