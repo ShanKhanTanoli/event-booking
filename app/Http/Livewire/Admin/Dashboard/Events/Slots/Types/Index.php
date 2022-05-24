@@ -28,16 +28,16 @@ class Index extends Component
 
     public function SpecificDays()
     {
-        dd('Specific');
+        return redirect(route('AdminAddSpecificDays', ['slug' => $this->event->slug, 'lang' => App::getLocale()]));
     }
 
     public function Daily()
     {
-        dd('daily');
+        return redirect(route('AdminAddDaily', ['slug' => $this->event->slug, 'lang' => App::getLocale()]));
     }
 
     public function Weekly()
     {
-        dd('weekly');
+        return redirect(route('AdminAddWeekly', ['slug' => $this->event->slug, 'lang' => App::getLocale()]));
     }
 }

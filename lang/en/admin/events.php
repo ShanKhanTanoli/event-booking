@@ -32,6 +32,7 @@ return [
     'slot-specific-days' => 'For Specific Days',
     'slot-specific-info' => 'This is useful when you want to create Slots for Specific Days.',
 
+    'slot-types' => 'Slot Types',
     'slot-daily' => 'Daily',
     'slot-daily-info' => 'This is useful when you want to create Slots for Every Day.',
 
