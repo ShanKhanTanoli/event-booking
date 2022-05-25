@@ -20,6 +20,7 @@ class Slot extends Model
         'type',
         'capacity',
         'can_book_before',
+        'can_book_until',
         'can_cancel_before',
     ];
 }

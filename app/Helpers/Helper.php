@@ -37,5 +37,14 @@ class Helper
         if (!$full) $string = array_slice($string, 0, 1);
         return $string ? implode(', ', $string) . ' ago' : 'just now';
     }
-    /*Begin::Duration ago*/
+    /*End::Duration ago*/
+
+
+    /*Begin::Count Slot Duration*/
+    public static function CountSlotDuration($starting_date, $ending_date)
+    {
+        $datediff = strtotime($ending_date) - strtotime($starting_date);
+        return round($datediff / (60 * 60 * 24));
+    }
+    /*End::Count Slot Duration*/
 }

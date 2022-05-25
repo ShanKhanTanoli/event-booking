@@ -15,6 +15,10 @@ return array_merge(
     include('admin/events.php'),
     /*End::Events*/
 
+    /*Begin::Slots*/
+    include('admin/slots.php'),
+    /*End::Slots*/
+
     /*Begin::Plans*/
     include('admin/plans.php'),
     /*End::Plans*/

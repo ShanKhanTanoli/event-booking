@@ -48,7 +48,7 @@ return new class extends Migration
             'company_phone' => '+00000000000',
             'company_address' => 'This is the Address',
             'comission_percentage' => 5,
-            'language_id' => 2,
+            'language_id' => 1,
             'currency_id' => 2,
         ]);
     }

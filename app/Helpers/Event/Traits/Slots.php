@@ -26,6 +26,27 @@ trait Slots
             ->count();
     }
 
+    public static function CountSpecificdaySlots($event)
+    {
+        return self::Slots($event)
+            ->where('type', 'specific_day')
+            ->count();
+    }
+
+    public static function CountDailySlots($event)
+    {
+        return self::Slots($event)
+            ->where('type', 'daily')
+            ->count();
+    }
+
+    public static function CountWeeklySlots($event)
+    {
+        return self::Slots($event)
+            ->where('type', 'weekly')
+            ->count();
+    }
+
     public static function FindSlot($event, $slot)
     {
         return self::Slots($event)

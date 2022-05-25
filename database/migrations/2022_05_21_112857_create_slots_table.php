@@ -39,6 +39,7 @@ return new class extends Migration
             $table->string('capacity')->nullable();
 
             $table->string('can_book_before')->nullable();
+            $table->string('can_book_until')->nullable();
             $table->string('can_cancel_before')->nullable();
 
             $table->softDeletes();
@@ -73,6 +74,7 @@ return new class extends Migration
                         'type' => $faker->randomElement(['specific_day', 'daily', 'weekly']),
                         'capacity' => mt_rand(1, 20),
                         'can_book_before' => 10,
+                        'can_book_until' => 10,
                         'can_cancel_before' => 10,
                     ]);
                 }
